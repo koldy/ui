@@ -1,10 +1,10 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 import DocsTitle from './components/DocsTitle';
 import DocsText from './components/DocsText';
 import DocsSubTitle from './components/DocsSubTitle';
 import DocsCode from './components/DocsCode';
-import {NavLink} from 'react-router-dom';
 
 export const title = 'Getting started';
 export const slug = 'getting-started';
@@ -49,7 +49,7 @@ export const Documentation = function() {
 				<DocsCode.Code>yarn add koldy-ui prop-types styled-components</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				After you have installed required packages, you may run the <NavLink to="app">App</NavLink>.
+				After you have installed required packages, go to <NavLink to="app">App</NavLink> docs.
 			</DocsText>
 		</>
 	);
