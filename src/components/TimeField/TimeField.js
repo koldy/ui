@@ -511,6 +511,7 @@ TimeField.propTypes = {
 const Container = styled.span`
 	display: inline-flex;
 	flex-wrap: nowrap;
+	flex-direction: row;
 	align-items: center;
 	border: 2px solid #cfcfcf;
 	height: auto;
@@ -529,7 +530,7 @@ const Container = styled.span`
  */
 
 const Input = function(props) {
-	const {flex = 1, width = '100%'} = props;
+	const {flex = null, width = '100%'} = props;
 
 	const {
 		name: fieldName,
@@ -1127,11 +1128,15 @@ const Field = styled.span`
 		width: ${({cssWidth, innerElementsCount}) =>
 			isNumberOrString(cssWidth)
 				? `calc(${getPixelsOrString(cssWidth)} / ${innerElementsCount})`
-				: `calc(100% / ${innerElementsCount})`};
+				: `${100 / innerElementsCount}%`};
 		
 		&:nth-child(7) {
 			min-width: 3em;
 		}
+	}
+	
+	> span {
+		width: 2px;
 	}
 `;
 
