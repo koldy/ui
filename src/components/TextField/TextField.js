@@ -6,7 +6,7 @@ import Box from '../InputField/Box';
 import Text from '../InputField/Text';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, omit} from '../../util/helpers';
+import {getPixelsOrString, isNumberOrString, omit} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
@@ -302,7 +302,7 @@ const Container = styled.span`
  */
 
 const Input = function(props) {
-	const {flex, width = '100%'} = props;
+	const {flex = null, width = '100%'} = props;
 
 	const {
 		innerRef,
@@ -384,9 +384,8 @@ const Field = styled.input`
 	}
 
 	${({inputCss}) => css(inputCss)}
-	${({cssFlex}) => (typeof cssFlex === 'string' || typeof cssFlex === 'number' ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) =>
-		typeof cssWidth === 'string' || typeof cssWidth === 'number' ? `width: ${getPixelsOrString(cssWidth)};` : ''}
+	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
+	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
 `;
 
 /**

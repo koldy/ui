@@ -238,7 +238,7 @@ const Container = styled.span`
  */
 
 const Input = function(props) {
-	const {flex, width = '100%'} = props;
+	const {flex = null, width = '100%'} = props;
 
 	const [files, setFiles] = useState(null);
 
@@ -349,9 +349,8 @@ const FieldContainer = styled.span`
 	letter-spacing: normal;
 	text-rendering: optimizeSpeed;
 
-	${({cssFlex}) => (typeof cssFlex === 'string' || typeof cssFlex === 'number' ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) =>
-		typeof cssWidth === 'string' || typeof cssWidth === 'number' ? `width: ${getPixelsOrString(cssWidth)};` : ''}
+	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
+	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
 
 	input {
 		box-sizing: border-box;

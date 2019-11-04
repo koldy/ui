@@ -83,6 +83,13 @@ import {
 } from '../docs/GlobalRulesForProps.docs';
 
 import {
+	title as InputAlignmentTitle,
+	slug as InputAlignmentSlug,
+	json as InputAlignmentJson,
+	Documentation as InputAlignmentDocumentation
+} from '../docs/InputAlignment.docs';
+
+import {
 	title as MenuTitle,
 	slug as MenuSlug,
 	json as MenuJson,
@@ -323,6 +330,13 @@ export const components = [
 		slug: TimeFieldSlug,
 		json: TimeFieldJson,
 		Documentation: TimeFieldDocumentation,
+		group: INPUT_COMPONENT
+	},
+	{
+		title: InputAlignmentTitle,
+		slug: InputAlignmentSlug,
+		json: InputAlignmentJson,
+		Documentation: InputAlignmentDocumentation,
 		group: INPUT_COMPONENT
 	}
 ];

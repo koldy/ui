@@ -127,6 +127,10 @@ const RightContent = styled.div`
 const VisualExample = styled.div`
 	display: block;
 	background: ${({isDark}) => (isDark ? '#282828' : '#ffffff')};
+
+	> * {
+		vertical-align: middle;
+	}
 `;
 
 const Content = styled.div`

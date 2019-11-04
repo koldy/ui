@@ -1,68 +1,10 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import {isArray} from '../../src/util/helpers';
 import DocsSubTitle from './DocsSubTitle';
 import Tabs from './Tabs';
-
-const StyledTypes = styled.div`
-	display: inline-block;
-`;
-
-const StyledType = styled.code`
-	display: inline-block;
-	vertical-align: middle;
-	background: ${({theme}) => theme.codeBackground};
-	color: ${({theme}) => theme.codeColor};
-	padding: 0.15rem;
-	margin-right: 0.25rem;
-	border-radius: 3px;
-`;
-
-const Description = styled.div`
-	display: block;
-	width: 100%;
-	line-height: 1.4;
-	margin: 0.5rem 0;
-
-	p {
-		line-height: 1.4;
-	}
-
-	code {
-		background: ${({theme}) => theme.codeBackground};
-		color: ${({theme}) => theme.codeColor};
-	}
-`;
-
-const StyledDefault = styled.div`
-	display: block;
-	margin-top: 0.5rem;
-	font-size: 0.9rem;
-	color: ${({theme}) => theme.primaryColor};
-
-	code {
-		display: inline-block;
-		margin-left: 1rem;
-		background: ${({theme}) => theme.codeBackground};
-		color: ${({theme}) => theme.codeColor};
-	}
-`;
-
-const StyledExpander = styled.tr`
-	td {
-		text-align: center !important;
-	}
-
-	&:hover {
-		td {
-			background: transparent !important;
-		}
-	}
-`;
-
-// ------------------------------------------- PROPS -------------------------------------------
 
 const VIEW_MAIN = 'main';
 const VIEW_ADDITIONAL = 'additional';
@@ -199,7 +141,7 @@ const Table = styled.table`
 
 		&:nth-child(2) {
 			text-align: left;
-			width: calc(67% - 100px);
+			width: auto;
 		}
 
 		&:nth-child(3) {
@@ -352,7 +294,7 @@ const Prop = function(props) {
 	}
 
 	return (
-		<>
+		<Fragment>
 			<FirstTr onClick={toggle} hasDescription={!!description}>
 				<Cell>
 					<div>
@@ -376,7 +318,7 @@ const Prop = function(props) {
 						{defaultValue !== null && defaultValue !== true && defaultValue !== false && <code>{defaultValue}</code>}
 					</Cell>
 				) : (
-					<Cell />
+					<Cell>&nbsp;</Cell>
 				)}
 				<RequiredCell required={required}>{required ? 'yes' : 'no'}</RequiredCell>
 			</FirstTr>
@@ -385,7 +327,7 @@ const Prop = function(props) {
 					<Cell colSpan={3}>{description}</Cell>
 				</LastTr>
 			)}
-		</>
+		</Fragment>
 	);
 };
 

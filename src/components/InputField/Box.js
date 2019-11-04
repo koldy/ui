@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getPixelsOrString, getStyleForPaddings, isEmpty} from '../../util/helpers';
+import {getPixelsOrString, getStyleForMargins, getStyleForPaddings, isEmpty} from '../../util/helpers';
 import InputFieldContext from './InputFieldContext';
 
 /**
@@ -12,7 +12,25 @@ import InputFieldContext from './InputFieldContext';
  * @constructor
  */
 const Box = function(props) {
-	const {children, flex, width, alignSelf, textAlign = 'unset', p, pt, pr, pb, pl} = props;
+	const {
+		children,
+		flex,
+		width,
+		alignSelf,
+		textAlign = 'unset',
+		m = null,
+		mt = null,
+		mr = null,
+		mb = null,
+		ml = null,
+		p = null,
+		pt = null,
+		pr = null,
+		pb = null,
+		pl = null
+	} = props;
+
+	const marginCss = getStyleForMargins({m, mt, mr, mb, ml});
 	const paddingCss = getStyleForPaddings({p, pt, pr, pb, pl});
 
 	const {focusField} = useContext(InputFieldContext);
@@ -23,6 +41,7 @@ const Box = function(props) {
 			cssWidth={width}
 			cssAlignSelf={alignSelf}
 			cssTextAlign={textAlign}
+			marginCss={marginCss}
 			paddingCss={paddingCss}
 		>
 			{typeof children === 'function' ? children({focusField}) : children}
@@ -37,7 +56,14 @@ Box.propTypes = {
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
 	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'unset']),
 
-	// paddings:
+	// margins:
+	m: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	mt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	mr: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	mb: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+	// padding:
 	p: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pr: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -52,6 +78,7 @@ const StyledBox = styled.span`
 	padding: 0;
 	text-align: ${({cssTextAlign}) => cssTextAlign};
 	position: relative;
+	${({marginCss}) => (!isEmpty(marginCss) ? css(marginCss) : '')}
 	${({paddingCss}) => (!isEmpty(paddingCss) ? css(paddingCss) : '')}
 
 	align-self: ${({cssAlignSelf}) => cssAlignSelf || 'unset'};

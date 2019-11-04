@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, isFunction, omit} from '../../util/helpers';
+import {getPixelsOrString, isFunction, isNumberOrString, omit} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
@@ -296,7 +296,7 @@ const Container = styled.span`
  */
 
 const Input = function(props) {
-	const {children = null, flex, width = '100%'} = props;
+	const {children = null, flex = null, width = '100%'} = props;
 
 	const {
 		innerRef,
@@ -347,11 +347,8 @@ Input.propTypes = {
 
 const Field = styled.span`
 	display: inline-block;
-	${({cssFlex}) => (typeof cssFlex === 'string' || typeof cssFlex === 'number' ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) =>
-		typeof cssWidth === 'string' || typeof cssWidth === 'string'
-			? `width: ${getPixelsOrString(cssWidth)};`
-			: ''}
+	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
+	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
 	position: relative;
 	font-size: ${({inputCss}) => inputCss.fontSize || '1rem'};
 

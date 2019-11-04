@@ -70,6 +70,7 @@ const Menu = forwardRef(function(props, ref) {
 		variant = defaultVariant,
 		size = defaultSize,
 		color = defaultColor,
+		inline = false,
 		height = null,
 		onChange = null,
 		disabled = false,
@@ -318,7 +319,7 @@ const Menu = forwardRef(function(props, ref) {
 	);
 
 	return (
-		<StyledMenu ref={ref} tabIndex={0} menuCss={menuCss} style={menuStyle}>
+		<StyledMenu ref={ref} tabIndex={0} menuCss={menuCss} inline={inline} style={menuStyle}>
 			{htmlValue}
 			<MenuContext.Provider value={context}>{children}</MenuContext.Provider>
 		</StyledMenu>
@@ -326,8 +327,9 @@ const Menu = forwardRef(function(props, ref) {
 });
 
 const StyledMenu = styled.nav`
-	display: block;
-	width: 100%;
+	display: ${({inline}) => (inline ? 'inline-block' : 'block')};
+	width: ${({inline}) => (inline ? 'auto' : '100%')};
+	vertical-align: inherit;
 	box-sizing: border-box;
 	overflow-y: auto;
 	${({menuCss}) => css(menuCss)}
@@ -355,6 +357,7 @@ Menu.propTypes = {
 	variant: PropTypes.string,
 	size: PropTypes.string,
 	color: PropTypes.string,
+	inline: PropTypes.bool,
 	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onChange: PropTypes.func,
 	disabled: PropTypes.bool,

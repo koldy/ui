@@ -37,8 +37,8 @@ const DocsTitle = function({children, hash}) {
 					<Controls>
 						<ControlButton onClick={toggleDarkMode}>Dark: {isDark ? 'ON' : 'OFF'}</ControlButton>
 						<ControlButton onChange={toggleTheme} as="select" defaultValue={isDark ? 'dark' : 'light'}>
-							<option value="light">default light theme</option>
-							<option value="dark">default dark theme</option>
+							<option value="light">koldy-ui-light-theme</option>
+							<option value="dark">koldy-ui-dark-theme</option>
 						</ControlButton>
 					</Controls>
 				</Flex>
@@ -66,7 +66,7 @@ const FixedContainer = styled.div`
 	z-index: 200;
 	width: 100%;
 	max-width: calc(100vw - 200px - 2rem);
-	
+
 	@media (min-width: 1130px) {
 		max-width: 900px;
 	}
@@ -130,6 +130,10 @@ const ControlButton = styled.button`
 	outline: none;
 	margin: 2px;
 	height: 32px;
+	appearance: none;
+	font-size: 0.85rem;
+	box-sizing: border-box;
+	line-height: normal;
 `;
 
 export default DocsTitle;
