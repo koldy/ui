@@ -48,17 +48,9 @@ export const Documentation = function() {
 				<DocsCode.Code>{'<TimeField />'}</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				Although it might look strange at first, be aware that the default look depends about the theme and since there
-				are universal theme settings for all input elements, this component uses that look as well. So, at first, this
-				component by default is big and wide the same as regular <code>TextField</code> component.
+				Be aware that the default look depends about the theme and since there are universal theme settings for all
+				input elements, this component uses that look as well, except for the width.
 			</DocsText>
-			<DocsText>Maybe this example is more popular:</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<TimeField precision="seconds" width="auto" />
-				</DocsCode.Example>
-				<DocsCode.Code>{'<TimeField precision="seconds" width="auto" />'}</DocsCode.Code>
-			</DocsCode>
 			<Props>
 				<Props.Prop name="children" type="node" defaultValue="<TimeField.Input/>">
 					<p>
@@ -166,27 +158,6 @@ export const Documentation = function() {
 							</DocsCode.Example>
 						</DocsCode>
 					))}
-				</Props.Prop>
-				<Props.Prop name="width" type="string" defaultValue="theme.inputField.defaults.width">
-					<p>
-						Use one of the keys set in <code>theme.inputField.width</code> or set your own fixed width.
-					</p>
-					<AvailableKeys data={widths} name="theme.inputField.width" />
-					<p>Example of fixed with of 75%</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<TimeField width="75%" />
-						</DocsCode.Example>
-						<DocsCode.Code>{`<TimeField width="75%" />`}</DocsCode.Code>
-					</DocsCode>
-				</Props.Prop>
-				<Props.Prop name="minWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>min-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
-				</Props.Prop>
-				<Props.Prop name="maxWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="onChange" type="func">
 					<p>Called when value has changed. This is required prop when TimeField is used as controlled component.</p>
@@ -325,16 +296,10 @@ export const Documentation = function() {
 				<Props.Prop name="mb" />
 				<Props.Prop name="ml" />
 			</Props>
-			<Props title="Props for TimeField.Input" hash="timeField-input-props">
-				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
-				</Props.Prop>
-				<Props.Prop name="width" type={['string', 'number']}>
-					If you want to set custom width on the content's width, then use this prop.
-				</Props.Prop>
-			</Props>
+			<DocsSubTitle hash="timefield-input">TimeField.Input</DocsSubTitle>
+			<DocsText>
+				Unlike other <em>Input</em> subcomponents, this one doesn't accept any prop.
+			</DocsText>
 			<TextDocs component="TimeField" />
 			<DocsCode label="Example for TimeField.Text:">
 				<DocsCode.Example>
@@ -440,20 +405,6 @@ export const Documentation = function() {
 				<DocsCode key={t} label={t} labelWidth="auto">
 					<DocsCode.Example>
 						<TimeField size={t} />
-					</DocsCode.Example>
-				</DocsCode>
-			))}
-			<DocsSubTitle hash="width">Width</DocsSubTitle>
-			<DocsText>
-				It is possible to predefine width in the theme, so you can have one place from where you control the width.
-			</DocsText>
-			<DocsText>
-				<AvailableKeys data={widths} />
-			</DocsText>
-			{Object.keys(widths).map((t) => (
-				<DocsCode key={t} label={t} labelWidth="auto">
-					<DocsCode.Example>
-						<TimeField width={t} />
 					</DocsCode.Example>
 				</DocsCode>
 			))}

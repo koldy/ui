@@ -153,6 +153,20 @@ import {
 } from './components/Text/Text.docs';
 
 import {
+	title as ThemeTitle,
+	slug as ThemeSlug,
+	json as ThemeJson,
+	Documentation as ThemeDocumentation
+} from '../docs/Theme.docs';
+
+import {
+	title as ThemeManagerTitle,
+	slug as ThemeManagerSlug,
+	json as ThemeManagerJson,
+	Documentation as ThemeManagerDocumentation
+} from '../docs/ThemeManager.docs';
+
+import {
 	title as TimeFieldTitle,
 	slug as TimeFieldSlug,
 	json as TimeFieldJson,
@@ -190,6 +204,20 @@ export const components = [
 		slug: GlobalRulesForPropsSlug,
 		json: GlobalRulesForPropsJson,
 		Documentation: GlobalRulesForPropsDocumentation,
+		group: DOCUMENTATION
+	},
+	{
+		title: ThemeTitle,
+		slug: ThemeSlug,
+		json: ThemeJson,
+		Documentation: ThemeDocumentation,
+		group: DOCUMENTATION
+	},
+	{
+		title: ThemeManagerTitle,
+		slug: ThemeManagerSlug,
+		json: ThemeManagerJson,
+		Documentation: ThemeManagerDocumentation,
 		group: DOCUMENTATION
 	},
 	{

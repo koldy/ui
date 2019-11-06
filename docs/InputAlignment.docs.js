@@ -39,11 +39,9 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<TextField defaultValue="1st" size={size} />
-							<TextField defaultValue="2nd" size={size} />
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<TextField defaultValue="1st" size={size} />
+						<TextField defaultValue="2nd" size={size} />
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -51,11 +49,9 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<TextField defaultValue="1st" size={size} />
-							<FileField size={size} />
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<TextField defaultValue="1st" size={size} />
+						<FileField size={size} />
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -65,20 +61,18 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<TextField defaultValue="1st" size={size} />
-							<FileField size={size}>
-								<FileField.Input />
-								<FileField.Box m={-2}>
-									{({focusField}) => (
-										<Button size={size} onClick={focusField}>
-											Select file
-										</Button>
-									)}
-								</FileField.Box>
-							</FileField>
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<TextField defaultValue="1st" size={size} />
+						<FileField size={size}>
+							<FileField.Input />
+							<FileField.Box m={-2}>
+								{({focusField}) => (
+									<Button size={size} onClick={focusField}>
+										Select file
+									</Button>
+								)}
+							</FileField.Box>
+						</FileField>
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -86,15 +80,13 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<TextField defaultValue="1st" size={size} />
-							<Select size={size}>
-								<option>2nd</option>
-								<option>3rd</option>
-								<option>4th</option>
-							</Select>
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<TextField defaultValue="1st" size={size} />
+						<Select size={size}>
+							<option>2nd</option>
+							<option>3rd</option>
+							<option>4th</option>
+						</Select>
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -102,14 +94,12 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<TextField defaultValue="1st" size={size} />
-							<Menu size={size} inline>
-								<Menu.Item inline>first</Menu.Item>
-								<Menu.Item inline>second</Menu.Item>
-							</Menu>
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<TextField defaultValue="1st" size={size} />
+						<Menu size={size} inline>
+							<Menu.Item inline>first</Menu.Item>
+							<Menu.Item inline>second</Menu.Item>
+						</Menu>
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -117,20 +107,18 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<Select size={size}>
-								<option>2nd</option>
-								<option>3rd</option>
-								<option>4th</option>
-							</Select>
-							<TimeField size={size} width="auto" />
-							<Select size={size}>
-								<option>2nd</option>
-								<option>3rd</option>
-								<option>4th</option>
-							</Select>
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<Select size={size}>
+							<option>2nd</option>
+							<option>3rd</option>
+							<option>4th</option>
+						</Select>
+						<TimeField size={size} width="auto" />
+						<Select size={size}>
+							<option>2nd</option>
+							<option>3rd</option>
+							<option>4th</option>
+						</Select>
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -138,11 +126,9 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<DatePicker size={size} />
-							<DatePicker size={size} />
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<DatePicker size={size} />
+						<DatePicker size={size} />
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -150,19 +136,17 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<Select size={size}>
-								<option>2nd</option>
-								<option>3rd</option>
-								<option>4th</option>
-							</Select>
-							<Select size={size}>
-								<option>2nd</option>
-								<option>3rd</option>
-								<option>4th</option>
-							</Select>
-							<Button size={size}>Submit</Button>
-						</AlignedExample>
+						<Select size={size}>
+							<option>2nd</option>
+							<option>3rd</option>
+							<option>4th</option>
+						</Select>
+						<Select size={size}>
+							<option>2nd</option>
+							<option>3rd</option>
+							<option>4th</option>
+						</Select>
+						<Button size={size}>Submit</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -170,12 +154,10 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<Button size={size}>Submit</Button>
-							<Checkbox size={size} />
-							<Checkbox size={size} />
-							<TextField size={size} />
-						</AlignedExample>
+						<Button size={size}>Submit</Button>
+						<Checkbox size={size} />
+						<Checkbox size={size} />
+						<TextField size={size} />
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -183,14 +165,12 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<Radio size={size} defaultValue="one">
-								<Button size={size}>Submit</Button>
-								<Radio.Option value="one" />
-								<Radio.Option value="two" />
-								<TextField size={size} />
-							</Radio>
-						</AlignedExample>
+						<Radio size={size} defaultValue="one">
+							<Button size={size}>Submit</Button>
+							<Radio.Option value="one" />
+							<Radio.Option value="two" />
+							<TextField size={size} />
+						</Radio>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
@@ -203,37 +183,32 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={`inputField size: ${size}`}>
 					<DocsCode.Example>
-						<AlignedExample>
-							<TextField size={size} width={200}>
-								<TextField.Input />
-								<TextField.Box m={-2}>
-									<Button size={size}>OK</Button>
-								</TextField.Box>
-							</TextField>
-							<FileField size={size} width={200}>
-								<FileField.Input />
-								<FileField.Box m={-2}>
-									<Button size={size}>OK</Button>
-								</FileField.Box>
-							</FileField>
-							<Select size={size} width={200}>
-								<Select.Input>
-									<option>2nd</option>
-									<option>3rd</option>
-									<option>4th</option>
-								</Select.Input>
-								<Select.Box m={-2}>
-									<Button size={size}>OK</Button>
-								</Select.Box>
-							</Select>
-							<Button size={size}>OK</Button>
-						</AlignedExample>
+						<TextField size={size} width={200}>
+							<TextField.Input />
+							<TextField.Box m={-2}>
+								<Button size={size}>OK</Button>
+							</TextField.Box>
+						</TextField>
+						<FileField size={size} width={200}>
+							<FileField.Input />
+							<FileField.Box m={-2}>
+								<Button size={size}>OK</Button>
+							</FileField.Box>
+						</FileField>
+						<Select size={size} width={200}>
+							<Select.Input>
+								<option>2nd</option>
+								<option>3rd</option>
+								<option>4th</option>
+							</Select.Input>
+							<Select.Box m={-2}>
+								<Button size={size}>OK</Button>
+							</Select.Box>
+						</Select>
+						<Button size={size}>OK</Button>
 					</DocsCode.Example>
 				</DocsCode>
 			))}
 		</>
 	);
 };
-
-const AlignedExample = styled.div`
-`;

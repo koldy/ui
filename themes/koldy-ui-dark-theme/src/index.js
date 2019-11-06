@@ -683,8 +683,8 @@ export default {
 		},
 		width: {
 			sm: '180px',
-			md: '300px',
-			lg: '420px'
+			md: '280px',
+			lg: '380px'
 		},
 		variant: {
 			square: {

@@ -214,7 +214,6 @@ const TimeField = function(props) {
 
 	const {
 		size: defaultSize = null,
-		width: defaultWidth = null,
 		variant: defaultVariant,
 		color: defaultColor
 	} = theme.json('inputField.defaults');
@@ -228,9 +227,6 @@ const TimeField = function(props) {
 		color = defaultColor,
 		size = defaultSize,
 		variant = defaultVariant,
-		width = defaultWidth,
-		minWidth = null,
-		maxWidth = null,
 		onChange = null,
 		onClick = null,
 		onDoubleClick = null,
@@ -266,10 +262,6 @@ const TimeField = function(props) {
 	 */
 
 	const [containerCss, inputCss] = useMemo(() => {
-		// =============================    WIDTH    ========================================
-		const widths = theme.json('inputField.width');
-		const widthValue = widths[width] === undefined ? getPixelsOrString(width) : getPixelsOrString([widths[width]]);
-
 		// =============================    VARIANT    ========================================
 		const variants = theme.json('inputField.variant');
 		if (!isObject(variants[variant])) {
@@ -342,7 +334,6 @@ const TimeField = function(props) {
 		return [
 			{
 				...getStyleForMargins({m, mt, mr, mb, ml}),
-				width: widthValue,
 				cursor: disabled ? 'not-allowed' : 'unset',
 				borderRadius,
 				borderWidth,
@@ -384,7 +375,7 @@ const TimeField = function(props) {
 				}
 			}
 		];
-	}, [theme, width, variant, color, disabled, readOnly, m, mt, mr, mb, ml]);
+	}, [theme, variant, color, disabled, readOnly, m, mt, mr, mb, ml]);
 
 	/**
 	 * Useful methods
@@ -470,7 +461,7 @@ const TimeField = function(props) {
 	}
 
 	return (
-		<Container containerCss={containerCss} minWidthCss={minWidth} maxWidthCss={maxWidth} ref={innerContainerRef}>
+		<Container containerCss={containerCss} ref={innerContainerRef}>
 			{name && <input type="hidden" name={name} value={fieldValue} />}
 			<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 		</Container>
@@ -486,9 +477,6 @@ TimeField.propTypes = {
 	color: PropTypes.string,
 	size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	variant: PropTypes.string,
-	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onChange: PropTypes.func,
 	onClick: PropTypes.func,
 	onDoubleClick: PropTypes.func,
@@ -520,18 +508,13 @@ const Container = styled.span`
 	position: relative;
 	transition: all 300ms ease-in-out 10ms;
 	${({containerCss}) => css(containerCss)}
-	
-	${({minWidthCss}) => (minWidthCss !== null ? `min-width: ${getPixelsOrString(minWidthCss)};` : '')}
-	${({maxWidthCss}) => (maxWidthCss !== null ? `max-width: ${getPixelsOrString(maxWidthCss)};` : '')}
 `;
 
 /**
  * ******************************** Input **************************************
  */
 
-const Input = function(props) {
-	const {flex = null, width = '100%'} = props;
-
+const Input = function() {
 	const {
 		name: fieldName,
 		value,
@@ -984,7 +967,7 @@ const Input = function(props) {
 	}, []);
 
 	return (
-		<Field inputCss={filteredInputCss} cssFlex={flex} cssWidth={width} innerElementsCount={innerElementsCount}>
+		<Field inputCss={filteredInputCss} innerElementsCount={innerElementsCount}>
 			<input
 				type="number"
 				min={0}
@@ -1079,7 +1062,6 @@ const Field = styled.span`
 	box-sizing: border-box;
 	font-size: ${({inputCss}) => inputCss.fontSize || '1em'};
 	color: ${({inputCss}) => inputCss.color || 'inherit'};
-	${({cssFlex}) => (typeof cssFlex === 'string' || typeof cssFlex === 'number' ? `flex: ${cssFlex};` : '')}
 	
 	> input {
 		display: inline-block;
@@ -1101,6 +1083,7 @@ const Field = styled.span`
 		word-spacing: normal;
 		transition: all 300ms ease-in-out 10ms;
 		min-width: 2em;
+		max-width: 3em;
 	
 		text-shadow: none;
 		cursor: text;
@@ -1124,11 +1107,6 @@ const Field = styled.span`
 		}
 	
 		${({inputCss}) => css(inputCss)}
-		
-		width: ${({cssWidth, innerElementsCount}) =>
-			isNumberOrString(cssWidth)
-				? `calc(${getPixelsOrString(cssWidth)} / ${innerElementsCount})`
-				: `${100 / innerElementsCount}%`};
 		
 		&:nth-child(7) {
 			min-width: 3em;

@@ -285,7 +285,6 @@ TextField.propTypes = {
 
 const Container = styled.span`
 	display: inline-flex;
-	vertical-align: inherit;
 	flex-wrap: nowrap;
 	align-items: center;
 	border: 2px solid #cfcfcf;
