@@ -9,7 +9,7 @@ import DocsCode from '../../../docs/components/DocsCode';
 
 export const title = 'Box';
 export const slug = 'box';
-export const json = 'box';
+export const json = null;
 
 export const Documentation = function() {
 	return (

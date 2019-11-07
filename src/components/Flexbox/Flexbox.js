@@ -69,6 +69,7 @@ const Flexbox = forwardRef(function(props, ref) {
 
 const StyledFlexbox = styled.div`
 	display: ${({inline}) => (inline ? 'inline-flex' : 'flex')};
+	box-sizing: border-box;
 	flex-direction: ${({flexDirection}) => flexDirection};
 	flex-wrap: ${({flexWrap}) => flexWrap};
 	justify-content: ${({justifyContent}) => justifyContent};
@@ -152,6 +153,7 @@ const FlexboxItem = forwardRef(function(props, ref) {
 
 const StyledFlexboxItem = styled.div`
 	display: block;
+	box-sizing: border-box;
 	order: ${({order}) => order || 'unset'};
 	align-self: ${({alignSelf}) => alignSelf || 'unset'};
 	flex: ${({flex}) => flex || 'unset'};

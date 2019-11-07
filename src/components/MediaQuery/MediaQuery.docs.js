@@ -1,37 +1,35 @@
 import React, {Fragment, useContext} from 'react';
-import DocsTitle from '../../../docs/components/DocsTitle';
 import styled from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
 
-import Props from '../../../docs/components/Props';
+import DocsTitle from '../../../docs/components/DocsTitle';
 import DocsSubTitle from '../../../docs/components/DocsSubTitle';
 import DocsText from '../../../docs/components/DocsText';
 import ImportComponent from '../../../docs/components/ImportComponent';
 import DocsCode from '../../../docs/components/DocsCode';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
-import useResponsive from './useResponsive';
-import Badge from '../Badge/Badge';
+import useMediaQueries from './useMediaQueries';
 import {isNumberOrString} from '../../util/helpers';
 
-export const title = 'useResponsive';
-export const slug = 'use-responsive';
-export const json = 'breakpoints';
+export const title = 'useMediaQueries';
+export const slug = 'use-media-queries';
+export const json = 'mediaQueries';
 
 export const Documentation = function() {
 	const {theme} = useContext(ThemeContext);
 
-	const breakpoints = theme.json('breakpoints');
-	const data = useResponsive();
+	const mediaQueries = theme.json('mediaQueries');
+	const data = useMediaQueries();
 
 	return (
 		<>
-			<DocsTitle hash="badge">useResponsive</DocsTitle>
-			<ImportComponent name="useResponsive" />
+			<DocsTitle hash="use-media-queries">useMediaQueries</DocsTitle>
+			<ImportComponent name="useMediaQueries" />
 			<DocsText>
-				<code>useResponsive</code> is a hook that parses your breakpoints definition in the theme, plus it gives you
-				other useful data. Koldy UI parses that on every window resize event providing you with new data. Don't worry if
-				you use this hook a lot, calculation on resize will happen only once.
+				<code>useMediaQueries</code> is a hook that parses your media queries definition in the theme, plus it gives you
+				other standard useful data. Koldy UI parses that on every window resize event providing you with new data. Don't
+				worry if you use this hook a lot, calculation on resize will happen only once.
 			</DocsText>
 			<DocsText>In current theme, this is what you'll get:</DocsText>
 			<DocsCode>
@@ -53,7 +51,7 @@ export const Documentation = function() {
 				</DocsCode.Example>
 				<DocsCode.Code>
 					{`
-					const {innerWidth, innerHeight, portrait, landscape, square, aspectRatio} = useResponsive();
+					const {innerWidth, innerHeight, portrait, landscape, square, aspectRatio} = useMediaQueries();
 					// and other keys that start with: is...
 					`}
 				</DocsCode.Code>
@@ -61,16 +59,16 @@ export const Documentation = function() {
 			<DocsText>
 				These numbers are dynamic. Try to resize your screen (or rotate your phone) to see new numbers.
 			</DocsText>
-			<DocsSubTitle hash="breakpoints">Breakpoints</DocsSubTitle>
+			<DocsSubTitle hash="media-queries">Media queries in theme's JSON</DocsSubTitle>
 			<DocsText>
-				Remember that breakpoints in theme are just helpers. You can set as many as you want. The value of each
-				breakpoint is standard CSS media query which can be used with <code>window.matchMedia</code>. The name of each
-				breakpoint will be prefixed with <code>is</code>. So, if you named you breakpoint <code>xlg</code>, you'll be
-				able to get <code>isXlg</code>. Prefix <code>is</code> tells you that you'll always get boolean, unless browser
+				Remember that media queries in theme are just helpers. You can set as many as you want. The value of each media
+				query is standard CSS media query which can be used with <code>window.matchMedia</code>. The name of each media
+				query will be prefixed with <code>is</code>. So, if you named you media query <code>xlg</code>, you'll be able
+				to get <code>isXlg</code>. Prefix <code>is</code> tells you that you'll always get boolean, unless browser
 				doesn't support <code>window.matchMedia</code>.
 			</DocsText>
 			<DocsText>
-				<AvailableKeys data={breakpoints} />
+				<AvailableKeys data={mediaQueries} />
 			</DocsText>
 		</>
 	);

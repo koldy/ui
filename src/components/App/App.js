@@ -7,7 +7,7 @@ import ThemeContext from '../../theme/ThemeContext';
 import Toasts from '../Toast/Toasts';
 import useToaster from '../Toast/useToaster';
 import Toast from '../Toast/Toast';
-import ResponsiveApp from '../Responsive/ResponsiveApp';
+import MediaQueriesDetector from '../MediaQuery/MediaQueriesDetector';
 
 let appCounter = 0;
 
@@ -25,7 +25,7 @@ const App = function(props) {
 
 	return (
 		<ThemeContext.Provider value={contextValues}>
-			<ResponsiveApp>
+			<MediaQueriesDetector>
 				<GlobalStyleComponent />
 				{children}
 				<Toasts appIndex={appIndex} />
@@ -34,7 +34,7 @@ const App = function(props) {
 						{componentRenderProp}
 					</Toast>
 				))}
-			</ResponsiveApp>
+			</MediaQueriesDetector>
 		</ThemeContext.Provider>
 	);
 };

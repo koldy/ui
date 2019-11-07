@@ -15,7 +15,7 @@ import Text from '../Text/Text';
 
 export const title = 'Checkbox';
 export const slug = 'checkbox';
-export const json = 'checkbox';
+export const json = 'checkboxAndRadio';
 
 export const Documentation = function() {
 	const {theme} = useContext(ThemeContext);

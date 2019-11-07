@@ -1,6 +1,6 @@
 export default {
-	name: 'Default Koldy UI theme',
-	description: 'Default Koldy UI theme',
+	name: 'Default Koldy UI Light Theme',
+	description: 'A theme suitable for most light user interfaces',
 	license: 'MIT',
 	author: [
 		{
@@ -9,11 +9,11 @@ export default {
 			github: 'https://github.com/vkoudela'
 		}
 	],
-	version: '0.1.0',
+	version: '0.1.5',
 	html: {},
 	body: {},
 	zIndex: 5000,
-	breakpoints: {
+	mediaQueries: {
 		xs: '(max-width: 499px)',
 		sm: '(min-width: 500px) and (max-width: 787px)',
 		md: '(min-width: 788px) and (max-width: 991px)',
@@ -202,6 +202,27 @@ export default {
 					backgroundColor: 'gray|-3',
 					borderColor: 'gray|-3',
 					color: '#888888'
+				},
+				'&:focus': {
+					boxShadow: '0 0 1px 2px gray|-3',
+					outline: 'none'
+				},
+				'&:active': {
+					boxShadow: 'inset 0 0 1px 2px gray|3'
+				}
+			},
+			transparent: {
+				color: '#222222',
+				backgroundColor: 'transparent',
+				borderColor: 'transparent',
+				'&:hover': {
+					backgroundColor: 'transparent',
+					borderColor: 'gray|-4',
+					boxShadow: 'none'
+				},
+				'&:disabled': {
+					color: '#888888',
+					borderColor: 'transparent'
 				},
 				'&:focus': {
 					boxShadow: '0 0 1px 2px gray|-3',

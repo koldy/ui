@@ -7,7 +7,7 @@ import {isFunction} from '../../util/helpers';
 
 let timer = null;
 
-const ResponsiveApp = function(props) {
+const MediaQueriesDetector = function(props) {
 	const {children} = props;
 
 	const {theme} = useContext(ThemeContext);
@@ -44,8 +44,8 @@ const ResponsiveApp = function(props) {
 		const square = innerWidth === innerHeight;
 		const aspectRatio = innerWidth / innerHeight;
 
-		const breakpointsData = {};
-		const breakpoints = theme.json('breakpoints');
+		const mediaQueryData = {};
+		const mediaQueries = theme.json('mediaQueries');
 
 		if (isFunction(window.matchMedia)) {
 			const retinaMediaQuery = `
@@ -57,28 +57,32 @@ const ResponsiveApp = function(props) {
 				only screen and (min-resolution: 2dppx)
 			`;
 
-			breakpointsData.portrait = window.matchMedia('screen and (orientation:portrait)').matches;
-			breakpointsData.landscape = window.matchMedia('screen and (orientation:landscape)').matches;
-			breakpointsData.retina = window.matchMedia(retinaMediaQuery).matches;
+			mediaQueryData.portrait = window.matchMedia('screen and (orientation:portrait)').matches;
+			mediaQueryData.landscape = window.matchMedia('screen and (orientation:landscape)').matches;
+			mediaQueryData.retina = window.matchMedia(retinaMediaQuery).matches;
+			mediaQueryData.prefersDarkColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			mediaQueryData.prefersLightColorScheme = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-			for (const breakpoint of Object.keys(breakpoints)) {
-				const query = breakpoints[breakpoint];
+			for (const mediaQuery of Object.keys(mediaQueries)) {
+				const query = mediaQueries[mediaQuery];
 
 				const {matches} = window.matchMedia(query);
 
-				const brk = breakpoint.substr(0, 1).toUpperCase() + breakpoint.substr(1, breakpoint.length - 1);
-				breakpointsData[`is${brk}`] = typeof matches === 'boolean' ? matches : false;
+				const brk = mediaQuery.substr(0, 1).toUpperCase() + mediaQuery.substr(1, mediaQuery.length - 1);
+				mediaQueryData[`is${brk}`] = typeof matches === 'boolean' ? matches : false;
 			}
 		} else {
-			theme.warning('window.matchMedia is not available, all breakpoints will be set to null');
+			theme.warning('window.matchMedia is not available, all media queries will be set to null');
 
-			breakpointsData.portrait = innerHeight > innerWidth;
-			breakpointsData.landscape = innerWidth > innerHeight;
-			breakpointsData.retina = null;
+			mediaQueryData.portrait = innerHeight > innerWidth;
+			mediaQueryData.landscape = innerWidth > innerHeight;
+			mediaQueryData.retina = null;
+			mediaQueryData.prefersDarkColorScheme = null;
+			mediaQueryData.prefersLightColorScheme = null;
 
-			for (const breakpoint of Object.keys(breakpoints)) {
-				const brk = breakpoint.substr(0, 1).toUpperCase() + breakpoint.substr(1, breakpoint.length - 1);
-				breakpointsData[`is${brk}`] = null;
+			for (const mediaQuery of Object.keys(mediaQueries)) {
+				const brk = mediaQuery.substr(0, 1).toUpperCase() + mediaQuery.substr(1, mediaQuery.length - 1);
+				mediaQueryData[`is${brk}`] = null;
 			}
 		}
 
@@ -87,15 +91,15 @@ const ResponsiveApp = function(props) {
 			innerHeight,
 			square,
 			aspectRatio,
-			...breakpointsData
+			...mediaQueryData
 		};
 	}, [theme, sizes]);
 
 	return <ResponsiveContext.Provider value={responsiveContext}>{children}</ResponsiveContext.Provider>;
 };
 
-ResponsiveApp.propTypes = {
+MediaQueriesDetector.propTypes = {
 	children: PropTypes.node
 };
 
-export default ResponsiveApp;
+export default MediaQueriesDetector;

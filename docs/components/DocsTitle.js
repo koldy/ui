@@ -1,9 +1,11 @@
-import React, {Fragment, useCallback, useEffect, useContext} from 'react';
+import React, {Fragment, useCallback, useEffect, useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import {preventDefaultAndStopPropagation} from '../../src/util/helpers';
 import DocsContext from './DocsContext';
+import Drawer from '../../src/components/Drawer/Drawer';
+import JsonViewer from './JsonViewer';
 
 const DocsTitle = function({children, hash}) {
 	const handleClick = useCallback(
@@ -19,12 +21,26 @@ const DocsTitle = function({children, hash}) {
 		document.title = `Koldy UI - ${children}`;
 	}, [children]);
 
-	const {isDark, setDark, toggleTheme} = useContext(DocsContext);
-
+	const {isDark, setDark, toggleTheme, json} = useContext(DocsContext);
+	const [showJson, setShowJson] = useState(false);
 	const toggleDarkMode = useCallback(() => setDark(!isDark), [isDark]);
+	const openJson = useCallback(() => setShowJson(true), []);
+	const hideJson = useCallback(() => setShowJson(false), []);
 
 	return (
 		<Fragment>
+			{showJson && (
+				<Drawer
+					onClose={hideJson}
+					overlayBackgroundColor="rgba(255, 255, 255, 0.5)"
+					backgroundColor="#ffffff"
+					position="right"
+					size="50%"
+				>
+					{({closeFn}) => <JsonViewer onClose={closeFn} />}
+				</Drawer>
+			)}
+
 			<FixedContainer>
 				<Flex>
 					<H1 onClick={handleClick}>
@@ -35,6 +51,7 @@ const DocsTitle = function({children, hash}) {
 						{children}
 					</H1>
 					<Controls>
+						{json && <ControlButton onClick={openJson}>JSON: {json}</ControlButton>}
 						<ControlButton onClick={toggleDarkMode}>Dark: {isDark ? 'ON' : 'OFF'}</ControlButton>
 						<ControlButton onChange={toggleTheme} as="select" defaultValue={isDark ? 'dark' : 'light'}>
 							<option value="light">koldy-ui-light-theme</option>

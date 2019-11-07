@@ -122,7 +122,7 @@ import {
 	slug as ResponsiveSlug,
 	json as ResponsiveJson,
 	Documentation as ResponsiveDocumentation
-} from './components/Responsive/Responsive.docs';
+} from './components/MediaQuery/MediaQuery.docs';
 
 import {
 	title as SelectTitle,

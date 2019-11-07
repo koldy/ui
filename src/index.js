@@ -26,7 +26,7 @@ import ThemeManager from './theme/ThemeManager';
 import ThemeError from './theme/ThemeError';
 
 // hooks
-import useResponsive from './components/Responsive/useResponsive';
+import useMediaQueries from './components/MediaQuery/useMediaQueries';
 
 export {
 	// components
@@ -55,5 +55,5 @@ export {
 	ThemeError,
 	ThemeManager,
 	// hooks
-	useResponsive
+	useMediaQueries
 };
