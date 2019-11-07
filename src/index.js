@@ -25,7 +25,8 @@ import ThemeContext from './theme/ThemeContext';
 import ThemeManager from './theme/ThemeManager';
 import ThemeError from './theme/ThemeError';
 
-// animations
+// hooks
+import useResponsive from './components/Responsive/useResponsive';
 
 export {
 	// components
@@ -52,5 +53,7 @@ export {
 	// some other useful stuff
 	ThemeContext,
 	ThemeError,
-	ThemeManager
+	ThemeManager,
+	// hooks
+	useResponsive
 };

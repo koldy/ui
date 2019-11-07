@@ -7,6 +7,7 @@ import ThemeContext from '../../theme/ThemeContext';
 import Toasts from '../Toast/Toasts';
 import useToaster from '../Toast/useToaster';
 import Toast from '../Toast/Toast';
+import ResponsiveApp from '../Responsive/ResponsiveApp';
 
 let appCounter = 0;
 
@@ -24,14 +25,16 @@ const App = function(props) {
 
 	return (
 		<ThemeContext.Provider value={contextValues}>
-			<GlobalStyleComponent />
-			{children}
-			<Toasts appIndex={appIndex} />
-			{toasters.map(({componentRenderProp, id, position, entryAnimation, closeFn}) => (
-				<Toast key={id} position={position} entryAnimation={entryAnimation} onClose={closeFn}>
-					{componentRenderProp}
-				</Toast>
-			))}
+			<ResponsiveApp>
+				<GlobalStyleComponent />
+				{children}
+				<Toasts appIndex={appIndex} />
+				{toasters.map(({componentRenderProp, id, position, entryAnimation, closeFn}) => (
+					<Toast key={id} position={position} entryAnimation={entryAnimation} onClose={closeFn}>
+						{componentRenderProp}
+					</Toast>
+				))}
+			</ResponsiveApp>
 		</ThemeContext.Provider>
 	);
 };

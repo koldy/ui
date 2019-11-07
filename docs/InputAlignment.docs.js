@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import styled from 'styled-components';
 
 import DocsTitle from './components/DocsTitle';
 import DocsText from './components/DocsText';

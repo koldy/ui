@@ -118,6 +118,13 @@ import {
 } from './components/Radio/Radio.docs';
 
 import {
+	title as ResponsiveTitle,
+	slug as ResponsiveSlug,
+	json as ResponsiveJson,
+	Documentation as ResponsiveDocumentation
+} from './components/Responsive/Responsive.docs';
+
+import {
 	title as SelectTitle,
 	slug as SelectSlug,
 	json as SelectJson,
@@ -183,6 +190,7 @@ import {
 const DOCUMENTATION = 'documentation';
 const COMPONENT = 'component';
 const INPUT_COMPONENT = 'input-component';
+const HOOKS = 'hooks';
 
 export const components = [
 	{
@@ -366,5 +374,13 @@ export const components = [
 		json: InputAlignmentJson,
 		Documentation: InputAlignmentDocumentation,
 		group: INPUT_COMPONENT
+	},
+	// hooks
+	{
+		title: ResponsiveTitle,
+		slug: ResponsiveSlug,
+		json: ResponsiveJson,
+		Documentation: ResponsiveDocumentation,
+		group: HOOKS
 	}
 ];

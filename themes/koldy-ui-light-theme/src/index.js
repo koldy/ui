@@ -14,24 +14,11 @@ export default {
 	body: {},
 	zIndex: 5000,
 	breakpoints: {
-		xs: {
-			to: 499
-		},
-		sm: {
-			from: 500,
-			to: 787
-		},
-		md: {
-			from: 788,
-			to: 991
-		},
-		lg: {
-			from: 992,
-			to: 1439
-		},
-		xlg: {
-			from: 1440
-		}
+		xs: '(max-width: 499px)',
+		sm: '(min-width: 500px) and (max-width: 787px)',
+		md: '(min-width: 788px) and (max-width: 991px)',
+		lg: '(min-width: 992px) and (max-width: 1199px)',
+		xlg: '(min-width: 1200px)'
 	},
 	color: {
 		primary: ['#82b6d4', '#71acce', '#5fa1c8', '#4d97c2', '#3c8dbc', '#3781ab', '#32749a', '#2c6789', '#275a78'],
