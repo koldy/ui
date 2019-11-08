@@ -93,8 +93,8 @@ const JsonViewer = function(props) {
 					<Button onClick={onClose}>Close</Button>
 				</Flexbox.Item>
 			</Flexbox>
-			{view === VIEW_JSON && <TextArea defaultValue={JSON.stringify(json, null, '\t')} ref={inputRef} />}
-			{view === VIEW_ALL && <TextArea defaultValue={JSON.stringify(theme.json(), null, '\t')} ref={inputRef} />}
+			{view === VIEW_JSON && <TextArea defaultValue={JSON.stringify(json, null, '  ')} ref={inputRef} />}
+			{view === VIEW_ALL && <TextArea defaultValue={JSON.stringify(theme.json(), null, '  ')} ref={inputRef} />}
 		</Fragment>
 	);
 };
@@ -125,7 +125,9 @@ const TextArea = styled.textarea`
 	border: 2px solid #cfcfcf;
 	border-radius: 0;
 	padding: 0.5rem;
-	font-size: 0.8rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.25;
 	color: ${({theme}) => theme.black};
 	font-family: 'Courier New', monospace;
 	width: 100%;

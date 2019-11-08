@@ -506,7 +506,9 @@ export const Documentation = function() {
 				Size can only be set in theme. Don't mix this prop with the <code>width</code> prop, size tells how big the
 				component is (font size, padding and etc).
 			</DocsText>
-			<AvailableKeys data={sizes} />
+			<DocsText>
+				<AvailableKeys data={sizes} />
+			</DocsText>
 			{Object.keys(sizes).map((t) => (
 				<DocsCode key={t} label={t} labelWidth="auto">
 					<DocsCode.Example>
@@ -518,7 +520,9 @@ export const Documentation = function() {
 			<DocsText>
 				It is possible to predefine width in the theme, so you can have one place from where you control the width.
 			</DocsText>
-			<AvailableKeys data={widths} />
+			<DocsText>
+				<AvailableKeys data={widths} />
+			</DocsText>
 			{Object.keys(widths).map((t) => (
 				<DocsCode key={t} label={t} labelWidth="auto">
 					<DocsCode.Example>

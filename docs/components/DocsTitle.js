@@ -52,7 +52,7 @@ const DocsTitle = function({children, hash}) {
 					</H1>
 					<Controls>
 						{json && <ControlButton onClick={openJson}>JSON: {json}</ControlButton>}
-						<ControlButton onClick={toggleDarkMode}>Dark: {isDark ? 'ON' : 'OFF'}</ControlButton>
+						<ControlButton onClick={toggleDarkMode}>BG: {isDark ? 'dark' : 'light'}</ControlButton>
 						<ControlButton onChange={toggleTheme} as="select" defaultValue={isDark ? 'dark' : 'light'}>
 							<option value="light">koldy-ui-light-theme</option>
 							<option value="dark">koldy-ui-dark-theme</option>
