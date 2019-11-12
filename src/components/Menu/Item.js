@@ -13,23 +13,42 @@ const Item = forwardRef(function(props, ref) {
 		inline = false,
 		disabled: itemDisabled,
 		value = undefined,
+		onClick = null,
+		onDoubleClick = null,
 		m = null,
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		as = 'div'
 	} = props;
 
 	const handleClick = useCallback(
 		(e) => {
-			if (value !== undefined) {
+			if (value !== undefined || isFunction(onClick)) {
 				e.preventDefault();
 				e.stopPropagation();
 
-				pickValue(value);
+				if (isFunction(onClick)) {
+					onClick({value});
+				} else {
+					pickValue(value);
+				}
 			}
 		},
-		[value, pickValue]
+		[value, pickValue, onClick]
+	);
+
+	const handleDoubleClick = useCallback(
+		(e) => {
+			if (isFunction(onDoubleClick)) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				onDoubleClick({value});
+			}
+		},
+		[value, onDoubleClick]
 	);
 
 	/**
@@ -70,7 +89,9 @@ const Item = forwardRef(function(props, ref) {
 			itemCss={itemCss}
 			className={className}
 			onClick={handleClick}
+			onDoubleClick={handleDoubleClick}
 			style={style}
+			as={as}
 			{...otherProps}
 		>
 			{isFunction(children) ? children({name, isSelected, isDisabled}) : children}
@@ -83,13 +104,18 @@ Item.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	inline: PropTypes.bool,
 	disabled: PropTypes.bool,
+	onClick: PropTypes.func,
+	onDoubleClick: PropTypes.func,
 
 	// margins:
 	m: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	mt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	mr: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	mb: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+	// advanced props:
+	as: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 };
 
 const StyledItem = styled.div`

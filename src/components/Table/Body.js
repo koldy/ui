@@ -4,31 +4,31 @@ import styled from 'styled-components';
 
 import {omit} from '../../util/helpers';
 
-const Thead = function(props) {
+const Body = function(props) {
 	const {children = null, style: userStyle = null} = props;
 
 	const style = {
 		...userStyle
 	};
 
-	const otherProps = omit(props, Object.keys(Thead.propTypes));
+	const otherProps = omit(props, Object.keys(Body.propTypes));
 
 	return (
-		<StyledThead style={style} {...otherProps}>
+		<StyledTbody style={style} {...otherProps}>
 			{children}
-		</StyledThead>
+		</StyledTbody>
 	);
 };
 
-Thead.propTypes = {
+Body.propTypes = {
 	children: PropTypes.node,
 	// eslint-disable-next-line
 	style: PropTypes.object
 };
 
-const StyledThead = styled.thead`
-	display: table-header-group;
+const StyledTbody = styled.tbody`
+	display: table-row-group;
 	border-color: inherit;
 `;
 
-export default Thead;
+export default Body;

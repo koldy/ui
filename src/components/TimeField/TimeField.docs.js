@@ -120,7 +120,7 @@ export const Documentation = function() {
 					</p>
 					<TimeField defaultValue={newYear2019} />
 				</Props.Prop>
-				<Props.Prop name="valueFormat" type="func">
+				<Props.Prop name="valueFormat" type="function">
 					<p>
 						<code>valueFormat</code> is function that gets the instance of <code>Date</code> or <code>null</code> for
 						its first parameter and it's up to you how do you want to format it. The returned value from that function
@@ -159,7 +159,7 @@ export const Documentation = function() {
 						</DocsCode>
 					))}
 				</Props.Prop>
-				<Props.Prop name="onChange" type="func">
+				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when TimeField is used as controlled component.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -176,7 +176,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<TimeField name="onChangeExampleName" onChange={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onClick" type="func">
+				<Props.Prop name="onClick" type="function">
 					<p>Called when the component is clicked on.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -193,7 +193,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<TimeField name="onClickExampleName" onClick={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onDoubleClick" type="func">
+				<Props.Prop name="onDoubleClick" type="function">
 					<p>Called when the component is double clicked on.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -210,7 +210,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<TimeField name="onDoubleClickExampleName" onDoubleClick={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onFocus" type="func">
+				<Props.Prop name="onFocus" type="function">
 					<p>Called when the component is focused.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -236,7 +236,7 @@ export const Documentation = function() {
 						<TimeField.Input />
 					</TimeField>
 				</Props.Prop>
-				<Props.Prop name="onBlur" type="func">
+				<Props.Prop name="onBlur" type="function">
 					<p>Called when the component is blurred.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>

@@ -110,7 +110,7 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<Props>
-				<Props.Prop name="children" type="func" required>
+				<Props.Prop name="children" type={['function', 'node']} required>
 					Use the function as opportunity to get some of the Overlay's properties useful for creating UI on top of
 					overlay. This function gets object for parameter which contains:
 					<ul>
@@ -124,7 +124,11 @@ export const Documentation = function() {
 					Overlay is simple component that accepts any native CSS color for this prop or the name from theme's color
 					definition in <code>theme.color</code>.
 				</Props.Prop>
-				<Props.Prop name="onClose" type="func" required>
+				<Props.Prop name="animationDuration" type="string" defaultValue="theme.overlay.defaults.animationDuration">
+					If set, entry and exit animations will be that long. You can pass any valid CSS value for animation duration.
+					Example: <code>300ms</code>.
+				</Props.Prop>
+				<Props.Prop name="onClose" type="function" required>
 					Function which will close the modal. You are responsible for unmounting the Overlay so your{' '}
 					<code>onClose</code> function should do it.
 				</Props.Prop>

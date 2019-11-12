@@ -4,9 +4,9 @@ import styled, {css} from 'styled-components';
 
 import {getStyleForMargins, isObject, omit} from '../../util/helpers';
 
-import Head from './Thead';
-import Body from './Tbody';
-import Foot from './Tfoot';
+import Head from './Head';
+import Body from './Body';
+import Foot from './Foot';
 import Tr from './Tr';
 import Th from './Th';
 import Td from './Td';
@@ -86,16 +86,16 @@ const Table = function(props) {
 		return {};
 	}, [theme, color]);
 
-	if (theme.inDebug()) {
-		// TODO: Check the children in debug mode
-		React.Children.forEach(children, (child) => {
-			if (React.isValidElement(child)) {
-				if (!(child instanceof Head) && !(child instanceof Body) && !(child instanceof Foot)) {
-					//throw new ThemeError('Table component expected children of Thead, Tbody or Tfoot, but got none of them');
-				}
-			}
-		});
-	}
+	// if (theme.inDebug()) {
+	// 	// TODO: Check the children in debug mode
+	// 	React.Children.forEach(children, (child) => {
+	// 		if (React.isValidElement(child)) {
+	// 			if (!(child instanceof Head) && !(child instanceof Body) && !(child instanceof Foot)) {
+	// 				//throw new ThemeError('Table component expected children of Thead, Tbody or Tfoot, but got none of them');
+	// 			}
+	// 		}
+	// 	});
+	// }
 
 	const style = {
 		...getStyleForMargins({m, mt, mr, mb, ml}),
@@ -140,9 +140,9 @@ const StyledTable = styled.table`
 	${({tableColorCss}) => css(tableColorCss)};
 `;
 
-Table.Thead = Head;
-Table.Tbody = Body;
-Table.Tfoot = Foot;
+Table.Head = Head;
+Table.Body = Body;
+Table.Foot = Foot;
 
 Table.Tr = Tr;
 Table.Th = Th;

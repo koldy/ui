@@ -255,7 +255,7 @@ export const Documentation = function() {
 					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
 					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
-				<Props.Prop name="onChange" type="func">
+				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when FileField is used as controlled component.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -272,7 +272,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<FileField name="onChangeExampleName" onChange={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onClick" type="func">
+				<Props.Prop name="onClick" type="function">
 					<p>Called when the component is clicked on.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -289,7 +289,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<FileField name="onClickExampleName" onClick={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onDoubleClick" type="func">
+				<Props.Prop name="onDoubleClick" type="function">
 					<p>Called when the component is double clicked on.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -306,7 +306,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<FileField name="onDoubleClickExampleName" onDoubleClick={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onFocus" type="func">
+				<Props.Prop name="onFocus" type="function">
 					<p>Called when the component is focused.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -328,7 +328,7 @@ export const Documentation = function() {
 						<FileField.Input />
 					</FileField>
 				</Props.Prop>
-				<Props.Prop name="onBlur" type="func">
+				<Props.Prop name="onBlur" type="function">
 					<p>Called when the component is blurred.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>

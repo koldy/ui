@@ -118,7 +118,7 @@ export const Documentation = function() {
 				<Props.Prop name="disabled" type="bool" defaultValue="false">
 					Set this prop to disabled if you want to disable all options within this <code>Radio</code> set.
 				</Props.Prop>
-				<Props.Prop name="onChange" type="func">
+				<Props.Prop name="onChange" type="function">
 					<p>
 						Function called when value has changed. It'll get the object for the first parameter with the following
 						keys:

@@ -344,13 +344,14 @@ export default {
 	},
 	overlay: {
 		defaults: {
-			backgroundColor: 'semiBlack'
+			backgroundColor: 'semiBlack',
+			animationDuration: '300ms'
 		}
 	},
 	text: {
 		defaults: {
 			variant: 'no-variant',
-			color: 'no-color'
+			color: 'primary'
 		},
 		variant: {
 			'no-variant': {},
@@ -362,9 +363,11 @@ export default {
 			}
 		},
 		color: {
-			'no-color': {},
 			primary: {
-				color: 'primary'
+				color: '#222222'
+			},
+			primaryInverted: {
+				color: '#eeeeee'
 			},
 			info: {
 				color: 'info'
@@ -1097,15 +1100,23 @@ export default {
 	},
 	menu: {
 		defaults: {
-			variant: 'primary',
+			variant: 'square',
 			size: 'md',
 			color: 'gray'
 		},
 		variant: {
-			primary: {
+			square: {
 				menu: {},
 				item: {
 					fontFamily: 'inherit'
+				},
+				line: {}
+			},
+			rounded: {
+				menu: {},
+				item: {
+					fontFamily: 'inherit',
+					borderRadius: '4px'
 				},
 				line: {}
 			}
@@ -1146,6 +1157,64 @@ export default {
 			}
 		},
 		color: {
+			primary: {
+				menu: {
+					background: 'transparent',
+					outline: 'none'
+				},
+				item: {
+					background: 'primary',
+					border: 'none',
+					outline: 'none',
+					color: '#ffffff',
+					'&:hover': {
+						background: 'primary|1'
+					},
+					'&.selected': {
+						background: 'primary|3',
+						color: '#ffffff',
+						':hover': {
+							background: 'primary|4'
+						}
+					},
+					'&.disabled': {
+						cursor: 'not-allowed',
+						background: 'primary|-2'
+					}
+				},
+				line: {
+					borderTop: '1px solid #efefef'
+				}
+			},
+			primaryInverted: {
+				menu: {
+					background: 'transparent',
+					outline: 'none'
+				},
+				item: {
+					background: 'transparent',
+					border: 'none',
+					outline: 'none',
+					color: '#efefef',
+					'&:hover': {
+						background: 'primary|-2',
+						color: '#ffffff'
+					},
+					'&.selected': {
+						background: '#ffffff',
+						color: 'primary|-1',
+						':hover': {
+							background: undefined
+						}
+					},
+					'&.disabled': {
+						cursor: 'not-allowed'
+					}
+				},
+				line: {
+					borderTop: '1px solid #efefef'
+				}
+			},
 			gray: {
 				menu: {
 					background: 'transparent',
@@ -1155,10 +1224,10 @@ export default {
 					background: 'transparent',
 					border: 'none',
 					outline: 'none',
+					color: 'black',
 					'&:hover': {
 						background: '#efefef'
 					},
-					color: 'black',
 					'&.selected': {
 						background: '#f6f6f6',
 						':hover': {

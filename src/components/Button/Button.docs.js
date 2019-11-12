@@ -64,7 +64,7 @@ export const Documentation = function() {
 					Adds <code>disabled</code> attribute to the button. In this case, you're able to use CSS's{' '}
 					<code>:disabled</code> pseudo selector to style the button.
 				</Props.Prop>
-				<Props.Prop name="onClick" type="func">
+				<Props.Prop name="onClick" type="function">
 					<DocsCode>
 						<DocsCode.Example>
 							<Button onClick={(x) => console.log(x)}>Click me!</Button>
@@ -81,7 +81,7 @@ export const Documentation = function() {
 						</li>
 					</ul>
 				</Props.Prop>
-				<Props.Prop name="onDoubleClick" type="func">
+				<Props.Prop name="onDoubleClick" type="function">
 					If you set <code>onDoubleClick</code> without <code>onClick</code> prop, button will keep the type{' '}
 					<code>submit</code> which could cause unexpected behaviour when used within the form. In that case, take care
 					of <code>type</code> prop yourself.
@@ -101,7 +101,7 @@ export const Documentation = function() {
 						</li>
 					</ul>
 				</Props.Prop>
-				<Props.Prop name="onFocus" type="func">
+				<Props.Prop name="onFocus" type="function">
 					<p>
 						If set, it'll fire given function with standard information. You may use this as opportunity to catch the{' '}
 						<code>element</code> and place the drop down menu if you like.
@@ -122,7 +122,7 @@ export const Documentation = function() {
 						</li>
 					</ul>
 				</Props.Prop>
-				<Props.Prop name="onBlur" type="func">
+				<Props.Prop name="onBlur" type="function">
 					<p>If set, it'll fire given function with standard information.</p>
 					<DocsCode>
 						<DocsCode.Example>

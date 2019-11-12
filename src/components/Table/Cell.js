@@ -14,6 +14,8 @@ const Cell = function(props) {
 		height = null,
 		textAlign = null,
 		verticalAlign = null,
+		colSpan = null,
+		rowSpan = null,
 		style: userStyle = null,
 		as = 'td',
 		p = null,
@@ -69,6 +71,8 @@ const Cell = function(props) {
 			onDoubleClick={handleDoubleClick}
 			textAlign={textAlign}
 			verticalAlign={verticalAlign}
+			colSpan={colSpan}
+			rowSpan={rowSpan}
 			style={style}
 			{...otherProps}
 			as={as}

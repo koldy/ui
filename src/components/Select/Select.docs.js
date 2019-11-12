@@ -98,7 +98,7 @@ export const Documentation = function() {
 					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
 					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
-				<Props.Prop name="onChange" type="func">
+				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when Select is used as controlled component.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -119,7 +119,7 @@ export const Documentation = function() {
 						<option value="2">two</option>
 					</Select>
 				</Props.Prop>
-				<Props.Prop name="onFocus" type="func">
+				<Props.Prop name="onFocus" type="function">
 					<p>Called when the component is focused.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -140,7 +140,7 @@ export const Documentation = function() {
 						<option value="2">two</option>
 					</Select>
 				</Props.Prop>
-				<Props.Prop name="onBlur" type="func">
+				<Props.Prop name="onBlur" type="function">
 					<p>Called when the component is blurred.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>

@@ -226,10 +226,10 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<Props>
-				<Props.Prop name="children" type="function" required>
+				<Props.Prop name="children" type={['function', 'node']} required>
 					<p>
-						Every Toast must have the content which is defined by the render function. This function gets the object for
-						first parameter which has:
+						Every Toast must have the content which is function or node. If children prop is a function, then the
+						function will get an object for first parameter which has:
 					</p>
 					<ul>
 						<li>

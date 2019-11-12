@@ -33,7 +33,8 @@ const Box = forwardRef(function(props, ref) {
 		top = null,
 		right = null,
 		bottom = null,
-		left = null
+		left = null,
+		as = 'div'
 	} = props;
 
 	const {theme} = useContext(ThemeContext);
@@ -162,6 +163,7 @@ const Box = forwardRef(function(props, ref) {
 			textAlignValue={textAlign}
 			positionValue={position}
 			style={style}
+			as={as}
 			{...otherProps}
 		>
 			{children}
@@ -203,7 +205,10 @@ Box.propTypes = {
 	top: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	right: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	bottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	left: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+	left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+	// advanced props:
+	as: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 };
 
 const StyledBox = styled.div`

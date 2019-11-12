@@ -681,7 +681,7 @@ export const Documentation = function() {
 					Sets the overlay duration for both entry and exit duration. Value must be valid CSS value that contains{' '}
 					<code>ms</code> or <code>s</code>. Example: <code>350ms</code>.
 				</Props.Prop>
-				<Props.Prop name="onClose" type="func" required>
+				<Props.Prop name="onClose" type="function" required>
 					<p>
 						If/when drawer is closed from the inside, then this function will be called. When this function is called,{' '}
 						<code>Drawer</code> should be unmounted.

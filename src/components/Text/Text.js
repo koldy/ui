@@ -247,7 +247,7 @@ Text.propTypes = {
 	// eslint-disable-next-line
 	style: PropTypes.object,
 
-	// paddings
+	// padding
 	p: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pr: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

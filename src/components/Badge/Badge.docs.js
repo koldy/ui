@@ -34,7 +34,7 @@ export const Documentation = function() {
 			</DocsCode>
 			<Props>
 				<Props.Prop name="children" type="node" />
-				<Props.Prop name="onClick" type="func">
+				<Props.Prop name="onClick" type="function">
 					<p>Fires function with object on first parameter with the following keys:</p>
 					<ul>
 						<li>
@@ -48,7 +48,7 @@ export const Documentation = function() {
 						<DocsCode.Code>{'<Badge onClick={(x) => console.log(x)}>Click me!</Badge>'}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
-				<Props.Prop name="onDoubleClick" type="func">
+				<Props.Prop name="onDoubleClick" type="function">
 					<p>Fires function with object on first parameter with the following keys:</p>
 					<ul>
 						<li>

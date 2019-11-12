@@ -4,31 +4,31 @@ import styled from 'styled-components';
 
 import {omit} from '../../util/helpers';
 
-const Tbody = function(props) {
+const Foot = function(props) {
 	const {children = null, style: userStyle = null} = props;
 
 	const style = {
 		...userStyle
 	};
 
-	const otherProps = omit(props, Object.keys(Tbody.propTypes));
+	const otherProps = omit(props, Object.keys(Foot.propTypes));
 
 	return (
-		<StyledTbody style={style} {...otherProps}>
+		<StyledTfoot style={style} {...otherProps}>
 			{children}
-		</StyledTbody>
+		</StyledTfoot>
 	);
 };
 
-Tbody.propTypes = {
+Foot.propTypes = {
 	children: PropTypes.node,
 	// eslint-disable-next-line
 	style: PropTypes.object
 };
 
-const StyledTbody = styled.tbody`
-	display: table-row-group;
+const StyledTfoot = styled.tfoot`
+	display: table-footer-group;
 	border-color: inherit;
 `;
 
-export default Tbody;
+export default Foot;

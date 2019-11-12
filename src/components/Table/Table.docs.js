@@ -7,12 +7,11 @@ import ThemeContext from '../../theme/ThemeContext';
 import Props from '../../../docs/components/Props';
 import DocsSubTitle from '../../../docs/components/DocsSubTitle';
 import DocsText from '../../../docs/components/DocsText';
-import ValueShowcase from '../../../docs/components/ValueShowcase';
 import ImportComponent from '../../../docs/components/ImportComponent';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
 import DocsCode from '../../../docs/components/DocsCode';
 
-export const title = 'Table';
+export const title = <s>Table</s>;
 export const slug = 'table';
 export const json = 'table';
 
@@ -24,24 +23,24 @@ export const Documentation = function() {
 
 	return (
 		<>
-			<DocsTitle hash="table">Table</DocsTitle>
+			<DocsTitle hash="table">Table (experimental)</DocsTitle>
 			<ImportComponent name="Table" />
 			<DocsText>Jump to subcomponent:</DocsText>
 			<DocsText>
 				<ul>
 					<li>
-						<a href="#thead">
-							<code>Table.Thead</code>
+						<a href="#head">
+							<code>Table.Head</code>
 						</a>
 					</li>
 					<li>
-						<a href="#tbody">
-							<code>Table.Tbody</code>
+						<a href="#body">
+							<code>Table.Body</code>
 						</a>
 					</li>
 					<li>
-						<a href="#tfoot">
-							<code>Table.Tfoot</code>
+						<a href="#foot">
+							<code>Table.Foot</code>
 						</a>
 					</li>
 					<li>
@@ -89,18 +88,18 @@ export const Documentation = function() {
 			<DocsText>
 				<ul>
 					<li>
-						<a href="#thead">
-							<code>Table.Thead</code>
+						<a href="#head">
+							<code>Table.Head</code>
 						</a>
 					</li>
 					<li>
-						<a href="#tbody">
-							<code>Table.Tbody</code>
+						<a href="#body">
+							<code>Table.Body</code>
 						</a>
 					</li>
 					<li>
-						<a href="#tfoot">
-							<code>Table.Tfoot</code>
+						<a href="#foot">
+							<code>Table.Foot</code>
 						</a>
 					</li>
 					<li>
@@ -121,8 +120,8 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<DocsText>
-				Table component always expect <code>Thead</code>, <code>Tbody</code> or <code>Tfoot</code> as its direct
-				children and to keep everything consistent, it won't allow <code>&lt;Rr&gt;</code> tags as direct children of{' '}
+				Table component always expect <code>Head</code>, <code>Body</code> or <code>Foot</code> as its direct children
+				and to keep everything consistent, it won't allow <code>&lt;tr&gt;</code> tags as direct children of{' '}
 				<code>&lt;table&gt;</code> tag.
 			</DocsText>
 			<DocsSubTitle hash="theory">Some theory about styling</DocsSubTitle>
@@ -154,15 +153,15 @@ export const Documentation = function() {
 			<DocsCode>
 				<DocsCode.Example>
 					<Table width="100%" tableLayout="fixed">
-						<Table.Thead>
+						<Table.Head>
 							<Table.Tr>
 								<Table.Th width={70}>-</Table.Th>
 								<Table.Th>1st</Table.Th>
 								<Table.Th>2nd</Table.Th>
 								<Table.Th>3rd</Table.Th>
 							</Table.Tr>
-						</Table.Thead>
-						<Table.Tbody>
+						</Table.Head>
+						<Table.Body>
 							<Table.Tr>
 								<Table.Th>first</Table.Th>
 								<Table.Td>1.1</Table.Td>
@@ -175,21 +174,21 @@ export const Documentation = function() {
 								<Table.Td>2.2</Table.Td>
 								<Table.Td>2.3</Table.Td>
 							</Table.Tr>
-						</Table.Tbody>
+						</Table.Body>
 					</Table>
 				</DocsCode.Example>
 				<DocsCode.Code>
 					{`
 					<Table width="100%" tableLayout="fixed">
-						<Table.Thead>
+						<Table.Head>
 							<Table.Tr>
 								<Table.Th width={70}>-</Table.Th>
 								<Table.Th>1st</Table.Th>
 								<Table.Th>2nd</Table.Th>
 								<Table.Th>3rd</Table.Th>
 							</Table.Tr>
-						</Table.Thead>
-						<Table.Tbody>
+						</Table.Head>
+						<Table.Body>
 							<Table.Tr>
 								<Table.Th>first</Table.Th>
 								<Table.Td>1.1</Table.Td>
@@ -202,7 +201,7 @@ export const Documentation = function() {
 								<Table.Td>2.2</Table.Td>
 								<Table.Td>2.3</Table.Td>
 							</Table.Tr>
-						</Table.Tbody>
+						</Table.Body>
 					</Table>
 					`}
 				</DocsCode.Code>
@@ -215,15 +214,15 @@ export const Documentation = function() {
 				<DocsCode key={size} label={size}>
 					<DocsCode.Example>
 						<Table width="100%" tableLayout="fixed" size={size}>
-							<Table.Thead>
+							<Table.Head>
 								<Table.Tr>
 									<Table.Th width={70}>-</Table.Th>
 									<Table.Th>1st</Table.Th>
 									<Table.Th>2nd</Table.Th>
 									<Table.Th>3rd</Table.Th>
 								</Table.Tr>
-							</Table.Thead>
-							<Table.Tbody>
+							</Table.Head>
+							<Table.Body>
 								<Table.Tr>
 									<Table.Th>first</Table.Th>
 									<Table.Td>1.1</Table.Td>
@@ -236,21 +235,21 @@ export const Documentation = function() {
 									<Table.Td>2.2</Table.Td>
 									<Table.Td>2.3</Table.Td>
 								</Table.Tr>
-							</Table.Tbody>
+							</Table.Body>
 						</Table>
 					</DocsCode.Example>
 					<DocsCode.Code>
 						{`
 						<Table width="100%" tableLayout="fixed" size="${size}">
-							<Table.Thead>
+							<Table.Head>
 								<Table.Tr>
 									<Table.Th width={70}>-</Table.Th>
 									<Table.Th>1st</Table.Th>
 									<Table.Th>2nd</Table.Th>
 									<Table.Th>3rd</Table.Th>
 								</Table.Tr>
-							</Table.Thead>
-							<Table.Tbody>
+							</Table.Head>
+							<Table.Body>
 								<Table.Tr>
 									<Table.Th>first</Table.Th>
 									<Table.Td>1.1</Table.Td>
@@ -263,7 +262,7 @@ export const Documentation = function() {
 									<Table.Td>2.2</Table.Td>
 									<Table.Td>2.3</Table.Td>
 								</Table.Tr>
-							</Table.Tbody>
+							</Table.Body>
 						</Table>
 						`}
 					</DocsCode.Code>
@@ -277,15 +276,15 @@ export const Documentation = function() {
 				<DocsCode key={color} label={color}>
 					<DocsCode.Example>
 						<Table width="100%" tableLayout="fixed" color={color}>
-							<Table.Thead>
+							<Table.Head>
 								<Table.Tr>
 									<Table.Th width={70}>-</Table.Th>
 									<Table.Th>1st</Table.Th>
 									<Table.Th>2nd</Table.Th>
 									<Table.Th>3rd</Table.Th>
 								</Table.Tr>
-							</Table.Thead>
-							<Table.Tbody>
+							</Table.Head>
+							<Table.Body>
 								<Table.Tr>
 									<Table.Th>first</Table.Th>
 									<Table.Td>1.1</Table.Td>
@@ -298,21 +297,21 @@ export const Documentation = function() {
 									<Table.Td>2.2</Table.Td>
 									<Table.Td>2.3</Table.Td>
 								</Table.Tr>
-							</Table.Tbody>
+							</Table.Body>
 						</Table>
 					</DocsCode.Example>
 					<DocsCode.Code>
 						{`
 						<Table width="100%" tableLayout="fixed" color="${color}">
-							<Table.Thead>
+							<Table.Head>
 								<Table.Tr>
 									<Table.Th width={70}>-</Table.Th>
 									<Table.Th>1st</Table.Th>
 									<Table.Th>2nd</Table.Th>
 									<Table.Th>3rd</Table.Th>
 								</Table.Tr>
-							</Table.Thead>
-							<Table.Tbody>
+							</Table.Head>
+							<Table.Body>
 								<Table.Tr>
 									<Table.Th>first</Table.Th>
 									<Table.Td>1.1</Table.Td>
@@ -325,40 +324,40 @@ export const Documentation = function() {
 									<Table.Td>2.2</Table.Td>
 									<Table.Td>2.3</Table.Td>
 								</Table.Tr>
-							</Table.Tbody>
+							</Table.Body>
 						</Table>
 						`}
 					</DocsCode.Code>
 				</DocsCode>
 			))}
-			<DocsSubTitle hash="thead">Thead</DocsSubTitle>
+			<DocsSubTitle hash="head">Head</DocsSubTitle>
 			<DocsText>
 				Use this component as direct child of <code>Table</code> component.
 			</DocsText>
-			<Props hash="thead-props">
+			<Props hash="head-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="style" />
 			</Props>
-			<DocsSubTitle hash="tbody">Tbody</DocsSubTitle>
+			<DocsSubTitle hash="body">Body</DocsSubTitle>
 			<DocsText>
 				Use this component as direct child of <code>Table</code> component.
 			</DocsText>
-			<Props hash="tbody-props">
+			<Props hash="body-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="style" />
 			</Props>
-			<DocsSubTitle hash="tfoot">Tfoot</DocsSubTitle>
+			<DocsSubTitle hash="foot">Foot</DocsSubTitle>
 			<DocsText>
 				Use this component as direct child of <code>Table</code> component.
 			</DocsText>
-			<Props hash="tfoot-props">
+			<Props hash="foot-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="style" />
 			</Props>
 			<DocsSubTitle hash="tr">Tr</DocsSubTitle>
 			<DocsText>
-				Use this component as direct child of <code>Table.Thead</code>, <code>Table.Tbody</code> or{' '}
-				<code>Table.Tfoot</code> component.
+				Use this component as direct child of <code>Table.Head</code>, <code>Table.Body</code> or{' '}
+				<code>Table.Foot</code> component.
 			</DocsText>
 			<Props hash="tr-props">
 				<Props.Prop name="children" type="node" />

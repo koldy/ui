@@ -137,7 +137,7 @@ export const Documentation = function() {
 						</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
-				<Props.Prop name="onChange" type="func">
+				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when TextArea is used as controlled component.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -154,7 +154,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<TextArea name="onChangeExampleName" onChange={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onClick" type="func">
+				<Props.Prop name="onClick" type="function">
 					<p>Called when the component is clicked on.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -171,7 +171,7 @@ export const Documentation = function() {
 					<p>Check the example and watch your browser's console to see the change.</p>
 					<TextArea name="onClickExampleName" onClick={(o) => console.log(o)} />
 				</Props.Prop>
-				<Props.Prop name="onDoubleClick" type="func">
+				<Props.Prop name="onDoubleClick" type="function">
 					<p>Called when the component is double clicked on.</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>

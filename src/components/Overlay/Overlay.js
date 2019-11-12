@@ -36,7 +36,7 @@ const Overlay = function(props) {
 	const ref = useRef(null);
 
 	// detect the animation duration, either set by user or by theme
-	const animationDuration = userAnimationDuration || null;
+	const animationDuration = userAnimationDuration || defaults.animationDuration || null;
 
 	// TODO: optimize stacking and implement body-scroll-locking because overflow:hidden is not enough
 
@@ -130,9 +130,9 @@ const Overlay = function(props) {
 Overlay.counter = 0;
 
 Overlay.propTypes = {
+	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
 	animationDuration: PropTypes.string,
 	backgroundColor: PropTypes.string,
-	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
 	disableCloseOnESC: PropTypes.bool,
 	disableCloseOnClick: PropTypes.bool,
 	onClose: PropTypes.func.isRequired,

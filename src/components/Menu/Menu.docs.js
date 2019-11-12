@@ -14,6 +14,7 @@ import Button from '../Button/Button';
 import Flexbox from '../Flexbox/Flexbox';
 import Checkbox from '../Checkbox/Checkbox';
 import {emptyFn} from '../../util/helpers';
+import Box from '../Box/Box';
 
 export const title = 'Menu';
 export const slug = 'menu';
@@ -103,10 +104,14 @@ export const Documentation = function() {
 			<DocsText>Sub components:</DocsText>
 			<ul>
 				<li>
-					<code>Menu.Item</code>
+					<a href="#item">
+						<code>Menu.Item</code>
+					</a>
 				</li>
 				<li>
-					<code>Menu.Divider</code>
+					<a href="#divider">
+						<code>Menu.Divider</code>
+					</a>
 				</li>
 			</ul>
 			<DocsText>
@@ -321,7 +326,7 @@ export const Documentation = function() {
 						</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
-				<Props.Prop name="onChange" type="func">
+				<Props.Prop name="onChange" type="function">
 					<p>
 						Fires when there's a change on selected value(s). Function will get the object for first parameter with the
 						following keys:
@@ -463,6 +468,34 @@ export const Documentation = function() {
 					</DocsCode.Code>
 				</DocsCode>
 			))}
+			<DocsText>
+				These color combinations might not look attractive when having "vertical menus", so here's the same example with
+				inline elements and variant rounded:
+			</DocsText>
+			{Object.keys(colors).map((val) => (
+				<DocsCode label={val} labelWidth="auto" key={val}>
+					<DocsCode.Example>
+						<Menu color={val} variant="rounded">
+							{customOptions.map(({country}) => (
+								<Menu.Item value={country} inline m="0.25rem" key={country}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</DocsCode.Example>
+					<DocsCode.Code>
+						{`
+						<Menu color="${val}" variant="rounded">
+							{customOptions.map(({country}) => (
+								<Menu.Item value={country} inline m="0.25rem" key={country}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+						`}
+					</DocsCode.Code>
+				</DocsCode>
+			))}
 			<DocsSubTitle hash="item">Menu.Item</DocsSubTitle>
 			<DocsText>
 				This component provides the core functionality of <code>Menu</code> component while still keeping the
@@ -532,12 +565,86 @@ export const Documentation = function() {
 				<Props.Prop name="disabled" type="bool" defaultValue={false}>
 					<p>If set to true, this Item will be disabled.</p>
 				</Props.Prop>
+				<Props.Prop name="onClick">
+					<p>Fires function with object on first parameter with the following keys:</p>
+					<ul>
+						<li>
+							<strong>value</strong> - value given as prop
+						</li>
+					</ul>
+					<DocsCode>
+						<DocsCode.Example>
+							<Menu>
+								{customOptions.map(({country}) => (
+									<Menu.Item key={country} value={country} inline onClick={(x) => console.log(x)}>
+										{country}
+									</Menu.Item>
+								))}
+							</Menu>
+						</DocsCode.Example>
+					</DocsCode>
+					<p>
+						Bw aware that if <code>onClick</code> prop is set, then <code>onChange</code> in <code>Menu</code> component
+						won't work because internal click handler will be overridden with your function.
+					</p>
+				</Props.Prop>
+				<Props.Prop name="onDoubleClick">
+					<p>Fires function with object on first parameter with the following keys:</p>
+					<ul>
+						<li>
+							<strong>value</strong> - value given as prop
+						</li>
+					</ul>
+					<DocsCode>
+						<DocsCode.Example>
+							<Menu>
+								{customOptions.map(({country}) => (
+									<Menu.Item key={country} value={country} inline onDoubleClick={(x) => console.log(x)}>
+										{country}
+									</Menu.Item>
+								))}
+							</Menu>
+						</DocsCode.Example>
+					</DocsCode>
+				</Props.Prop>
 				<Props.Prop name="m" />
 				<Props.Prop name="mt" />
 				<Props.Prop name="mr" />
 				<Props.Prop name="mb" />
 				<Props.Prop name="ml" />
 				<Props.Prop name="ref" />
+				<Props.Prop name="as">
+					<p>
+						If you're just building vertical menus with this component, then you may use this prop as opportunity to
+						completely change its internal behaviour. Here are few examples:
+					</p>
+					<DocsCode>
+						<DocsCode.Example>
+							<Menu>
+								{customOptions.map(({country}) => (
+									<Menu.Item key={country} as="a" href={`https://google.com/?q=${country}`} target="_blank">
+										{country}
+									</Menu.Item>
+								))}
+							</Menu>
+						</DocsCode.Example>
+						<DocsCode.Code>
+							{`
+							<Menu>
+								{customOptions.map(({country}) => (
+									<Menu.Item key={country} as="a" href={\`https://google.com/?q=\${country}\`} target="_blank">
+										{country}
+									</Menu.Item>
+								))}
+							</Menu>
+							`}
+						</DocsCode.Code>
+					</DocsCode>
+					<p>
+						Bw aware that if you're using this component on this way, then you shouldn't pass <code>value</code> prop
+						because that would override the click events.
+					</p>
+				</Props.Prop>
 			</Props>
 			<DocsText>Here's more complex example when you want to put a checkbox and icon before the text.</DocsText>
 			<DocsCode>

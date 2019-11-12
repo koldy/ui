@@ -1,4 +1,4 @@
-import React, {useReducer, useContext, createContext, useState, useEffect, useMemo} from 'react';
+import React, {useContext, useState, useMemo} from 'react';
 import {createPortal} from 'react-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -13,6 +13,7 @@ import {flipInHorizontalBottomAnimation} from '../../animations/flipInHorizontal
 import {slitInHorizontalAnimation} from '../../animations/slitInHorizontalKeyframes';
 import {slideInBckCenterAnimation} from '../../animations/slideInBckCenter';
 import {swingInTopFwdAnimation} from '../../animations/swingInTopFwd';
+import {isFunction} from '../../util/helpers';
 
 const Toast = function(props) {
 	const {children, position, entryAnimation = 'fade', onClose = null} = props;
@@ -23,9 +24,6 @@ const Toast = function(props) {
 
 	const target = document.getElementById(`koldy-ui-toasts-${position || defaultPosition}-${appIndex}`);
 	const [targetExists, setTargetExists] = useState(!!target);
-
-	const [goingOn, setGoingOn] = useState(false);
-	const [goingOff, setGoingOff] = useState(false);
 
 	const animation = useMemo(() => {
 		switch (entryAnimation) {
@@ -63,7 +61,10 @@ const Toast = function(props) {
 	}, [entryAnimation]);
 
 	if (targetExists) {
-		return createPortal(<StyledToast animation={animation}>{children({closeFn: onClose})}</StyledToast>, target);
+		return createPortal(
+			<StyledToast animation={animation}>{isFunction(children) ? children({closeFn: onClose}) : children}</StyledToast>,
+			target
+		);
 	}
 
 	// If Toast is rendered inside of <App> without any delay, it would throw an error telling that HTMLElement doesn't exist
@@ -74,7 +75,7 @@ const Toast = function(props) {
 };
 
 Toast.propTypes = {
-	children: PropTypes.func.isRequired,
+	children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
 	position: PropTypes.oneOf([
 		'top-left',
 		'top-center',

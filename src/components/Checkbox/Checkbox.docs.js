@@ -95,7 +95,7 @@ export const Documentation = function() {
 					<p>The checkbox's color variations defined in theme.</p>
 					<AvailableKeys data={colors} />
 				</Props.Prop>
-				<Props.Prop name="onChange" type="func">
+				<Props.Prop name="onChange" type="function">
 					<p>
 						Function called when value has changed. It'll get the object for the first parameter with the following
 						keys:
