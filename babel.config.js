@@ -1,7 +1,8 @@
-module.exports = function(api) {
-	api.cache(true);
+module.exports = function (api) {
+	api.cache.never();
 
 	const presets = ['@babel/preset-env', '@babel/preset-react'];
+
 	const plugins = [
 		'@babel/plugin-proposal-class-properties',
 		'@babel/plugin-proposal-object-rest-spread',
@@ -14,8 +15,30 @@ module.exports = function(api) {
 		]
 	];
 
+	const env = {
+		cjs: {
+			presets: ['@babel/preset-env', '@babel/preset-react'],
+		},
+		esm: {
+			presets: [
+				[
+					'@babel/preset-env',
+					{
+						useBuiltIns: 'usage', // "usage" | "entry" | false, defaults to false.
+						corejs: 3,
+						targets: {
+							esmodules: true,
+							ie: '11'
+						}
+					}
+				]
+			]
+		}
+	};
+
 	return {
 		presets,
-		plugins
+		plugins,
+		env
 	};
 };

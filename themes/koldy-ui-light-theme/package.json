@@ -1,23 +1,29 @@
 {
-  "name": "koldy-ui-light-theme",
-  "version": "0.1.5",
-  "description": "Koldy UI Light Theme",
-  "main": "dist/index.js",
-  "scripts": {
-    "prepublishOnly": "babel src --out-dir ./dist -s inline"
-  },
-  "author": "Vlatko Koudela",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/koldy/ui-light-theme/issues"
-  },
-  "homepage": "https://koldy.io",
-  "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3"
-  },
-  "files": [
-    "dist/*"
-  ]
+	"name": "koldy-ui-light-theme",
+	"version": "0.1.6",
+	"description": "Koldy UI Light Theme",
+	"main": "lib/index.js",
+	"scripts": {
+		"build": "babel --delete-dir-on-start src/ --out-dir ./lib",
+		"prepublishOnly": "npm run build"
+	},
+	"author": "Vlatko Koudela",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/koldy/ui/issues"
+	},
+	"homepage": "https://koldy.io",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/koldy/ui.git",
+		"directory": "themes/koldy-ui-light-theme"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.7.0",
+		"@babel/core": "^7.7.2",
+		"@babel/preset-env": "^7.7.1"
+	},
+	"files": [
+		"lib/*"
+	]
 }
