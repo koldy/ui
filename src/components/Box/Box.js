@@ -208,7 +208,11 @@ Box.propTypes = {
 	left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+	as: PropTypes.oneOfType([
+		PropTypes.func,
+		PropTypes.string,
+		PropTypes.shape({render: PropTypes.func.isRequired}),
+	])
 };
 
 const StyledBox = styled.div`

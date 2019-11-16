@@ -20,8 +20,7 @@ const Th = function(props) {
 		pt = null,
 		pr = null,
 		pb = null,
-		pl = null,
-		as = 'th'
+		pl = null
 	} = props;
 
 	const otherProps = omit(props, ['children']);
@@ -41,7 +40,7 @@ const Th = function(props) {
 			pr={pr}
 			pb={pb}
 			pl={pl}
-			as={as}
+			as="th"
 			{...otherProps}
 		>
 			{children}
@@ -67,9 +66,7 @@ Th.propTypes = {
 	pt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pr: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pb: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	pl: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-	as: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+	pl: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default Th;

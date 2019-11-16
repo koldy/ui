@@ -2,7 +2,7 @@ import React, {useContext, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getStyleForMargins, isObject, omit} from '../../util/helpers';
+import {getPixelsOrString, getStyleForMargins, isObject, omit} from '../../util/helpers';
 
 import Head from './Head';
 import Body from './Body';
@@ -19,11 +19,26 @@ import ThemeContext from '../../theme/ThemeContext';
  * @constructor
  */
 const Table = function(props) {
+	const {theme} = useContext(ThemeContext);
+	const {
+		size: defaultSize = null,
+		color: defaultColor = null,
+		border: defaultBorder = null,
+		hover: defaultHover = null,
+		striped: defaultStriped = false,
+		tableLayout: defaultTableLayout = 'auto'
+	} = theme.json('table.defaults');
+
 	const {
 		children = null,
-		tableLayout = null,
-		size = null,
-		color = null,
+		tableLayout = defaultTableLayout,
+		borderCollapse = 'collapse',
+		size = defaultSize,
+		width = '100%',
+		color = defaultColor,
+		border = defaultBorder,
+		hover = defaultHover,
+		striped = defaultStriped,
 		style: userStyle = null,
 		m = null,
 		mt = null,
@@ -32,84 +47,344 @@ const Table = function(props) {
 		ml = null
 	} = props;
 
-	const {theme} = useContext(ThemeContext);
-
-	// TODO: use one useMemo instead of one per each prop
-
 	/**
-	 * ******************************** Calculate table sizes **************************************
+	 * ******************************** STYLE PARSER **************************************
 	 */
-	const tableSizeCss = useMemo(() => {
-		// see what we have in theme and return some values that should be passed to styled component
-		const defaults = theme.json('table.defaults');
+
+	const {tableCss, tableStyle} = useMemo(() => {
+		// get the size
 		const sizes = theme.json('table.size');
-
-		const defaultSize = size || defaults.size || null;
-
-		if (defaultSize === null) {
-			theme.warning("Table component didn't detect default table size so no size will be applied to the table");
-		} else {
-			const themeSize = sizes[defaultSize] || null;
-
-			if (themeSize === null || !isObject(themeSize)) {
-				theme.warning(`<Table size="${defaultSize}"/> not found in theme.table.size or not an object`);
-			} else {
-				return themeSize;
-			}
-		}
-
-		return {};
-	}, [theme, size]);
-
-	/**
-	 * ******************************** Calculate table colors **************************************
-	 */
-	const tableColorCss = useMemo(() => {
-		// see what we have in theme and return some values that should be passed to styled component
-		const defaults = theme.json('table.defaults');
 		const colors = theme.json('table.color');
 
-		const defaultColor = color || defaults.color || null;
+		const c = {};
 
-		if (defaultColor === null) {
-			theme.warning("Table component didn't detect default table color so no color will be applied to the table");
+		let thead = {
+			' > tr': {
+				' > th': {
+					'&:last-child': {}
+				},
+				' > td': {
+					'&:last-child': {}
+				},
+				'&:last-child': {
+					' > th': {},
+					' > td': {}
+				}
+			}
+		};
+
+		let tbody = {
+			' > tr': {
+				' > th': {
+					'&:last-child': {}
+				},
+				' > td': {
+					'&:last-child': {}
+				},
+				'&:last-child': {
+					' > th': {},
+					' > td': {}
+				},
+				'&:nth-child(even)': {
+					' > th': {},
+					' > td': {}
+				}
+			}
+		};
+
+		let tfoot = {
+			' > tr': {
+				' > th': {
+					'&:last-child': {}
+				},
+				' > td': {
+					'&:last-child': {}
+				},
+				'&:last-child': {
+					' > th': {},
+					' > td': {}
+				}
+			}
+		};
+
+		if (sizes[size] === undefined) {
+			theme.warning(`<Table size="${size}"/>  is not set in theme.table.size.${size} so it's ignored`);
 		} else {
-			const themeColor = colors[defaultColor] || null;
+			const {body} = sizes[size];
+			const {head = body, foot = body} = sizes[size];
 
-			if (themeColor === null || !isObject(themeColor)) {
-				theme.warning(`<Table color="${defaultColor}"/> not found in theme.table.color or not an object`);
-			} else {
-				return theme.processColors(themeColor);
+			if (isObject(head)) {
+				const {th, td} = head;
+				thead[' > tr'][' > th'] = {
+					...thead[' > tr'][' > th'],
+					...th
+				};
+				thead[' > tr'][' > td'] = {
+					...thead[' > tr'][' > td'],
+					...td
+				};
+			}
+
+			if (isObject(body)) {
+				const {th, td} = body;
+				tbody[' > tr'][' > th'] = {
+					...tbody[' > tr'][' > th'],
+					...th
+				};
+				tbody[' > tr'][' > td'] = {
+					...tbody[' > tr'][' > td'],
+					...td
+				};
+			}
+
+			if (isObject(foot)) {
+				const {th, td} = foot;
+				tfoot[' > tr'][' > th'] = {
+					...tfoot[' > tr'][' > th'],
+					...th
+				};
+				tfoot[' > tr'][' > td'] = {
+					...tfoot[' > tr'][' > td'],
+					...td
+				};
 			}
 		}
 
-		return {};
-	}, [theme, color]);
+		if (colors[color] === undefined) {
+			theme.warning(`<Table color="${color}"/>  is not set in theme.table.color.${color} so it's ignored`);
+		} else {
+			const {borderColor, body} = colors[color];
+			const {head = body, foot = body} = colors[color];
 
-	// if (theme.inDebug()) {
-	// 	// TODO: Check the children in debug mode
-	// 	React.Children.forEach(children, (child) => {
-	// 		if (React.isValidElement(child)) {
-	// 			if (!(child instanceof Head) && !(child instanceof Body) && !(child instanceof Foot)) {
-	// 				//throw new ThemeError('Table component expected children of Thead, Tbody or Tfoot, but got none of them');
-	// 			}
-	// 		}
-	// 	});
-	// }
+			// go through borders and apply style(s)
+			if (borderColor) {
+				// color definition depends on border and hover settings
+				// borders can be: table, all, rows, head, foot -> or any combination with "|" in it
+				const borders = typeof border === 'string' ? border.split('|') : [];
 
-	const style = {
-		...getStyleForMargins({m, mt, mr, mb, ml}),
-		...userStyle
-	};
+				for (const b of borders) {
+					switch (b) {
+						case 'table':
+							c.border = `1px solid ${theme.processColor(borderColor)}`;
+							break;
+
+						case 'column':
+							// column means vertical borders across all columns including head, body and foot
+							thead[' > tr'][' > th'] = {
+								...thead[' > tr'][' > th'],
+								borderRight: `1px solid ${theme.processColor(borderColor)}`
+							};
+							thead[' > tr'][' > th']['&:last-child'] = {
+								...thead[' > tr'][' > th']['&:last-child'],
+								borderRight: 'none'
+							};
+							thead[' > tr'][' > td'] = {
+								...thead[' > tr'][' > td'],
+								borderRight: `1px solid ${theme.processColor(borderColor)}`
+							};
+							thead[' > tr'][' > td']['&:last-child'] = {
+								...thead[' > tr'][' > td']['&:last-child'],
+								borderRight: 'none'
+							};
+
+							tbody[' > tr'][' > th'] = {
+								...tbody[' > tr'][' > th'],
+								borderRight: `1px solid ${theme.processColor(borderColor)}`
+							};
+							tbody[' > tr'][' > th']['&:last-child'] = {
+								...tbody[' > tr'][' > th']['&:last-child'],
+								borderRight: 'none'
+							};
+							tbody[' > tr'][' > td'] = {
+								...tbody[' > tr'][' > td'],
+								borderRight: `1px solid ${theme.processColor(borderColor)}`
+							};
+							tbody[' > tr'][' > td']['&:last-child'] = {
+								...tbody[' > tr'][' > td']['&:last-child'],
+								borderRight: 'none'
+							};
+
+							tfoot[' > tr'][' > th'] = {
+								...tfoot[' > tr'][' > th'],
+								borderRight: `1px solid ${theme.processColor(borderColor)}`
+							};
+							tfoot[' > tr'][' > th']['&:last-child'] = {
+								...tfoot[' > tr'][' > th']['&:last-child'],
+								borderRight: 'none'
+							};
+							tfoot[' > tr'][' > td'] = {
+								...tfoot[' > tr'][' > td'],
+								borderRight: `1px solid ${theme.processColor(borderColor)}`
+							};
+							tfoot[' > tr'][' > td']['&:last-child'] = {
+								...tfoot[' > tr'][' > td']['&:last-child'],
+								borderRight: 'none'
+							};
+							break;
+
+						case 'row':
+							tbody[' > tr'][' > th'] = {
+								...tbody[' > tr'][' > th'],
+								borderBottom: `1px solid ${theme.processColor(borderColor)}`
+							};
+							tbody[' > tr'][' > td'] = {
+								...tbody[' > tr'][' > td'],
+								borderBottom: `1px solid ${theme.processColor(borderColor)}`
+							};
+
+							tbody[' > tr']['&:last-child'][' > th'] = {
+								...tbody[' > tr']['&:last-child'][' > th'],
+								borderBottom: 'none'
+							};
+							tbody[' > tr']['&:last-child'][' > td'] = {
+								...tbody[' > tr']['&:last-child'][' > td'],
+								borderBottom: 'none'
+							};
+							break;
+
+						case 'head':
+							thead[' > tr'][' > th'] = {
+								...thead[' > tr'][' > th'],
+								borderBottom: `1px solid ${theme.processColor(borderColor)}`
+							};
+							thead[' > tr'][' > td'] = {
+								...thead[' > tr'][' > td'],
+								borderBottom: `1px solid ${theme.processColor(borderColor)}`
+							};
+							break;
+
+						case 'foot':
+							tfoot[' > tr'][' > th'] = {
+								...tfoot[' > tr'][' > th'],
+								borderTop: `1px solid ${theme.processColor(borderColor)}`
+							};
+							tfoot[' > tr'][' > td'] = {
+								...tfoot[' > tr'][' > td'],
+								borderTop: `1px solid ${theme.processColor(borderColor)}`
+							};
+							break;
+
+						default:
+							theme.warning(`Unknown table border setting: ${b}; check the prop of your <Table border="${border}"/> `);
+					}
+				}
+			}
+
+			// apply head color
+			if (isObject(head)) {
+				const {backgroundColor = null, backgroundHoverColor = null, textColor = null, textHoverColor = null} = head;
+
+				thead[' > tr'][' > th'] = {
+					...thead[' > tr'][' > th'],
+					backgroundColor: theme.processColor(backgroundColor),
+					color: theme.processColor(textColor)
+				};
+				thead[' > tr'][' > td'] = {
+					...thead[' > tr'][' > td'],
+					backgroundColor: theme.processColor(backgroundColor),
+					color: theme.processColor(textColor)
+				};
+			}
+
+			// apply body color
+			if (isObject(body)) {
+				const {backgroundColor = null, backgroundHoverColor = null, textColor = null, textHoverColor = null} = body;
+				const {backgroundStripeColor = backgroundHoverColor} = body;
+
+				tbody[' > tr'][' > th'] = {
+					...tbody[' > tr'][' > th'],
+					backgroundColor: theme.processColor(backgroundColor),
+					color: theme.processColor(textColor)
+				};
+				tbody[' > tr'][' > td'] = {
+					...tbody[' > tr'][' > td'],
+					backgroundColor: theme.processColor(backgroundColor),
+					color: theme.processColor(textColor)
+				};
+
+				if (striped === true && backgroundStripeColor) {
+					tbody[' > tr']['&:nth-child(even)'][' > th'] = {
+						...tbody[' > tr']['&:nth-child(even)'][' > th'],
+						backgroundColor: backgroundStripeColor
+					};
+					tbody[' > tr']['&:nth-child(even)'][' > td'] = {
+						...tbody[' > tr']['&:nth-child(even)'][' > td'],
+						backgroundColor: backgroundStripeColor
+					};
+				}
+
+				switch (hover) {
+					case 'table':
+						c['&:hover'] = {
+							'th, td': {
+								backgroundColor: backgroundHoverColor
+							}
+						};
+						break;
+					case 'row':
+						tbody['> tr:hover'] = {
+							'> th, > td': {
+								backgroundColor: backgroundHoverColor
+							}
+						};
+						break;
+
+					case 'cell':
+						tbody['td:hover'] = {
+							backgroundColor: backgroundHoverColor
+						};
+						break;
+
+					// no default
+				}
+			} else {
+				theme.warning(`Body colors are not set in theme.table.color.${color}.body`);
+			}
+
+			// apply foot color
+			if (isObject(foot)) {
+				const {backgroundColor = null, backgroundHoverColor = null, textColor = null, textHoverColor = null} = foot;
+
+				tfoot[' > tr'][' > th'] = {
+					...tfoot[' > tr'][' > th'],
+					backgroundColor: theme.processColor(backgroundColor),
+					color: theme.processColor(textColor)
+				};
+				tfoot[' > tr'][' > td'] = {
+					...tfoot[' > tr'][' > td'],
+					backgroundColor: theme.processColor(backgroundColor),
+					color: theme.processColor(textColor)
+				};
+			}
+		}
+
+		return {
+			tableCss: {
+				...c,
+				' > thead': thead,
+				' > tbody': tbody,
+				' > tfoot': tfoot
+			},
+			tableStyle: {
+				...getStyleForMargins({m, mt, mr, mb, ml}),
+				...userStyle,
+				width: getPixelsOrString(width)
+			}
+		};
+	}, [theme, size, color, border, hover, striped, userStyle, width, m, mt, mr, mb, ml]);
 
 	const otherProps = omit(props, Object.keys(Table.propTypes));
+
+	if (striped) {
+		console.log('table css je', tableCss);
+	}
 
 	return (
 		<StyledTable
 			tableLayout={tableLayout}
-			tableSizeCss={tableSizeCss}
-			tableColorCss={tableColorCss}
-			style={style}
+			borderCollapse={borderCollapse}
+			tableCss={tableCss}
+			style={tableStyle}
 			{...otherProps}
 		>
 			{children}
@@ -120,8 +395,13 @@ const Table = function(props) {
 Table.propTypes = {
 	children: PropTypes.node,
 	tableLayout: PropTypes.oneOf(['auto', 'fixed']),
+	borderCollapse: PropTypes.oneOf(['separate', 'collapse']),
+	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	size: PropTypes.string,
 	color: PropTypes.string,
+	border: PropTypes.string,
+	hover: PropTypes.oneOf(['table', 'row', 'cell']),
+	striped: PropTypes.bool,
 	// eslint-disable-next-line
 	style: PropTypes.object,
 
@@ -135,9 +415,10 @@ Table.propTypes = {
 
 const StyledTable = styled.table`
 	display: table;
+	border-collapse: ${({borderCollapse}) => borderCollapse};
 	table-layout: ${({tableLayout}) => tableLayout || 'auto'};
-	${({tableSizeCss}) => css(tableSizeCss)};
-	${({tableColorCss}) => css(tableColorCss)};
+	box-sizing: border-box;
+	${({tableCss}) => css(tableCss)};
 `;
 
 Table.Head = Head;

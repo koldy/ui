@@ -7,17 +7,20 @@ import {
 	getStyleForPaddings,
 	getStyleForStringOrNumber,
 	getStyleForValue,
-	isFunction,
+	isFunction, isObject,
 	omit
 } from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
 const Text = forwardRef(function(props, ref) {
+	const {theme} = useContext(ThemeContext);
+	const defaults = theme.json('text.defaults');
+
 	const {
 		children = null,
 		block = false,
 		style: userStyle = null,
-		variant = null,
+		variant = defaults.variant,
 		color = null,
 		onClick = null,
 		onDoubleClick = null,
@@ -25,7 +28,7 @@ const Text = forwardRef(function(props, ref) {
 		fontSize = null,
 		fontWeight = null,
 		lineHeight = null,
-		as: userAs = null,
+		as = 'span',
 		m = null,
 		mt = null,
 		mr = null,
@@ -37,8 +40,6 @@ const Text = forwardRef(function(props, ref) {
 		pb = null,
 		pl = null
 	} = props;
-
-	const {theme} = useContext(ThemeContext);
 
 	/**
 	 * ******************************** CLICK EVENTS **************************************
@@ -68,110 +69,41 @@ const Text = forwardRef(function(props, ref) {
 
 	const hasClick = !!onClick || !!onDoubleClick;
 
-	// TODO: Use one useMemo instead of 3
 
 	/**
-	 * ******************************** COLOR **************************************
+	 * ******************************** STYLE PARSER **************************************
 	 */
-
-	const colorCss = useMemo(() => {
-		const colors = theme.json('text.color');
-		const defaults = theme.json('text.defaults');
-
-		// what if color is set?
-		if (color) {
-			// first, is this color defined in theme?
-
-			if (typeof colors[color] === 'undefined') {
-				// it is not defined in theme, so it'll be used as is (included in style attr)
-				return {};
-			}
-
-			// else, color is set in theme, let's take it and return in
-			return theme.processColors(colors[color]);
-		}
-
-		// if we're here, it means that color value is not set, so let's try with default color (if any)
-		const defaultColor = defaults.color || null;
-
-		if (defaultColor) {
-			if (typeof colors[defaultColor] !== 'undefined') {
-				// color is set in theme, let's return it
-				return theme.processColors(colors[defaultColor]);
-			}
-
-			// else, we'll just print warning
-			theme.warning(`There's no default color "${defaultColor}" defined in theme.text.color`);
-		}
-
-		return {};
-	}, [theme, color]);
-
-	/**
-	 * ******************************** VARIANT **************************************
-	 */
-
-	const variantCss = useMemo(() => {
+	const textCss = useMemo(() => {
 		const variants = theme.json('text.variant');
-		const defaults = theme.json('text.defaults');
 
-		if (variant) {
-			// if variant is set, let's look for it in theme
+		let c = {};
 
-			if (typeof variants[variant] === 'undefined') {
-				theme.warning(
-					`There's no <Text variant="${variant}"/> defined in theme.text.variant, fallbacking to default variant`
-				);
-			} else {
-				// else, variant exists
-				return variants[variant];
-			}
+		// variant
+		if (!isObject(variants[variant])) {
+			theme.warning(`<Text variant="${variant}"/> doesn't exists in theme's json: theme.text.variant.${variant}`);
+		} else {
+			c = {
+				...theme.processColors(variants[variant]),
+				fontFamily,
+				fontWeight
+			};
 		}
-
-		// if we're here, we're gonna use defaultVariant
-		const defaultVariant = defaults.variant || null;
-
-		if (defaultVariant) {
-			if (typeof variants[defaultVariant] === 'undefined') {
-				theme.warning(
-					`There's no <Text variant="${defaultVariant}"/> defined in theme.text.variant, no variant will be used`
-				);
-			} else {
-				// else, variant exists
-				return variants[defaultVariant];
-			}
-		}
-
-		return {};
-	}, [theme, variant]);
-
-	/**
-	 * ******************************** STYLE **************************************
-	 */
-
-	const style = useMemo(() => {
-		const colorStyle = {};
 
 		if (color) {
-			// append color only if color is defined and value doesn't exist in theme.text.color
-			const colors = theme.json('text.color');
-
-			if (typeof colors[color] === 'undefined') {
-				colorStyle.color = color;
-			}
+			c.color = theme.processColor(color);
 		}
 
-		return {
-			...getStyleForPaddings({p, pt, pr, pb, pl}),
-			...getStyleForMargins({m, mt, mr, mb, ml}),
-			...colorStyle,
-			...getStyleForValue('fontFamily', fontFamily),
-			...getStyleForValue('fontWeight', fontWeight),
-			...getStyleForStringOrNumber('fontSize', fontSize),
-			...getStyleForValue('lineHeight', lineHeight),
-			...theme.processColors(userStyle || {})
-		};
-	}, [theme, userStyle, p, pt, pr, pb, pl, m, mt, mr, mb, ml, color, fontFamily, fontSize, fontWeight, lineHeight]);
+		return c;
+	}, [theme, variant, color, fontFamily, fontWeight]);
+
+	const style = useMemo(() => ({
+		...getStyleForPaddings({p, pt, pr, pb, pl}),
+		...getStyleForMargins({m, mt, mr, mb, ml}),
+		...getStyleForStringOrNumber('fontSize', fontSize),
+		...getStyleForValue('lineHeight', lineHeight),
+		...theme.processColors(userStyle || {})
+	}), [theme, userStyle, fontSize, lineHeight, p, pt, pr, pb, pl, m, mt, mr, mb, ml]);
+
 
 	/**
 	 * ******************************** OTHER PROPS **************************************
@@ -185,11 +117,10 @@ const Text = forwardRef(function(props, ref) {
 			onClick={handleClick}
 			onDoubleClick={handleDoubleClick}
 			hasClick={hasClick}
-			colorCss={colorCss}
-			variantCss={variantCss}
+			textCss={textCss}
 			blockCss={block}
 			style={style}
-			as={userAs || 'span'}
+			as={as}
 			{...otherProps}
 		>
 			{children}
@@ -213,8 +144,7 @@ const StyledText = styled.span`
 	margin-inline-start: 0;
 	margin-inline-end: 0;
 
-	${({colorCss}) => css(colorCss)}
-	${({variantCss}) => css(variantCss)}
+	${({textCss}) => css(textCss)}
 `;
 
 Text.propTypes = {
@@ -262,7 +192,11 @@ Text.propTypes = {
 	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+	as: PropTypes.oneOfType([
+		PropTypes.func,
+		PropTypes.string,
+		PropTypes.shape({render: PropTypes.func.isRequired}),
+	])
 };
 
 export default Text;

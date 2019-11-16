@@ -27,7 +27,7 @@ export const Documentation = function() {
 	const {theme} = useContext(ThemeContext);
 
 	const variants = theme.json('text.variant');
-	const colors = theme.json('text.color');
+	const colors = theme.json('color');
 
 	return (
 		<>
@@ -37,10 +37,10 @@ export const Documentation = function() {
 				<DocsCode.Example>
 					<Text>I'm text example</Text>
 				</DocsCode.Example>
-				<DocsCode.Code>{"<Menu>I'm text example</Menu>"}</DocsCode.Code>
+				<DocsCode.Code>{"<Text>I'm text example</Text>"}</DocsCode.Code>
 			</DocsCode>
 			<DocsSubTitle hash="some-theory">Some theory</DocsSubTitle>
-			<DocsText>Use this component when you want to print text, both inline text and text block.</DocsText>
+			<DocsText>Use this component when you want to print text, both inline text and text block (which is meant for headings).</DocsText>
 			<DocsText>
 				This component renders as <code>span</code> tag by default.
 			</DocsText>
@@ -87,10 +87,18 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.text.defaults.variant">
+					<p>
+						Variant is variation you want to use in your system. You're not limited to anything in the theme, so feel free
+						to write any CSS you'd like, including colors and size definitions. You may have variant named <code>paragraph</code>
+						which has everything predefined if you'd like.
+					</p>
 					<AvailableKeys data={variants} />
 				</Props.Prop>
-				<Props.Prop name="color" type="string" defaultValue="theme.text.defaults.color">
-					<p>Set any predefined set of values defined in theme.</p>
+				<Props.Prop name="color" type="string">
+					<p>Set any color you'd like from predefined colors in the theme. Color definitions are located in <code>theme.color</code>, not in theme.text.color.</p>
+					<p>
+						It is possible to provide color like <code>primary|2</code> for this prop.
+					</p>
 					<AvailableKeys data={colors} />
 					<p>
 						If you set value that's not defined in a theme, the value you set here will be used as is. This gives you
@@ -101,7 +109,7 @@ export const Documentation = function() {
 							<Text color="rgba(255, 0, 0, 0.5)">I'm semi-red and I'm not defined in theme.</Text>
 						</DocsCode.Example>
 						<DocsCode.Code>
-							{'<Menu color="rgba(255, 0, 0, 0.5)">I\'m semi-red and I\'m not defined in theme.</Menu>'}
+							{'<Text color="rgba(255, 0, 0, 0.5)">I\'m semi-red and I\'m not defined in theme.</Text>'}
 						</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
@@ -113,7 +121,7 @@ export const Documentation = function() {
 						<DocsCode.Example>
 							<Text onClick={() => alert('Click!')}>I'm clickable text.</Text>
 						</DocsCode.Example>
-						<DocsCode.Code>{"<Menu onClick={() => alert('Click!')}>I'm clickable text.</Menu>"}</DocsCode.Code>
+						<DocsCode.Code>{"<Text onClick={() => alert('Click!')}>I'm clickable text.</Text>"}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="onDoubleClick">
@@ -125,7 +133,7 @@ export const Documentation = function() {
 							<Text onDoubleClick={() => alert('Double clicked!')}>I'm (double)clickable text.</Text>
 						</DocsCode.Example>
 						<DocsCode.Code>
-							{"<Menu onDoubleClick={() => alert('Double clicked!')}>I'm (double)clickable text.</Menu>"}
+							{"<Text onDoubleClick={() => alert('Double clicked!')}>I'm (double)clickable text.</Text>"}
 						</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
@@ -141,7 +149,7 @@ export const Documentation = function() {
 							<Text fontFamily="'Times New Roman', sans-serif">I have Times New Roman</Text>
 						</DocsCode.Example>
 						<DocsCode.Code>
-							{'<Menu fontFamily="\'Times New Roman\', sans-serif">I have Times New Roman font.</Menu>'}
+							{'<Text fontFamily="\'Times New Roman\', sans-serif">I have Times New Roman font.</Text>'}
 						</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
@@ -156,7 +164,7 @@ export const Documentation = function() {
 						<DocsCode.Example>
 							<Text fontSize="2rem">I'm 2rem big!</Text>
 						</DocsCode.Example>
-						<DocsCode.Code>{'<Menu fontSize="2rem">I 2rem big!</Menu>'}</DocsCode.Code>
+						<DocsCode.Code>{'<Text fontSize="2rem">I 2rem big!</Text>'}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="fontWeight" type="string">
@@ -170,7 +178,7 @@ export const Documentation = function() {
 						<DocsCode.Example>
 							<Text fontWeight={700}>I'm 700 bold</Text>
 						</DocsCode.Example>
-						<DocsCode.Code>{"<Menu fontWeight={700}>I'm 700 bold</Menu>"}</DocsCode.Code>
+						<DocsCode.Code>{"<Text fontWeight={700}>I'm 700 bold</Text>"}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="lineHeight" type={['string', 'number']}>
@@ -215,9 +223,7 @@ export const Documentation = function() {
 			</Props>
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				Unlike other components where color says just what color value is picked from theme, Text's color prop is little
-				bit more extended and it does do the same (picks color from theme) but if it doesn't find the color in theme,
-				it'll use given value as <code>color</code> CSS value. This gives you ability to color the text "on the fly".
+				Here are examples of using colors from the theme as text color:
 			</DocsText>
 			{Object.keys(colors).map((color) => (
 				<DocsCode key={color}>
@@ -234,11 +240,12 @@ export const Documentation = function() {
 				<DocsCode.Code>{`<Text color="#ff0000">I'm pure red and I'm not from the theme!</Text>`}</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				<AvailableKeys data={colors} name="theme.text.color" />
+				<AvailableKeys data={colors} name="theme.color" />
 			</DocsText>
 			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
 			<DocsText>
-				Variant is the shape of the <code>Text</code> component and it should include all the styling except the color.
+				Variant is the shape of the <code>Text</code> component and it should include all the possible styling. You may
+				include colors and size, but those styles will be overridden if provided through other props.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={variants} name="theme.text.variant" />

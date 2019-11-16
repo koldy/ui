@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import {getPixelsOrString, getStyleForPaddings, isFunction, omit} from '../../util/helpers';
-import {RowContext} from './TableContext';
+import RowContext from './RowContext';
 
 const Cell = function(props) {
 	const {
@@ -94,7 +94,7 @@ Cell.propTypes = {
 	rowSpan: PropTypes.number,
 	// eslint-disable-next-line
 	style: PropTypes.object,
-	as: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+	as: PropTypes.string, // because we're passing this internally
 
 	// padding:
 	p: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -108,6 +108,7 @@ const StyledCell = styled.td`
 	display: table-cell;
 	text-align: ${({textAlign}) => textAlign || 'left'};
 	vertical-align: ${({verticalAlign}) => verticalAlign || 'middle'};
+	box-sizing: border-box;
 `;
 
 export default Cell;

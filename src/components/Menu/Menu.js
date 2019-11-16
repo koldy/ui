@@ -164,23 +164,15 @@ const Menu = forwardRef(function(props, ref) {
 			const {menu = {}, item = {}, line = {}} = variants[variant];
 
 			menuCssDefinition = {
-				...pick(menu, ['border', 'borderStyle', 'borderRadius'])
+				...pick(menu, theme.variantProperties())
 			};
 
 			itemCssDefinition = {
-				...pick(item, ['font', 'fontFamily', 'fontSize', 'borderRadius'])
+				...pick(item, theme.variantProperties())
 			};
 
 			lineCssDefinition = {
-				...pick(line, [
-					'borderRadius',
-					'border',
-					'borderStyle',
-					'borderTop',
-					'borderTopStyle',
-					'borderBottom',
-					'borderBottomStyle'
-				])
+				...pick(line, theme.variantProperties())
 			};
 		}
 
@@ -193,17 +185,17 @@ const Menu = forwardRef(function(props, ref) {
 
 			menuCssDefinition = {
 				...menuCssDefinition,
-				...pick(menu, ['padding'])
+				...pick(menu, theme.sizeProperties())
 			};
 
 			itemCssDefinition = {
 				...itemCssDefinition,
-				...pick(item, ['padding', 'margin', 'fontSize', 'lineHeight'])
+				...pick(item, theme.sizeProperties())
 			};
 
 			lineCssDefinition = {
 				...lineCssDefinition,
-				...pick(line, ['borderWidth', 'margin'])
+				...pick(line, theme.sizeProperties())
 			};
 		}
 
@@ -313,13 +305,14 @@ const Menu = forwardRef(function(props, ref) {
 			disabled,
 			internalValues,
 			pickValue,
-			multiple
+			multiple,
+			inline
 		}),
 		[name, itemCss, lineCss, disabled, internalValues, pickValue, multiple]
 	);
 
 	return (
-		<StyledMenu ref={ref} tabIndex={0} menuCss={menuCss} inline={inline} style={menuStyle}>
+		<StyledMenu ref={ref} menuCss={menuCss} inline={inline} style={menuStyle}>
 			{htmlValue}
 			<MenuContext.Provider value={context}>{children}</MenuContext.Provider>
 		</StyledMenu>

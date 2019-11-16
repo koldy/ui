@@ -11,7 +11,7 @@ import ImportComponent from '../../../docs/components/ImportComponent';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
 import DocsCode from '../../../docs/components/DocsCode';
 
-export const title = <s>Table</s>;
+export const title = 'Table';
 export const slug = 'table';
 export const json = 'table';
 
@@ -23,42 +23,97 @@ export const Documentation = function() {
 
 	return (
 		<>
-			<DocsTitle hash="table">Table (experimental)</DocsTitle>
+			<DocsTitle hash="table">Table</DocsTitle>
 			<ImportComponent name="Table" />
-			<DocsText>Jump to subcomponent:</DocsText>
 			<DocsText>
-				<ul>
-					<li>
-						<a href="#head">
-							<code>Table.Head</code>
-						</a>
-					</li>
-					<li>
-						<a href="#body">
-							<code>Table.Body</code>
-						</a>
-					</li>
-					<li>
-						<a href="#foot">
-							<code>Table.Foot</code>
-						</a>
-					</li>
-					<li>
-						<a href="#tr">
-							<code>Table.Tr</code>
-						</a>
-					</li>
-					<li>
-						<a href="#th">
-							<code>Table.Th</code>
-						</a>
-					</li>
-					<li>
-						<a href="#td">
-							<code>Table.Td</code>
-						</a>
-					</li>
-				</ul>
+				This is Koldy <strong>UI</strong> and that's why this component offers only styled User Interface and nothing
+				else. Here's an example of Table:
+			</DocsText>
+			<DocsCode>
+				<DocsCode.Example>
+					<Table color="gray" border="table|head|row|column" striped hover="row">
+						<Table.Head>
+							<Table.Tr>
+								<Table.Th>continent</Table.Th>
+								<Table.Th>country</Table.Th>
+								<Table.Th>population</Table.Th>
+							</Table.Tr>
+						</Table.Head>
+						<Table.Body>
+							<Table.Tr>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>20M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Croatia</Table.Td>
+								<Table.Td>4M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Germany</Table.Td>
+								<Table.Td>81M</Table.Td>
+							</Table.Tr>
+						</Table.Body>
+					</Table>
+				</DocsCode.Example>
+				<DocsCode.Code>
+					{`
+					<Table color="gray" border="table|head|row|column" striped hover="row">
+						<Table.Head>
+							<Table.Tr>
+								<Table.Th>continent</Table.Th>
+								<Table.Th>country</Table.Th>
+								<Table.Th>population</Table.Th>
+							</Table.Tr>
+						</Table.Head>
+						<Table.Body>
+							<Table.Tr>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>20M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Croatia</Table.Td>
+								<Table.Td>4M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Germany</Table.Td>
+								<Table.Td>81M</Table.Td>
+							</Table.Tr>
+						</Table.Body>
+					</Table>
+					`}
+				</DocsCode.Code>
+			</DocsCode>
+			<DocsText>
+				Jump to subcomponent:{' '}
+				<a href="#head">
+					<code>Head</code>
+				</a>
+				,{' '}
+				<a href="#body">
+					<code>Body</code>
+				</a>
+				,{' '}
+				<a href="#foot">
+					<code>Foot</code>
+				</a>
+				,{' '}
+				<a href="#tr">
+					<code>Tr</code>
+				</a>
+				,{' '}
+				<a href="#th">
+					<code>Th</code>
+				</a>
+				,{' '}
+				<a href="#td">
+					<code>Td</code>
+				</a>
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type="node" />
@@ -70,8 +125,26 @@ export const Documentation = function() {
 					<p>Sets the table's size using parameters from the theme.</p>
 					<AvailableKeys data={sizes} />
 				</Props.Prop>
-				<Props.Prop name="tableLayout" type="string" defaultValue="auto">
+				<Props.Prop name="tableLayout" type="string" defaultValue="theme.table.defaults.tableLayout">
 					Use one of the CSS's value: <code>auto</code> or <code>fixed</code>.
+				</Props.Prop>
+				<Props.Prop name="width" type={['string', 'number']} defaultValue="100%">
+					Defines the width. If passed as number, it'll be used as pixels, otherwise it'll be used as is.
+				</Props.Prop>
+				<Props.Prop name="border" type="string" defaultValue="theme.table.defaults.border">
+					<p>
+						Defines where you want to have a border visible on table. This prop can accept multiple border values by
+						separating the string with <code>|</code>. So if you want to have a border around the whole table, plus
+						under every row, then set the border to <code>table|row</code>.
+					</p>
+					<AvailableKeys data={['table', 'row', 'column', 'head', 'foot']} />
+				</Props.Prop>
+				<Props.Prop name="hover" type="string" defaultValue="theme.table.defaults.hover">
+					<p>Defines which elements should change its color on hover.</p>
+					<AvailableKeys data={['table', 'row', 'cell']} />
+				</Props.Prop>
+				<Props.Prop name="striped" type="boolean" defaultValue="theme.table.defaults.striped">
+					<p>Tells the component to have different background on every even row.</p>
 				</Props.Prop>
 				<Props.Prop name="style" />
 				<Props.Prop name="m" />
@@ -213,54 +286,58 @@ export const Documentation = function() {
 			{Object.keys(sizes).map((size) => (
 				<DocsCode key={size} label={size}>
 					<DocsCode.Example>
-						<Table width="100%" tableLayout="fixed" size={size}>
+						<Table size={size}>
 							<Table.Head>
 								<Table.Tr>
-									<Table.Th width={70}>-</Table.Th>
-									<Table.Th>1st</Table.Th>
-									<Table.Th>2nd</Table.Th>
-									<Table.Th>3rd</Table.Th>
+									<Table.Th>continent</Table.Th>
+									<Table.Th>country</Table.Th>
+									<Table.Th>population</Table.Th>
 								</Table.Tr>
 							</Table.Head>
 							<Table.Body>
 								<Table.Tr>
-									<Table.Th>first</Table.Th>
-									<Table.Td>1.1</Table.Td>
-									<Table.Td>1.2</Table.Td>
-									<Table.Td>1.3</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>20M</Table.Td>
 								</Table.Tr>
 								<Table.Tr>
-									<Table.Th>second</Table.Th>
-									<Table.Td>2.1</Table.Td>
-									<Table.Td>2.2</Table.Td>
-									<Table.Td>2.3</Table.Td>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Croatia</Table.Td>
+									<Table.Td>4M</Table.Td>
+								</Table.Tr>
+								<Table.Tr>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Germany</Table.Td>
+									<Table.Td>81M</Table.Td>
 								</Table.Tr>
 							</Table.Body>
 						</Table>
 					</DocsCode.Example>
 					<DocsCode.Code>
 						{`
-						<Table width="100%" tableLayout="fixed" size="${size}">
+						<Table size="${size}">
 							<Table.Head>
 								<Table.Tr>
-									<Table.Th width={70}>-</Table.Th>
-									<Table.Th>1st</Table.Th>
-									<Table.Th>2nd</Table.Th>
-									<Table.Th>3rd</Table.Th>
+									<Table.Th>continent</Table.Th>
+									<Table.Th>country</Table.Th>
+									<Table.Th>population</Table.Th>
 								</Table.Tr>
 							</Table.Head>
 							<Table.Body>
 								<Table.Tr>
-									<Table.Th>first</Table.Th>
-									<Table.Td>1.1</Table.Td>
-									<Table.Td>1.2</Table.Td>
-									<Table.Td>1.3</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>20M</Table.Td>
 								</Table.Tr>
 								<Table.Tr>
-									<Table.Th>second</Table.Th>
-									<Table.Td>2.1</Table.Td>
-									<Table.Td>2.2</Table.Td>
-									<Table.Td>2.3</Table.Td>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Croatia</Table.Td>
+									<Table.Td>4M</Table.Td>
+								</Table.Tr>
+								<Table.Tr>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Germany</Table.Td>
+									<Table.Td>81M</Table.Td>
 								</Table.Tr>
 							</Table.Body>
 						</Table>
@@ -275,54 +352,58 @@ export const Documentation = function() {
 			{Object.keys(colors).map((color) => (
 				<DocsCode key={color} label={color}>
 					<DocsCode.Example>
-						<Table width="100%" tableLayout="fixed" color={color}>
+						<Table color={color} border="row|column|table|head">
 							<Table.Head>
 								<Table.Tr>
-									<Table.Th width={70}>-</Table.Th>
-									<Table.Th>1st</Table.Th>
-									<Table.Th>2nd</Table.Th>
-									<Table.Th>3rd</Table.Th>
+									<Table.Th>continent</Table.Th>
+									<Table.Th>country</Table.Th>
+									<Table.Th>population</Table.Th>
 								</Table.Tr>
 							</Table.Head>
 							<Table.Body>
 								<Table.Tr>
-									<Table.Th>first</Table.Th>
-									<Table.Td>1.1</Table.Td>
-									<Table.Td>1.2</Table.Td>
-									<Table.Td>1.3</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>20M</Table.Td>
 								</Table.Tr>
 								<Table.Tr>
-									<Table.Th>second</Table.Th>
-									<Table.Td>2.1</Table.Td>
-									<Table.Td>2.2</Table.Td>
-									<Table.Td>2.3</Table.Td>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Croatia</Table.Td>
+									<Table.Td>4M</Table.Td>
+								</Table.Tr>
+								<Table.Tr>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Germany</Table.Td>
+									<Table.Td>81M</Table.Td>
 								</Table.Tr>
 							</Table.Body>
 						</Table>
 					</DocsCode.Example>
 					<DocsCode.Code>
 						{`
-						<Table width="100%" tableLayout="fixed" color="${color}">
+						<Table color="${color}" border="row|column|table|head">
 							<Table.Head>
 								<Table.Tr>
-									<Table.Th width={70}>-</Table.Th>
-									<Table.Th>1st</Table.Th>
-									<Table.Th>2nd</Table.Th>
-									<Table.Th>3rd</Table.Th>
+									<Table.Th>continent</Table.Th>
+									<Table.Th>country</Table.Th>
+									<Table.Th>population</Table.Th>
 								</Table.Tr>
 							</Table.Head>
 							<Table.Body>
 								<Table.Tr>
-									<Table.Th>first</Table.Th>
-									<Table.Td>1.1</Table.Td>
-									<Table.Td>1.2</Table.Td>
-									<Table.Td>1.3</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>Australia</Table.Td>
+									<Table.Td>20M</Table.Td>
 								</Table.Tr>
 								<Table.Tr>
-									<Table.Th>second</Table.Th>
-									<Table.Td>2.1</Table.Td>
-									<Table.Td>2.2</Table.Td>
-									<Table.Td>2.3</Table.Td>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Croatia</Table.Td>
+									<Table.Td>4M</Table.Td>
+								</Table.Tr>
+								<Table.Tr>
+									<Table.Td>Europe</Table.Td>
+									<Table.Td>Germany</Table.Td>
+									<Table.Td>81M</Table.Td>
 								</Table.Tr>
 							</Table.Body>
 						</Table>
@@ -331,29 +412,9 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsSubTitle hash="head">Head</DocsSubTitle>
-			<DocsText>
-				Use this component as direct child of <code>Table</code> component.
-			</DocsText>
-			<Props hash="head-props">
-				<Props.Prop name="children" type="node" />
-				<Props.Prop name="style" />
-			</Props>
 			<DocsSubTitle hash="body">Body</DocsSubTitle>
-			<DocsText>
-				Use this component as direct child of <code>Table</code> component.
-			</DocsText>
-			<Props hash="body-props">
-				<Props.Prop name="children" type="node" />
-				<Props.Prop name="style" />
-			</Props>
 			<DocsSubTitle hash="foot">Foot</DocsSubTitle>
-			<DocsText>
-				Use this component as direct child of <code>Table</code> component.
-			</DocsText>
-			<Props hash="foot-props">
-				<Props.Prop name="children" type="node" />
-				<Props.Prop name="style" />
-			</Props>
+			<DocsText>All these components accept only children prop which should be node.</DocsText>
 			<DocsSubTitle hash="tr">Tr</DocsSubTitle>
 			<DocsText>
 				Use this component as direct child of <code>Table.Head</code>, <code>Table.Body</code> or{' '}

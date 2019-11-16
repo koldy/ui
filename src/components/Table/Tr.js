@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {RowContext} from './TableContext';
+import RowContext from './RowContext';
 import {isFunction} from '../../util/helpers';
 
 const Tr = function(props) {

@@ -6,7 +6,7 @@ const DEBUG = 'debug';
 const STRICT = 'strict';
 const PRODUCTION = 'production';
 
-const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError}) {
+const ThemeManager = function ({json, mode, onDebug, onInfo, onWarning, onError}) {
 	this._mode = [DEBUG, STRICT, PRODUCTION].indexOf(mode) >= 0 ? mode : null;
 	this.on = {onDebug, onInfo, onWarning, onError};
 
@@ -16,7 +16,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 * Debug options and methods
 	 ***************************************/
 
-	this.error = function(...args) {
+	this.error = function (...args) {
 		if (this.inDebug() && window && window.console && window.console.error) {
 			// error is always visible, even in production
 			window.console.error(...args);
@@ -32,7 +32,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 		}
 	};
 
-	this.info = function(...args) {
+	this.info = function (...args) {
 		if (this.inDebug() && window && window.console && window.console.info) {
 			window.console.info(...args);
 		}
@@ -43,7 +43,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 		}
 	};
 
-	this.warning = function(...args) {
+	this.warning = function (...args) {
 		if (this.inDebug() && window && window.console && window.console.warn) {
 			window.console.warn(...args);
 		}
@@ -58,7 +58,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 		}
 	};
 
-	this.debug = function(...args) {
+	this.debug = function (...args) {
 		if (this.inDebug() && window && window.console && window.console.debug) {
 			window.console.debug(...args);
 		}
@@ -69,11 +69,11 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 		}
 	};
 
-	this.inDebug = function() {
+	this.inDebug = function () {
 		return this._mode === DEBUG;
 	};
 
-	this.isStrict = function() {
+	this.isStrict = function () {
 		return this._mode === STRICT;
 	};
 
@@ -82,7 +82,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 * @param {string} what - it can be delimited with a dot
 	 * @return {{*}}
 	 */
-	this.json = function(what) {
+	this.json = function (what) {
 		if (typeof what !== 'string') {
 			return this._json;
 		}
@@ -118,7 +118,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 *
 	 * @return {Color[]}
 	 */
-	this.colors = function() {
+	this.colors = function () {
 		return Object.values(this._colors);
 	};
 
@@ -126,14 +126,14 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 * @param {string} colorName
 	 * @return {Color|null}
 	 */
-	this.color = function(colorName) {
+	this.color = function (colorName) {
 		return typeof colorName === 'string' && this._colors[colorName] instanceof Color ? this._colors[colorName] : null;
 	};
 
 	/**
 	 * @return {Color|null}
 	 */
-	this.firstColor = function() {
+	this.firstColor = function () {
 		return this.color(this._firstColor);
 	};
 
@@ -142,7 +142,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 * @param {object} obj
 	 * @return object
 	 */
-	this.processColors = function(obj) {
+	this.processColors = function (obj) {
 		if (!isObject(obj)) {
 			throw new ThemeError(`Invalid parameter, expected object, got: ${typeof obj}`);
 		}
@@ -165,7 +165,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 		return data;
 	};
 
-	this.processColor = function(colorValue) {
+	this.processColor = function (colorValue) {
 		if (typeof colorValue === 'string') {
 			// we got the string for the color, so there's two possibilities: it contains "|" or it doesn't
 			// if it does, then the color includes the tone
@@ -248,15 +248,136 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 * Gets the list of color properties to parse
 	 * @return {string[]}
 	 */
-	this.colorProperties = function() {
+	this.colorProperties = function () {
 		return [
-			'color',
+			'background',
+			'backgroundAttachment',
+			'backgroundBlendMode',
+			'backgroundClip',
 			'backgroundColor',
+			'backgroundImage',
+			'backgroundOrigin',
+			'backgroundPosition',
+			'backgroundPositionX',
+			'backgroundPositionY',
+			'backgroundRepeat',
+			'backgroundRepeatX',
+			'backgroundRepeatY',
+			'backgroundSize',
+			'borderBlockEndColor',
+			'borderBlockStartColor',
 			'borderColor',
+			'borderImage',
 			'borderTopColor',
 			'borderRightColor',
 			'borderBottomColor',
-			'borderLeftColor'
+			'borderLeftColor',
+			'boxShadow',
+			'caretColor',
+			'color',
+			'columnRuleColor',
+			'outlineColor',
+			'textDecorationColor',
+			'textShadow',
+			'textDecorationColor'
+		];
+	};
+
+	/**
+	 * Get the common variant CSS properties
+	 * @return {*[]}
+	 */
+	this.variantProperties = function () {
+		return [
+			'animation',
+			'animationDelay',
+			'animationDirection',
+			'animationDuration',
+			'animationFillMode',
+			'animationIterationCount',
+			'animationName',
+			'animationPlayState',
+			'animationTimingFunction',
+			'backfaceVisibility',
+			'backgroundImageRepeat',
+			'border',
+			'borderCollapse',
+			'borderRadius',
+			'borderStyle',
+			'borderBottomStyle',
+			'borderRightStyle',
+			'borderTopStyle',
+			'borderLeftStyle',
+			'borderBlockEndStyle',
+			'borderBlockStartStyle',
+			'bottom',
+			'clear',
+			'clip',
+			'captionSide',
+			'font',
+			'fontFamily',
+			'fontVariant',
+			'fontWeight',
+			'left',
+			'lineHeight',
+			'transition',
+			'verticalAlign',
+			'opacity',
+			'outline',
+			'outlineStyle',
+			'overflow',
+			'overflowX',
+			'overflowY',
+			'perspective',
+			'position',
+			'right',
+			'tableLayout',
+			'textAlign',
+			'textAlignLast',
+			'textDecoration',
+			'textDecorationLine',
+			'textDecorationStyle',
+			'textIndent',
+			'textTransform',
+			'top',
+			'whiteSpace'
+		];
+	};
+
+	/**
+	 * Get the common size CSS properties
+	 * @return {[string, string, string, string]}
+	 */
+	this.sizeProperties = function () {
+		return [
+			'borderWidth',
+			'borderBlockEndWidth',
+			'borderBlockStartWidth',
+			'borderTopWidth',
+			'borderRightWidth',
+			'borderBottomWidth',
+			'borderLeftWidth',
+			'fontSize',
+			'fontVariant',
+			'fontWeight',
+			'lineHeight',
+			'margin',
+			'marginTop',
+			'marginRight',
+			'marginBottom',
+			'marginLeft',
+			'maxHeight',
+			'minHeight',
+			'maxWidth',
+			'minWidth',
+			'padding',
+			'paddingTop',
+			'paddingRight',
+			'paddingBottom',
+			'paddingLeft',
+			'outlineWidth',
+			'tabSize',
+			'textDecorationStyle'
 		];
 	};
 
@@ -266,7 +387,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 * @param {string} property
 	 * @return {null|{}}
 	 */
-	this.processObjectOrString = function(value, property) {
+	this.processObjectOrString = function (value, property) {
 		if (!value) {
 			return null;
 		}

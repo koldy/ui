@@ -26,11 +26,13 @@ export default {
 		success: ['#5cc696', '#45be87', '#2eb678', '#17ae69', '#00a65a', '#009752', '#00884a', '#007942', '#006a3a'],
 		warning: ['#f7c068', '#f6b752', '#f5ae3d', '#f4a527', '#f39c12', '#dd8e11', '#c7800f', '#b1720e', '#9b640c'],
 		danger: ['#f89f92', '#f79182', '#f68473', '#f57663', '#f56954', '#df604d', '#c95645', '#b34d3e', '#9c4336'],
-		gray: ['#e2e4ea', '#dee1e7', '#dadde4', '#d6d9e1', '#d2d6de', '#bfc3ca', '#acb0b6', '#999ca2', '#86898e'],
+		gray: ['#ebedf3', '#e2e4ea', '#dee1e7', '#dadde4', '#d6d9e1', '#d2d6de', '#bfc3ca', '#acb0b6', '#999ca2', '#86898e', '#7e8186'],
 		black: ['#636363', '#111111', '#000000'],
 		teal: ['#81dede', '#6fd9d9', '#5dd5d5', '#4bd0d0', '#39cccc', '#34baba', '#2fa7a7', '#2a9595', '#258282'],
-		semiBlack: ['rgba(0, 0, 0, 0.25)', 'rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.75)'],
-		semiWhite: ['rgba(255, 255, 255, 0.25)', 'rgba(255, 255, 255, 0.5)', 'rgba(255, 255, 255, 0.75)']
+		semiBlack: ['rgba(0, 0, 0, 0.05)', 'rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0.4)', 'rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.6)', 'rgba(0, 0, 0, 0.8)', 'rgba(0, 0, 0, 0.95)'],
+		semiWhite: ['rgba(255, 255, 255, 0.05)', 'rgba(255, 255, 255, 0.2)', 'rgba(255, 255, 255, 0.4)', 'rgba(255, 255, 255, 0.5)', 'rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.95)'],
+		textColor: ['#333333', '#222222', '#000000', '#000000', '#000000'],
+		textColorInverse: ['#cccccc', '#dddddd', '#ffffff', '#ffffff', '#ffffff']
 	},
 	button: {
 		defaults: {
@@ -85,7 +87,7 @@ export default {
 		},
 		color: {
 			primary: {
-				color: '#ffffff',
+				color: 'textColorInverse',
 				backgroundColor: 'primary',
 				borderColor: 'primary|1',
 				'&:hover': {
@@ -106,7 +108,7 @@ export default {
 				}
 			},
 			info: {
-				color: '#ffffff',
+				color: 'textColorInverse',
 				backgroundColor: 'info',
 				borderColor: 'info|1',
 				'&:hover': {
@@ -127,7 +129,7 @@ export default {
 				}
 			},
 			success: {
-				color: '#ffffff',
+				color: 'textColorInverse',
 				backgroundColor: 'success',
 				borderColor: 'success|1',
 				'&:hover': {
@@ -148,7 +150,7 @@ export default {
 				}
 			},
 			danger: {
-				color: '#ffffff',
+				color: 'textColorInverse',
 				backgroundColor: 'danger',
 				borderColor: 'danger|1',
 				'&:hover': {
@@ -169,7 +171,7 @@ export default {
 				}
 			},
 			warning: {
-				color: '#ffffff',
+				color: 'textColorInverse',
 				backgroundColor: 'warning',
 				borderColor: 'warning|1',
 				'&:hover': {
@@ -190,16 +192,16 @@ export default {
 				}
 			},
 			gray: {
-				color: '#222222',
-				backgroundColor: 'gray',
-				borderColor: 'gray|1',
+				color: 'textColor',
+				backgroundColor: 'gray|-5',
+				borderColor: 'gray',
 				'&:hover': {
-					backgroundColor: 'gray|1',
-					borderColor: 'gray|2',
+					backgroundColor: 'gray|-3',
+					borderColor: 'gray|1',
 					boxShadow: 'none'
 				},
 				'&:disabled': {
-					backgroundColor: 'gray|-3',
+					backgroundColor: 'gray|-5',
 					borderColor: 'gray|-3',
 					color: '#888888'
 				},
@@ -212,24 +214,44 @@ export default {
 				}
 			},
 			transparent: {
-				color: '#222222',
+				color: 'textColor',
 				backgroundColor: 'transparent',
-				borderColor: 'transparent',
+				borderColor: 'gray|-5',
 				'&:hover': {
 					backgroundColor: 'transparent',
-					borderColor: 'gray|-4',
+					borderColor: 'gray|-3',
 					boxShadow: 'none'
 				},
 				'&:disabled': {
-					color: '#888888',
+					color: 'textColor|-2',
 					borderColor: 'transparent'
 				},
 				'&:focus': {
-					boxShadow: '0 0 1px 2px gray|-3',
+					boxShadow: '0 0 1px 2px gray|-4',
 					outline: 'none'
 				},
 				'&:active': {
-					boxShadow: 'inset 0 0 1px 2px gray|3'
+					boxShadow: 'inset 0 0 1px 2px gray|-4'
+				}
+			},
+			link: {
+				color: 'textColor',
+				backgroundColor: 'transparent',
+				borderColor: 'none',
+				'&:hover': {
+					backgroundColor: 'transparent',
+					borderColor: 'none',
+					boxShadow: 'none'
+				},
+				'&:disabled': {
+					color: 'textColor|-2',
+					borderColor: 'transparent'
+				},
+				'&:focus': {
+					boxShadow: '0 0 1px 2px gray|-5'
+				},
+				'&:active': {
+					boxShadow: 'none'
 				}
 			}
 		},
@@ -350,47 +372,21 @@ export default {
 	},
 	text: {
 		defaults: {
-			variant: 'no-variant',
-			color: 'primary'
+			variant: 'text'
 		},
 		variant: {
-			'no-variant': {},
+			'text': {
+				fontSize: '1rem',
+				color: 'textColor'
+			},
 			link: {
-				borderBottom: '1px dashed #cfcfcf',
-				'&:visited': {
-					borderBottomColor: '#efefef'
-				}
-			}
-		},
-		color: {
-			primary: {
-				color: '#222222'
-			},
-			primaryInverted: {
-				color: '#eeeeee'
-			},
-			info: {
-				color: 'info'
-			},
-			success: {
-				color: 'success'
-			},
-			danger: {
-				color: 'danger'
-			},
-			warning: {
-				color: 'warning'
-			},
-			gray: {
-				color: 'gray'
-			},
-			highlight: {
-				color: '#ffffff',
-				backgroundColor: 'primary|2'
-			},
-			selectable: {
-				'&::selection': {
-					backgroundColor: '#ff0000'
+				color: 'textColor',
+				borderBottom: '1px dashed #666666',
+				textDecoration: 'none',
+				cursor: 'pointer',
+				'&:hover': {
+					borderBottomColor: '#111111',
+					borderBottomStyle: 'solid'
 				}
 			}
 		}
@@ -398,260 +394,117 @@ export default {
 	table: {
 		defaults: {
 			size: 'md',
-			color: 'no-color'
+			color: 'transparent',
+			border: null,
+			hover: null,
+			striped: null,
+			tableLayout: null
 		},
 		size: {
 			sm: {
-				borderCollapse: 'collapse',
-				'>thead': {
-					'>tr': {
-						'>th': {
-							fontSize: '0.8rem',
-							padding: '0.25rem',
-							fontWeight: 'normal'
-						}
-					}
-				},
-				'>tbody': {
-					'>tr': {
-						'>th': {
-							fontSize: '0.8rem',
-							padding: '0.25rem',
-							fontWeight: 'normal'
-						},
-						'>td': {
-							fontSize: '0.8rem',
-							padding: '0.25rem'
-						}
-					}
-				},
-				'>tfoot': {
-					'>tr': {
-						'>th': {
-							fontSize: '0.8rem',
-							padding: '0.1rem'
-						},
-						'>td': {
-							fontSize: '0.8rem',
-							padding: '0.1rem'
-						}
+				body: {
+					th: {
+						fontSize: '0.8rem',
+						padding: '0.25rem',
+						fontWeight: 'normal'
+					},
+					td: {
+						fontSize: '0.8rem',
+						padding: '0.25rem'
 					}
 				}
 			},
 			md: {
-				borderCollapse: 'collapse',
-				'>thead': {
-					'>tr': {
-						'>th': {
-							fontSize: '0.92rem',
-							padding: '0.5rem',
-							fontWeight: 'bold'
-						}
+				head: {
+					th: {
+						fontSize: '0.92rem',
+						padding: '0.5rem',
+						fontWeight: 'bold'
+					},
+					td: {
+						fontSize: '0.92rem',
+						padding: '0.5rem'
 					}
 				},
-				'>tbody': {
-					'>tr': {
-						'>th': {
-							fontSize: '0.92rem',
-							padding: '0.5rem',
-							fontWeight: 'normal'
-						},
-						'>td': {
-							fontSize: '0.92rem',
-							padding: '0.5rem'
-						}
+				body: {
+					th: {
+						fontSize: '0.92rem',
+						padding: '0.5rem',
+						fontWeight: 'bold'
+					},
+					td: {
+						fontSize: '0.92rem',
+						padding: '0.5rem'
 					}
 				},
-				'>tfoot': {
-					'>tr': {
-						'>th': {},
-						'>td': {}
+				foot: {
+					th: {
+						fontSize: '0.92rem',
+						padding: '0.5rem',
+						fontWeight: 'bold'
+					},
+					td: {
+						fontSize: '0.92rem',
+						padding: '0.5rem'
 					}
 				}
 			},
 			lg: {
-				borderCollapse: 'collapse',
-				'>thead': {
-					'>tr': {
-						'>th': {
-							fontSize: '1.1rem',
-							padding: '0.75rem',
-							fontWeight: 'bold'
-						}
-					}
-				},
-				'>tbody': {
-					'>tr': {
-						'>th': {
-							fontSize: '1.1rem',
-							padding: '0.75rem',
-							fontWeight: 'normal'
-						},
-						'>td': {
-							fontSize: '1.1rem',
-							padding: '0.75rem',
-							fontWeight: 'normal'
-						}
-					}
-				},
-				'>tfoot': {
-					'>tr': {
-						'>th': {
-							fontSize: '1.2rem',
-							padding: '0.3rem 0.6rem',
-							fontWeight: 'bold'
-						},
-						'>td': {
-							fontSize: '1.2rem',
-							padding: '0.3rem 0.6rem',
-							fontWeight: 'normal'
-						}
+				body: {
+					th: {
+						fontSize: '1.1rem',
+						padding: '0.75rem',
+						fontWeight: 'bold'
+					},
+					td: {
+						fontSize: '1.1rem',
+						padding: '0.75rem',
+						fontWeight: 'normal'
 					}
 				}
 			}
 		},
 		color: {
-			'no-color': {
-				border: 'none'
-			},
-			borderedGray: {
-				border: '1px solid gray|-4',
-				'>thead': {
-					'>tr': {
-						'>th': {
-							color: 'black',
-							borderTop: '1px solid gray|-4',
-							borderRight: '1px solid gray|-4'
-						}
-					}
+			transparent: {
+				borderColor: null,
+				head: {
+					backgroundColor: 'transparent',
+					textColor: 'textColor'
 				},
-				'>tbody': {
-					'>tr': {
-						'>th': {
-							borderTop: '1px solid gray|-4',
-							borderRight: '1px solid gray|-4',
-							color: 'black'
-						},
-						'>td': {
-							borderTop: '1px solid gray|-4',
-							borderRight: '1px solid gray|-4',
-							color: 'black'
-						},
-						'&:hover': {
-							'>td, >th': {
-								backgroundColor: '#f6f6f6'
-							}
-						}
-					}
-				},
-				'>tfoot': {
-					'>tr': {
-						'>th': {},
-						'>td': {}
-					}
+				body: {
+					backgroundColor: 'transparent',
+					backgroundHoverColor: 'transparent',
+					backgroundStripeColor: 'transparent',
+					textColor: 'textColor',
+					textHoverColor: 'textColor|1'
 				}
 			},
-			rowBorderGray: {
-				border: '1px solid gray|-4',
-				'>thead': {
-					'>tr': {
-						'>th': {
-							color: 'black'
-						}
-					}
+			gray: {
+				borderColor: '#dddddd',
+				head: {
+					backgroundColor: '#efefef',
+					textColor: 'textColor'
 				},
-				'>tbody': {
-					'>tr': {
-						'>th': {
-							borderTop: '1px solid gray|-4',
-							color: 'black'
-						},
-						'>td': {
-							borderTop: '1px solid gray|-4',
-							color: 'black'
-						},
-						'&:hover': {
-							'>td, >th': {
-								backgroundColor: '#f6f6f6'
-							}
-						}
-					}
-				},
-				'>tfoot': {
-					'>tr': {
-						'>th': {},
-						'>td': {}
-					}
+				body: {
+					backgroundColor: '#ffffff',
+					backgroundHoverColor: '#efefef',
+					backgroundStripeColor: '#f4f4f4',
+					textColor: 'textColor',
+					textHoverColor: 'textColor|1'
 				}
 			},
-			borderedPrimary: {
-				border: '1px solid primary|-4',
-				'>thead': {
-					'>tr': {
-						'>th': {
-							color: 'black',
-							borderTop: '1px solid primary|-4',
-							borderRight: '1px solid primary|-4'
-						}
-					}
+			primary: {
+				borderColor: 'primary',
+				head: {
+					backgroundColor: '#ffffff',
+					textColor: 'textColor'
 				},
-				'>tbody': {
-					'>tr': {
-						'>th': {
-							borderTop: '1px solid primary|-4',
-							borderRight: '1px solid primary|-4',
-							color: 'black'
-						},
-						'>td': {
-							borderTop: '1px solid primary|-4',
-							borderRight: '1px solid primary|-4',
-							color: 'black'
-						},
-						'&:hover': {
-							'>td, >th': {
-								backgroundColor: '#e0eefc'
-							}
-						}
-					}
-				},
-				'>tfoot': {
-					'>tr': {
-						'>th': {},
-						'>td': {}
-					}
-				}
-			},
-			rowBorderPrimary: {
-				border: '1px solid primary|-4',
-				'>thead': {
-					'>tr': {
-						'>th': {
-							color: 'black'
-						}
-					}
-				},
-				'>tbody': {
-					'>tr': {
-						'>th': {
-							borderTop: '1px solid primary|-4',
-							color: 'black'
-						},
-						'>td': {
-							borderTop: '1px solid primary|-4',
-							color: 'black'
-						},
-						'&:hover': {
-							'>td, >th': {
-								backgroundColor: '#e0eefc'
-							}
-						}
-					}
-				},
-				'>tfoot': {
-					'>tr': {
-						'>th': {},
-						'>td': {}
-					}
+				body: {
+					backgroundColor: '#ffffff',
+					backgroundHoverColor: '#efefef',
+					backgroundStripeColor: '#efefef',
+					textColor: 'textColor',
+					textHoverColor: 'textColor|1'
 				}
 			}
 		}
@@ -719,7 +572,7 @@ export default {
 					// these are the only CSS values we're going to apply
 					background: '#ffffff',
 					backgroundSize: undefined,
-					color: 'black',
+					color: 'textColor',
 					borderColor: 'gray',
 					outline: undefined,
 					outlineOffset: undefined,
@@ -734,11 +587,11 @@ export default {
 					}
 				},
 				disabled: {
-					background: '#cfcfcf',
+					background: '#efefef',
 					color: 'black|-1',
 					borderColor: 'gray|-2',
 					hover: {
-						background: '#cfcfcf'
+						background: undefined
 					}
 				},
 				readOnly: {
@@ -774,11 +627,11 @@ export default {
 					}
 				},
 				disabled: {
-					background: '#cfcfcf',
+					background: '#efefef',
 					color: 'black|-1',
 					borderColor: 'success|-2',
 					hover: {
-						background: '#cfcfcf'
+						background: undefined
 					}
 				},
 				readOnly: {
@@ -814,11 +667,11 @@ export default {
 					}
 				},
 				disabled: {
-					background: '#cfcfcf',
+					background: '#efefef',
 					color: 'black|-1',
 					borderColor: 'warning|-2',
 					hover: {
-						background: '#cfcfcf'
+						background: undefined
 					}
 				},
 				readOnly: {
@@ -854,11 +707,11 @@ export default {
 					}
 				},
 				disabled: {
-					background: '#cfcfcf',
+					background: '#efefef',
 					color: 'black|-1',
 					borderColor: 'danger|-2',
 					hover: {
-						background: '#cfcfcf'
+						background: undefined
 					}
 				},
 				readOnly: {
@@ -1108,7 +961,8 @@ export default {
 			square: {
 				menu: {},
 				item: {
-					fontFamily: 'inherit'
+					fontFamily: 'inherit',
+					textDecoration: 'none'
 				},
 				line: {}
 			},
@@ -1116,7 +970,8 @@ export default {
 				menu: {},
 				item: {
 					fontFamily: 'inherit',
-					borderRadius: '4px'
+					borderRadius: '4px',
+					textDecoration: 'none'
 				},
 				line: {}
 			}

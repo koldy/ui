@@ -6,11 +6,13 @@ import MenuContext from './MenuContext';
 import {getStyleForMargins, isFunction, omit} from '../../util/helpers';
 
 const Item = forwardRef(function(props, ref) {
-	const {name, itemCss, disabled: menuDisabled, internalValues, pickValue} = useContext(MenuContext);
+	const {name, itemCss, inline: menuInline = false, disabled: menuDisabled, internalValues, pickValue} = useContext(
+		MenuContext
+	);
 
 	const {
 		children,
-		inline = false,
+		inline = menuInline,
 		disabled: itemDisabled,
 		value = undefined,
 		onClick = null,
@@ -115,7 +117,7 @@ Item.propTypes = {
 	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})])
 };
 
 const StyledItem = styled.div`

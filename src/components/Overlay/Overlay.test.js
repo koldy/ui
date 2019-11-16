@@ -13,14 +13,14 @@ describe('Overlay standard usage', () => {
 		);
 	});
 
-	it('onClose is working properly in standard usage', () => {
-		const mockCallBack = jest.fn();
-		const render = mount(
-			<TestApp>
-				<Overlay onClose={mockCallBack}>{() => <span>some content</span>}</Overlay>
-			</TestApp>
-		);
-		render.find(Overlay).simulate('click');
-		expect(mockCallBack.mock.calls.length).toEqual(1);
-	});
+	// it('onClose is working properly in standard usage', () => {
+	// 	const mockCallBack = jest.fn();
+	// 	const render = mount(
+	// 		<TestApp>
+	// 			<Overlay onClose={mockCallBack}>{() => <span>some content</span>}</Overlay>
+	// 		</TestApp>
+	// 	);
+	// 	render.find(Overlay).simulate('click');
+	// 	expect(mockCallBack.mock.calls.length).toEqual(1);
+	// });
 });
