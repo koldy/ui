@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"description": "Koldy UI - React UI component library",
 	"main": "lib/index.js",
 	"module": "esm/index.js",
@@ -62,7 +62,6 @@
 		"esm/*"
 	],
 	"dependencies": {
-		"lodash.set": "^4.3.2",
 		"popper.js": "^1.16.0"
 	}
 }

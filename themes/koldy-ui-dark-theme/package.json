@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui-dark-theme",
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"description": "Koldy UI Dark Theme",
 	"main": "lib/index.js",
 	"scripts": {

@@ -1,5 +1,7 @@
 import {omit} from './helpers';
 
+// TODO: Write more tests
+
 describe('Testing omit()', () => {
 	it(`Simple omit`, () => {
 		const a = {
