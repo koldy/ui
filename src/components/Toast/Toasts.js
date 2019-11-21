@@ -1,4 +1,4 @@
-import React, {Fragment, useContext} from 'react';
+import React, {useContext} from 'react';
 import {createPortal} from 'react-dom';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
@@ -28,7 +28,7 @@ const Toasts = function(props) {
 	const bottomStretchCss = theme.json('toast.bottom-stretch');
 
 	return createPortal(
-		<Fragment>
+		<>
 			<StyledTopLeft id={`koldy-ui-toasts-top-left-${appIndex}`} additionalCss={topLeftCss} />
 			<StyledTopCenter id={`koldy-ui-toasts-top-center-${appIndex}`} additionalCss={topCenterCss} />
 			<StyledTopRight id={`koldy-ui-toasts-top-right-${appIndex}`} additionalCss={topRightCss} />
@@ -37,7 +37,7 @@ const Toasts = function(props) {
 			<StyledBottomCenter id={`koldy-ui-toasts-bottom-center-${appIndex}`} additionalCss={bottomCenterCss} />
 			<StyledBottomRight id={`koldy-ui-toasts-bottom-right-${appIndex}`} additionalCss={bottomRightCss} />
 			<StyledBottomStretch id={`koldy-ui-toasts-bottom-stretch-${appIndex}`} additionalCss={bottomStretchCss} />
-		</Fragment>,
+		</>,
 		document.body
 	);
 };

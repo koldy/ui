@@ -15,6 +15,7 @@ export const title = 'Text';
 export const slug = 'text';
 export const json = 'text';
 
+// eslint-disable-next-line
 const H1 = function({children}) {
 	return (
 		<Text block as="h1" fontWeight="bold" fontSize="1.5rem">
@@ -45,8 +46,8 @@ export const Documentation = function() {
 				This component renders as <code>span</code> tag by default.
 			</DocsText>
 			<DocsText>
-				Koldy UI doesn't provide typography system so it's completely up to you to define, but this component can be
-				used for defining your typography system. Like this:
+				Koldy UI doesn't provide typography system so it's completely up to you to define, but this component can be used for defining your
+				typography system. Like this:
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>
@@ -69,10 +70,7 @@ export const Documentation = function() {
 			<Props>
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="block" type="bool" defaultValue={false}>
-					<p>
-						If set to true, it'll be rendered as block element (as CSS display block), otherwise, it's inline element by
-						default.{' '}
-					</p>
+					<p>If set to true, it'll be rendered as block element (as CSS display block), otherwise, it's inline element by default. </p>
 					<DocsCode>
 						<DocsCode.Example>
 							<Text block>I'm a text in block component.</Text>
@@ -88,29 +86,30 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.text.defaults.variant">
 					<p>
-						Variant is variation you want to use in your system. You're not limited to anything in the theme, so feel free
-						to write any CSS you'd like, including colors and size definitions. You may have variant named <code>paragraph</code>
+						Variant is variation you want to use in your system. You're not limited to anything in the theme, so feel free to write any CSS
+						you'd like, including colors and size definitions. You may have variant named <code>paragraph</code>
 						which has everything predefined if you'd like.
 					</p>
 					<AvailableKeys data={variants} />
 				</Props.Prop>
 				<Props.Prop name="color" type="string">
-					<p>Set any color you'd like from predefined colors in the theme. Color definitions are located in <code>theme.color</code>, not in theme.text.color.</p>
+					<p>
+						Set any color you'd like from predefined colors in the theme. Color definitions are located in <code>theme.color</code>, not in
+						theme.text.color.
+					</p>
 					<p>
 						It is possible to provide color like <code>primary|2</code> for this prop.
 					</p>
 					<AvailableKeys data={colors} />
 					<p>
-						If you set value that's not defined in a theme, the value you set here will be used as is. This gives you
-						opportunity to set custom color "on the fly".{' '}
+						If you set value that's not defined in a theme, the value you set here will be used as is. This gives you opportunity to set
+						custom color "on the fly".{' '}
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
 							<Text color="rgba(255, 0, 0, 0.5)">I'm semi-red and I'm not defined in theme.</Text>
 						</DocsCode.Example>
-						<DocsCode.Code>
-							{'<Text color="rgba(255, 0, 0, 0.5)">I\'m semi-red and I\'m not defined in theme.</Text>'}
-						</DocsCode.Code>
+						<DocsCode.Code>{'<Text color="rgba(255, 0, 0, 0.5)">I\'m semi-red and I\'m not defined in theme.</Text>'}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="onClick">
@@ -132,12 +131,10 @@ export const Documentation = function() {
 						<DocsCode.Example>
 							<Text onDoubleClick={() => alert('Double clicked!')}>I'm (double)clickable text.</Text>
 						</DocsCode.Example>
-						<DocsCode.Code>
-							{"<Text onDoubleClick={() => alert('Double clicked!')}>I'm (double)clickable text.</Text>"}
-						</DocsCode.Code>
+						<DocsCode.Code>{"<Text onDoubleClick={() => alert('Double clicked!')}>I'm (double)clickable text.</Text>"}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
-				<Props.Prop name="fontFamily" type="string">
+				<Props.Prop name="fontFamily" type="string" defaultValue="inherit">
 					<p>
 						To set the font, use any valid <code>font-family</code> CSS value and pass it here.{' '}
 					</p>
@@ -148,12 +145,10 @@ export const Documentation = function() {
 						<DocsCode.Example>
 							<Text fontFamily="'Times New Roman', sans-serif">I have Times New Roman</Text>
 						</DocsCode.Example>
-						<DocsCode.Code>
-							{'<Text fontFamily="\'Times New Roman\', sans-serif">I have Times New Roman font.</Text>'}
-						</DocsCode.Code>
+						<DocsCode.Code>{'<Text fontFamily="\'Times New Roman\', sans-serif">I have Times New Roman font.</Text>'}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
-				<Props.Prop name="fontSize" type="string">
+				<Props.Prop name="fontSize" type="string" defaultValue="inherit">
 					<p>
 						To set the font size, use any valid <code>font-size</code> CSS value and pass it here.{' '}
 					</p>
@@ -167,7 +162,7 @@ export const Documentation = function() {
 						<DocsCode.Code>{'<Text fontSize="2rem">I 2rem big!</Text>'}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
-				<Props.Prop name="fontWeight" type="string">
+				<Props.Prop name="fontWeight" type="string" defaultValue="inherit">
 					<p>
 						To set the font weight, use any valid <code>font-weight</code> CSS value and pass it here.{' '}
 					</p>
@@ -181,7 +176,7 @@ export const Documentation = function() {
 						<DocsCode.Code>{"<Text fontWeight={700}>I'm 700 bold</Text>"}</DocsCode.Code>
 					</DocsCode>
 				</Props.Prop>
-				<Props.Prop name="lineHeight" type={['string', 'number']}>
+				<Props.Prop name="lineHeight" type={['string', 'number']} defaultValue="inherit">
 					<p>
 						To set the line height, use any valid <code>line-height</code> CSS value and pass it here.{' '}
 					</p>
@@ -222,9 +217,7 @@ export const Documentation = function() {
 				<Props.Prop name="ref" />
 			</Props>
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
-			<DocsText>
-				Here are examples of using colors from the theme as text color:
-			</DocsText>
+			<DocsText>Here are examples of using colors from the theme as text color:</DocsText>
 			{Object.keys(colors).map((color) => (
 				<DocsCode key={color}>
 					<DocsCode.Example>
@@ -244,8 +237,8 @@ export const Documentation = function() {
 			</DocsText>
 			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
 			<DocsText>
-				Variant is the shape of the <code>Text</code> component and it should include all the possible styling. You may
-				include colors and size, but those styles will be overridden if provided through other props.
+				Variant is the shape of the <code>Text</code> component and it should include all the possible styling. You may include colors and
+				size, but those styles will be overridden if provided through other props.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={variants} name="theme.text.variant" />

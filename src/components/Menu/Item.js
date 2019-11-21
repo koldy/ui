@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
 import MenuContext from './MenuContext';
-import {getStyleForMargins, isFunction, omit} from '../../util/helpers';
+import {getStyleForMargins, isFunction} from '../../util/helpers';
 
 const Item = forwardRef(function(props, ref) {
-	const {name, itemCss, inline: menuInline = false, disabled: menuDisabled, internalValues, pickValue} = useContext(
-		MenuContext
-	);
+	const {name, itemCss, inline: menuInline = false, disabled: menuDisabled, internalValues, pickValue} = useContext(MenuContext);
 
 	const {
 		children,
@@ -22,7 +20,8 @@ const Item = forwardRef(function(props, ref) {
 		mr = null,
 		mb = null,
 		ml = null,
-		as = 'div'
+		as = 'div',
+		...otherProps
 	} = props;
 
 	const handleClick = useCallback(
@@ -81,8 +80,6 @@ const Item = forwardRef(function(props, ref) {
 		}),
 		[m, mt, mr, mb, ml]
 	);
-
-	const otherProps = omit(props, Object.keys(Item.propTypes));
 
 	return (
 		<StyledItem

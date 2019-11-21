@@ -83,8 +83,7 @@ const StyledBox = styled.span`
 
 	align-self: ${({cssAlignSelf}) => cssAlignSelf || 'unset'};
 	flex: ${({cssFlex}) => cssFlex || 'unset'};
-	width: ${({cssWidth}) =>
-		typeof cssWidth === 'string' || typeof cssWidth === 'number' ? getPixelsOrString(cssWidth) : 'unset'};
+	width: ${({cssWidth}) => (typeof cssWidth === 'string' || typeof cssWidth === 'number' ? getPixelsOrString(cssWidth) : 'unset')};
 `;
 
 export default Box;

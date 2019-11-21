@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useContext, forwardRef, useState} from 'rea
 import PropTypes from 'prop-types';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getHtmlValue, getStyleForMargins, omit} from '../../util/helpers';
+import {getHtmlValue, getStyleForMargins} from '../../util/helpers';
 import ThemeError from '../../theme/ThemeError';
 import Checkmark, {getInputProps as getCheckmarkInputProps} from '../../styled-components/Checkmark';
 import Dot, {getInputProps as getDotInputProps} from '../../styled-components/Dot';
@@ -26,7 +26,9 @@ const Checkbox = forwardRef(function(props, ref) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+
+		...otherProps
 	} = props;
 
 	const {theme} = useContext(ThemeContext);
@@ -90,12 +92,6 @@ const Checkbox = forwardRef(function(props, ref) {
 
 	const [checked, setChecked] = useState(userChecked || userDefaultChecked || false);
 
-	/**
-	 * ******************************** OTHER PROPS **************************************
-	 */
-
-	const otherProps = omit(props, Object.keys(Checkbox.propTypes));
-
 	const handleChange = useCallback(
 		(e) => {
 			setChecked(e.currentTarget.checked);
@@ -145,9 +141,7 @@ const Checkbox = forwardRef(function(props, ref) {
 				{...otherProps}
 			/>
 			<span />
-			{!checked && name && typeof offValue !== 'undefined' && (
-				<input type="hidden" name={name} value={getHtmlValue(offValue)} />
-			)}
+			{!checked && name && typeof offValue !== 'undefined' && <input type="hidden" name={name} value={getHtmlValue(offValue)} />}
 		</Input>
 	);
 });
@@ -159,14 +153,7 @@ Checkbox.propTypes = {
 	checked: PropTypes.bool,
 	defaultChecked: PropTypes.bool,
 	size: PropTypes.string,
-	variant: PropTypes.oneOf([
-		'checkmark-square',
-		'checkmark-round',
-		'dot-square',
-		'dot-round',
-		'switch-square',
-		'switch-round'
-	]),
+	variant: PropTypes.oneOf(['checkmark-square', 'checkmark-round', 'dot-square', 'dot-round', 'switch-square', 'switch-round']),
 	color: PropTypes.string,
 	onChange: PropTypes.func,
 	disabled: PropTypes.bool,

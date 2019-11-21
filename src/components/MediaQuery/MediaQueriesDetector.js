@@ -63,14 +63,14 @@ const MediaQueriesDetector = function(props) {
 			mediaQueryData.prefersDarkColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 			mediaQueryData.prefersLightColorScheme = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-			for (const mediaQuery of Object.keys(mediaQueries)) {
+			Object.keys(mediaQueries).forEach((mediaQuery) => {
 				const query = mediaQueries[mediaQuery];
 
 				const {matches} = window.matchMedia(query);
 
 				const brk = mediaQuery.substr(0, 1).toUpperCase() + mediaQuery.substr(1, mediaQuery.length - 1);
 				mediaQueryData[`is${brk}`] = typeof matches === 'boolean' ? matches : false;
-			}
+			});
 		} else {
 			theme.warning('window.matchMedia is not available, all media queries will be set to null');
 
@@ -80,10 +80,10 @@ const MediaQueriesDetector = function(props) {
 			mediaQueryData.prefersDarkColorScheme = null;
 			mediaQueryData.prefersLightColorScheme = null;
 
-			for (const mediaQuery of Object.keys(mediaQueries)) {
+			Object.keys(mediaQueries).forEach((mediaQuery) => {
 				const brk = mediaQuery.substr(0, 1).toUpperCase() + mediaQuery.substr(1, mediaQuery.length - 1);
 				mediaQueryData[`is${brk}`] = null;
-			}
+			});
 		}
 
 		return {

@@ -50,22 +50,22 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="offValue" type={['string', 'number']} defaultValue="undefined">
 					<p>
-						By default, Checkbox component will behave just like the regular HTML5 checkbox: if value is checked, value
-						will be serialized in form. If value is not checked, value will be completely omitted from serialization and
-						that behaviour is sometimes very annoying.
+						By default, Checkbox component will behave just like the regular HTML5 checkbox: if value is checked, value will be serialized
+						in form. If value is not checked, value will be completely omitted from serialization and that behaviour is sometimes very
+						annoying.
 					</p>
 					<p>In some cases, you'll want to get the value of unchecked checkbox and this prop solves that problem.</p>
 					<p>
 						Note 1: this won't work if <code>name</code> is not set.
 					</p>
 					<p>
-						Note 2: if <code>offValue</code> is set, it'll be rendered as hidden field with the same name and the name
-						from the input tag will be removed so the eventual manual serialization don't serialize two fields.
+						Note 2: if <code>offValue</code> is set, it'll be rendered as hidden field with the same name and the name from the input tag
+						will be removed so the eventual manual serialization don't serialize two fields.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="checked" type="bool" defaultValue="undefined">
-					If you want to create controlled checkbox component, then set this prop. When component is controlled, you're
-					required to set the <code>onChange</code> function as well.
+					If you want to create controlled checkbox component, then set this prop. When component is controlled, you're required to set the{' '}
+					<code>onChange</code> function as well.
 				</Props.Prop>
 				<Props.Prop name="defaultChecked" type="bool" defaultValue="undefined">
 					If you want to create uncontrolled checkbox component, then use this prop to set the initial "checked".
@@ -76,12 +76,11 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.checkboxAndRadio.defaults.variant">
 					<p>
-						Same checkbox behavior can be applied on a components with a different look. Using this prop, you're telling
-						how do you want the checkbox to look like.
+						Same checkbox behavior can be applied on a components with a different look. Using this prop, you're telling how do you want the
+						checkbox to look like.
 					</p>
 					<p>
-						Unlike other components where variants can be defined in the theme, here, variants are predefined and you
-						may choose one of:
+						Unlike other components where variants can be defined in the theme, here, variants are predefined and you may choose one of:
 					</p>
 					<p>
 						{variants.map((variant) => (
@@ -96,10 +95,7 @@ export const Documentation = function() {
 					<AvailableKeys data={colors} />
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
-					<p>
-						Function called when value has changed. It'll get the object for the first parameter with the following
-						keys:
-					</p>
+					<p>Function called when value has changed. It'll get the object for the first parameter with the following keys:</p>
 					<ul>
 						<li>
 							<strong>name</strong>
@@ -134,15 +130,13 @@ export const Documentation = function() {
 							<Checkbox key={variant} variant={variant} size={val} mr={10} />
 						))}
 					</DocsCode.Example>
-					<DocsCode.Code>
-						{variants.map((variant) => `<Checkbox size="${val}" variant="${variant}" />`).join('\n')}
-					</DocsCode.Code>
+					<DocsCode.Code>{variants.map((variant) => `<Checkbox size="${val}" variant="${variant}" />`).join('\n')}</DocsCode.Code>
 				</DocsCode>
 			))}
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				Defining color for checkbox is very limited when compared to other components and there are just few states. If
-				you think of checkbox very carefully, you'll see:
+				Defining color for checkbox is very limited when compared to other components and there are just few states. If you think of
+				checkbox very carefully, you'll see:
 			</DocsText>
 			<DocsText>
 				<ul>
@@ -180,17 +174,15 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
+			<DocsText>Variant is prop that tells how component will look like. Same functionality can be achieved with different look.</DocsText>
 			<DocsText>
-				Variant is prop that tells how component will look like. Same functionality can be achieved with different look.
-			</DocsText>
-			<DocsText>
-				Unlike other components where variants can be defined in the theme, this component doesn't allow that. There are
-				few predefined variant values:
+				Unlike other components where variants can be defined in the theme, this component doesn't allow that. There are few predefined
+				variant values:
 				{variants.map((variant) => (
 					<code key={variant}>{variant}</code>
 				))}
-				. Each of the values represent one styled component. Size and colors are the only parameters you can modify.
-				Even with this limited parametrization, you can achieve some effects, like this:
+				. Each of the values represent one styled component. Size and colors are the only parameters you can modify. Even with this limited
+				parametrization, you can achieve some effects, like this:
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>

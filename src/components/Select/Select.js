@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, isFunction, isNumberOrString, omit} from '../../util/helpers';
+import {getPixelsOrString, isFunction, isNumberOrString} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
@@ -13,12 +13,9 @@ import Text from '../InputField/Text';
 const Select = forwardRef(function(props, ref) {
 	const {theme} = useContext(ThemeContext);
 
-	const {
-		size: defaultSize = null,
-		width: defaultWidth = null,
-		variant: defaultVariant,
-		color: defaultColor
-	} = theme.json('inputField.defaults');
+	const {size: defaultSize = null, width: defaultWidth = null, variant: defaultVariant, color: defaultColor} = theme.json(
+		'inputField.defaults'
+	);
 
 	const {
 		children = null,
@@ -45,7 +42,8 @@ const Select = forwardRef(function(props, ref) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const innerRef = useRef(null);
@@ -230,7 +228,7 @@ const Select = forwardRef(function(props, ref) {
 			handleBlur,
 			handleChange,
 			focusField,
-			otherProps: omit(props, Object.keys(Select.propTypes))
+			otherProps
 		}),
 		[innerRef, name, disabled, containerCss, inputCss, focusField, multiple, visibleOptions, props]
 	);

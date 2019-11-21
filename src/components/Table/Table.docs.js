@@ -26,8 +26,8 @@ export const Documentation = function() {
 			<DocsTitle hash="table">Table</DocsTitle>
 			<ImportComponent name="Table" />
 			<DocsText>
-				This is Koldy <strong>UI</strong> and that's why this component offers only styled User Interface and nothing
-				else. Here's an example of Table:
+				This is Koldy <strong>UI</strong> and that's why this component offers only styled User Interface and nothing else. Here's an
+				example of Table:
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>
@@ -133,9 +133,9 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="border" type="string" defaultValue="theme.table.defaults.border">
 					<p>
-						Defines where you want to have a border visible on table. This prop can accept multiple border values by
-						separating the string with <code>|</code>. So if you want to have a border around the whole table, plus
-						under every row, then set the border to <code>table|row</code>.
+						Defines where you want to have a border visible on table. This prop can accept multiple border values by separating the string
+						with <code>|</code>. So if you want to have a border around the whole table, plus under every row, then set the border to{' '}
+						<code>table|row</code>.
 					</p>
 					<AvailableKeys data={['table', 'row', 'column', 'head', 'foot']} />
 				</Props.Prop>
@@ -155,8 +155,7 @@ export const Documentation = function() {
 			</Props>
 			<DocsText>Table is a component for showing tabular data. Don't ever use Table component for layout.</DocsText>
 			<DocsText>
-				This component wraps basic HTML and CSS properties into several components provided as static properties of{' '}
-				<code>Table</code>:
+				This component wraps basic HTML and CSS properties into several components provided as static properties of <code>Table</code>:
 			</DocsText>
 			<DocsText>
 				<ul>
@@ -193,14 +192,12 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<DocsText>
-				Table component always expect <code>Head</code>, <code>Body</code> or <code>Foot</code> as its direct children
-				and to keep everything consistent, it won't allow <code>&lt;tr&gt;</code> tags as direct children of{' '}
-				<code>&lt;table&gt;</code> tag.
+				Table component always expect <code>Head</code>, <code>Body</code> or <code>Foot</code> as its direct children and to keep
+				everything consistent, it won't allow <code>&lt;tr&gt;</code> tags as direct children of <code>&lt;table&gt;</code> tag.
 			</DocsText>
 			<DocsSubTitle hash="theory">Some theory about styling</DocsSubTitle>
 			<DocsText>
-				When you're thinking about styling the table, there's just few things reasonable enough that should go to the
-				theme definition:
+				When you're thinking about styling the table, there's just few things reasonable enough that should go to the theme definition:
 			</DocsText>
 			<DocsText>
 				<ul>
@@ -209,12 +206,12 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<DocsText>
-				When we're talking about the size, we're talking about default cell padding, spacing and default font size
-				within the cell. Avoid defining CSS for the children in cells.
+				When we're talking about the size, we're talking about default cell padding, spacing and default font size within the cell. Avoid
+				defining CSS for the children in cells.
 			</DocsText>
 			<DocsText>
-				And when we're talking about the colors, we talk about backgrounds, text color, hover effects, border colors and
-				the colors of the child elements within the table's cell.
+				And when we're talking about the colors, we talk about backgrounds, text color, hover effects, border colors and the colors of the
+				child elements within the table's cell.
 			</DocsText>
 			<DocsText>Both size and colors can be defined in the theme. Please note:</DocsText>
 			<DocsText>
@@ -417,15 +414,12 @@ export const Documentation = function() {
 			<DocsText>All these components accept only children prop which should be node.</DocsText>
 			<DocsSubTitle hash="tr">Tr</DocsSubTitle>
 			<DocsText>
-				Use this component as direct child of <code>Table.Head</code>, <code>Table.Body</code> or{' '}
-				<code>Table.Foot</code> component.
+				Use this component as direct child of <code>Table.Head</code>, <code>Table.Body</code> or <code>Table.Foot</code> component.
 			</DocsText>
 			<Props hash="tr-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick">If defined, it'll be triggered if any cell within the row is clicked on.</Props.Prop>
-				<Props.Prop name="onDoubleClick">
-					If defined, it'll be triggered if any cell within the row is double clicked on.
-				</Props.Prop>
+				<Props.Prop name="onDoubleClick">If defined, it'll be triggered if any cell within the row is double clicked on.</Props.Prop>
 			</Props>
 			<DocsSubTitle hash="th">Th</DocsSubTitle>
 			<DocsText>
@@ -434,12 +428,10 @@ export const Documentation = function() {
 			<Props hash="th-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick">
-					If defined, it'll be triggered when user clicks on the cell. <code>onClick</code> events are always stopped
-					when propagation, so if there's <code>onClick</code> set on <code>Tr</code> component, it won't be triggered.
+					If defined, it'll be triggered when user clicks on the cell. <code>onClick</code> events are always stopped when propagation, so
+					if there's <code>onClick</code> set on <code>Tr</code> component, it won't be triggered.
 				</Props.Prop>
-				<Props.Prop name="onDoubleClick">
-					If defined, it'll be triggered if any cell within the row is double clicked on.
-				</Props.Prop>
+				<Props.Prop name="onDoubleClick">If defined, it'll be triggered if any cell within the row is double clicked on.</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					Set the cell width. If number is passed, it'll be treated as pixels. If string is passed, it'll be used as is.
 				</Props.Prop>
@@ -447,8 +439,8 @@ export const Documentation = function() {
 					One of: <code>left</code>, <code>center</code>, <code>right</code>, <code>justify</code>
 				</Props.Prop>
 				<Props.Prop name="verticalAlign" type="string">
-					One of: <code>baseline</code>, <code>sub</code>, <code>super</code>, <code>text-top</code>,{' '}
-					<code>text-bottom</code>, <code>middle</code>, <code>top</code> or <code>bottom</code>.
+					One of: <code>baseline</code>, <code>sub</code>, <code>super</code>, <code>text-top</code>, <code>text-bottom</code>,{' '}
+					<code>middle</code>, <code>top</code> or <code>bottom</code>.
 				</Props.Prop>
 				<Props.Prop name="colSpan" type="number">
 					Standard <code>colspan</code> attribute for the cell.
@@ -470,12 +462,10 @@ export const Documentation = function() {
 			<Props hash="td-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick">
-					If defined, it'll be triggered when user clicks on the cell. <code>onClick</code> events are always stopped
-					when propagation, so if there's <code>onClick</code> set on <code>Tr</code> component, it won't be triggered.
+					If defined, it'll be triggered when user clicks on the cell. <code>onClick</code> events are always stopped when propagation, so
+					if there's <code>onClick</code> set on <code>Tr</code> component, it won't be triggered.
 				</Props.Prop>
-				<Props.Prop name="onDoubleClick">
-					If defined, it'll be triggered if any cell within the row is double clicked on.
-				</Props.Prop>
+				<Props.Prop name="onDoubleClick">If defined, it'll be triggered if any cell within the row is double clicked on.</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					Set the cell width. If number is passed, it'll be treated as pixels. If string is passed, it'll be used as is.
 				</Props.Prop>
@@ -483,8 +473,8 @@ export const Documentation = function() {
 					One of: <code>left</code>, <code>center</code>, <code>right</code>, <code>justify</code>
 				</Props.Prop>
 				<Props.Prop name="verticalAlign" type="string">
-					One of: <code>baseline</code>, <code>sub</code>, <code>super</code>, <code>text-top</code>,{' '}
-					<code>text-bottom</code>, <code>middle</code>, <code>top</code> or <code>bottom</code>.
+					One of: <code>baseline</code>, <code>sub</code>, <code>super</code>, <code>text-top</code>, <code>text-bottom</code>,{' '}
+					<code>middle</code>, <code>top</code> or <code>bottom</code>.
 				</Props.Prop>
 				<Props.Prop name="colSpan" type="number">
 					Standard <code>colspan</code> attribute for the cell.

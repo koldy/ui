@@ -25,9 +25,6 @@ export const Documentation = function() {
 
 	const sizes2 = theme.json('inputField.size');
 	const colors2 = theme.json('inputField.color');
-	const variants2 = theme.json('inputField.variant');
-
-	const [dateExample, setDateExample] = useState(new Date());
 
 	return (
 		<>
@@ -40,37 +37,35 @@ export const Documentation = function() {
 				<DocsCode.Code>{'<DatePicker />'}</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				DatePicker component is a calendar that can be used as input component for selecting date and time. Check the
-				props to explore more options.
+				DatePicker component is a calendar that can be used as input component for selecting date and time. Check the props to explore more
+				options.
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type={['node', 'func']}>
 					<p>
-						Children can be used for adding additional content under the calendar itself. If it's used as{' '}
-						<code>node</code>, then the content will be just appended. If it's used as <code>function</code>, then the
-						function will get some useful information. First parameter of the function is object with the following
-						keys:
+						Children can be used for adding additional content under the calendar itself. If it's used as <code>node</code>, then the
+						content will be just appended. If it's used as <code>function</code>, then the function will get some useful information. First
+						parameter of the function is object with the following keys:
 					</p>
 					<ul>
 						<li>
-							<strong>setSelectedDate</strong> - function that can be used for setting the calendar's internal date.
-							Pass instance of <code>Date</code> as first parameter.
+							<strong>setSelectedDate</strong> - function that can be used for setting the calendar's internal date. Pass instance of{' '}
+							<code>Date</code> as first parameter.
 						</li>
 						<li>
-							<strong>selectedDate</strong> - instance of <code>Date</code> or <code>null</code> - current date in the
-							component
+							<strong>selectedDate</strong> - instance of <code>Date</code> or <code>null</code> - current date in the component
 						</li>
 						<li>
-							<strong>setViewDate</strong> - using this function you're able to set the month that is currently being
-							seen by end user. This can be used when <code>selectedDate</code> is not yet set.
+							<strong>setViewDate</strong> - using this function you're able to set the month that is currently being seen by end user. This
+							can be used when <code>selectedDate</code> is not yet set.
 						</li>
 						<li>
-							<strong>minDate</strong> - instance of <code>Date</code> - if you didn't pass the <code>minDate</code> by
-							yourself, then you'll get the calculated minimum date here
+							<strong>minDate</strong> - instance of <code>Date</code> - if you didn't pass the <code>minDate</code> by yourself, then
+							you'll get the calculated minimum date here
 						</li>
 						<li>
-							<strong>maxDate</strong> - instance of <code>Date</code> - if you didn't pass the <code>maxDate</code> by
-							yourself, then you'll get the calculated maximum date here
+							<strong>maxDate</strong> - instance of <code>Date</code> - if you didn't pass the <code>maxDate</code> by yourself, then
+							you'll get the calculated maximum date here
 						</li>
 					</ul>
 					<DocsCode>
@@ -114,25 +109,22 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="value" type="Date">
-					If you plan to use this component as controlled component, then set the Date. If you want to use it as
-					controlled component without initial value, then pass <code>null</code> as initial value.
+					If you plan to use this component as controlled component, then set the Date. If you want to use it as controlled component
+					without initial value, then pass <code>null</code> as initial value.
 				</Props.Prop>
 				<Props.Prop name="value" type="Date">
-					If you plan to use this component as uncontrolled component, but want to set the initial value, then use this
-					prop.
+					If you plan to use this component as uncontrolled component, but want to set the initial value, then use this prop.
 				</Props.Prop>
 				<Props.Prop name="valueFormat" type="function">
-					To customize the value rendered as hidden field when using <code>name</code> prop, use this prop. First
-					parameter of this function is either instance of <code>Date</code> or <code>null</code>.
+					To customize the value rendered as hidden field when using <code>name</code> prop, use this prop. First parameter of this function
+					is either instance of <code>Date</code> or <code>null</code>.
 				</Props.Prop>
 				<Props.Prop name="initialMonth" type="Date" defaultValue="new Date()">
-					If you don't set the initial value, by default, calendar will show the current month. If you want to change
-					the initial month, you may do that by setting this prop.
+					If you don't set the initial value, by default, calendar will show the current month. If you want to change the initial month, you
+					may do that by setting this prop.
 				</Props.Prop>
 				<Props.Prop name="minDate" type="Date" defaultValue="last 100 years">
-					<p>
-						If set, it won't be possible to select date lower than this date. In this example, min date is set to today.
-					</p>
+					<p>If set, it won't be possible to select date lower than this date. In this example, min date is set to today.</p>
 					<DocsCode>
 						<DocsCode.Example>
 							<DatePicker minDate={new Date()} />
@@ -141,10 +133,7 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="maxDate" type="Date" defaultValue="next 100 years">
-					<p>
-						If set, it won't be possible to select date greater than this date. In this example, min date is set to
-						today.
-					</p>
+					<p>If set, it won't be possible to select date greater than this date. In this example, min date is set to today.</p>
 					<DocsCode>
 						<DocsCode.Example>
 							<DatePicker maxDate={new Date()} />
@@ -196,10 +185,7 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="hideNav" type="boolean" defaultValue={false}>
-					<p>
-						If you want to hide the navigation (previous/next month, month selector and year) for any reason, use this
-						prop.
-					</p>
+					<p>If you want to hide the navigation (previous/next month, month selector and year) for any reason, use this prop.</p>
 					<DocsCode>
 						<DocsCode.Example>
 							<DatePicker hideNav />
@@ -209,8 +195,8 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="disabled" type="boolean" defaultValue={false}>
 					<p>
-						Acting as standard <code>disabled</code> attribute on input fields. If set to <code>true</code>, all dates
-						inside of calendar will become disabled.
+						Acting as standard <code>disabled</code> attribute on input fields. If set to <code>true</code>, all dates inside of calendar
+						will become disabled.
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -221,9 +207,8 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="timePrecision" type="string">
 					<p>
-						If set, then <code>TimeField</code> component will be rendered under the calendar and user will have ability
-						to set the time next to selected date. When this prop is set, other <code>time</code> props can be set in
-						order to customize TimeField.
+						If set, then <code>TimeField</code> component will be rendered under the calendar and user will have ability to set the time
+						next to selected date. When this prop is set, other <code>time</code> props can be set in order to customize TimeField.
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -234,15 +219,14 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="timeColor" type="string" defaultValue="theme.inputField.defaults.color">
 					<p>
-						To adjust the color of <code>TimeField</code> under the calendar, use one of the keys set in{' '}
-						<code>theme.inputField.color</code>.
+						To adjust the color of <code>TimeField</code> under the calendar, use one of the keys set in <code>theme.inputField.color</code>
+						.
 					</p>
 					<AvailableKeys data={colors2} name="theme.inputField.color" />
 				</Props.Prop>
 				<Props.Prop name="timeSize" type="string" defaultValue="theme.inputField.defaults.size">
 					<p>
-						To adjust the size of <code>TimeField</code> under the calendar, use one of the keys set in{' '}
-						<code>theme.inputField.size</code>.
+						To adjust the size of <code>TimeField</code> under the calendar, use one of the keys set in <code>theme.inputField.size</code>.
 					</p>
 					<AvailableKeys data={sizes2} name="theme.inputField.size" />
 				</Props.Prop>

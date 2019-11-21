@@ -2,16 +2,14 @@ import React, {forwardRef, useContext, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {isFunction, omit} from '../../util/helpers';
+import {isFunction} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 
 const TextArea = forwardRef(function(props, ref) {
 	const {theme} = useContext(ThemeContext);
 
-	const {size: defaultSize, width: defaultWidth, variant: defaultVariant, color: defaultColor} = theme.json(
-		'inputField.defaults'
-	);
+	const {size: defaultSize, width: defaultWidth, variant: defaultVariant, color: defaultColor} = theme.json('inputField.defaults');
 
 	const {
 		name = null,
@@ -34,12 +32,13 @@ const TextArea = forwardRef(function(props, ref) {
 		onClick = null,
 		onDoubleClick = null,
 		resize = 'none',
+		containerRef,
 		m = null,
 		mt = null,
 		mr = null,
 		mb = null,
 		ml = null,
-		containerRef
+		...otherProps
 	} = props;
 
 	const handleClick = useCallback(
@@ -120,8 +119,6 @@ const TextArea = forwardRef(function(props, ref) {
 		mb,
 		ml
 	});
-
-	const otherProps = omit(props, Object.keys(TextArea.propTypes));
 
 	return (
 		<Container containerCss={containerCss} style={containerStyle} ref={containerRef}>

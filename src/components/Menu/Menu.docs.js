@@ -1,4 +1,4 @@
-import React, {useContext, useState, useCallback} from 'react';
+import React, {useContext, useState} from 'react';
 import DocsTitle from '../../../docs/components/DocsTitle';
 
 import Menu from './Menu';
@@ -14,7 +14,6 @@ import Button from '../Button/Button';
 import Flexbox from '../Flexbox/Flexbox';
 import Checkbox from '../Checkbox/Checkbox';
 import {emptyFn} from '../../util/helpers';
-import Box from '../Box/Box';
 
 export const title = 'Menu';
 export const slug = 'menu';
@@ -118,11 +117,10 @@ export const Documentation = function() {
 				<code>Menu</code> component is one of the most useful components created in this UI library and here's why.
 			</DocsText>
 			<DocsText>
-				It can be used both as navigation menu and it can be used as input component (that's why it's placed under input
-				components). When used as input component, then it behaves similar to <code>Select</code> component. Other UI
-				libraries and frameworks would offer components like Select2, SelectMenu, Navs, Vertical menus, Tag inputs and
-				similar. So, in order not to "hardcode" all these derivatives, Koldy UI offers just a tool which can be used to
-				build all those components and that tool is <code>Menu</code>.
+				It can be used both as navigation menu and it can be used as input component (that's why it's placed under input components). When
+				used as input component, then it behaves similar to <code>Select</code> component. Other UI libraries and frameworks would offer
+				components like Select2, SelectMenu, Navs, Vertical menus, Tag inputs and similar. So, in order not to "hardcode" all these
+				derivatives, Koldy UI offers just a tool which can be used to build all those components and that tool is <code>Menu</code>.
 			</DocsText>
 			<DocsText>Here's an example of simple vertical menu:</DocsText>
 			<DocsCode>
@@ -158,8 +156,7 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				And here's an example of <code>Menu</code> as input component. Watch the browser's console to see the changes on
-				click.
+				And here's an example of <code>Menu</code> as input component. Watch the browser's console to see the changes on click.
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>
@@ -184,25 +181,23 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				Notice that as soon as you give a value to the <code>Item</code>, it applies "input" behaviour. Check props docs
-				for more explanation and examples.
+				Notice that as soon as you give a value to the <code>Item</code>, it applies "input" behaviour. Check props docs for more
+				explanation and examples.
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type="node" required>
-					This prop is required and you're free to put literally anything in there, but to use this component's
-					features, we recommend that you use <code>Menu.Item</code> and <code>Menu.Divider</code> for achieving most of
-					the functionality.
+					This prop is required and you're free to put literally anything in there, but to use this component's features, we recommend that
+					you use <code>Menu.Item</code> and <code>Menu.Divider</code> for achieving most of the functionality.
 				</Props.Prop>
 				<Props.Prop name="name" type="string">
-					If set, all active values will be rendered as HTML's <code>select</code> and <code>option</code> tags which
-					are visually hidden, but if you put the menu inside the form, form serialization will automatically collect
-					the selected options as well.
+					If set, all active values will be rendered as HTML's <code>select</code> and <code>option</code> tags which are visually hidden,
+					but if you put the menu inside the form, form serialization will automatically collect the selected options as well.
 				</Props.Prop>
 				<Props.Prop name="multiple" type="bool" defaultValue={false}>
 					<p>
-						If set to <code>true</code>, it'll allow multiple options to be active at the same time. If{' '}
-						<code>onChange</code> is provided as well, then the value given through the onChange function will be either
-						array (if multiple) or scalar value (if not multiple). Check your browser's console to see the case.
+						If set to <code>true</code>, it'll allow multiple options to be active at the same time. If <code>onChange</code> is provided as
+						well, then the value given through the onChange function will be either array (if multiple) or scalar value (if not multiple).
+						Check your browser's console to see the case.
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -228,10 +223,7 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="value" type={['number', 'string', 'array']}>
-					<p>
-						If set, it means you're using this component as controlled component and you are responsible for the values
-						all the time.
-					</p>
+					<p>If set, it means you're using this component as controlled component and you are responsible for the values all the time.</p>
 					<DocsCode>
 						<DocsCode.Example>
 							<Menu onChange={({value}) => setExample1(value)} value={example1}>
@@ -259,10 +251,7 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['number', 'string', 'array']}>
-					<p>
-						If set, it means you're using this component as uncontrolled component and you're just setting initial
-						value.
-					</p>
+					<p>If set, it means you're using this component as uncontrolled component and you're just setting initial value.</p>
 					<DocsCode>
 						<DocsCode.Example>
 							<Menu onChange={({value}) => console.log(value)} defaultValue="Croatia">
@@ -327,17 +316,14 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
-					<p>
-						Fires when there's a change on selected value(s). Function will get the object for first parameter with the
-						following keys:
-					</p>
+					<p>Fires when there's a change on selected value(s). Function will get the object for first parameter with the following keys:</p>
 					<ul>
 						<li>
 							<strong>name</strong> - the name of <code>Menu</code> component or <code>null</code>
 						</li>
 						<li>
-							<strong>value</strong> - if <code>Menu</code> has <code>multiple</code> prop set to true, then value will
-							be array, otherwise it'll be scalar value or <code>null</code> if nothing is selected.
+							<strong>value</strong> - if <code>Menu</code> has <code>multiple</code> prop set to true, then value will be array, otherwise
+							it'll be scalar value or <code>null</code> if nothing is selected.
 						</li>
 					</ul>
 				</Props.Prop>
@@ -377,8 +363,7 @@ export const Documentation = function() {
 			</Props>
 			<DocsSubTitle hash="variant">Variants</DocsSubTitle>
 			<DocsText>
-				You may use variants as a chance to do some component styling, like having another font, or having another
-				border style.
+				You may use variants as a chance to do some component styling, like having another font, or having another border style.
 			</DocsText>
 			<AvailableKeys data={variants} />
 			{Object.keys(variants).map((val) => (
@@ -407,8 +392,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Sizes</DocsSubTitle>
 			<DocsText>
-				You may have multiple sizes defined in theme for each of the subcomponents. Under size, you may define font
-				size, padding and some margins.
+				You may have multiple sizes defined in theme for each of the subcomponents. Under size, you may define font size, padding and some
+				margins.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={sizes} />
@@ -438,9 +423,7 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsSubTitle hash="color">Colors</DocsSubTitle>
-			<DocsText>
-				You may have multiple colors defined in theme for each of the subcomponents. Check the theme for more options.
-			</DocsText>
+			<DocsText>You may have multiple colors defined in theme for each of the subcomponents. Check the theme for more options.</DocsText>
 			<DocsText>
 				<AvailableKeys data={colors} />
 			</DocsText>
@@ -469,8 +452,8 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsText>
-				These color combinations might not look attractive when having "vertical menus", so here's the same example with
-				inline elements and variant rounded:
+				These color combinations might not look attractive when having "vertical menus", so here's the same example with inline elements and
+				variant rounded:
 			</DocsText>
 			{Object.keys(colors).map((val) => (
 				<DocsCode label={val} labelWidth="auto" key={val}>
@@ -498,28 +481,27 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="item">Menu.Item</DocsSubTitle>
 			<DocsText>
-				This component provides the core functionality of <code>Menu</code> component while still keeping the
-				possibility of completely visually customizing it. Check its props for more explanation and examples.
+				This component provides the core functionality of <code>Menu</code> component while still keeping the possibility of completely
+				visually customizing it. Check its props for more explanation and examples.
 			</DocsText>
 			<Props hash="item-props" title="Props for Menu.Item">
 				<Props.Prop name="children" type={['string', 'number', 'node', 'func']}>
 					<p>
-						If passing <code>string</code>, <code>number</code> or <code>node</code>, then it'll be rendered as is, but
-						respecting all styling from the theme. <code>node</code> allows you to put, for example,{' '}
-						<code>Flexbox</code>
+						If passing <code>string</code>, <code>number</code> or <code>node</code>, then it'll be rendered as is, but respecting all
+						styling from the theme. <code>node</code> allows you to put, for example, <code>Flexbox</code>
 						inside to achieve more complex layout (for example, you want to put icon, then text).
 					</p>
 					<p>
-						If using function, then it's possible to get some internal Item's state in order to customize whatever you
-						need to customize. So, the first parameter of this function is object with the following keys:
+						If using function, then it's possible to get some internal Item's state in order to customize whatever you need to customize.
+						So, the first parameter of this function is object with the following keys:
 					</p>
 					<ul>
 						<li>
 							<strong>name</strong> - the name of <code>Menu</code> component
 						</li>
 						<li>
-							<strong>isSelected</strong> - boolean - true if current Item is currently selected (item must have{' '}
-							<code>value</code> prop set in order for this to work)
+							<strong>isSelected</strong> - boolean - true if current Item is currently selected (item must have <code>value</code> prop set
+							in order for this to work)
 						</li>
 						<li>
 							<strong>isDisabled</strong> - boolean - true if menu or this item are set to be disabled
@@ -584,8 +566,8 @@ export const Documentation = function() {
 						</DocsCode.Example>
 					</DocsCode>
 					<p>
-						Bw aware that if <code>onClick</code> prop is set, then <code>onChange</code> in <code>Menu</code> component
-						won't work because internal click handler will be overridden with your function.
+						Bw aware that if <code>onClick</code> prop is set, then <code>onChange</code> in <code>Menu</code> component won't work because
+						internal click handler will be overridden with your function.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="onDoubleClick">
@@ -615,8 +597,8 @@ export const Documentation = function() {
 				<Props.Prop name="ref" />
 				<Props.Prop name="as">
 					<p>
-						If you're just building vertical menus with this component, then you may use this prop as opportunity to
-						completely change its internal behaviour. Here are few examples:
+						If you're just building vertical menus with this component, then you may use this prop as opportunity to completely change its
+						internal behaviour. Here are few examples:
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -641,8 +623,8 @@ export const Documentation = function() {
 						</DocsCode.Code>
 					</DocsCode>
 					<p>
-						Bw aware that if you're using this component on this way, then you shouldn't pass <code>value</code> prop
-						because that would override the click events.
+						Bw aware that if you're using this component on this way, then you shouldn't pass <code>value</code> prop because that would
+						override the click events.
 					</p>
 				</Props.Prop>
 			</Props>
@@ -691,8 +673,8 @@ export const Documentation = function() {
 			</DocsCode>
 			<DocsSubTitle hash="divider">Menu.Divider</DocsSubTitle>
 			<DocsText>
-				Divider is simple component that puts the horizontal line 100% wide. Its color can be customized in theme, as
-				well as thickness in variant. This component has no props.
+				Divider is simple component that puts the horizontal line 100% wide. Its color can be customized in theme, as well as thickness in
+				variant. This component has no props.
 			</DocsText>
 		</>
 	);

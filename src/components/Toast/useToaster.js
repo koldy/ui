@@ -64,9 +64,7 @@ export default () => {
 
 	const addToast = (componentRenderProp, config = {}) => {
 		if (typeof componentRenderProp !== 'function') {
-			throw new TypeError(
-				'When adding new Toast, first parameter must be render prop function, like: ({closeFn}) => <div>content</div>'
-			);
+			throw new TypeError('When adding new Toast, first parameter must be render prop function, like: ({closeFn}) => <div>content</div>');
 		}
 
 		uid += 1;

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Cell from './Cell';
-import {omit} from '../../util/helpers';
 
 const Td = function(props) {
 	const {
@@ -20,10 +19,9 @@ const Td = function(props) {
 		pt = null,
 		pr = null,
 		pb = null,
-		pl = null
+		pl = null,
+		...otherProps
 	} = props;
-
-	const otherProps = omit(props, ['children']);
 
 	return (
 		<Cell

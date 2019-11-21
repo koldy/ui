@@ -6,7 +6,7 @@ import RowContext from './RowContext';
 import {isFunction} from '../../util/helpers';
 
 const Tr = function(props) {
-	const {children = null, onClick: userOnClick = null, onDoubleClick: userOnDoubleClick = null} = props;
+	const {children = null, onClick: userOnClick = null, onDoubleClick: userOnDoubleClick = null, ...otherProps} = props;
 
 	const onClick = useCallback(() => {
 		if (isFunction(userOnClick)) {
@@ -26,7 +26,7 @@ const Tr = function(props) {
 	};
 
 	return (
-		<StyledTr>
+		<StyledTr {...otherProps}>
 			<RowContext.Provider value={rowContext}>{children}</RowContext.Provider>
 		</StyledTr>
 	);

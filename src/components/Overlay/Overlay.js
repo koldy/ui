@@ -4,13 +4,61 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {addDocumentEvent, emptyFn, isFunction, omit, removeDocumentEvent} from '../../util/helpers';
+import {addDocumentEvent, emptyFn, isFunction, removeDocumentEvent} from '../../util/helpers';
 import {fadeInAnimation} from '../../animations/fadeIn';
 import useZIndex from '../../hooks/useZIndex';
 
 const overlays = []; // the array of all active overlays
 const closeFunctions = {}; // index:fn pairs of closing functions called from ESC key
 let originalOverflow = null; // the original overflow from the body that we'll return when all overlays are gone
+
+/**
+ * Function on window keydown
+ * @param e
+ */
+const globalCloseOnESC = function(e) {
+	if (e.keyCode === 27) {
+		// the ESC key
+		// in this moment, overlays should contain information about all active overlays; we need the last one
+
+		if (overlays.length > 0) {
+			const latestIndex = overlays[overlays.length - 1];
+
+			// let's find the close function in closeFunctions
+			if (closeFunctions[latestIndex]) {
+				const {onClose, disableCloseOnESC} = closeFunctions[latestIndex];
+
+				// it is possible that close function doesn't exist because if ESC key is prevented, then close function won't exist
+				if (!disableCloseOnESC && isFunction(onClose)) {
+					onClose();
+				}
+			}
+		}
+	}
+};
+
+/**
+ * Function on overlay click
+ * @param e
+ */
+const handleMouseClick = function(e) {
+	e.stopPropagation();
+
+	// in this moment, overlays should contain information about all active overlays; we need the last one
+	if (overlays.length > 0) {
+		const latestIndex = overlays[overlays.length - 1];
+
+		// let's find the close function in closeFunctions
+		if (closeFunctions[latestIndex]) {
+			const {onClose, disableCloseOnClick} = closeFunctions[latestIndex];
+
+			// it is possible that close function doesn't exist because if ESC key is prevented, then close function won't exist
+			if (!disableCloseOnClick && isFunction(onClose)) {
+				onClose();
+			}
+		}
+	}
+};
 
 /**
  * @typedef {Object} Props
@@ -25,9 +73,17 @@ let originalOverflow = null; // the original overflow from the body that we'll r
  * @param {Props} props
  */
 const Overlay = function(props) {
-	const {children, zIndex = null, onClose, style: userStyle = null, backgroundColor = null} = props;
-	const {disableCloseOnESC = false, disableCloseOnClick = false} = props;
-	const {animationDuration: userAnimationDuration = null} = props;
+	const {
+		children,
+		zIndex = null,
+		onClose,
+		style: userStyle = null,
+		backgroundColor = null,
+		disableCloseOnESC = false,
+		disableCloseOnClick = false,
+		animationDuration: userAnimationDuration = null,
+		...otherProps
+	} = props;
 
 	const {theme} = useContext(ThemeContext);
 	const defaults = theme ? theme.json('overlay.defaults') : {};
@@ -42,6 +98,7 @@ const Overlay = function(props) {
 
 	// bind close function(s)
 	useEffect(() => {
+		// eslint-disable-next-line
 		const index = (Overlay.counter += 1);
 
 		overlays.push(index);
@@ -110,8 +167,6 @@ const Overlay = function(props) {
 		};
 	}, [theme, backgroundColor, userStyle]);
 
-	// detect other props
-	const otherProps = omit(props, Object.keys(Overlay.propTypes));
 
 	return createPortal(
 		<Wrapper
@@ -153,53 +208,5 @@ const Wrapper = styled.div`
 	animation: ${fadeInAnimation};
 	z-index: 5000;
 `;
-
-/**
- * Function on window keydown
- * @param e
- */
-const globalCloseOnESC = function(e) {
-	if (e.keyCode === 27) {
-		// the ESC key
-		// in this moment, overlays should contain information about all active overlays; we need the last one
-
-		if (overlays.length > 0) {
-			const latestIndex = overlays[overlays.length - 1];
-
-			// let's find the close function in closeFunctions
-			if (closeFunctions[latestIndex]) {
-				const {onClose, disableCloseOnESC} = closeFunctions[latestIndex];
-
-				// it is possible that close function doesn't exist because if ESC key is prevented, then close function won't exist
-				if (!disableCloseOnESC && isFunction(onClose)) {
-					onClose();
-				}
-			}
-		}
-	}
-};
-
-/**
- * Function on overlay click
- * @param e
- */
-const handleMouseClick = function(e) {
-	e.stopPropagation();
-
-	// in this moment, overlays should contain information about all active overlays; we need the last one
-	if (overlays.length > 0) {
-		const latestIndex = overlays[overlays.length - 1];
-
-		// let's find the close function in closeFunctions
-		if (closeFunctions[latestIndex]) {
-			const {onClose, disableCloseOnClick} = closeFunctions[latestIndex];
-
-			// it is possible that close function doesn't exist because if ESC key is prevented, then close function won't exist
-			if (!disableCloseOnClick && isFunction(onClose)) {
-				onClose();
-			}
-		}
-	}
-};
 
 export default Overlay;

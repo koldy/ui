@@ -103,11 +103,11 @@ export const Documentation = function() {
 			// filter it
 			const opts = [];
 
-			for (const state of states) {
+			states.forEach((state) => {
 				if (state.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) >= 0) {
 					opts.push(state);
 				}
-			}
+			});
 
 			setSuggestions(opts);
 		}
@@ -122,12 +122,12 @@ export const Documentation = function() {
 			// filter it
 			const opts = [];
 
-			for (const opt of customOptions) {
+			customOptions.forEach((opt) => {
 				const {country} = opt;
 				if (country.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) >= 0) {
 					opts.push(opt);
 				}
-			}
+			});
 
 			setCustomSuggestions(opts);
 		}
@@ -237,8 +237,7 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				AutoComplete is TextField with options that can be used to preset the text in the TextField. These options will
-				become visible if:
+				AutoComplete is TextField with options that can be used to preset the text in the TextField. These options will become visible if:
 			</DocsText>
 			<DocsText>
 				<ul>
@@ -247,26 +246,25 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<DocsText>
-				Good example for the component is above: you want your users to be able to put any text in the TextField, but it
-				would be good if the text is preselected from available set of values.
+				Good example for the component is above: you want your users to be able to put any text in the TextField, but it would be good if
+				the text is preselected from available set of values.
 			</DocsText>
 			<DocsText>
-				This component is dumb and knows nothing but one thing: show its children as options when user types something.
-				With that in mind, you are responsible on which options will be shown. If you take a look on the example above,
-				you'll see that developer is responsible for filtering options on <code>onChange</code> or <code>onInput</code>{' '}
-				event. Therefore, you are in total control on how this component will behave.
+				This component is dumb and knows nothing but one thing: show its children as options when user types something. With that in mind,
+				you are responsible on which options will be shown. If you take a look on the example above, you'll see that developer is
+				responsible for filtering options on <code>onChange</code> or <code>onInput</code> event. Therefore, you are in total control on how
+				this component will behave.
 			</DocsText>
 			<Props title="Props for AutoComplete" hash="props-autocomplete">
 				<Props.Prop name="children" type="node">
 					<p>
-						Use children to define the possible values. Every child should be <code>AutoComplete.Option</code>{' '}
-						component.
+						Use children to define the possible values. Every child should be <code>AutoComplete.Option</code> component.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="type" type="string" defaultValue="text">
 					<p>
-						This is <code>type</code> attribute of text field. Allowed values are: <code>text</code>, <code> tel</code>,{' '}
-						<code>email</code> and <code>search</code>.
+						This is <code>type</code> attribute of text field. Allowed values are: <code>text</code>, <code> tel</code>, <code>email</code>{' '}
+						and <code>search</code>.
 					</p>
 					{['text', 'tel', 'email', 'search'].map((type) => (
 						<DocsCode key={type}>
@@ -296,13 +294,9 @@ export const Documentation = function() {
 					<p>
 						If you want to use AutoComplete as controlled component, then set the <code>value</code> prop.
 					</p>
-					<AutoComplete
-						value="I'm here and you can't change me"
-						onChange={({value}) => console.log('New value is', value)}
-					/>
+					<AutoComplete value="I'm here and you can't change me" onChange={({value}) => console.log('New value is', value)} />
 					<p>
-						Remember that options won't become visible unless user types something in and that won't happen if you don't
-						allow/control it.
+						Remember that options won't become visible unless user types something in and that won't happen if you don't allow/control it.
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -327,8 +321,7 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['string', 'number']}>
 					<p>
-						If you plan to use TextField as uncontrolled component, then use <code>defaultValue</code> to set the
-						initial value.
+						If you plan to use TextField as uncontrolled component, then use <code>defaultValue</code> to set the initial value.
 					</p>
 					<AutoComplete defaultValue="I'm here by default">
 						{states.map((state) => (
@@ -363,12 +356,12 @@ export const Documentation = function() {
 					<AvailableKeys data={widths} name="theme.textField.width" />
 				</Props.Prop>
 				<Props.Prop name="minWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>min-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>min-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="maxWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when TextField is used as controlled component.</p>
@@ -393,9 +386,8 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="onInput" type="function">
 					<p>
-						Unlike <code>onChange</code> which is called on every change, <code>onInput</code> function will be called
-						with defined delay. This is useful when you want to allow user to type something in first and then you want
-						to fire callback when typing is done.
+						Unlike <code>onChange</code> which is called on every change, <code>onInput</code> function will be called with defined delay.
+						This is useful when you want to allow user to type something in first and then you want to fire callback when typing is done.
 					</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -420,14 +412,8 @@ export const Documentation = function() {
 					<p>
 						To set the delay for <code>onInput</code>, use this prop.
 					</p>
-					<p>
-						Check the example with input delay of 1000 (1 second) and watch your browser's console to see the change.
-					</p>
-					<AutoComplete
-						name="onInputDelayExample"
-						onInput={({name, value}) => console.log(name, value)}
-						inputDelay={1000}
-					>
+					<p>Check the example with input delay of 1000 (1 second) and watch your browser's console to see the change.</p>
+					<AutoComplete name="onInputDelayExample" onInput={({name, value}) => console.log(name, value)} inputDelay={1000}>
 						{states.map((state) => (
 							<AutoComplete.Option key={state} value={state} hoverBackgroundColor="#efefef" />
 						))}
@@ -547,8 +533,7 @@ export const Documentation = function() {
 			<Props title="Props for AutoComplete.Option" hash="props-autocomplete-option">
 				<Props.Prop name="children" type="function">
 					<p>
-						If set, it has to be used as function. Render prop function will get the object for first parameter that has
-						the following keys:
+						If set, it has to be used as function. Render prop function will get the object for first parameter that has the following keys:
 					</p>
 					<ul>
 						<li>
@@ -567,8 +552,7 @@ export const Documentation = function() {
 							<strong>values</strong> - array - the array of all other values
 						</li>
 						<li>
-							<strong>theme</strong> - instance of ThemeManager - if you want to access the theme's data, use this
-							object
+							<strong>theme</strong> - instance of ThemeManager - if you want to access the theme's data, use this object
 						</li>
 					</ul>
 					<p>If you're not using render prop function, then you may use some other props to customize option's look.</p>
@@ -581,12 +565,12 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="hoverBackgroundColor" type="string">
 					<p>
-						If not using render props, then <code>hoverBackgroundColor</code> will be applied when value is selected or
-						user points the pointer over value.
+						If not using render props, then <code>hoverBackgroundColor</code> will be applied when value is selected or user points the
+						pointer over value.
 					</p>
 					<p>
-						Please note that this prop doesn't have default value so if you don't set it yourself, then selected value
-						won't be visually highlighted which may be very confusing for end user.
+						Please note that this prop doesn't have default value so if you don't set it yourself, then selected value won't be visually
+						highlighted which may be very confusing for end user.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="p" />
@@ -622,8 +606,7 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				You may set any of the predefined colors from the theme.{' '}
-				<AvailableKeys data={colors} name="theme.textField.color" />
+				You may set any of the predefined colors from the theme. <AvailableKeys data={colors} name="theme.textField.color" />
 			</DocsText>
 			{Object.keys(colors).map((val) => (
 				<DocsCode key={val} label={val} labelWidth="auto">
@@ -647,9 +630,9 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Size</DocsSubTitle>
 			<DocsText>
-				Use <code>size</code> prop to set the size of the TextField component. Don't get confused by the component's
-				width because that's not the same as size (read about width in next section). Size tells the size of font,
-				height and padding. While setting the CSS for size, only font size will be applied.
+				Use <code>size</code> prop to set the size of the TextField component. Don't get confused by the component's width because that's
+				not the same as size (read about width in next section). Size tells the size of font, height and padding. While setting the CSS for
+				size, only font size will be applied.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={sizes} name="theme.textField.size" />
@@ -676,9 +659,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="width">Width</DocsSubTitle>
 			<DocsText>
-				Use <code>width</code> prop to set the width of the TextField component. Don't get confused by the component's
-				size. Width tells the width of TextField component and it can be predefined in theme or it can be set using the{' '}
-				<code>width</code> prop.
+				Use <code>width</code> prop to set the width of the TextField component. Don't get confused by the component's size. Width tells the
+				width of TextField component and it can be predefined in theme or it can be set using the <code>width</code> prop.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={widths} name="theme.textField.width" />
@@ -762,8 +744,7 @@ export const Documentation = function() {
 			</DocsCode>
 			<DocsSubTitle hash="options-customization">Options customization</DocsSubTitle>
 			<DocsText>
-				Customizing options is easy. Simply use <code>AutoComplete.Option</code>, but set your own content using render
-				prop function.
+				Customizing options is easy. Simply use <code>AutoComplete.Option</code>, but set your own content using render prop function.
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>
@@ -838,8 +819,7 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				Render prop in <code>AutoComplete.Option</code> will always get one parameter, which is object with the
-				following keys:
+				Render prop in <code>AutoComplete.Option</code> will always get one parameter, which is object with the following keys:
 			</DocsText>
 			<DocsText>
 				<ul>
@@ -847,8 +827,7 @@ export const Documentation = function() {
 						<strong>value</strong> - string/number - same value provide as prop
 					</li>
 					<li>
-						<strong>pickValue</strong> - function - use this function if you want to "pick the value" - use it for click
-						events
+						<strong>pickValue</strong> - function - use this function if you want to "pick the value" - use it for click events
 					</li>
 					<li>
 						<strong>selectedValue</strong> - string/number - which value in the list is currently "selected"
@@ -860,8 +839,7 @@ export const Documentation = function() {
 						<strong>values</strong> - array of string/number - the array current possible value
 					</li>
 					<li>
-						<strong>theme</strong> - instance of ThemeManager - ability to access current theme settings for event more
-						advanced usage
+						<strong>theme</strong> - instance of ThemeManager - ability to access current theme settings for event more advanced usage
 					</li>
 				</ul>
 			</DocsText>

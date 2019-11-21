@@ -46,9 +46,7 @@ const Grid = styled.div`
 
 const Button = function(props) {
 	const {date} = props;
-	const {viewDate, dayInMonthCss, dayOutOfMonthCss, selectedDate, pickDate, disabled, minDate, maxDate} = useContext(
-		DatePickerContext
-	);
+	const {viewDate, dayInMonthCss, dayOutOfMonthCss, selectedDate, pickDate, disabled, minDate, maxDate} = useContext(DatePickerContext);
 
 	const [inMonth, isSelected, isDisabled] = useMemo(() => {
 		let outOfRange = false;

@@ -2,7 +2,7 @@ import React, {useContext, useCallback, forwardRef, useImperativeHandle, useRef}
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getStyleForMargins, isFunction, isObject, omit} from '../../util/helpers';
+import {getStyleForMargins, isFunction, isObject} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
 const Badge = forwardRef(function(props, ref) {
@@ -13,10 +13,14 @@ const Badge = forwardRef(function(props, ref) {
 		color: userColor = null,
 		variant = null,
 		size = null,
-		style: userStyle = null
+		style: userStyle = null,
+		m = null,
+		mt = null,
+		mr = null,
+		mb = null,
+		ml = null,
+		...otherProps
 	} = props;
-
-	const {m = null, mt = null, mr = null, mb = null, ml = null} = props;
 
 	const {theme} = useContext(ThemeContext);
 
@@ -61,9 +65,7 @@ const Badge = forwardRef(function(props, ref) {
 		variantCss = useVariant({theme, ...props});
 
 		if (!isObject(variantCss)) {
-			theme.warning(
-				`Variant function from badge.variant.${variantKey} returned invalid value; expected object, got: ${typeof variantCss}`
-			);
+			theme.warning(`Variant function from badge.variant.${variantKey} returned invalid value; expected object, got: ${typeof variantCss}`);
 			variantCss = null;
 		} else {
 			// it's valid, let's process it
@@ -91,14 +93,10 @@ const Badge = forwardRef(function(props, ref) {
 			const colorData2 = badgeColors[defaults.color] || null;
 
 			if (colorData2 === null) {
-				theme.warning(
-					`Unable to use <Badge color="${selectedColor}"/>, left badge without style because there's no default color either`
-				);
+				theme.warning(`Unable to use <Badge color="${selectedColor}"/>, left badge without style because there's no default color either`);
 			} else {
 				colorsCss = theme.processColors(colorData2);
-				theme.warning(
-					`Unable to use <Badge color="${selectedColor}"/>, so using <Badge color="${defaults.color}"/> instead`
-				);
+				theme.warning(`Unable to use <Badge color="${selectedColor}"/>, so using <Badge color="${defaults.color}"/> instead`);
 			}
 		} else {
 			colorsCss = theme.processColors(colorData);
@@ -131,17 +129,12 @@ const Badge = forwardRef(function(props, ref) {
 			if (defaultSize) {
 				// we have default size, let's use it
 				sizeCss = sizes[defaultSize] || defaultSizeCss;
-				theme.warning(
-					`Unable to use <Badge size="${size}"/> because it's not defined; applied default size from theme`
-				);
+				theme.warning(`Unable to use <Badge size="${size}"/> because it's not defined; applied default size from theme`);
 			} else {
 				theme.warning(`Unable to use <Badge size="${size}"/> because it's not defined; applied theme default size`);
 			}
 		}
 	}
-
-	/* get all other props */
-	const otherProps = omit(props, Object.keys(Badge.propTypes));
 
 	const style = {
 		...getStyleForMargins({m, mt, mr, mb, ml}),

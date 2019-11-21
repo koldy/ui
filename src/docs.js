@@ -1,9 +1,4 @@
-import {
-	title as AppTitle,
-	slug as AppSlug,
-	json as AppJson,
-	Documentation as AppDocumentation
-} from './components/App/App.docs';
+import {title as AppTitle, slug as AppSlug, json as AppJson, Documentation as AppDocumentation} from './components/App/App.docs';
 
 import {
 	title as AutoCompleteTitle,
@@ -19,12 +14,7 @@ import {
 	Documentation as BadgeDocumentation
 } from './components/Badge/Badge.docs';
 
-import {
-	title as BoxTitle,
-	slug as BoxSlug,
-	json as BoxJson,
-	Documentation as BoxDocumentation
-} from './components/Box/Box.docs';
+import {title as BoxTitle, slug as BoxSlug, json as BoxJson, Documentation as BoxDocumentation} from './components/Box/Box.docs';
 
 import {
 	title as ButtonTitle,
@@ -40,12 +30,7 @@ import {
 	Documentation as CheckboxDocumentation
 } from './components/Checkbox/Checkbox.docs';
 
-import {
-	title as ColorsTitle,
-	slug as ColorsSlug,
-	json as ColorsJson,
-	Documentation as ColorsDocumentation
-} from '../docs/Colors.docs';
+import {title as ColorsTitle, slug as ColorsSlug, json as ColorsJson, Documentation as ColorsDocumentation} from '../docs/Colors.docs';
 
 import {
 	title as DrawerTitle,
@@ -89,12 +74,7 @@ import {
 	Documentation as InputAlignmentDocumentation
 } from '../docs/InputAlignment.docs';
 
-import {
-	title as MenuTitle,
-	slug as MenuSlug,
-	json as MenuJson,
-	Documentation as MenuDocumentation
-} from './components/Menu/Menu.docs';
+import {title as MenuTitle, slug as MenuSlug, json as MenuJson, Documentation as MenuDocumentation} from './components/Menu/Menu.docs';
 
 import {
 	title as MiniCalendarTitle,
@@ -152,19 +132,9 @@ import {
 	Documentation as TextFieldDocumentation
 } from './components/TextField/TextField.docs';
 
-import {
-	title as TextTitle,
-	slug as TextSlug,
-	json as TextJson,
-	Documentation as TextDocumentation
-} from './components/Text/Text.docs';
+import {title as TextTitle, slug as TextSlug, json as TextJson, Documentation as TextDocumentation} from './components/Text/Text.docs';
 
-import {
-	title as ThemeTitle,
-	slug as ThemeSlug,
-	json as ThemeJson,
-	Documentation as ThemeDocumentation
-} from '../docs/Theme.docs';
+import {title as ThemeTitle, slug as ThemeSlug, json as ThemeJson, Documentation as ThemeDocumentation} from '../docs/Theme.docs';
 
 import {
 	title as ThemeManagerTitle,

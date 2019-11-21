@@ -39,18 +39,14 @@ export default ({
 		// =============================    SIZE    ========================================
 		const sizes = theme.json('inputField.size');
 		if (!isObject(sizes[size])) {
-			throw new ThemeError(
-				`Wrong <TextField size="${size}" /> - "${size}" is not properly defined in theme.inputField.size.${size}`
-			);
+			throw new ThemeError(`Wrong <TextField size="${size}" /> - "${size}" is not properly defined in theme.inputField.size.${size}`);
 		}
 		const {fontSize, fontWeight, padding, lineHeight, letterSpacing} = sizes[size];
 
 		// =============================    COLOR    ========================================
 		const colors = theme.json('inputField.color');
 		if (!isObject(colors[color])) {
-			throw new ThemeError(
-				`Wrong <TextField color="${color}" /> - "${color}" is not properly defined in theme.inputField.color.${color}`
-			);
+			throw new ThemeError(`Wrong <TextField color="${color}" /> - "${color}" is not properly defined in theme.inputField.color.${color}`);
 		}
 
 		// because we're having container and the only usable CSS pseudoselector is :focus-within, we have to deal with "read-only" and "disabled" manually
@@ -66,17 +62,7 @@ export default ({
 			colorSet = colors[color].normal || {};
 		}
 
-		const {
-			background,
-			backgroundSize,
-			color: fontColor,
-			borderColor,
-			boxShadow,
-			outline,
-			outlineOffset,
-			hover = {},
-			focus = {}
-		} = colorSet;
+		const {background, backgroundSize, color: fontColor, borderColor, boxShadow, outline, outlineOffset, hover = {}, focus = {}} = colorSet;
 
 		const {
 			background: hoverBackground,
@@ -165,23 +151,5 @@ export default ({
 				}
 			}
 		};
-	}, [
-		theme,
-		size,
-		width,
-		height,
-		minWidth,
-		maxWidth,
-		minHeight,
-		maxHeight,
-		variant,
-		color,
-		disabled,
-		readOnly,
-		m,
-		mt,
-		mr,
-		mb,
-		ml
-	]);
+	}, [theme, size, width, height, minWidth, maxWidth, minHeight, maxHeight, variant, color, disabled, readOnly, m, mt, mr, mb, ml]);
 };

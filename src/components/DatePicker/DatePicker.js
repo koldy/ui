@@ -1,4 +1,4 @@
-import React, {useMemo, useContext, useRef, useEffect, useCallback, useReducer, Fragment} from 'react';
+import React, {useMemo, useContext, useRef, useEffect, useCallback, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -83,9 +83,7 @@ const DatePicker = function(props) {
 
 	const containerRef = useRef(null);
 	const {size: defaultSize = null, variant: defaultVariant, color: defaultColor} = theme.json('datePicker.defaults');
-	const {size: timeDefaultSize, variant: timeDefaultVariant, color: timeDefaultColor} = theme.json(
-		'datePicker.defaults'
-	);
+	const {size: timeDefaultSize, variant: timeDefaultVariant, color: timeDefaultColor} = theme.json('datePicker.defaults');
 
 	const {
 		children = null,
@@ -179,11 +177,7 @@ const DatePicker = function(props) {
 		}
 
 		const detectedMinDate = new Date();
-		detectedMinDate.setFullYear(
-			detectedMinDate.getFullYear() - 100,
-			detectedMinDate.getMonth(),
-			detectedMinDate.getDate()
-		);
+		detectedMinDate.setFullYear(detectedMinDate.getFullYear() - 100, detectedMinDate.getMonth(), detectedMinDate.getDate());
 		detectedMinDate.setHours(0, 0, 0, 0);
 		return detectedMinDate;
 	}, [givenMinDate]);
@@ -194,11 +188,7 @@ const DatePicker = function(props) {
 		}
 
 		const detectedMaxDate = new Date();
-		detectedMaxDate.setFullYear(
-			detectedMaxDate.getFullYear() + 100,
-			detectedMaxDate.getMonth(),
-			detectedMaxDate.getDate()
-		);
+		detectedMaxDate.setFullYear(detectedMaxDate.getFullYear() + 100, detectedMaxDate.getMonth(), detectedMaxDate.getDate());
 		detectedMaxDate.setHours(0, 0, 0, 0);
 		return detectedMaxDate;
 	}, [givenMaxDate]);
@@ -383,10 +373,10 @@ const DatePicker = function(props) {
 			<DatePickerContext.Provider value={context}>
 				{name && <input type="hidden" name={name} value={hiddenValue} />}
 				{!hideNav && (
-					<Fragment>
+					<>
 						<Nav />
 						<Line lineColor={lineColor} />
-					</Fragment>
+					</>
 				)}
 				<DayNames />
 				<MonthGrid />
@@ -406,7 +396,7 @@ const DatePicker = function(props) {
 					</TimeContainer>
 				)}
 				{children && (
-					<Fragment>
+					<>
 						<Line lineColor={lineColor} />
 						{typeof children === 'function'
 							? children({
@@ -417,7 +407,7 @@ const DatePicker = function(props) {
 									maxDate
 							  })
 							: children}
-					</Fragment>
+					</>
 				)}
 			</DatePickerContext.Provider>
 		</StyledDatePicker>

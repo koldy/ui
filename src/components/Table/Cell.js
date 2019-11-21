@@ -2,7 +2,7 @@ import React, {useCallback, useContext} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {getPixelsOrString, getStyleForPaddings, isFunction, omit} from '../../util/helpers';
+import {getPixelsOrString, getStyleForPaddings, isFunction} from '../../util/helpers';
 import RowContext from './RowContext';
 
 const Cell = function(props) {
@@ -22,7 +22,8 @@ const Cell = function(props) {
 		pt = null,
 		pr = null,
 		pb = null,
-		pl = null
+		pl = null,
+		...otherProps
 	} = props;
 	const {onClick: onRowClick, onDoubleClick: onRowDoubleClick} = useContext(RowContext);
 
@@ -62,8 +63,6 @@ const Cell = function(props) {
 		...getStyleForPaddings({p, pt, pr, pb, pl}),
 		...userStyle
 	};
-
-	const otherProps = omit(props, Object.keys(Cell.propTypes));
 
 	return (
 		<StyledCell

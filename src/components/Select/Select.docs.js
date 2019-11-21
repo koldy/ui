@@ -57,8 +57,7 @@ export const Documentation = function() {
 					If you want to use Select as controlled component, then set the <code>value</code> prop.
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['string', 'number']}>
-					If you plan to use Select as uncontrolled component, then use <code>defaultValue</code> to set the initial
-					value.
+					If you plan to use Select as uncontrolled component, then use <code>defaultValue</code> to set the initial value.
 				</Props.Prop>
 				<Props.Prop name="color" type="string" defaultValue="theme.select.defaults.color">
 					<p>
@@ -72,8 +71,7 @@ export const Documentation = function() {
 					</p>
 					<AvailableKeys data={sizes} name="theme.select.size" />
 					<p>
-						If you're looking for HTML's attribute <code>size</code>, then take a look at <code>visibleOptions</code>{' '}
-						prop.
+						If you're looking for HTML's attribute <code>size</code>, then take a look at <code>visibleOptions</code> prop.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="width" type="string" defaultValue="theme.select.defaults.width">
@@ -84,19 +82,18 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="height" type="string">
 					<p>
-						Height is automatically set by the font size and padding, so this prop shouldn't be used. However, if you're
-						using
-						<code>multiple</code>, then you'll probably want to set the height. Otherwise, browser will decide what's
-						the height for your component.
+						Height is automatically set by the font size and padding, so this prop shouldn't be used. However, if you're using
+						<code>multiple</code>, then you'll probably want to set the height. Otherwise, browser will decide what's the height for your
+						component.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="minWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>min-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>min-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="maxWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when Select is used as controlled component.</p>
@@ -228,8 +225,7 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				You may set any of the predefined colors from the theme.{' '}
-				<AvailableKeys data={colors} name="theme.select.color" />
+				You may set any of the predefined colors from the theme. <AvailableKeys data={colors} name="theme.select.color" />
 			</DocsText>
 			{Object.keys(colors).map((val) => (
 				<DocsCode key={val} label={val} labelWidth="auto">
@@ -251,9 +247,9 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Size</DocsSubTitle>
 			<DocsText>
-				Use <code>size</code> prop to set the size of the Select component. Don't get confused by the component's width
-				because that's not the same as size (read about width in next section). Size tells the size of font, height and
-				padding. While setting the CSS for size, only font size will be applied.
+				Use <code>size</code> prop to set the size of the Select component. Don't get confused by the component's width because that's not
+				the same as size (read about width in next section). Size tells the size of font, height and padding. While setting the CSS for
+				size, only font size will be applied.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={sizes} name="theme.select.size" />
@@ -278,9 +274,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="width">Width</DocsSubTitle>
 			<DocsText>
-				Use <code>width</code> prop to set the width of the Select component. Don't get confused by the component's
-				size. Width tells the width of Select component and it can be predefined in theme or it can be set using the{' '}
-				<code>width</code> prop.
+				Use <code>width</code> prop to set the width of the Select component. Don't get confused by the component's size. Width tells the
+				width of Select component and it can be predefined in theme or it can be set using the <code>width</code> prop.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={widths} name="theme.select.width" />
@@ -340,9 +335,8 @@ export const Documentation = function() {
 			</DocsCode>
 			<Props title="Props for Select.Input" hash="select-input-props">
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width
+					or relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
@@ -353,22 +347,19 @@ export const Documentation = function() {
 					The content you want to put.
 				</Props.Prop>
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width
+					or relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
 				</Props.Prop>
 				<Props.Prop name="alignSelf" type="string">
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					customize the position of this component, then use this prop. It is standard CSS <code>align-self</code>{' '}
-					property, so allowed values are:
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to customize the position
+					of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 					<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
-					If this component is wider then its inner content, then you may want to set the <code>text-align</code>{' '}
-					explicitly.
+					If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 				</Props.Prop>
 				<Props.Prop name="p" />
 				<Props.Prop name="pt" />
@@ -403,22 +394,19 @@ export const Documentation = function() {
 					The content you want to put.
 				</Props.Prop>
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width or
+					relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
 				</Props.Prop>
 				<Props.Prop name="alignSelf" type="string">
-					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to
-					customize the position of this component, then use this prop. It is standard CSS <code>align-self</code>{' '}
-					property, so allowed values are:
+					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to customize the position
+					of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 					<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
-					If this component is wider then its inner content, then you may want to set the <code>text-align</code>{' '}
-					explicitly.
+					If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 				</Props.Prop>
 				<Props.Prop name="p" />
 				<Props.Prop name="pt" />

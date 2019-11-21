@@ -1,3 +1,4 @@
+/* eslint react/no-array-index-key: 0 */
 import React, {useContext} from 'react';
 import styled, {css} from 'styled-components';
 import DatePickerContext from './DatePickerContext';

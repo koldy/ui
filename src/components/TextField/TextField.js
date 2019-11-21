@@ -6,7 +6,7 @@ import Box from '../InputField/Box';
 import Text from '../InputField/Text';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, isNumberOrString, omit} from '../../util/helpers';
+import {getPixelsOrString, isNumberOrString} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
@@ -18,12 +18,9 @@ let inputTimeout = null;
 const TextField = forwardRef(function(props, ref) {
 	const {theme} = useContext(ThemeContext);
 
-	const {
-		size: defaultSize = null,
-		width: defaultWidth = null,
-		variant: defaultVariant,
-		color: defaultColor
-	} = theme.json('inputField.defaults');
+	const {size: defaultSize = null, width: defaultWidth = null, variant: defaultVariant, color: defaultColor} = theme.json(
+		'inputField.defaults'
+	);
 
 	const {
 		children = null,
@@ -52,7 +49,8 @@ const TextField = forwardRef(function(props, ref) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const innerRef = useRef(null);
@@ -225,7 +223,7 @@ const TextField = forwardRef(function(props, ref) {
 			handleBlur,
 			handleChange,
 			focusField,
-			otherProps: omit(props, Object.keys(TextField.propTypes))
+			otherProps
 		}),
 		[innerRef, type, name, placeholder, disabled, readOnly, inputCss, focusField, props]
 	);

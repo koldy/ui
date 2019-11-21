@@ -2,7 +2,7 @@ import React, {useMemo, forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {getPixelsOrString, getStyleForMargins, omit} from '../../util/helpers';
+import {getPixelsOrString, getStyleForMargins} from '../../util/helpers';
 
 /**
  * The container for Flexbox container - it is just mapping the flexbox properties. It's children should be only "Flexbox.Item", nothing else.
@@ -35,7 +35,8 @@ const Flexbox = forwardRef(function(props, ref) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const style = useMemo(
@@ -47,8 +48,6 @@ const Flexbox = forwardRef(function(props, ref) {
 		}),
 		[width, height, userStyle, m, mt, mr, mb, ml]
 	);
-
-	const otherProps = omit(props, Object.keys(Flexbox.propTypes));
 
 	return (
 		<StyledFlexbox
@@ -82,14 +81,7 @@ Flexbox.propTypes = {
 	inline: PropTypes.bool,
 	flexDirection: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse']),
 	flexWrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse']),
-	justifyContent: PropTypes.oneOf([
-		'flex-start',
-		'flex-end',
-		'center',
-		'space-between',
-		'space-around',
-		'space-evenly'
-	]),
+	justifyContent: PropTypes.oneOf(['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']),
 	alignItems: PropTypes.oneOf(['stretch', 'flex-start', 'flex-end', 'center', 'baseline']),
 	alignContent: PropTypes.oneOf(['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'stretch']),
 
@@ -122,7 +114,8 @@ const FlexboxItem = forwardRef(function(props, ref) {
 		order = null,
 		flex = null,
 		alignSelf = null,
-		textAlign: textAlignValue = null
+		textAlign: textAlignValue = null,
+		...otherProps
 	} = props;
 
 	const style = useMemo(
@@ -133,8 +126,6 @@ const FlexboxItem = forwardRef(function(props, ref) {
 		}),
 		[width, height, userStyle]
 	);
-
-	const otherProps = omit(props, Object.keys(FlexboxItem.propTypes));
 
 	return (
 		<StyledFlexboxItem

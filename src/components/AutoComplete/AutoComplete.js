@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 import Popper from 'popper.js';
 
-import {getStyleForMargins, getStyleForPaddings, omit, preventDefaultAndStopPropagation} from '../../util/helpers';
+import {getStyleForMargins, getStyleForPaddings, isFunction, omit, preventDefaultAndStopPropagation} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 import TextField from '../TextField/TextField';
 import useOutsideClick from '../../hooks/useOutsideClick';
@@ -67,12 +67,9 @@ const reducer = function(state, action) {
 const AutoComplete = forwardRef(function(props, ref) {
 	const {theme} = useContext(ThemeContext);
 
-	const {
-		size: defaultSize = null,
-		width: defaultWidth = null,
-		variant: defaultVariant,
-		color: defaultColor
-	} = theme.json('inputField.defaults');
+	const {size: defaultSize = null, width: defaultWidth = null, variant: defaultVariant, color: defaultColor} = theme.json(
+		'inputField.defaults'
+	);
 
 	const {
 		children = null,
@@ -97,6 +94,7 @@ const AutoComplete = forwardRef(function(props, ref) {
 		onDoubleClick = null,
 		onInput = null,
 		inputDelay = 300,
+		// eslint-disable-next-line
 		onKeyDown = null // not defined in propTypes
 	} = props;
 
@@ -447,21 +445,17 @@ const Option = function(props) {
 	const {pickValue, selectedValue, values} = useContext(LocalContext);
 	const {theme} = useContext(ThemeContext);
 
-	if (typeof children === 'function') {
-		const childrenParam = useMemo(() => {
-			// this just keeps the reference to the same object
-			return {
-				value,
-				pickValue: createPickValue(value, pickValue),
-				selectedValue,
-				isSelected: selectedValue === value,
-				values,
-				theme
-			};
-		}, [value, pickValue, selectedValue, values, theme]);
-
-		return children(childrenParam);
-	}
+	const childrenParam = useMemo(() => {
+		// this just keeps the reference to the same object
+		return {
+			value,
+			pickValue: createPickValue(value, pickValue),
+			selectedValue,
+			isSelected: selectedValue === value,
+			values,
+			theme
+		};
+	}, [value, pickValue, selectedValue, values, theme]);
 
 	const style = useMemo(() => {
 		if (p === null && pt === null && pr === null && pb === null && pl === null) {
@@ -495,6 +489,10 @@ const Option = function(props) {
 		},
 		[value, pickValue]
 	);
+
+	if (isFunction(children)) {
+		return children(childrenParam);
+	}
 
 	return (
 		<StyledOption

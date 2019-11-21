@@ -1,4 +1,4 @@
-import React, {Fragment, useContext} from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
@@ -27,9 +27,9 @@ export const Documentation = function() {
 			<DocsTitle hash="use-media-queries">useMediaQueries</DocsTitle>
 			<ImportComponent name="useMediaQueries" />
 			<DocsText>
-				<code>useMediaQueries</code> is a hook that parses your media queries definition in the theme, plus it gives you
-				other standard useful data. Koldy UI parses that on every window resize event providing you with new data. Don't
-				worry if you use this hook a lot, calculation on resize will happen only once.
+				<code>useMediaQueries</code> is a hook that parses your media queries definition in the theme, plus it gives you other standard
+				useful data. Koldy UI parses that on every window resize event providing you with new data. Don't worry if you use this hook a lot,
+				calculation on resize will happen only once.
 			</DocsText>
 			<DocsText>In current theme, this is what you'll get:</DocsText>
 			<DocsCode>
@@ -42,7 +42,7 @@ export const Documentation = function() {
 									<td>
 										{data[key] === true && <True>true</True>}
 										{data[key] === false && <False>false</False>}
-										{isNumberOrString(data[key]) ? <Fragment>{data[key]}</Fragment> : ''}
+										{isNumberOrString(data[key]) ? <>{data[key]}</> : ''}
 									</td>
 								</tr>
 							))}
@@ -56,16 +56,13 @@ export const Documentation = function() {
 					`}
 				</DocsCode.Code>
 			</DocsCode>
-			<DocsText>
-				These numbers are dynamic. Try to resize your screen (or rotate your phone) to see new numbers.
-			</DocsText>
+			<DocsText>These numbers are dynamic. Try to resize your screen (or rotate your phone) to see new numbers.</DocsText>
 			<DocsSubTitle hash="media-queries">Media queries in theme's JSON</DocsSubTitle>
 			<DocsText>
-				Remember that media queries in theme are just helpers. You can set as many as you want. The value of each media
-				query is standard CSS media query which can be used with <code>window.matchMedia</code>. The name of each media
-				query will be prefixed with <code>is</code>. So, if you named you media query <code>xlg</code>, you'll be able
-				to get <code>isXlg</code>. Prefix <code>is</code> tells you that you'll always get boolean, unless browser
-				doesn't support <code>window.matchMedia</code>.
+				Remember that media queries in theme are just helpers. You can set as many as you want. The value of each media query is standard
+				CSS media query which can be used with <code>window.matchMedia</code>. The name of each media query will be prefixed with{' '}
+				<code>is</code>. So, if you named you media query <code>xlg</code>, you'll be able to get <code>isXlg</code>. Prefix <code>is</code>{' '}
+				tells you that you'll always get boolean, unless browser doesn't support <code>window.matchMedia</code>.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={mediaQueries} />

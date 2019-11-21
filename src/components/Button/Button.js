@@ -2,7 +2,7 @@ import React, {forwardRef, useContext, useCallback, useRef, useImperativeHandle}
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getPixelsOrString, getStyleForMargins, getStyleForWidth, isFunction, isObject, omit} from '../../util/helpers';
+import {getPixelsOrString, getStyleForMargins, getStyleForWidth, isFunction, isObject} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
 const Button = forwardRef(function(props, ref) {
@@ -24,7 +24,8 @@ const Button = forwardRef(function(props, ref) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const {theme} = useContext(ThemeContext);
@@ -137,9 +138,7 @@ const Button = forwardRef(function(props, ref) {
 				);
 			} else {
 				colorsCss = theme.processColors(colorData2);
-				theme.warning(
-					`Unable to use <Button color="${selectedColor}"/>, so using <Button color="${defaults.color}"/> instead`
-				);
+				theme.warning(`Unable to use <Button color="${selectedColor}"/>, so using <Button color="${defaults.color}"/> instead`);
 			}
 		} else {
 			colorsCss = theme.processColors(colorData);
@@ -172,9 +171,7 @@ const Button = forwardRef(function(props, ref) {
 			if (defaultSize) {
 				// we have default size, let's use it
 				sizeCss = sizes[defaultSize] || defaultSizeCss;
-				theme.warning(
-					`Unable to use <Button size="${size}"/> because it's not defined; applied default size from theme`
-				);
+				theme.warning(`Unable to use <Button size="${size}"/> because it's not defined; applied default size from theme`);
 			} else {
 				theme.warning(`Unable to use <Button size="${size}"/> because it's not defined; applied theme default size`);
 			}
@@ -244,9 +241,6 @@ const Button = forwardRef(function(props, ref) {
 		minWidth: minWidthCss,
 		...userStyle
 	};
-
-	/* get all other props */
-	const otherProps = omit(props, Object.keys(Button.propTypes));
 
 	return (
 		<StyledButton

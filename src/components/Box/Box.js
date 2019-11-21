@@ -2,7 +2,7 @@ import React, {useContext, useCallback, useMemo, forwardRef, useRef, useImperati
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {getStyleForMargins, getStyleForPaddings, getStyleForStringOrNumber, isFunction, omit} from '../../util/helpers';
+import {getStyleForMargins, getStyleForPaddings, getStyleForStringOrNumber, isFunction} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
 const Box = forwardRef(function(props, ref) {
@@ -34,7 +34,8 @@ const Box = forwardRef(function(props, ref) {
 		right = null,
 		bottom = null,
 		left = null,
-		as = 'div'
+		as = 'div',
+		...otherProps
 	} = props;
 
 	const {theme} = useContext(ThemeContext);
@@ -153,8 +154,6 @@ const Box = forwardRef(function(props, ref) {
 		pl
 	]);
 
-	const otherProps = omit(props, Object.keys(Box.propTypes));
-
 	return (
 		<StyledBox
 			ref={innerRef}
@@ -208,11 +207,7 @@ Box.propTypes = {
 	left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([
-		PropTypes.func,
-		PropTypes.string,
-		PropTypes.shape({render: PropTypes.func.isRequired}),
-	])
+	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})])
 };
 
 const StyledBox = styled.div`

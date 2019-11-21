@@ -3,7 +3,7 @@ import {shallow, mount} from 'enzyme';
 
 import Menu from './Menu';
 import TestApp from '../../../test/TestApp';
-import {testClick, testDoubleClick, testMargins, testPaddings} from '../../../test/test-helpers';
+import {testMargins} from '../../../test/test-helpers';
 
 describe('Menu standard usage', () => {
 	it('Renders without crashing', () => {

@@ -2,14 +2,9 @@ import React, {useContext, useMemo, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 
 import DatePickerContext from './DatePickerContext';
-import {
-	isValidDate,
-	getDaysInMonth,
-	preventDefaultAndStopPropagation,
-	isFunction,
-	getDateAsInteger
-} from '../../util/helpers';
+import {isValidDate, getDaysInMonth, preventDefaultAndStopPropagation, isFunction, getDateAsInteger} from '../../util/helpers';
 
+// eslint-disable-next-line
 const isMonthAllowed = function(viewDate, month, minDate, maxDate) {
 	// TODO: implement this
 	return true;

@@ -7,8 +7,8 @@ import {
 	getStyleForPaddings,
 	getStyleForStringOrNumber,
 	getStyleForValue,
-	isFunction, isObject,
-	omit
+	isFunction,
+	isObject
 } from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
@@ -38,7 +38,8 @@ const Text = forwardRef(function(props, ref) {
 		pt = null,
 		pr = null,
 		pb = null,
-		pl = null
+		pl = null,
+		...otherProps
 	} = props;
 
 	/**
@@ -69,7 +70,6 @@ const Text = forwardRef(function(props, ref) {
 
 	const hasClick = !!onClick || !!onDoubleClick;
 
-
 	/**
 	 * ******************************** STYLE PARSER **************************************
 	 */
@@ -96,20 +96,16 @@ const Text = forwardRef(function(props, ref) {
 		return c;
 	}, [theme, variant, color, fontFamily, fontWeight]);
 
-	const style = useMemo(() => ({
-		...getStyleForPaddings({p, pt, pr, pb, pl}),
-		...getStyleForMargins({m, mt, mr, mb, ml}),
-		...getStyleForStringOrNumber('fontSize', fontSize),
-		...getStyleForValue('lineHeight', lineHeight),
-		...theme.processColors(userStyle || {})
-	}), [theme, userStyle, fontSize, lineHeight, p, pt, pr, pb, pl, m, mt, mr, mb, ml]);
-
-
-	/**
-	 * ******************************** OTHER PROPS **************************************
-	 */
-
-	const otherProps = omit(props, Object.keys(Text.propTypes));
+	const style = useMemo(
+		() => ({
+			...getStyleForPaddings({p, pt, pr, pb, pl}),
+			...getStyleForMargins({m, mt, mr, mb, ml}),
+			...getStyleForStringOrNumber('fontSize', fontSize),
+			...getStyleForValue('lineHeight', lineHeight),
+			...theme.processColors(userStyle || {})
+		}),
+		[theme, userStyle, fontSize, lineHeight, p, pt, pr, pb, pl, m, mt, mr, mb, ml]
+	);
 
 	return (
 		<StyledText
@@ -134,9 +130,9 @@ const StyledText = styled.span`
 	line-height: inherit;
 	box-sizing: border-box;
 	cursor: ${({hasClick}) => (hasClick ? 'pointer' : 'unset')};
-	font-weight: unset;
-	font-family: unset;
-	font-size: unset;
+	font-weight: inherit;
+	font-family: inherit;
+	font-size: inherit;
 	margin: 0;
 	padding: 0;
 	margin-block-start: 0;
@@ -154,23 +150,7 @@ Text.propTypes = {
 	color: PropTypes.string,
 	fontFamily: PropTypes.string,
 	fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	fontWeight: PropTypes.oneOf([
-		'normal',
-		'bold',
-		'bolder',
-		'lighter',
-		'initial',
-		'inherit',
-		100,
-		200,
-		300,
-		400,
-		500,
-		600,
-		700,
-		800,
-		900
-	]),
+	fontWeight: PropTypes.oneOf(['normal', 'bold', 'bolder', 'lighter', 'initial', 'inherit', 100, 200, 300, 400, 500, 600, 700, 800, 900]),
 	lineHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onClick: PropTypes.func,
 	onDoubleClick: PropTypes.func,
@@ -192,11 +172,7 @@ Text.propTypes = {
 	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([
-		PropTypes.func,
-		PropTypes.string,
-		PropTypes.shape({render: PropTypes.func.isRequired}),
-	])
+	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})])
 };
 
 export default Text;

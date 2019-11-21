@@ -2,16 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {omit} from '../../util/helpers';
-
 const Head = function(props) {
-	const {children = null, style: userStyle = null} = props;
+	const {children = null, style: userStyle = null, ...otherProps} = props;
 
 	const style = {
 		...userStyle
 	};
-
-	const otherProps = omit(props, Object.keys(Head.propTypes));
 
 	return (
 		<StyledThead style={style} {...otherProps}>

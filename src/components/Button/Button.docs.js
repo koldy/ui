@@ -35,11 +35,10 @@ export const Documentation = function() {
 			</DocsCode>
 			<DocsSubTitle hash="some-theory">Some theory</DocsSubTitle>
 			<DocsText>
-				Button component seems like simple component and you'll find a lot of component libraries trying to define
-				button in one way or another. Most of the libraries gives you ability to use one of their predefined properties
-				and changing it is really hard sometimes. Adding additional properties and styles is sometimes impossible
-				without doing hacks or digging deep into their documentation. Here, styling button or adding new styles is
-				really easy.
+				Button component seems like simple component and you'll find a lot of component libraries trying to define button in one way or
+				another. Most of the libraries gives you ability to use one of their predefined properties and changing it is really hard sometimes.
+				Adding additional properties and styles is sometimes impossible without doing hacks or digging deep into their documentation. Here,
+				styling button or adding new styles is really easy.
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type="node">
@@ -53,16 +52,16 @@ export const Documentation = function() {
 					<p>
 						If not set, then it'll be determined automatically based on <code>onClick</code>. If
 						<code>onClick</code> is set, then type will be <code>button</code>, otherwise it's
-						<code>submit</code>. So, if you use this component inside your form, it'll be automatically suitable for
-						form submit. If you set the <code>onClick</code>, then button won't submit form automatically any more.
+						<code>submit</code>. So, if you use this component inside your form, it'll be automatically suitable for form submit. If you set
+						the <code>onClick</code>, then button won't submit form automatically any more.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="name" type="string">
 					This is usually never used, unless you have to send button's name through the form.
 				</Props.Prop>
 				<Props.Prop name="disabled" type="bool" defaultValue={false}>
-					Adds <code>disabled</code> attribute to the button. In this case, you're able to use CSS's{' '}
-					<code>:disabled</code> pseudo selector to style the button.
+					Adds <code>disabled</code> attribute to the button. In this case, you're able to use CSS's <code>:disabled</code> pseudo selector
+					to style the button.
 				</Props.Prop>
 				<Props.Prop name="onClick" type="function">
 					<DocsCode>
@@ -82,9 +81,8 @@ export const Documentation = function() {
 					</ul>
 				</Props.Prop>
 				<Props.Prop name="onDoubleClick" type="function">
-					If you set <code>onDoubleClick</code> without <code>onClick</code> prop, button will keep the type{' '}
-					<code>submit</code> which could cause unexpected behaviour when used within the form. In that case, take care
-					of <code>type</code> prop yourself.
+					If you set <code>onDoubleClick</code> without <code>onClick</code> prop, button will keep the type <code>submit</code> which could
+					cause unexpected behaviour when used within the form. In that case, take care of <code>type</code> prop yourself.
 					<DocsCode>
 						<DocsCode.Example>
 							<Button onDoubleClick={(x) => console.log(x)}>Double click me!</Button>
@@ -103,8 +101,8 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="onFocus" type="function">
 					<p>
-						If set, it'll fire given function with standard information. You may use this as opportunity to catch the{' '}
-						<code>element</code> and place the drop down menu if you like.
+						If set, it'll fire given function with standard information. You may use this as opportunity to catch the <code>element</code>{' '}
+						and place the drop down menu if you like.
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -161,8 +159,7 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.button.defaults.variant">
 					<p>
-						Variant is ability to shape the button's look. Use one of the values from variants defined in{' '}
-						<code>theme.button.variant</code>.
+						Variant is ability to shape the button's look. Use one of the values from variants defined in <code>theme.button.variant</code>.
 					</p>
 					<AvailableKeys data={variants} />
 				</Props.Prop>
@@ -217,11 +214,10 @@ export const Documentation = function() {
 			</DocsText>
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				It's impossible to define button with just one color because there are various button's states which can use
-				other color or similar tone of the same color. To simplify things, you can pass the color name as prop, but all
-				state colors will be defined by the theme. You're not limited just to background, border and text color. You can
-				define anything you want in theme, including states, such as <code>:disabled</code>, <code>:focus</code>,{' '}
-				<code>:hover</code> and such.
+				It's impossible to define button with just one color because there are various button's states which can use other color or similar
+				tone of the same color. To simplify things, you can pass the color name as prop, but all state colors will be defined by the theme.
+				You're not limited just to background, border and text color. You can define anything you want in theme, including states, such as{' '}
+				<code>:disabled</code>, <code>:focus</code>, <code>:hover</code> and such.
 			</DocsText>
 			<DocsText>Available button colors are:</DocsText>
 			{Object.keys(colors).map((color) => (
@@ -249,8 +245,8 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<DocsText>
-				So, when defining size, that's all you should be defining in your theme. Be aware that variant CSS is applied
-				after size so if you define size in variant, it'll override size defined here.
+				So, when defining size, that's all you should be defining in your theme. Be aware that variant CSS is applied after size so if you
+				define size in variant, it'll override size defined here.
 			</DocsText>
 			<DocsText>Available button sizes are:</DocsText>
 			{Object.keys(sizes).map((size) => (
@@ -271,12 +267,11 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="width">Width</DocsSubTitle>
 			<DocsText>
-				Size is not width, and vice versa. Width is just definition of how wide is the button and nothing else. By using
-				width, it's possible to use any button size with different width.
+				Size is not width, and vice versa. Width is just definition of how wide is the button and nothing else. By using width, it's
+				possible to use any button size with different width.
 			</DocsText>
 			<DocsText>
-				Width is a prop that's not necessarily defined in theme because you can pass any width any time. Here are few
-				examples:
+				Width is a prop that's not necessarily defined in theme because you can pass any width any time. Here are few examples:
 			</DocsText>
 
 			{[30, 100, '120px', '100%'].map((w) => (
@@ -284,16 +279,13 @@ export const Documentation = function() {
 					<DocsCode.Example>
 						<Button width={w}>Submit</Button>
 					</DocsCode.Example>
-					<DocsCode.Code>
-						{`<Button width=${typeof w === 'number' ? `{${w}}` : `"${w}"`}>Submit</Button>`}
-					</DocsCode.Code>
+					<DocsCode.Code>{`<Button width=${typeof w === 'number' ? `{${w}}` : `"${w}"`}>Submit</Button>`}</DocsCode.Code>
 				</DocsCode>
 			))}
 
 			<DocsText>
-				You can pass any valid CSS value for width and it'll work. However, some designs require button widths to be
-				consistent and in that case, you can define the list of widths and use them simply by passing their name to{' '}
-				<code>width</code> prop.
+				You can pass any valid CSS value for width and it'll work. However, some designs require button widths to be consistent and in that
+				case, you can define the list of widths and use them simply by passing their name to <code>width</code> prop.
 			</DocsText>
 			<DocsText>Available widths in theme are:</DocsText>
 			{Object.keys(widths).map((w) => (
@@ -305,15 +297,14 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsText>
-				When setting width with CSS value, then it'll set the exact <code>width</code> to button. If you're using width
-				definition from the theme, then it'll set the <code>min-width</code> to the button, allowing you to have more
-				text in your button if needed, without cutting it.
+				When setting width with CSS value, then it'll set the exact <code>width</code> to button. If you're using width definition from the
+				theme, then it'll set the <code>min-width</code> to the button, allowing you to have more text in your button if needed, without
+				cutting it.
 			</DocsText>
 			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
 			<DocsText>
-				Variant is the button's shape. By using variants, you can completely redefine button's shape. Most common case
-				is when you want to have standard square button or circle button. You're not limited to any predefined
-				properties and you can define anything you want.
+				Variant is the button's shape. By using variants, you can completely redefine button's shape. Most common case is when you want to
+				have standard square button or circle button. You're not limited to any predefined properties and you can define anything you want.
 			</DocsText>
 			<DocsText>Available variants in theme are:</DocsText>
 			{Object.keys(variants).map((val) => (

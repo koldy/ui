@@ -129,11 +129,7 @@ const Drawer = function(props) {
 
 	if (overlayBackgroundColor) {
 		return createPortal(
-			<Overlay
-				onClose={handleClose}
-				animationDuration={overlayAnimationDuration}
-				backgroundColor={overlayBackgroundColor}
-			>
+			<Overlay onClose={handleClose} animationDuration={overlayAnimationDuration} backgroundColor={overlayBackgroundColor}>
 				<Container
 					position={position}
 					entryAnimationDuration={entryAnimationDuration}
@@ -207,7 +203,8 @@ const Container = styled.div`
 					? slideInLeftAnimation({animationDuration: entryAnimationDuration})
 					: slideOutLeftAnimation({animationDuration: exitAnimationDuration});
 
-			// no default
+			default:
+				return 'none';
 		}
 	}};
 	${({styleCss}) => css(styleCss)}

@@ -1,25 +1,14 @@
-import React, {
-	useContext,
-	useCallback,
-	useRef,
-	useMemo,
-	Fragment,
-	useImperativeHandle,
-	useEffect,
-	useReducer
-} from 'react';
+import React, {useContext, useCallback, useRef, useMemo, useImperativeHandle, useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
 import {
 	dateToISOString,
-	getPixelsOrString,
 	getSelectedText,
 	getStyleForMargins,
 	isControlledComponent,
 	isFunction,
-	isNumberOrString,
 	isObject,
 	isValidDate,
 	selectText
@@ -135,11 +124,11 @@ const reducer = function(state, action) {
 
 			if (value === null || value === '') {
 				let allIsAlreadyNull = true;
-				for (const partial of PARTIALS) {
+				PARTIALS.forEach((partial) => {
 					if (partial !== name && state[partial] !== null && state[partial] !== '') {
 						allIsAlreadyNull = false;
 					}
-				}
+				});
 
 				if (allIsAlreadyNull) {
 					// since new value is falsy and all others are falsy, we're resetting everything and that's it
@@ -212,11 +201,7 @@ const reducer = function(state, action) {
 const TimeField = function(props) {
 	const {theme} = useContext(ThemeContext);
 
-	const {
-		size: defaultSize = null,
-		variant: defaultVariant,
-		color: defaultColor
-	} = theme.json('inputField.defaults');
+	const {size: defaultSize = null, variant: defaultVariant, color: defaultColor} = theme.json('inputField.defaults');
 
 	const {
 		children = null,
@@ -274,18 +259,14 @@ const TimeField = function(props) {
 		// =============================    SIZE    ========================================
 		const sizes = theme.json('inputField.size');
 		if (!isObject(sizes[size])) {
-			throw new ThemeError(
-				`Wrong <TimeField size="${size}" /> - "${size}" is not properly defined in theme.inputField.size.${size}`
-			);
+			throw new ThemeError(`Wrong <TimeField size="${size}" /> - "${size}" is not properly defined in theme.inputField.size.${size}`);
 		}
 		const {fontSize, fontWeight, padding, lineHeight, letterSpacing} = sizes[size];
 
 		// =============================    COLOR    ========================================
 		const colors = theme.json('inputField.color');
 		if (!isObject(colors[color])) {
-			throw new ThemeError(
-				`Wrong <TimeField color="${color}" /> - "${color}" is not properly defined in theme.inputField.color.${color}`
-			);
+			throw new ThemeError(`Wrong <TimeField color="${color}" /> - "${color}" is not properly defined in theme.inputField.color.${color}`);
 		}
 
 		// because we're having container and the only usable CSS pseudoselector is :focus-within, we have to deal with "read-only" and "disabled" manually
@@ -301,17 +282,7 @@ const TimeField = function(props) {
 			colorSet = colors[color].normal || {};
 		}
 
-		const {
-			background,
-			backgroundSize,
-			color: fontColor,
-			borderColor,
-			boxShadow,
-			outline,
-			outlineOffset,
-			hover = {},
-			focus = {}
-		} = colorSet;
+		const {background, backgroundSize, color: fontColor, borderColor, boxShadow, outline, outlineOffset, hover = {}, focus = {}} = colorSet;
 
 		const {
 			background: hoverBackground,
@@ -628,6 +599,46 @@ const Input = function() {
 	);
 
 	/**
+	 * ******************************** SET METHODS **************************************
+	 */
+
+	const setPartialValue = useCallback((name, partialValue) => {
+		if (controlledComponent) {
+			const newDate = isValidDate(lastDate.current) ? new Date(lastDate.current) : new Date();
+
+			switch (name) {
+				case 'hours':
+					newDate.setHours(valueParser(partialValue));
+					break;
+				case 'minutes':
+					newDate.setMinutes(valueParser(partialValue));
+					break;
+				case 'seconds':
+					newDate.setSeconds(valueParser(partialValue));
+					break;
+				case 'milliseconds':
+					newDate.setMilliseconds(valueParser(partialValue));
+					break;
+				// no default
+			}
+
+			if (isFunction(lastOnChange.current)) {
+				lastOnChange.current({
+					name: lastName.current,
+					containerElement: innerContainerRef.current,
+					value: newDate
+				});
+			}
+		} else {
+			dispatch({
+				type: 'set-partial-value',
+				name,
+				value: partialValue
+			});
+		}
+	}, []);
+
+	/**
 	 * ******************************** JUMP to NEXT / PREV **************************************
 	 */
 
@@ -926,46 +937,6 @@ const Input = function() {
 		}
 	}, [value]);
 
-	/**
-	 * ******************************** SET METHODS **************************************
-	 */
-
-	const setPartialValue = useCallback((name, partialValue) => {
-		if (controlledComponent) {
-			const newDate = isValidDate(lastDate.current) ? new Date(lastDate.current) : new Date();
-
-			switch (name) {
-				case 'hours':
-					newDate.setHours(valueParser(partialValue));
-					break;
-				case 'minutes':
-					newDate.setMinutes(valueParser(partialValue));
-					break;
-				case 'seconds':
-					newDate.setSeconds(valueParser(partialValue));
-					break;
-				case 'milliseconds':
-					newDate.setMilliseconds(valueParser(partialValue));
-					break;
-				// no default
-			}
-
-			if (isFunction(lastOnChange.current)) {
-				lastOnChange.current({
-					name: lastName.current,
-					containerElement: innerContainerRef.current,
-					value: newDate
-				});
-			}
-		} else {
-			dispatch({
-				type: 'set-partial-value',
-				name,
-				value: partialValue
-			});
-		}
-	}, []);
-
 	return (
 		<Field inputCss={filteredInputCss} innerElementsCount={innerElementsCount}>
 			<input
@@ -1004,7 +975,7 @@ const Input = function() {
 				readOnly={readOnly}
 			/>
 			{(precision === 'seconds' || precision === 'milliseconds') && (
-				<Fragment>
+				<>
 					<span>:</span>
 					<input
 						type="number"
@@ -1023,10 +994,10 @@ const Input = function() {
 						disabled={disabled}
 						readOnly={readOnly}
 					/>
-				</Fragment>
+				</>
 			)}
 			{precision === 'milliseconds' && (
-				<Fragment>
+				<>
 					<span>.</span>
 					<input
 						type="number"
@@ -1045,15 +1016,10 @@ const Input = function() {
 						disabled={disabled}
 						readOnly={readOnly}
 					/>
-				</Fragment>
+				</>
 			)}
 		</Field>
 	);
-};
-
-Input.propTypes = {
-	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 const Field = styled.span`
@@ -1062,12 +1028,12 @@ const Field = styled.span`
 	box-sizing: border-box;
 	font-size: ${({inputCss}) => inputCss.fontSize || '1em'};
 	color: ${({inputCss}) => inputCss.color || 'inherit'};
-	
+
 	> input {
 		display: inline-block;
 		box-sizing: border-box;
 		outline: none !important;
-	
+
 		font-size: 1rem;
 		font-family: unset;
 		font-weight: 600;
@@ -1084,7 +1050,7 @@ const Field = styled.span`
 		transition: all 300ms ease-in-out 10ms;
 		min-width: 2em;
 		max-width: 3em;
-	
+
 		text-shadow: none;
 		cursor: text;
 		white-space: pre;
@@ -1093,26 +1059,26 @@ const Field = styled.span`
 		text-indent: 0;
 		letter-spacing: normal;
 		text-rendering: optimizeSpeed;
-	
+
 		&:disabled {
 			cursor: not-allowed;
 		}
-		
+
 		-moz-appearance: textfield;
-		
-		::-webkit-inner-spin-button, 
-		::-webkit-outer-spin-button { 
-		  appearance: none; 
-		  margin: 0; 
+
+		::-webkit-inner-spin-button,
+		::-webkit-outer-spin-button {
+			appearance: none;
+			margin: 0;
 		}
-	
+
 		${({inputCss}) => css(inputCss)}
-		
+
 		&:nth-child(7) {
 			min-width: 3em;
 		}
 	}
-	
+
 	> span {
 		width: 2px;
 	}

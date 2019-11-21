@@ -15,9 +15,7 @@ export const getInputProps = function(theme, defaults, userSize, userColor, vari
 		if (typeof sizes[userSize] === 'number') {
 			sizeCss = sizes[userSize];
 		} else {
-			theme.warning(
-				`<${component} size="${userSize}"/> is not defined in theme.checkboxAndRadio.size, fallbacking to default size`
-			);
+			theme.warning(`<${component} size="${userSize}"/> is not defined in theme.checkboxAndRadio.size, fallbacking to default size`);
 			sizeCss = null;
 		}
 	}
@@ -26,16 +24,12 @@ export const getInputProps = function(theme, defaults, userSize, userColor, vari
 		const defaultSize = defaults.size || null;
 
 		if (!defaultSize || typeof defaultSize !== 'string') {
-			theme.error(
-				`${component} default size is not defined in theme.checkboxAndRadio.defaults.size or it's not a string`
-			);
+			theme.error(`${component} default size is not defined in theme.checkboxAndRadio.defaults.size or it's not a string`);
+		} else if (typeof sizes[defaultSize] === 'number') {
+			// it's valid size
+			sizeCss = sizes[defaultSize];
 		} else {
-			if (typeof sizes[defaultSize] === 'number') {
-				// it's valid size
-				sizeCss = sizes[defaultSize];
-			} else {
-				theme.error(`${component} default size (${defaultSize}) is not defined in theme.checkboxAndRadio.size`);
-			}
+			theme.error(`${component} default size (${defaultSize}) is not defined in theme.checkboxAndRadio.size`);
 		}
 	}
 
@@ -59,9 +53,7 @@ export const getInputProps = function(theme, defaults, userSize, userColor, vari
 		// user set the color
 
 		if (typeof colors[userColor] === 'undefined') {
-			theme.warning(
-				`<${component} color="${userColor}"/> is not defined in theme.checkboxAndRadio.color, fallbacking to default color`
-			);
+			theme.warning(`<${component} color="${userColor}"/> is not defined in theme.checkboxAndRadio.color, fallbacking to default color`);
 		} else {
 			// color exists, all good
 			colorDefinitions = theme.processColors(colors[userColor]);
@@ -119,8 +111,7 @@ const Dot = styled.label`
 		left: 0;
 		height: ${({sizeCss}) => sizeCss}px;
 		width: ${({sizeCss}) => sizeCss}px;
-		border: ${({checkBorderCss}) => checkBorderCss}px solid
-			${({inactiveContainerBackground}) => inactiveContainerBackground};
+		border: ${({checkBorderCss}) => checkBorderCss}px solid ${({inactiveContainerBackground}) => inactiveContainerBackground};
 		transition: all 200ms ease;
 		border-radius: ${({borderRadiusCss}) => borderRadiusCss};
 		box-sizing: border-box;

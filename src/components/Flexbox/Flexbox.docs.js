@@ -36,8 +36,7 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				<code>Flexbox</code> and <code>Flexbox.Item</code> components map flexbox's container and child as defined in
-				great article on{' '}
+				<code>Flexbox</code> and <code>Flexbox.Item</code> components map flexbox's container and child as defined in great article on{' '}
 				<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer">
 					CSS-Tricks
 				</a>
@@ -72,8 +71,7 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="alignItems" type="string" defaultValue="stretch">
 					<p>
-						One of the: <code>stretch</code>, <code>flex-start</code>, <code>flex-end</code>, <code>center</code>,{' '}
-						<code>baseline</code>.
+						One of the: <code>stretch</code>, <code>flex-start</code>, <code>flex-end</code>, <code>center</code>, <code>baseline</code>.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
@@ -103,20 +101,20 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="flex" type={['string', 'number']}>
 					<p>
-						Defines the CSS <code>flex</code> value, both as number or as string. We recommend using it as number, but
-						if you need to define some more complex &quot;flex&quot; scenarios, then you'll have to use it as string.
+						Defines the CSS <code>flex</code> value, both as number or as string. We recommend using it as number, but if you need to define
+						some more complex &quot;flex&quot; scenarios, then you'll have to use it as string.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="alignSelf" type="string" defaultValue="auto">
 					<p>
-						One of <code>auto</code>, <code>flex-start</code>, <code>flex-end</code>, <code>center</code>,{' '}
-						<code>baseline</code> or <code>stretch</code>.
+						One of <code>auto</code>, <code>flex-start</code>, <code>flex-end</code>, <code>center</code>, <code>baseline</code> or{' '}
+						<code>stretch</code>.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
 					<p>
-						This is shorthand for aligning text within the Flexbox.Item. Use one of <code>left</code>,{' '}
-						<code>center</code>, <code>right</code> or <code>justify</code> values.
+						This is shorthand for aligning text within the Flexbox.Item. Use one of <code>left</code>, <code>center</code>,{' '}
+						<code>right</code> or <code>justify</code> values.
 					</p>
 					<DocsCode>
 						<DocsCode.Example>

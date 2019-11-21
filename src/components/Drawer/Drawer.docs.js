@@ -490,15 +490,9 @@ export const Documentation = function() {
 															<Button onClick={closeFn}>Close 3rd</Button> or{' '}
 															<Button onClick={() => setOverlay(true)}>Open overlay from here</Button>
 															{overlay && (
-																<Overlay
-																	onClose={() => setOverlay(false)}
-																	backgroundColor="primary"
-																	animationDuration="500ms"
-																>
+																<Overlay onClose={() => setOverlay(false)} backgroundColor="primary" animationDuration="500ms">
 																	<Box p="1rem">
-																		<Text color="white">
-																			This is now overlay content. You may watch for zIndex.
-																		</Text>
+																		<Text color="white">This is now overlay content. You may watch for zIndex.</Text>
 																	</Box>
 																</Overlay>
 															)}
@@ -578,15 +572,14 @@ export const Documentation = function() {
 				</Flexbox.Item>
 			</Flexbox>
 			<DocsText>
-				<code>Drawer</code> is common component that's usually used to show some additional content on any of four
-				positions. There's not much to style tho, except the size and the entry/exit animation.
+				<code>Drawer</code> is common component that's usually used to show some additional content on any of four positions. There's not
+				much to style tho, except the size and the entry/exit animation.
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type={['node', 'func']} required>
 					<p>
-						Content is required for this component and it can be either a node or a function. If you're using it as
-						function, then you have a chance to access the component's <code>closeFn</code> which, when used, will
-						animate drawer while disappearing.
+						Content is required for this component and it can be either a node or a function. If you're using it as function, then you have
+						a chance to access the component's <code>closeFn</code> which, when used, will animate drawer while disappearing.
 					</p>
 					<DocsCode>
 						<DocsCode.Code>
@@ -605,8 +598,8 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="size" type={['string', 'number']} defaultValue="theme.drawer.defaults.size">
 					<p>
-						The size of the drawer. It can be fixed or relative size. If set as number, then it'll be used as pixels,
-						otherwise, any value you pass will be used as is.
+						The size of the drawer. It can be fixed or relative size. If set as number, then it'll be used as pixels, otherwise, any value
+						you pass will be used as is.
 					</p>
 					<p>
 						If position is <code>top</code> or <code>bottom</code>, then the size will be applied to height.
@@ -615,8 +608,8 @@ export const Documentation = function() {
 						If position is <code>left</code> or <code>right</code>, then the size will be applied to width.
 					</p>
 					<p>
-						Be careful when using viewport units. When using <code>top</code> or <code>bottom</code>, then{' '}
-						<code>vh</code> can be used, otherwise <code>vw</code> should be used.
+						Be careful when using viewport units. When using <code>top</code> or <code>bottom</code>, then <code>vh</code> can be used,
+						otherwise <code>vw</code> should be used.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="position" type="string" required>
@@ -625,8 +618,8 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="backgroundColor" type="string">
 					<p>
-						The background color of the <code>Drawer</code>. It can be CSS color value or any valid value from the
-						colors definition in theme.
+						The background color of the <code>Drawer</code>. It can be CSS color value or any valid value from the colors definition in
+						theme.
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -670,41 +663,29 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="overlayBackgroundColor" type="string">
-					If set, <code>Drawer</code> will appear with background color set here. If overlay's background color is not
-					set, then Overlay won't be rendered at all.
+					If set, <code>Drawer</code> will appear with background color set here. If overlay's background color is not set, then Overlay
+					won't be rendered at all.
 				</Props.Prop>
-				<Props.Prop
-					name="overlayAnimationDuration"
-					type="string"
-					defaultValue="theme.drawer.defaults.overlayAnimationDuration"
-				>
-					Sets the overlay duration for both entry and exit duration. Value must be valid CSS value that contains{' '}
-					<code>ms</code> or <code>s</code>. Example: <code>350ms</code>.
+				<Props.Prop name="overlayAnimationDuration" type="string" defaultValue="theme.drawer.defaults.overlayAnimationDuration">
+					Sets the overlay duration for both entry and exit duration. Value must be valid CSS value that contains <code>ms</code> or{' '}
+					<code>s</code>. Example: <code>350ms</code>.
 				</Props.Prop>
 				<Props.Prop name="onClose" type="function" required>
 					<p>
-						If/when drawer is closed from the inside, then this function will be called. When this function is called,{' '}
-						<code>Drawer</code> should be unmounted.
+						If/when drawer is closed from the inside, then this function will be called. When this function is called, <code>Drawer</code>{' '}
+						should be unmounted.
 					</p>
 				</Props.Prop>
-				<Props.Prop
-					name="entryAnimationDuration"
-					type="string"
-					defaultValue="theme.drawer.defaults.entryAnimationDuration"
-				>
+				<Props.Prop name="entryAnimationDuration" type="string" defaultValue="theme.drawer.defaults.entryAnimationDuration">
 					<p>
-						The CSS animation duration of the entrance. The type of animation is set internally by component according
-						to <code>position</code> prop.
-					</p>
-				</Props.Prop>
-				<Props.Prop
-					name="exitAnimationDuration"
-					type="string"
-					defaultValue="theme.drawer.defaults.exitAnimationDuration"
-				>
-					<p>
-						The CSS animation duration of the exit. The type of animation is set internally by component according to{' '}
+						The CSS animation duration of the entrance. The type of animation is set internally by component according to{' '}
 						<code>position</code> prop.
+					</p>
+				</Props.Prop>
+				<Props.Prop name="exitAnimationDuration" type="string" defaultValue="theme.drawer.defaults.exitAnimationDuration">
+					<p>
+						The CSS animation duration of the exit. The type of animation is set internally by component according to <code>position</code>{' '}
+						prop.
 					</p>
 				</Props.Prop>
 			</Props>

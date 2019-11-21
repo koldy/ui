@@ -31,6 +31,16 @@ export const pick = function(obj, keys) {
 };
 
 /**
+ * Checks if given variable is array
+ *
+ * @param {*} object
+ * @return {boolean}
+ */
+export const isArray = function(object) {
+	return typeof object === 'object' && object !== null && object.constructor === Array;
+};
+
+/**
  *
  * @param {*} obj
  * @returns {boolean} true if object is object, and not array
@@ -58,21 +68,23 @@ export const isEmpty = function(object) {
 };
 
 /**
- * Checks if given variable is array
- *
- * @param {*} object
- * @return {boolean}
- */
-export const isArray = function(object) {
-	return typeof object === 'object' && object !== null && object.constructor === Array;
-};
-
-/**
  * @param {*} val
  * @return {boolean}
  */
 export const isFunction = function(val) {
 	return typeof val === 'function';
+};
+
+/**
+ * Get the values in pixels or anything else otherwise. If value is number,
+ * pixels "Xpx" will be returned. If given value is for e.g. "1rem", the "1rem"
+ * will be returned as is.
+ *
+ * @param value
+ * @return {string}
+ */
+export const getPixelsOrString = function(value) {
+	return typeof value === 'number' ? `${value}px` : value;
 };
 
 /**
@@ -118,18 +130,6 @@ export const getStyleForPaddings = function(props) {
 };
 
 /**
- * Get the values in pixels or anything else otherwise. If value is number,
- * pixels "Xpx" will be returned. If given value is for e.g. "1rem", the "1rem"
- * will be returned as is.
- *
- * @param value
- * @return {string}
- */
-export const getPixelsOrString = function(value) {
-	return typeof value === 'number' ? `${value}px` : value;
-};
-
-/**
  * @param {string} name
  * @param {string|number|null} value
  * @return {{}}
@@ -165,15 +165,46 @@ export const getStyleForValue = function(name, value) {
 export const getStyleForPositions = function(props) {
 	const style = {};
 
-	for (const position of ['top', 'right', 'bottom', 'left']) {
+	['top', 'right', 'bottom', 'left'].forEach((position) => {
 		const value = typeof props[position] === 'undefined' ? null : props[position];
 
 		if (typeof value === 'number' || typeof value === 'string') {
 			style[position] = typeof value === 'number' ? `${value}px` : value;
 		}
-	}
+	});
 
 	return style;
+};
+
+/**
+ * @param {string|*} str
+ * @returns {boolean}
+ */
+export const hasUnit = function(str) {
+	if (!str || typeof str !== 'string') {
+		return false;
+	}
+
+	const x = str.toLowerCase();
+	const l = x.length;
+
+	const last1 = x.substr(l - 1, 1);
+	const last2 = x.substr(l - 2, 2);
+	// const last3 = x.substr(l - 3, 3);
+
+	if (last1 === '%') {
+		return true;
+	}
+
+	if (['px', 'cm', 'mm', 'em', 'ex', 'in', 'pc', 'pt'].indexOf(last2) >= 0) {
+		// we need to ensure that if we ignore unit, we get the number
+		const number = parseFloat(x.substr(0, l - 2));
+		return !Number.isNaN(number);
+	}
+
+	// for last 3, we need to ensure that the rest of chars is number
+	const number = parseFloat(x.substr(0, l - 3));
+	return !Number.isNaN(number);
 };
 
 /**
@@ -228,37 +259,6 @@ export const isNativeColor = function(color) {
 	}
 
 	return false;
-};
-
-/**
- * @param {string|*} str
- * @returns {boolean}
- */
-export const hasUnit = function(str) {
-	if (!str || typeof str !== 'string') {
-		return false;
-	}
-
-	const x = str.toLowerCase();
-	const l = x.length;
-
-	const last1 = x.substr(l - 1, 1);
-	const last2 = x.substr(l - 2, 2);
-	// const last3 = x.substr(l - 3, 3);
-
-	if (last1 === '%') {
-		return true;
-	}
-
-	if (['px', 'cm', 'mm', 'em', 'ex', 'in', 'pc', 'pt'].indexOf(last2) >= 0) {
-		// we need to ensure that if we ignore unit, we get the number
-		const number = parseFloat(x.substr(0, l - 2));
-		return !Number.isNaN(number);
-	}
-
-	// for last 3, we need to ensure that the rest of chars is number
-	const number = parseFloat(x.substr(0, l - 3));
-	return !Number.isNaN(number);
 };
 
 /**
@@ -412,11 +412,7 @@ export const selectText = function(input) {
 	if (input instanceof HTMLElement) {
 		if (typeof input.select === 'function') {
 			input.select();
-		} else if (
-			typeof input.setSelectionRange === 'function' &&
-			typeof input.value === 'string' &&
-			input.value.length > 0
-		) {
+		} else if (typeof input.setSelectionRange === 'function' && typeof input.value === 'string' && input.value.length > 0) {
 			input.setSelectionRange(0, input.value.length);
 		}
 	}
@@ -518,6 +514,7 @@ export const dateToISOStringWithMilliseconds = function(date) {
  * @link https://stackoverflow.com/a/27947860
  */
 export const getDaysInMonth = function(year, month) {
+	// eslint-disable-next-line
 	return month === 2 ? (year & 3 || (!(year % 25) && year & 15) ? 28 : 29) : 30 + ((month + (month >> 3)) & 1);
 };
 

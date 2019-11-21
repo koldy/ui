@@ -16,21 +16,7 @@ export const title = 'TextField';
 export const slug = 'text-field';
 export const json = 'inputField';
 
-const types = [
-	'text',
-	'password',
-	'tel',
-	'email',
-	'search',
-	'number',
-	'url',
-	'date',
-	'datetime-local',
-	'month',
-	'time',
-	'week',
-	'color'
-];
+const types = ['text', 'password', 'tel', 'email', 'search', 'number', 'url', 'date', 'datetime-local', 'month', 'time', 'week', 'color'];
 
 export const Documentation = function() {
 	const {theme} = useContext(ThemeContext);
@@ -59,37 +45,36 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				<code>TextField</code> component is standard HTML input element with some advanced features which will be
-				explained later. Check the props and check the examples for the usage.
+				<code>TextField</code> component is standard HTML input element with some advanced features which will be explained later. Check the
+				props and check the examples for the usage.
 			</DocsText>
 			<DocsText>
-				Although this component looks really simple, look closely and you'll see that it's possible to combine any of
-				the components you already saw in other UI libraries, such as "search button with text field", or any other
-				content that might be useful to put within the <code>TextField</code>.
+				Although this component looks really simple, look closely and you'll see that it's possible to combine any of the components you
+				already saw in other UI libraries, such as "search button with text field", or any other content that might be useful to put within
+				the <code>TextField</code>.
 			</DocsText>
 
 			<Props>
 				<Props.Prop name="children" type="node" defaultValue="<TextField.Input/>">
 					<p>
-						If you want to create "complex" looking and behaving <code>TextField</code>, then use children to
-						reconfigure it's inner layout. This allows you to put any content before or after the input element itself.
-						If nothing is set, then standard HTML input will be used.
+						If you want to create "complex" looking and behaving <code>TextField</code>, then use children to reconfigure it's inner layout.
+						This allows you to put any content before or after the input element itself. If nothing is set, then standard HTML input will be
+						used.
 					</p>
 					<p>There are few components you should use for configuring the layout:</p>
 					<ul>
 						<li>
-							<code>TextField.Input</code> - standard input component which is used by default, but if yo're making your
-							own inner layout, then you have to use this component to tell where input should be
+							<code>TextField.Input</code> - standard input component which is used by default, but if yo're making your own inner layout,
+							then you have to use this component to tell where input should be
 						</li>
 						<li>
-							<code>TextField.Text</code> - use this component if you want to place plain text before or after the input
-							component itself; this component will take the padding and font size from the input field so it's style
-							and size will be automatically set
+							<code>TextField.Text</code> - use this component if you want to place plain text before or after the input component itself;
+							this component will take the padding and font size from the input field so it's style and size will be automatically set
 						</li>
 						<li>
-							<code>TextField.Box</code> - use this component to put more advanced components, like <code>Button</code>{' '}
-							or anything else. Unlike TextField.Text which has the component's style, this component has nothing, no
-							margin and no padding, so it's easier to position inner component.
+							<code>TextField.Box</code> - use this component to put more advanced components, like <code>Button</code> or anything else.
+							Unlike TextField.Text which has the component's style, this component has nothing, no margin and no padding, so it's easier to
+							position inner component.
 						</li>
 					</ul>
 					<p>Here's an example for putting the dollar sign before the text input:</p>
@@ -113,9 +98,7 @@ export const Documentation = function() {
 				<Props.Prop name="type" type="string" defaultValue="text">
 					<p>Set the input's type attribute.</p>
 					<AvailableKeys data={types} />
-					<p>
-						All listed types are HTML input types. Some of these types has their specialized component, like DateInput.
-					</p>
+					<p>All listed types are HTML input types. Some of these types has their specialized component, like DateInput.</p>
 				</Props.Prop>
 				<Props.Prop name="name" type="string">
 					Name used for forms.
@@ -124,15 +107,11 @@ export const Documentation = function() {
 					<p>
 						If you want to use TextField as controlled component, then set the <code>value</code> prop.
 					</p>
-					<TextField
-						value="I'm here and you can't change me"
-						onChange={({value}) => console.log('New value is', value)}
-					/>
+					<TextField value="I'm here and you can't change me" onChange={({value}) => console.log('New value is', value)} />
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['string', 'number']}>
 					<p>
-						If you plan to use TextField as uncontrolled component, then use <code>defaultValue</code> to set the
-						initial value.
+						If you plan to use TextField as uncontrolled component, then use <code>defaultValue</code> to set the initial value.
 					</p>
 					<TextField defaultValue="I'm here by default" />
 				</Props.Prop>
@@ -184,12 +163,12 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="minWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>min-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>min-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="maxWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when TextField is used as controlled component.</p>
@@ -210,9 +189,8 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="onInput" type="function">
 					<p>
-						Unlike <code>onChange</code> which is called on every change, <code>onInput</code> function will be called
-						with defined delay. This is useful when you want to allow user to type something in first and then you want
-						to fire callback when typing is done.
+						Unlike <code>onChange</code> which is called on every change, <code>onInput</code> function will be called with defined delay.
+						This is useful when you want to allow user to type something in first and then you want to fire callback when typing is done.
 					</p>
 					<p>Called function will get the object as first parameter that has the following keys:</p>
 					<ul>
@@ -233,14 +211,8 @@ export const Documentation = function() {
 					<p>
 						To set the delay for <code>onInput</code>, use this prop.
 					</p>
-					<p>
-						Check the example with input delay of 1000 (1 second) and watch your browser's console to see the change.
-					</p>
-					<TextField
-						name="onInputDelayExample"
-						onInput={({name, value}) => console.log(name, value)}
-						inputDelay={1000}
-					/>
+					<p>Check the example with input delay of 1000 (1 second) and watch your browser's console to see the change.</p>
+					<TextField name="onInputDelayExample" onInput={({name, value}) => console.log(name, value)} inputDelay={1000} />
 				</Props.Prop>
 				<Props.Prop name="onClick" type="function">
 					<p>Called when the component is clicked on.</p>
@@ -346,9 +318,8 @@ export const Documentation = function() {
 			</Props>
 			<Props title="Props for TextField.Input" hash="textfield-input-props">
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width
+					or relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
@@ -359,22 +330,19 @@ export const Documentation = function() {
 					The content you want to put.
 				</Props.Prop>
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width
+					or relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
 				</Props.Prop>
 				<Props.Prop name="alignSelf" type="string">
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					customize the position of this component, then use this prop. It is standard CSS <code>align-self</code>{' '}
-					property, so allowed values are:
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to customize the position
+					of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 					<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
-					If this component is wider then its inner content, then you may want to set the <code>text-align</code>{' '}
-					explicitly.
+					If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 				</Props.Prop>
 				<Props.Prop name="p" />
 				<Props.Prop name="pt" />
@@ -405,22 +373,19 @@ export const Documentation = function() {
 					The content you want to put.
 				</Props.Prop>
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width or
+					relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
 				</Props.Prop>
 				<Props.Prop name="alignSelf" type="string">
-					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to
-					customize the position of this component, then use this prop. It is standard CSS <code>align-self</code>{' '}
-					property, so allowed values are:
+					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to customize the position
+					of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 					<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
-					If this component is wider then its inner content, then you may want to set the <code>text-align</code>{' '}
-					explicitly.
+					If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 				</Props.Prop>
 				<Props.Prop name="p" />
 				<Props.Prop name="pt" />
@@ -477,8 +442,7 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				Here are examples of all variants, its color and other states, like <code>disabled</code> and{' '}
-				<code>readOnly</code>.
+				Here are examples of all variants, its color and other states, like <code>disabled</code> and <code>readOnly</code>.
 			</DocsText>
 			{Object.keys(variants).map((variant) => (
 				<Fragment key={variant}>
@@ -488,14 +452,7 @@ export const Documentation = function() {
 							<DocsCode.Example>
 								<TextField width={120} variant={variant} color={color} />
 								<TextField width={120} variant={variant} color={color} ml={10} disabled defaultValue="Disabled value" />
-								<TextField
-									width={120}
-									variant={variant}
-									color={color}
-									ml={10}
-									readOnly
-									defaultValue="Read only value"
-								/>
+								<TextField width={120} variant={variant} color={color} ml={10} readOnly defaultValue="Read only value" />
 							</DocsCode.Example>
 						</DocsCode>
 					))}
@@ -503,8 +460,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Size</DocsSubTitle>
 			<DocsText>
-				Size can only be set in theme. Don't mix this prop with the <code>width</code> prop, size tells how big the
-				component is (font size, padding and etc).
+				Size can only be set in theme. Don't mix this prop with the <code>width</code> prop, size tells how big the component is (font size,
+				padding and etc).
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={sizes} />
@@ -517,9 +474,7 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsSubTitle hash="width">Width</DocsSubTitle>
-			<DocsText>
-				It is possible to predefine width in the theme, so you can have one place from where you control the width.
-			</DocsText>
+			<DocsText>It is possible to predefine width in the theme, so you can have one place from where you control the width.</DocsText>
 			<DocsText>
 				<AvailableKeys data={widths} />
 			</DocsText>

@@ -45,10 +45,9 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				If you think of <code>textarea</code> carefully, you'll see that this is the same component as{' '}
-				<code>TextField</code>, only multiline. Therefore, theme's <code>textArea</code> rules will be applied on
-				TextArea component as well. Only difference is that TextArea implements some additional props like{' '}
-				<code>rows</code> and
+				If you think of <code>textarea</code> carefully, you'll see that this is the same component as <code>TextField</code>, only
+				multiline. Therefore, theme's <code>textArea</code> rules will be applied on TextArea component as well. Only difference is that
+				TextArea implements some additional props like <code>rows</code> and
 				<code>height</code> and has no "type" like TextField does.
 			</DocsText>
 			<Props>
@@ -59,15 +58,11 @@ export const Documentation = function() {
 					<p>
 						If you want to use TextArea as controlled component, then set the <code>value</code> prop.
 					</p>
-					<TextArea
-						value="I'm here and you can't change me"
-						onChange={({value}) => console.log('New value is', value)}
-					/>
+					<TextArea value="I'm here and you can't change me" onChange={({value}) => console.log('New value is', value)} />
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['string', 'number']}>
 					<p>
-						If you plan to use TextArea as uncontrolled component, then use <code>defaultValue</code> to set the initial
-						value.
+						If you plan to use TextArea as uncontrolled component, then use <code>defaultValue</code> to set the initial value.
 					</p>
 					<TextArea defaultValue="I'm here by default" />
 				</Props.Prop>
@@ -94,12 +89,12 @@ export const Documentation = function() {
 					<AvailableKeys data={widths} name="theme.textField.width" />
 				</Props.Prop>
 				<Props.Prop name="minWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>min-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>min-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="maxWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="height" type={['string', 'number']}>
 					Set the height of the TextArea. If set as number, it'll be used as pixels, otherwise it'll be used as is.
@@ -225,8 +220,7 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				You may set any of the predefined colors from the theme.{' '}
-				<AvailableKeys data={colors} name="theme.textField.color" />
+				You may set any of the predefined colors from the theme. <AvailableKeys data={colors} name="theme.textField.color" />
 			</DocsText>
 			{Object.keys(colors).map((val) => (
 				<DocsCode key={val} label={val} labelWidth="auto">
@@ -242,9 +236,9 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Size</DocsSubTitle>
 			<DocsText>
-				Use <code>size</code> prop to set the size of the TextArea component. Don't get confused by the component's
-				width because that's not the same as size (read about width in next section). Size tells the size of font,
-				height and padding. While setting the CSS for size, only font size will be applied.
+				Use <code>size</code> prop to set the size of the TextArea component. Don't get confused by the component's width because that's not
+				the same as size (read about width in next section). Size tells the size of font, height and padding. While setting the CSS for
+				size, only font size will be applied.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={sizes} name="theme.textField.size" />
@@ -263,9 +257,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="width">Width</DocsSubTitle>
 			<DocsText>
-				Use <code>width</code> prop to set the width of the TextArea component. Don't get confused by the component's
-				size. Width tells the width of TextArea component and it can be predefined in theme or it can be set using the{' '}
-				<code>width</code> prop.
+				Use <code>width</code> prop to set the width of the TextArea component. Don't get confused by the component's size. Width tells the
+				width of TextArea component and it can be predefined in theme or it can be set using the <code>width</code> prop.
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={widths} name="theme.textField.width" />

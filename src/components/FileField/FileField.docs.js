@@ -9,10 +9,8 @@ import DocsCode from '../../../docs/components/DocsCode';
 import DocsText from '../../../docs/components/DocsText';
 import Props from '../../../docs/components/Props';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
-import Text from '../Text/Text';
 import DocsSubTitle from '../../../docs/components/DocsSubTitle';
 import Button from '../Button/Button';
-import TextField from '../TextField/TextField';
 
 export const title = 'FileField';
 export const slug = 'file-field';
@@ -28,9 +26,7 @@ export const Documentation = function() {
 
 	const placeholder = useCallback(
 		({files, totalSize}) =>
-			files === null || files.length === 0
-				? 'No files selected'
-				: `${files.length} file(s) selected, total ${totalSize} B`,
+			files === null || files.length === 0 ? 'No files selected' : `${files.length} file(s) selected, total ${totalSize} B`,
 		[]
 	);
 
@@ -39,8 +35,7 @@ export const Documentation = function() {
 			<DocsTitle hash="fileField">FileField</DocsTitle>
 			<ImportComponent name="FileField" />
 			<DocsText>
-				<strong>PLEASE NOTE!</strong> All examples on this page won't take any of your files. Any file you select won't
-				go anywhere.
+				<strong>PLEASE NOTE!</strong> All examples on this page won't take any of your files. Any file you select won't go anywhere.
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>
@@ -49,14 +44,12 @@ export const Documentation = function() {
 				<DocsCode.Code>{`<FileField />`}</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				This is example of file field without any props. It looks nothing special, but it's actually very powerful
-				component ready to be customized much more than you expect. If you click on it, you'll be asked to select file,
-				but after that, nothing fill happen.
+				This is example of file field without any props. It looks nothing special, but it's actually very powerful component ready to be
+				customized much more than you expect. If you click on it, you'll be asked to select file, but after that, nothing fill happen.
 			</DocsText>
 			<p>&nbsp;</p>
 			<DocsText>
-				The following example is probably much more similar to the file components you already saw (and this one is
-				maybe even better):
+				The following example is probably much more similar to the file components you already saw (and this one is maybe even better):
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>
@@ -87,31 +80,30 @@ export const Documentation = function() {
 				</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				^^ That is example is much better, so the similar props will be used on all other examples so you can get the
-				feeling how this works.
+				^^ That is example is much better, so the similar props will be used on all other examples so you can get the feeling how this
+				works.
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type="node" defaultValue="<FileField.Input/>">
 					<p>
-						If you want to create "complex" looking and behaving <code>FileField</code>, then use children to
-						reconfigure it's inner layout. This allows you to put any content before or after the input element itself.
-						If nothing is set, then standard HTML input will be used.{' '}
+						If you want to create "complex" looking and behaving <code>FileField</code>, then use children to reconfigure it's inner layout.
+						This allows you to put any content before or after the input element itself. If nothing is set, then standard HTML input will be
+						used.{' '}
 					</p>
 					<p>There are few components you should use for configuring the layout:</p>
 					<ul>
 						<li>
-							<code>FileField.Input</code> - standard input component which is used by default, but if yo're making your
-							own inner layout, then you have to use this component to tell where input should be
+							<code>FileField.Input</code> - standard input component which is used by default, but if yo're making your own inner layout,
+							then you have to use this component to tell where input should be
 						</li>
 						<li>
-							<code>FileField.Text</code> - use this component if you want to place plain text before or after the input
-							component itself; this component will take the padding and font size from the input field so it's style
-							and size will be automatically set
+							<code>FileField.Text</code> - use this component if you want to place plain text before or after the input component itself;
+							this component will take the padding and font size from the input field so it's style and size will be automatically set
 						</li>
 						<li>
-							<code>FileField.Box</code> - use this component to put more advanced components, like <code>Button</code>{' '}
-							or anything else. Unlike FileField.Text which has the component's style, this component has nothing, no
-							margin and no padding, so it's easier to position inner component.
+							<code>FileField.Box</code> - use this component to put more advanced components, like <code>Button</code> or anything else.
+							Unlike FileField.Text which has the component's style, this component has nothing, no margin and no padding, so it's easier to
+							position inner component.
 						</li>
 					</ul>
 					<p>Here's an example for putting the dollar sign before the text input:</p>
@@ -136,13 +128,11 @@ export const Documentation = function() {
 					Name used for forms.
 				</Props.Prop>
 				<Props.Prop name="accept" type="string">
-					This is standard HTML attribute for <code>accept</code>. Use it to filter what types of files you want to
-					accept.
+					This is standard HTML attribute for <code>accept</code>. Use it to filter what types of files you want to accept.
 				</Props.Prop>
 				<Props.Prop name="multiple" type="bool" defaultValue={false}>
 					<p>
-						This is standard HTML attribute for <code>multiple</code>. Use it if you want to allow selecting multiple
-						files.{' '}
+						This is standard HTML attribute for <code>multiple</code>. Use it if you want to allow selecting multiple files.{' '}
 					</p>
 					<DocsCode>
 						<DocsCode.Example>
@@ -178,8 +168,8 @@ export const Documentation = function() {
 					</FileField>
 					<p>It's pretty clear what would happen if you're using string, number or node for the placeholder.</p>
 					<p>
-						If you put function for placeholder, then you're able to customize the placeholder text according to the
-						selected files in the input field. First parameter of this function is object with the following keys:{' '}
+						If you put function for placeholder, then you're able to customize the placeholder text according to the selected files in the
+						input field. First parameter of this function is object with the following keys:{' '}
 					</p>
 					<ul>
 						<li>
@@ -190,8 +180,8 @@ export const Documentation = function() {
 						</li>
 					</ul>
 					<p>
-						As you can see, Koldy UI doesn't work with any internationalization so it's up to you if you want, and how
-						you want to format the message in the component.{' '}
+						As you can see, Koldy UI doesn't work with any internationalization so it's up to you if you want, and how you want to format
+						the message in the component.{' '}
 					</p>
 				</Props.Prop>
 				<Props.Prop name="color" type="string" defaultValue="theme.inputField.defaults.color">
@@ -248,12 +238,12 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="minWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>min-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>min-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="maxWidth" type="string">
-					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of{' '}
-					<code>max-width</code> (for example, in theme's variant definition), it'll be overridden with this value.
+					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
+					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
 					<p>Called when value has changed. This is required prop when FileField is used as controlled component.</p>
@@ -365,9 +355,8 @@ export const Documentation = function() {
 			</Props>
 			<Props title="Props for FileField.Input" hash="fileField-input-props">
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width
+					or relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
@@ -378,22 +367,19 @@ export const Documentation = function() {
 					The content you want to put.
 				</Props.Prop>
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width
+					or relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
 				</Props.Prop>
 				<Props.Prop name="alignSelf" type="string">
-					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-					customize the position of this component, then use this prop. It is standard CSS <code>align-self</code>{' '}
-					property, so allowed values are:
+					All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to customize the position
+					of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 					<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
-					If this component is wider then its inner content, then you may want to set the <code>text-align</code>{' '}
-					explicitly.
+					If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 				</Props.Prop>
 				<Props.Prop name="p" />
 				<Props.Prop name="pt" />
@@ -424,22 +410,19 @@ export const Documentation = function() {
 					The content you want to put.
 				</Props.Prop>
 				<Props.Prop name="flex" type={['string', 'number']}>
-					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to
-					provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code>{' '}
-					property.
+					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width or
+					relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']}>
 					If you want to set custom width on the content's width, then use this prop.
 				</Props.Prop>
 				<Props.Prop name="alignSelf" type="string">
-					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to
-					customize the position of this component, then use this prop. It is standard CSS <code>align-self</code>{' '}
-					property, so allowed values are:
+					All elements within the box field's container are aligned with <code>inline-flex</code>, so if you want to customize the position
+					of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 					<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
-					If this component is wider then its inner content, then you may want to set the <code>text-align</code>{' '}
-					explicitly.
+					If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 				</Props.Prop>
 				<Props.Prop name="p" />
 				<Props.Prop name="pt" />
@@ -526,8 +509,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Size</DocsSubTitle>
 			<DocsText>
-				Size can only be set in theme. Don't mix this prop with the <code>width</code> prop, size tells how big the
-				component is (font size, padding and etc).
+				Size can only be set in theme. Don't mix this prop with the <code>width</code> prop, size tells how big the component is (font size,
+				padding and etc).
 			</DocsText>
 			<AvailableKeys data={sizes} />
 			{Object.keys(sizes).map((t) => (
@@ -561,9 +544,7 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsSubTitle hash="width">Width</DocsSubTitle>
-			<DocsText>
-				It is possible to predefine width in the theme, so you can have one place from where you control the width.
-			</DocsText>
+			<DocsText>It is possible to predefine width in the theme, so you can have one place from where you control the width.</DocsText>
 			<AvailableKeys data={widths} />
 			{Object.keys(widths).map((t) => (
 				<DocsCode key={t} label={t} labelWidth="auto">

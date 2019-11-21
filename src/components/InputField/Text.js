@@ -53,7 +53,7 @@ Text.propTypes = {
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
 	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'unset']),
 
-	// paddings:
+	// padding:
 	p: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	pr: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -67,12 +67,12 @@ const StyledText = styled.span`
 	text-align: ${({cssTextAlign}) => cssTextAlign};
 	position: relative;
 	white-space: nowrap;
-	${({paddingCss}) => (!isEmpty(paddingCss) ? css(paddingCss) : '')}
 
 	align-self: ${({cssAlignSelf}) => cssAlignSelf || 'unset'};
 	flex: ${({cssFlex}) => cssFlex || 'unset'};
-	width: ${({cssWidth}) =>
-		typeof cssWidth === 'string' || typeof cssWidth === 'number' ? getPixelsOrString(cssWidth) : 'unset'};
+	width: ${({cssWidth}) => (typeof cssWidth === 'string' || typeof cssWidth === 'number' ? getPixelsOrString(cssWidth) : 'unset')};
+
+	${({paddingCss}) => (!isEmpty(paddingCss) ? css(paddingCss) : '')}
 `;
 
 export default Text;

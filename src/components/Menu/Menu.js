@@ -116,16 +116,14 @@ const Menu = forwardRef(function(props, ref) {
 					} else {
 						localValues.push(val);
 					}
-				} else {
-					if (localValues.length === 1) {
-						if (localValues[0] === val) {
-							localValues = []; // allows deselecting selected item
-						} else {
-							localValues = [val];
-						}
+				} else if (localValues.length === 1) {
+					if (localValues[0] === val) {
+						localValues = []; // allows deselecting selected item
 					} else {
 						localValues = [val];
 					}
+				} else {
+					localValues = [val];
 				}
 
 				if (controlledComponent) {

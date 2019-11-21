@@ -34,13 +34,11 @@ const Radio = function(props) {
 	 * ******************************** VARIANT WORK **************************************
 	 */
 
-	/**
-	 * ******************************** VARIANT WORK **************************************
-	 */
-
 	let Input = null;
 	let inputProps = {};
 	const variant = userVariant || defaults.variantRadio || null;
+
+	// TODO: Reorganize variant useMemos
 
 	switch (variant) {
 		case null:
@@ -146,14 +144,7 @@ Radio.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
 	size: PropTypes.string,
-	variant: PropTypes.oneOf([
-		'checkmark-square',
-		'checkmark-round',
-		'dot-square',
-		'dot-round',
-		'switch-square',
-		'switch-round'
-	]),
+	variant: PropTypes.oneOf(['checkmark-square', 'checkmark-round', 'dot-square', 'dot-round', 'switch-square', 'switch-round']),
 	color: PropTypes.string,
 	onChange: PropTypes.func,
 	disabled: PropTypes.bool
@@ -176,9 +167,7 @@ const Option = forwardRef(function(props, ref) {
 		ml = null
 	} = props;
 
-	const {name, onChange, disabled: allDisabled = false, value: radioValue, setValue, Input, inputProps} = useContext(
-		RadioContext
-	);
+	const {name, onChange, disabled: allDisabled = false, value: radioValue, setValue, Input, inputProps} = useContext(RadioContext);
 
 	const handleChange = useCallback(
 		(e) => {

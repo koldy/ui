@@ -24,9 +24,9 @@ export const Documentation = function() {
 			</DocsCode>
 			<DocsSubTitle hash="some-theory">Some theory</DocsSubTitle>
 			<DocsText>
-				<code>Box</code> component is wrapper for <code>div</code> element and its main purpose is to be used for
-				positioning. Although it can be used like <code>&lt;Box as="p"/&gt;</code>, don't use it for content. So, any
-				time when you want to create menu, some subelements, or place anything else, use this component.
+				<code>Box</code> component is wrapper for <code>div</code> element and its main purpose is to be used for positioning. Although it
+				can be used like <code>&lt;Box as="p"/&gt;</code>, don't use it for content. So, any time when you want to create menu, some
+				subelements, or place anything else, use this component.
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type="node" />
@@ -79,23 +79,22 @@ export const Documentation = function() {
 				<Props.Prop name="background" type="string">
 					<p>
 						Defines the CSS's background value. You can pass any color value from the defined colors in theme in format{' '}
-						<code>color|tone</code>, otherwise, it'll be used as is, which means that you're able to pass any other
-						valid CSS color or the whole background definition.
+						<code>color|tone</code>, otherwise, it'll be used as is, which means that you're able to pass any other valid CSS color or the
+						whole background definition.
 					</p>
 					<p>
-						Be aware that if you defined, for example, color <code>red</code> in the theme and then you pass{' '}
-						<code>red</code> as a background's prop value, then you'll get the color definition from the theme instead
-						of #ff0000.
+						Be aware that if you defined, for example, color <code>red</code> in the theme and then you pass <code>red</code> as a
+						background's prop value, then you'll get the color definition from the theme instead of #ff0000.
 					</p>
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string">
-					This is shorthand for aligning text within the box. Use one of <code>left</code>, <code>center</code>,{' '}
-					<code>right</code> or <code>justify</code> values.
+					This is shorthand for aligning text within the box. Use one of <code>left</code>, <code>center</code>, <code>right</code> or{' '}
+					<code>justify</code> values.
 				</Props.Prop>
 				<Props.Prop name="position" type="string" defaultValue="static">
 					<p>
-						Set the box's position. Use one of <code>static</code>, <code>absolute</code>, <code>fixed</code>,{' '}
-						<code>relative</code>, <code>sticky</code>, <code>initial</code> or <code>inheirt</code> values.
+						Set the box's position. Use one of <code>static</code>, <code>absolute</code>, <code>fixed</code>, <code>relative</code>,{' '}
+						<code>sticky</code>, <code>initial</code> or <code>inheirt</code> values.
 					</p>
 					<p>
 						Please note: if <code>Box</code> has position of <code>absolute</code> or <code>fixed</code>, then:

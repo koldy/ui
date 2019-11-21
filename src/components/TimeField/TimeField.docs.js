@@ -37,8 +37,8 @@ export const Documentation = function() {
 			<DocsTitle hash="timeField">TimeField</DocsTitle>
 			<ImportComponent name="TimeField" />
 			<DocsText>
-				TimeField is input component that allows user to enter time in numeric format. By default, component shows hours
-				and minutes, but it can show seconds and milliseconds if it's set using <code>precision</code> prop.
+				TimeField is input component that allows user to enter time in numeric format. By default, component shows hours and minutes, but it
+				can show seconds and milliseconds if it's set using <code>precision</code> prop.
 			</DocsText>
 			<DocsText>By default, it looks like this:</DocsText>
 			<DocsCode>
@@ -48,30 +48,29 @@ export const Documentation = function() {
 				<DocsCode.Code>{'<TimeField />'}</DocsCode.Code>
 			</DocsCode>
 			<DocsText>
-				Be aware that the default look depends about the theme and since there are universal theme settings for all
-				input elements, this component uses that look as well, except for the width.
+				Be aware that the default look depends about the theme and since there are universal theme settings for all input elements, this
+				component uses that look as well, except for the width.
 			</DocsText>
 			<Props>
 				<Props.Prop name="children" type="node" defaultValue="<TimeField.Input/>">
 					<p>
-						If you want to create "complex" looking and behaving <code>TimeField</code>, then use children to
-						reconfigure it's inner layout. This allows you to put any content before or after the input element itself.
+						If you want to create "complex" looking and behaving <code>TimeField</code>, then use children to reconfigure it's inner layout.
+						This allows you to put any content before or after the input element itself.
 					</p>
 					<p>There are few components you should use for configuring the layout:</p>
 					<ul>
 						<li>
-							<code>TimeField.Input</code> - standard input component which is used by default, but if yo're making your
-							own inner layout, then you have to use this component to tell where input should be
+							<code>TimeField.Input</code> - standard input component which is used by default, but if yo're making your own inner layout,
+							then you have to use this component to tell where input should be
 						</li>
 						<li>
-							<code>TimeField.Text</code> - use this component if you want to place plain text before or after the input
-							component itself; this component will take the padding and font size from the input field so it's style
-							and size will be automatically set
+							<code>TimeField.Text</code> - use this component if you want to place plain text before or after the input component itself;
+							this component will take the padding and font size from the input field so it's style and size will be automatically set
 						</li>
 						<li>
-							<code>TimeField.Box</code> - use this component to put more advanced components, like <code>Button</code>{' '}
-							or anything else. Unlike TimeField.Text which has the component's style, this component has nothing, no
-							margin and no padding, so it's easier to position inner component.
+							<code>TimeField.Box</code> - use this component to put more advanced components, like <code>Button</code> or anything else.
+							Unlike TimeField.Text which has the component's style, this component has nothing, no margin and no padding, so it's easier to
+							position inner component.
 						</li>
 					</ul>
 					<p>Here's an example for putting the text content before the text input:</p>
@@ -93,15 +92,14 @@ export const Documentation = function() {
 					</DocsCode>
 				</Props.Prop>
 				<Props.Prop name="name" type="string">
-					Name used for forms. If name is set, field's value will be rendered in DOM as{' '}
-					<code>&lt;input type="hidden"/&gt;</code> and value will be in yyyy-MM-dd HH:mm:ss format. If you want to
-					customize format, then use <code>valueFormat</code> prop, which is a function that accepts instance of{' '}
-					<code>Date</code> or <code>null</code> as first parameter.
+					Name used for forms. If name is set, field's value will be rendered in DOM as <code>&lt;input type="hidden"/&gt;</code> and value
+					will be in yyyy-MM-dd HH:mm:ss format. If you want to customize format, then use <code>valueFormat</code> prop, which is a
+					function that accepts instance of <code>Date</code> or <code>null</code> as first parameter.
 				</Props.Prop>
 				<Props.Prop name="value" type="Date">
 					<p>
-						If you want to use TimeField as controlled component, then set the <code>value</code> prop. Component will
-						ignore year, month and day.
+						If you want to use TimeField as controlled component, then set the <code>value</code> prop. Component will ignore year, month
+						and day.
 					</p>
 					<TimeField
 						value={newYear2019}
@@ -115,21 +113,19 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['string', 'number']}>
 					<p>
-						If you plan to use TimeField as uncontrolled component, then use <code>defaultValue</code> to set the
-						initial value.
+						If you plan to use TimeField as uncontrolled component, then use <code>defaultValue</code> to set the initial value.
 					</p>
 					<TimeField defaultValue={newYear2019} />
 				</Props.Prop>
 				<Props.Prop name="valueFormat" type="function">
 					<p>
-						<code>valueFormat</code> is function that gets the instance of <code>Date</code> or <code>null</code> for
-						its first parameter and it's up to you how do you want to format it. The returned value from that function
-						will be rendered as{' '}
+						<code>valueFormat</code> is function that gets the instance of <code>Date</code> or <code>null</code> for its first parameter
+						and it's up to you how do you want to format it. The returned value from that function will be rendered as{' '}
 						<code>&lt;input type="hidden" name="field_name" value="function's return value"/&gt;</code>.
 					</p>
 					<p>
-						Use the function as opportunity to format the value of the Date. We don't force you to use Moment.js,
-						date-fns or any other date and time library, so it's up to you how you want to format your value.
+						Use the function as opportunity to format the value of the Date. We don't force you to use Moment.js, date-fns or any other date
+						and time library, so it's up to you how you want to format your value.
 					</p>
 					<p>
 						If this prop is not set, then the date will be rendered as<code>yyyy-MM-dd HH:mm:ss</code>.
@@ -224,8 +220,7 @@ export const Documentation = function() {
 							<strong>containerElement</strong> - instance of <code>HTMLElement</code>
 						</li>
 						<li>
-							<strong>field</strong> - which field was focused (one of the values: minutes, hours, seconds,
-							milliseconds)
+							<strong>field</strong> - which field was focused (one of the values: minutes, hours, seconds, milliseconds)
 						</li>
 					</ul>
 					<p>Check the example and watch your browser's console to see the change.</p>
@@ -250,8 +245,7 @@ export const Documentation = function() {
 							<strong>containerElement</strong> - instance of <code>HTMLElement</code>
 						</li>
 						<li>
-							<strong>field</strong> - which field was focused (one of the values: minutes, hours, seconds,
-							milliseconds)
+							<strong>field</strong> - which field was focused (one of the values: minutes, hours, seconds, milliseconds)
 						</li>
 					</ul>
 					<p>Check the example and watch your browser's console to see the change.</p>
@@ -360,8 +354,7 @@ export const Documentation = function() {
 			</DocsCode>
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				Here are examples of all variants, its color and other states, like <code>disabled</code> and{' '}
-				<code>readOnly</code>.
+				Here are examples of all variants, its color and other states, like <code>disabled</code> and <code>readOnly</code>.
 			</DocsText>
 			{Object.keys(variants).map((variant) => (
 				<Fragment key={variant}>
@@ -370,24 +363,8 @@ export const Documentation = function() {
 						<DocsCode key={`${variant}_${color}`} label={color} labelWidth="auto">
 							<DocsCode.Example>
 								<TimeField width="auto" variant={variant} precision="seconds" color={color} />
-								<TimeField
-									width="auto"
-									variant={variant}
-									precision="seconds"
-									color={color}
-									ml={10}
-									disabled
-									defaultValue={newYear2019}
-								/>
-								<TimeField
-									width="auto"
-									variant={variant}
-									precision="seconds"
-									color={color}
-									ml={10}
-									readOnly
-									defaultValue={newYear2019}
-								/>
+								<TimeField width="auto" variant={variant} precision="seconds" color={color} ml={10} disabled defaultValue={newYear2019} />
+								<TimeField width="auto" variant={variant} precision="seconds" color={color} ml={10} readOnly defaultValue={newYear2019} />
 							</DocsCode.Example>
 						</DocsCode>
 					))}
@@ -395,8 +372,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Size</DocsSubTitle>
 			<DocsText>
-				Size can only be set in theme. Don't mix this prop with the <code>width</code> prop, size tells how big the
-				component is (font size, padding and etc).
+				Size can only be set in theme. Don't mix this prop with the <code>width</code> prop, size tells how big the component is (font size,
+				padding and etc).
 			</DocsText>
 			<DocsText>
 				<AvailableKeys data={sizes} />

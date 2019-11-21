@@ -78,16 +78,16 @@ export const Documentation = function() {
 			</DocsCode>
 			<Props title="Props for Radio">
 				<Props.Prop name="children" type="node" required>
-					<code>Radio</code> component is just wrapper for its options, but in order to allow any layout you want, you
-					may put anything here, but in some point, use <code>Radio.Option</code>. <code>Radio.Option</code> components
-					won't work properly if it's not within the <code>Radio</code>.
+					<code>Radio</code> component is just wrapper for its options, but in order to allow any layout you want, you may put anything
+					here, but in some point, use <code>Radio.Option</code>. <code>Radio.Option</code> components won't work properly if it's not
+					within the <code>Radio</code>.
 				</Props.Prop>
 				<Props.Prop name="name" type="string">
 					Name used for forms.
 				</Props.Prop>
 				<Props.Prop name="value" type={['string', 'number', 'bool']}>
-					If <code>value</code> is set, it means you'll use this component as controlled component, so{' '}
-					<code>onChange</code> handler is required as well.
+					If <code>value</code> is set, it means you'll use this component as controlled component, so <code>onChange</code> handler is
+					required as well.
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['string', 'number', 'bool']}>
 					If <code>defaultValue</code> is set, it means you'll use this component as uncontrolled component.
@@ -98,12 +98,11 @@ export const Documentation = function() {
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.checkboxAndRadio.defaults.variant">
 					<p>
-						Same radio behavior can be applied on a components with a different look. Using this prop, you're telling
-						how do you want the radio to look like.
+						Same radio behavior can be applied on a components with a different look. Using this prop, you're telling how do you want the
+						radio to look like.
 					</p>
 					<p>
-						Unlike other components where variants can be defined in the theme, here, variants are predefined and you
-						may choose one of:
+						Unlike other components where variants can be defined in the theme, here, variants are predefined and you may choose one of:
 					</p>
 					<p>
 						{variants.map((variant) => (
@@ -119,10 +118,7 @@ export const Documentation = function() {
 					Set this prop to disabled if you want to disable all options within this <code>Radio</code> set.
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
-					<p>
-						Function called when value has changed. It'll get the object for the first parameter with the following
-						keys:
-					</p>
+					<p>Function called when value has changed. It'll get the object for the first parameter with the following keys:</p>
 					<ul>
 						<li>
 							<strong>name</strong>
@@ -190,8 +186,8 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>
-				Defining color for radio is very limited when compared to other components and there are just few states. If you
-				think of radio very carefully, you'll see:
+				Defining color for radio is very limited when compared to other components and there are just few states. If you think of radio very
+				carefully, you'll see:
 			</DocsText>
 			<DocsText>
 				<ul>
@@ -238,17 +234,15 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
+			<DocsText>Variant is prop that tells how component will look like. Same functionality can be achieved with different look.</DocsText>
 			<DocsText>
-				Variant is prop that tells how component will look like. Same functionality can be achieved with different look.
-			</DocsText>
-			<DocsText>
-				Unlike other components where variants can be defined in the theme, this component doesn't allow that. There are
-				few predefined variant values:
+				Unlike other components where variants can be defined in the theme, this component doesn't allow that. There are few predefined
+				variant values:
 				{variants.map((variant) => (
 					<code key={variant}>{variant}</code>
 				))}
-				. Each of the values represent one styled component. Size and colors are the only parameters you can modify.
-				Even with this limited parametrization, you can achieve some effects, like this:
+				. Each of the values represent one styled component. Size and colors are the only parameters you can modify. Even with this limited
+				parametrization, you can achieve some effects, like this:
 			</DocsText>
 			{variants.map((variant) => (
 				<DocsCode key={variant} label={variant} labelWidth="auto">

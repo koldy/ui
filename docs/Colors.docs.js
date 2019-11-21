@@ -23,22 +23,21 @@ export const Documentation = function() {
 		<>
 			<DocsTitle hash="colors">Colors</DocsTitle>
 			<DocsText>
-				In theory, naming colors is easy. But then, in practice, it's hard. You may think if it like: yeah, I have three
-				colors I want to use anywhere and that's it. And you might be right, but soon, you'll get into situation where
-				you need color variations for hover effects, disabled state, active and focus state, then the hover state on
-				disabled elements and etc. Some people solve that by using 3rd party tools that generate darker or lighter
-				colors according to given color. Sometimes, that might work, but in most cases, that won't be enough because
-				these tools are calculating colors using math and the result, sometimes, isn't what you want. Then, you may find
-				UI solutions that requires you to define too many colors or too little colors and getting it right is real pain.
+				In theory, naming colors is easy. But then, in practice, it's hard. You may think if it like: yeah, I have three colors I want to
+				use anywhere and that's it. And you might be right, but soon, you'll get into situation where you need color variations for hover
+				effects, disabled state, active and focus state, then the hover state on disabled elements and etc. Some people solve that by using
+				3rd party tools that generate darker or lighter colors according to given color. Sometimes, that might work, but in most cases, that
+				won't be enough because these tools are calculating colors using math and the result, sometimes, isn't what you want. Then, you may
+				find UI solutions that requires you to define too many colors or too little colors and getting it right is real pain.
 			</DocsText>
 			<DocsText>
-				Here, you should name the main colors you want to use, like, which color is primary (can be named{' '}
-				<code>primary</code>), intent colors (like <code>info</code>, <code>success</code>, <code>danger</code>) and
-				etc. You are not limited by any way, you can have as many colors as you like and you can use any name you want.
+				Here, you should name the main colors you want to use, like, which color is primary (can be named <code>primary</code>), intent
+				colors (like <code>info</code>, <code>success</code>, <code>danger</code>) and etc. You are not limited by any way, you can have as
+				many colors as you like and you can use any name you want.
 			</DocsText>
 			<DocsText>
-				To define a color in theme, you need a name (one name) and then you define the array of all color variations,
-				from lightest to darkest.
+				To define a color in theme, you need a name (one name) and then you define the array of all color variations, from lightest to
+				darkest.
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Code>const primary = ['#4d97c2', '#3c8dbc', '#3781ab'];</DocsCode.Code>
@@ -52,10 +51,10 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<DocsText>
-				So, when you want to use color lighter than the primary, use <code>primary|-1</code>, and when you need color
-				darker than the primary, use <code>primary|1</code>. This principal works across the whole theme's JSON and some
-				components like <code>Text</code> will accept color defined like that. This principal allows you to have as many
-				variations as you want. Koldy UI ships its main colors with main color +/- 4 variations.
+				So, when you want to use color lighter than the primary, use <code>primary|-1</code>, and when you need color darker than the
+				primary, use <code>primary|1</code>. This principal works across the whole theme's JSON and some components like <code>Text</code>{' '}
+				will accept color defined like that. This principal allows you to have as many variations as you want. Koldy UI ships its main
+				colors with main color +/- 4 variations.
 			</DocsText>
 			<DocsText>Current theme has these color sets:</DocsText>
 			<DocsCode>

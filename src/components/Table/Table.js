@@ -2,7 +2,7 @@ import React, {useContext, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getPixelsOrString, getStyleForMargins, isObject, omit} from '../../util/helpers';
+import {getPixelsOrString, getStyleForMargins, isObject} from '../../util/helpers';
 
 import Head from './Head';
 import Body from './Body';
@@ -44,7 +44,8 @@ const Table = function(props) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	/**
@@ -58,7 +59,7 @@ const Table = function(props) {
 
 		const c = {};
 
-		let thead = {
+		const thead = {
 			' > tr': {
 				' > th': {
 					'&:last-child': {}
@@ -73,7 +74,7 @@ const Table = function(props) {
 			}
 		};
 
-		let tbody = {
+		const tbody = {
 			' > tr': {
 				' > th': {
 					'&:last-child': {}
@@ -92,7 +93,7 @@ const Table = function(props) {
 			}
 		};
 
-		let tfoot = {
+		const tfoot = {
 			' > tr': {
 				' > th': {
 					'&:last-child': {}
@@ -162,7 +163,7 @@ const Table = function(props) {
 				// borders can be: table, all, rows, head, foot -> or any combination with "|" in it
 				const borders = typeof border === 'string' ? border.split('|') : [];
 
-				for (const b of borders) {
+				borders.forEach((b) => {
 					switch (b) {
 						case 'table':
 							c.border = `1px solid ${theme.processColor(borderColor)}`;
@@ -267,12 +268,12 @@ const Table = function(props) {
 						default:
 							theme.warning(`Unknown table border setting: ${b}; check the prop of your <Table border="${border}"/> `);
 					}
-				}
+				});
 			}
 
 			// apply head color
 			if (isObject(head)) {
-				const {backgroundColor = null, backgroundHoverColor = null, textColor = null, textHoverColor = null} = head;
+				const {backgroundColor = null, textColor = null /* backgroundHoverColor = null, textHoverColor = null */} = head;
 
 				thead[' > tr'][' > th'] = {
 					...thead[' > tr'][' > th'],
@@ -288,7 +289,7 @@ const Table = function(props) {
 
 			// apply body color
 			if (isObject(body)) {
-				const {backgroundColor = null, backgroundHoverColor = null, textColor = null, textHoverColor = null} = body;
+				const {backgroundColor = null, backgroundHoverColor = null, textColor = null /* , textHoverColor = null */} = body;
 				const {backgroundStripeColor = backgroundHoverColor} = body;
 
 				tbody[' > tr'][' > th'] = {
@@ -343,7 +344,7 @@ const Table = function(props) {
 
 			// apply foot color
 			if (isObject(foot)) {
-				const {backgroundColor = null, backgroundHoverColor = null, textColor = null, textHoverColor = null} = foot;
+				const {backgroundColor = null, textColor = null /* , backgroundHoverColor = null, textHoverColor = null */} = foot;
 
 				tfoot[' > tr'][' > th'] = {
 					...tfoot[' > tr'][' > th'],
@@ -373,20 +374,8 @@ const Table = function(props) {
 		};
 	}, [theme, size, color, border, hover, striped, userStyle, width, m, mt, mr, mb, ml]);
 
-	const otherProps = omit(props, Object.keys(Table.propTypes));
-
-	if (striped) {
-		console.log('table css je', tableCss);
-	}
-
 	return (
-		<StyledTable
-			tableLayout={tableLayout}
-			borderCollapse={borderCollapse}
-			tableCss={tableCss}
-			style={tableStyle}
-			{...otherProps}
-		>
+		<StyledTable tableLayout={tableLayout} borderCollapse={borderCollapse} tableCss={tableCss} style={tableStyle} {...otherProps}>
 			{children}
 		</StyledTable>
 	);

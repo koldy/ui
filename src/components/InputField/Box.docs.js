@@ -11,21 +11,19 @@ const BoxDocs = function({component}) {
 				The content you want to put.
 			</Props.Prop>
 			<Props.Prop name="flex" type={['string', 'number']}>
-				All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-				provide custom width or relative width, you may use this prop. This is standard CSS <code>flex</code> property.
+				All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to provide custom width or
+				relative width, you may use this prop. This is standard CSS <code>flex</code> property.
 			</Props.Prop>
 			<Props.Prop name="width" type={['string', 'number']}>
 				If you want to set custom width on the content's width, then use this prop.
 			</Props.Prop>
 			<Props.Prop name="alignSelf" type="string">
-				All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to
-				customize the position of this component, then use this prop. It is standard CSS <code>align-self</code>{' '}
-				property, so allowed values are:
+				All elements within the text field's container are aligned with <code>inline-flex</code>, so if you want to customize the position
+				of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 				<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 			</Props.Prop>
 			<Props.Prop name="textAlign" type="string">
-				If this component is wider then its inner content, then you may want to set the <code>text-align</code>{' '}
-				explicitly.
+				If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 			</Props.Prop>
 			<Props.Prop name="p" />
 			<Props.Prop name="pt" />

@@ -89,8 +89,8 @@ export const Documentation = function() {
 			</Props>
 			<DocsSubTitle hash="some-theory">Some theory</DocsSubTitle>
 			<DocsText>
-				Badge is standard component that usually show off some number (like unread message count) or any other
-				information that requires user's attention. In theory, there are few things you need about every badge:
+				Badge is standard component that usually show off some number (like unread message count) or any other information that requires
+				user's attention. In theory, there are few things you need about every badge:
 			</DocsText>
 			<DocsText>
 				<ul>
@@ -100,9 +100,8 @@ export const Documentation = function() {
 				</ul>
 			</DocsText>
 			<DocsText>
-				Badge's size should be always expressed in <em>em</em> units so the size can inherit the size of the places
-				where it's added (for example, if you put normal size Badge in &lt;h1&gt; tag, it has to have the same size as
-				title).
+				Badge's size should be always expressed in <em>em</em> units so the size can inherit the size of the places where it's added (for
+				example, if you put normal size Badge in &lt;h1&gt; tag, it has to have the same size as title).
 			</DocsText>
 			<DocsSubTitle hash="color">Color</DocsSubTitle>
 			<DocsText>You may use anything in CSS to customize the color of badge, including the hover state.</DocsText>
@@ -117,10 +116,9 @@ export const Documentation = function() {
 			))}
 			<DocsSubTitle hash="size">Size</DocsSubTitle>
 			<DocsText>
-				Badge size is automatic and it'll inherit the size of parent component, so when talking about badge size, you
-				just have to define do you want bigger or smaller badge according to the parent component. So, when defining
-				badge size in theme, we recommend that you define the font size and padding in <code>em</code> units instead in
-				pixels, rems or any other fixed size unit.
+				Badge size is automatic and it'll inherit the size of parent component, so when talking about badge size, you just have to define do
+				you want bigger or smaller badge according to the parent component. So, when defining badge size in theme, we recommend that you
+				define the font size and padding in <code>em</code> units instead in pixels, rems or any other fixed size unit.
 			</DocsText>
 			<DocsText>Available badge sizes are:</DocsText>
 			{Object.keys(sizes).map((val) => (
@@ -140,8 +138,7 @@ export const Documentation = function() {
 				</DocsCode>
 			))}
 			<DocsText>
-				Here's example of Badge without defined size, but placed in <code>h2</code> tag which, by default, has bigger
-				font size:
+				Here's example of Badge without defined size, but placed in <code>h2</code> tag which, by default, has bigger font size:
 			</DocsText>
 			<DocsCode>
 				<DocsCode.Example>
@@ -159,9 +156,8 @@ export const Documentation = function() {
 			</DocsCode>
 			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
 			<DocsText>
-				Variant is the badge's shape. By using variants, you can completely redefine badge's shape. Most common case is
-				when you want to have standard square badge or circle badge. You're not limited to any predefined properties and
-				you can define anything you want.
+				Variant is the badge's shape. By using variants, you can completely redefine badge's shape. Most common case is when you want to
+				have standard square badge or circle badge. You're not limited to any predefined properties and you can define anything you want.
 			</DocsText>
 			<DocsText>Available variants in theme are:</DocsText>
 			{Object.keys(variants).map((val) => (
