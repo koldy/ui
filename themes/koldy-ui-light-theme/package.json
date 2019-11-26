@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui-light-theme",
-	"version": "0.1.9",
+	"version": "0.2.0",
 	"description": "Koldy UI Light Theme",
 	"main": "lib/index.js",
 	"scripts": {

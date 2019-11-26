@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui",
-	"version": "0.1.10",
+	"version": "0.2.0",
 	"description": "Koldy UI - React UI component library",
 	"main": "lib/index.js",
 	"module": "esm/index.js",

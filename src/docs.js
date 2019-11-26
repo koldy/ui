@@ -91,6 +91,13 @@ import {
 } from './components/Overlay/Overlay.docs';
 
 import {
+	title as ProgressBarTitle,
+	slug as ProgressBarSlug,
+	json as ProgressBarJson,
+	Documentation as ProgressBarDocumentation
+} from './components/ProgressBar/ProgressBar.docs';
+
+import {
 	title as RadioTitle,
 	slug as RadioSlug,
 	json as RadioJson,
@@ -280,6 +287,13 @@ export const components = [
 		slug: OverlaySlug,
 		json: OverlayJson,
 		Documentation: OverlayDocumentation,
+		group: COMPONENT
+	},
+	{
+		title: ProgressBarTitle,
+		slug: ProgressBarSlug,
+		json: ProgressBarJson,
+		Documentation: ProgressBarDocumentation,
 		group: COMPONENT
 	},
 	{

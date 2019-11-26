@@ -29,8 +29,24 @@ export default {
 		gray: ['#ebedf3', '#e2e4ea', '#dee1e7', '#dadde4', '#d6d9e1', '#d2d6de', '#bfc3ca', '#acb0b6', '#999ca2', '#86898e', '#7e8186'],
 		black: ['#636363', '#111111', '#000000'],
 		teal: ['#81dede', '#6fd9d9', '#5dd5d5', '#4bd0d0', '#39cccc', '#34baba', '#2fa7a7', '#2a9595', '#258282'],
-		semiBlack: ['rgba(0, 0, 0, 0.05)', 'rgba(0, 0, 0, 0.2)', 'rgba(0, 0, 0, 0.4)', 'rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0.6)', 'rgba(0, 0, 0, 0.8)', 'rgba(0, 0, 0, 0.95)'],
-		semiWhite: ['rgba(255, 255, 255, 0.05)', 'rgba(255, 255, 255, 0.2)', 'rgba(255, 255, 255, 0.4)', 'rgba(255, 255, 255, 0.5)', 'rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.95)'],
+		semiBlack: [
+			'rgba(0, 0, 0, 0.05)',
+			'rgba(0, 0, 0, 0.2)',
+			'rgba(0, 0, 0, 0.4)',
+			'rgba(0, 0, 0, 0.5)',
+			'rgba(0, 0, 0, 0.6)',
+			'rgba(0, 0, 0, 0.8)',
+			'rgba(0, 0, 0, 0.95)'
+		],
+		semiWhite: [
+			'rgba(255, 255, 255, 0.05)',
+			'rgba(255, 255, 255, 0.2)',
+			'rgba(255, 255, 255, 0.4)',
+			'rgba(255, 255, 255, 0.5)',
+			'rgba(255, 255, 255, 0.6)',
+			'rgba(255, 255, 255, 0.8)',
+			'rgba(255, 255, 255, 0.95)'
+		],
 		textColor: ['#333333', '#222222', '#000000', '#000000', '#000000'],
 		textColorInverse: ['#cccccc', '#dddddd', '#ffffff', '#ffffff', '#ffffff']
 	},
@@ -375,7 +391,7 @@ export default {
 			variant: 'text'
 		},
 		variant: {
-			'text': {
+			text: {
 				fontSize: '1rem',
 				color: 'textColor'
 			},
@@ -1098,6 +1114,54 @@ export default {
 					borderTop: '1px solid #efefef'
 				}
 			}
+		}
+	},
+	progressBar: {
+		defaults: {
+			color: 'primary',
+			size: 'md',
+			variant: 'rounded'
+		},
+		color: {
+			primary: {
+				inactiveBackgroundColor: 'gray|-5',
+				activeBackgroundColor: 'primary'
+			},
+			info: {
+				inactiveBackgroundColor: 'gray|-5',
+				activeBackgroundColor: 'info'
+			},
+			success: {
+				inactiveBackgroundColor: 'gray|-5',
+				activeBackgroundColor: 'success'
+			},
+			warning: {
+				inactiveBackgroundColor: 'gray|-5',
+				activeBackgroundColor: 'warning'
+			},
+			danger: {
+				inactiveBackgroundColor: 'gray|-5',
+				activeBackgroundColor: 'danger'
+			}
+		},
+		size: {
+			sm: {
+				height: 4,
+				padding: 0
+			},
+			md: {
+				height: 8,
+				padding: 1
+			},
+			lg: {
+				height: 18,
+				padding: 4
+			}
+		},
+		variant: {
+			square: 0,
+			rounded: 4,
+			round: 100
 		}
 	}
 };
