@@ -10,6 +10,7 @@ import Drawer from './components/Drawer/Drawer';
 import FileField from './components/FileField/FileField';
 import Flexbox from './components/Flexbox/Flexbox';
 import Menu from './components/Menu/Menu';
+import ProgressBar from './components/ProgressBar/ProgressBar';
 import Overlay from './components/Overlay/Overlay';
 import Radio from './components/Radio/Radio';
 import Select from './components/Select/Select';
@@ -41,6 +42,7 @@ export {
 	FileField,
 	Flexbox,
 	Menu,
+  ProgressBar,
 	Overlay,
 	Radio,
 	Select,
