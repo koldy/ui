@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ThemeError from '../theme/ThemeError';
 
-export const getInputProps = function(theme, defaults, userSize, userColor, variant) {
+export const getInputProps = function(theme, defaults, userSize, userColor, variant, component) {
 	const sizes = theme.json('checkboxAndRadio.size');
 	const colors = theme.json('checkboxAndRadio.color');
 
@@ -15,7 +15,7 @@ export const getInputProps = function(theme, defaults, userSize, userColor, vari
 		if (typeof sizes[userSize] === 'number') {
 			sizeCss = sizes[userSize];
 		} else {
-			theme.warning(`<Radio size="${userSize}"/> is not defined in theme.checkboxAndRadio.size, fallbacking to default size`);
+			theme.warning(`<${component} size="${userSize}"/> is not defined in theme.checkboxAndRadio.size, fallbacking to default size`);
 			sizeCss = null;
 		}
 	}
@@ -24,12 +24,12 @@ export const getInputProps = function(theme, defaults, userSize, userColor, vari
 		const defaultSize = defaults.size || null;
 
 		if (!defaultSize || typeof defaultSize !== 'string') {
-			theme.error(`Radio default size is not defined in theme.checkboxAndRadio.defaults.size or it's not a string`);
+			theme.error(`${component} default size is not defined in theme.checkboxAndRadio.defaults.size or it's not a string`);
 		} else if (typeof sizes[defaultSize] === 'number') {
 			// it's valid size
 			sizeCss = sizes[defaultSize];
 		} else {
-			theme.error(`Radio default size (${defaultSize}) is not defined in theme.checkboxAndRadio.size`);
+			theme.error(`${component} default size (${defaultSize}) is not defined in theme.checkboxAndRadio.size`);
 		}
 	}
 
@@ -53,7 +53,7 @@ export const getInputProps = function(theme, defaults, userSize, userColor, vari
 		// user set the color
 
 		if (typeof colors[userColor] === 'undefined') {
-			theme.warning(`<Radio color="${userColor}"/> is not defined in theme.checkboxAndRadio.color, fallbacking to default color`);
+			theme.warning(`<${component} color="${userColor}"/> is not defined in theme.checkboxAndRadio.color, fallbacking to default color`);
 		} else {
 			// color exists, all good
 			colorDefinitions = theme.processColors(colors[userColor]);
@@ -73,7 +73,7 @@ export const getInputProps = function(theme, defaults, userSize, userColor, vari
 
 		if (typeof colors[defaultColor] === 'undefined') {
 			throw new ThemeError(
-				`<Radio color="${defaultColor}"/> is not defined in theme.checkboxAndRadio.color; check the value of theme.checkboxAndRadio.defaults.color`
+				`<${component} color="${defaultColor}"/> is not defined in theme.checkboxAndRadio.color; check the value of theme.checkboxAndRadio.defaults.color`
 			);
 		} else {
 			// color exists, all good
