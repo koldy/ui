@@ -38,57 +38,27 @@ const Checkbox = forwardRef(function(props, ref) {
 	 * ******************************** VARIANT WORK **************************************
 	 */
 
-	let Input = null;
-	let inputProps = {};
 	const variant = userVariant || defaults.variantCheckbox || null;
 
-	switch (variant) {
-		case null:
-		case 'checkmark-square':
-		case 'checkmark-round':
-			/**
-			 * ******************************** CHECKMARK **************************************
-			 */
-			Input = Checkmark;
+	const [Input, inputProps] = useMemo(() => {
+		switch (variant) {
+			case null:
+			case 'checkmark-square':
+			case 'checkmark-round':
+				return [Checkmark, getCheckmarkInputProps(theme, defaults, userSize, userColor, variant, 'Checkbox')];
 
-			inputProps = useMemo(() => getCheckmarkInputProps(theme, defaults, userSize, userColor, variant, 'Checkbox'), [
-				theme,
-				userSize,
-				userColor,
-				variant
-			]);
-			break;
+			case 'dot-square':
+			case 'dot-round':
+				return [Dot, getDotInputProps(theme, defaults, userSize, userColor, variant, 'Checkbox')];
 
-		case 'dot-square':
-		case 'dot-round':
-			/**
-			 * ******************************** DOT **************************************
-			 */
-			Input = Dot;
+			case 'switch-square':
+			case 'switch-round':
+				return [Switch, getSwitchInputProps(theme, defaults, userSize, userColor, variant, 'Checkbox')];
 
-			inputProps = useMemo(() => getDotInputProps(theme, defaults, userSize, userColor, variant, 'Checkbox'), [
-				theme,
-				userSize,
-				userColor,
-				variant
-			]);
-			break;
-
-		case 'switch-square':
-		case 'switch-round':
-			Input = Switch;
-
-			inputProps = useMemo(() => getSwitchInputProps(theme, defaults, userSize, userColor, variant, 'Checkbox'), [
-				theme,
-				userSize,
-				userColor,
-				variant
-			]);
-			break;
-
-		default:
-			throw new ThemeError(`Invalid Checkbox variant: ${variant}`);
-	}
+			default:
+				throw new ThemeError(`Invalid Checkbox variant: ${variant}`);
+		}
+	}, [variant, theme, defaults, userSize, userColor]);
 
 	const [checked, setChecked] = useState(userChecked || userDefaultChecked || false);
 

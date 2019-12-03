@@ -375,6 +375,14 @@ const Field = styled.input`
 	text-indent: 0;
 	letter-spacing: normal;
 	text-rendering: optimizeSpeed;
+	
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active {
+	    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+	    -webkit-transition-delay: 9999s;
+	}
 
 	&:disabled {
 		cursor: not-allowed;

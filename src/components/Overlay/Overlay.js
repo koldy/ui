@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
 import {addDocumentEvent, emptyFn, isFunction, removeDocumentEvent} from '../../util/helpers';
-import {fadeInAnimation} from '../../animations/fadeIn';
 import useZIndex from '../../hooks/useZIndex';
+import { fadeInAnimation } from "../../animations/fade";
 
 const overlays = []; // the array of all active overlays
 const closeFunctions = {}; // index:fn pairs of closing functions called from ESC key

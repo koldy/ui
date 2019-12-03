@@ -34,59 +34,27 @@ const Radio = function(props) {
 	 * ******************************** VARIANT WORK **************************************
 	 */
 
-	let Input = null;
-	let inputProps = {};
 	const variant = userVariant || defaults.variantRadio || null;
 
-	// TODO: Reorganize variant useMemos
+	const [Input, inputProps] = useMemo(() => {
+		switch (variant) {
+			case null:
+			case 'checkmark-square':
+			case 'checkmark-round':
+				return [Checkmark, getCheckmarkInputProps(theme, defaults, userSize, userColor, variant, 'Radio')];
 
-	switch (variant) {
-		case null:
-		case 'checkmark-square':
-		case 'checkmark-round':
-			/**
-			 * ******************************** CHECKMARK **************************************
-			 */
-			Input = Checkmark;
+			case 'dot-square':
+			case 'dot-round':
+				return [Dot, getDotInputProps(theme, defaults, userSize, userColor, variant, 'Radio')];
 
-			inputProps = useMemo(() => getCheckmarkInputProps(theme, defaults, userSize, userColor, variant, 'Radio'), [
-				theme,
-				userSize,
-				userColor,
-				variant
-			]);
-			break;
+			case 'switch-square':
+			case 'switch-round':
+				return [Switch, getSwitchInputProps(theme, defaults, userSize, userColor, variant, 'Radio')];
 
-		case 'dot-square':
-		case 'dot-round':
-			/**
-			 * ******************************** DOT **************************************
-			 */
-			Input = Dot;
-
-			inputProps = useMemo(() => getDotInputProps(theme, defaults, userSize, userColor, variant, 'Radio'), [
-				theme,
-				userSize,
-				userColor,
-				variant
-			]);
-			break;
-
-		case 'switch-square':
-		case 'switch-round':
-			Input = Switch;
-
-			inputProps = useMemo(() => getSwitchInputProps(theme, defaults, userSize, userColor, variant, 'Radio'), [
-				theme,
-				userSize,
-				userColor,
-				variant
-			]);
-			break;
-
-		default:
-			throw new ThemeError(`Invalid Radio variant: ${variant}`);
-	}
+			default:
+				throw new ThemeError(`Invalid Radio variant: ${variant}`);
+		}
+	}, [theme, defaults, userSize, userColor, variant]);
 
 	/**
 	 * ******************************** VALUE / REAL VALUE **************************************
@@ -116,24 +84,21 @@ const Radio = function(props) {
 		if (value !== undefined) {
 			setRealValue(value);
 		}
-	}, [value]);
+	}, [value, theme, defaultValue, onChange]);
 
 	/**
 	 * ******************************** CREATING CONTEXT VALUES **************************************
 	 */
-	const radioContext = useMemo(
-		() => ({
-			name,
-			disabled,
-			value: realValue,
-			setValue: handleValueChange,
-			radioValue: value,
-			radioDefaultValue: defaultValue,
-			Input,
-			inputProps
-		}),
-		[name, disabled, realValue, value, defaultValue, Input, inputProps]
-	);
+	const radioContext = {
+		name,
+		disabled,
+		value: realValue,
+		setValue: handleValueChange,
+		radioValue: value,
+		radioDefaultValue: defaultValue,
+		Input,
+		inputProps
+	};
 
 	return <RadioContext.Provider value={radioContext}>{children}</RadioContext.Provider>;
 };
@@ -167,14 +132,14 @@ const Option = forwardRef(function(props, ref) {
 		ml = null
 	} = props;
 
-	const {name, onChange, disabled: allDisabled = false, value: radioValue, setValue, Input, inputProps} = useContext(RadioContext);
+	const {name, disabled: allDisabled = false, value: radioValue, setValue, Input, inputProps} = useContext(RadioContext);
 
 	const handleChange = useCallback(
 		(e) => {
 			const {currentTarget} = e;
 			setValue({optionValue, element: currentTarget});
 		},
-		[onChange, optionValue, name]
+		[optionValue, setValue]
 	);
 
 	const style = useMemo(

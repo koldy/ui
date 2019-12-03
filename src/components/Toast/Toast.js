@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {fadeInAnimation} from '../../animations/fadeIn';
 import {rotateInCenterAnimation} from '../../animations/rotateInCenter';
 import {rotateVerticalCenterAnimation} from '../../animations/rotateVerticalCenter';
 import {rotateHorizontalCenterAnimation} from '../../animations/rotateHorizontalCenter';
@@ -14,6 +13,7 @@ import {slitInHorizontalAnimation} from '../../animations/slitInHorizontalKeyfra
 import {slideInBckCenterAnimation} from '../../animations/slideInBckCenter';
 import {swingInTopFwdAnimation} from '../../animations/swingInTopFwd';
 import {isFunction} from '../../util/helpers';
+import { fadeInAnimation } from "../../animations/fade";
 
 const Toast = function(props) {
 	const {children, position, entryAnimation = 'fade', onClose = null} = props;
@@ -28,7 +28,7 @@ const Toast = function(props) {
 	const animation = useMemo(() => {
 		switch (entryAnimation) {
 			case 'fade-in':
-				return fadeInAnimation({animationDuration: '300ms'});
+				return fadeInAnimation({animationDuration: '750ms'});
 
 			case 'rotate-in-center':
 				return rotateInCenterAnimation({animationDuration: '1300ms'});
