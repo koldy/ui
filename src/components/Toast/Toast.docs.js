@@ -31,7 +31,8 @@ const animations = [
 	'flip-in-horizontal-bottom',
 	'slit-in-horizontal',
 	'slide-in-bck-center',
-	'swing-in-top-fwd'
+	'swing-in-top-fwd',
+	'puff-in-center'
 ];
 
 export const Documentation = function() {

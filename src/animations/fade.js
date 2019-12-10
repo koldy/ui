@@ -16,14 +16,11 @@ export const fadeInKeyframes = keyframes`
 /**
  * @link https://animista.net/play/entrances/fade-in/fade-in
  */
-export const fadeInAnimation = (args) => {
-	const {animationDuration = '1.2s'} = args || {};
+export const fadeInAnimation = ({animationDuration = '1.2s'} = {}) => {
 	return css`
 		${fadeInKeyframes} ${animationDuration} cubic-bezier(0.390, 0.575, 0.565, 1.000) both
 	`;
 };
-
-export const fadeInAnimationDuration = '1.2s';
 
 /**
  * @type {Keyframes}
@@ -41,11 +38,8 @@ to {
 /**
  * @link https://animista.net/play/exits/fade-out/fade-out
  */
-export const fadeOutAnimation = (args) => {
-	const {animationDuration = '1s'} = args || {};
+export const fadeOutAnimation = ({animationDuration = '1s'} = {}) => {
 	return css`
 		${fadeOutKeyframes} ${animationDuration} ease-out both
 	`;
 };
-
-export const fadeOutAnimationDuration = '1s';

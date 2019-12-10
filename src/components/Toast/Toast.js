@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {rotateInCenterAnimation} from '../../animations/rotateInCenter';
+import {rotateInCenterAnimation} from '../../animations/rotateCenter';
 import {rotateVerticalCenterAnimation} from '../../animations/rotateVerticalCenter';
 import {rotateHorizontalCenterAnimation} from '../../animations/rotateHorizontalCenter';
 import {rotateScaleUpVerticalAnimation} from '../../animations/rotateScaleUpVertical';
-import {flipInHorizontalBottomAnimation} from '../../animations/flipInHorizontalBottom';
-import {slitInHorizontalAnimation} from '../../animations/slitInHorizontalKeyframes';
-import {slideInBckCenterAnimation} from '../../animations/slideInBckCenter';
-import {swingInTopFwdAnimation} from '../../animations/swingInTopFwd';
+import {flipInHorizontalBottomAnimation} from '../../animations/flipHorizontalBottom';
+import {slitInHorizontalAnimation} from '../../animations/slitHorizontal';
+import {slideInBckCenterAnimation} from '../../animations/slideBckCenter';
+import {swingInTopFwdAnimation} from '../../animations/swingTopFwd';
 import {isFunction} from '../../util/helpers';
-import { fadeInAnimation } from "../../animations/fade";
+import {fadeInAnimation} from '../../animations/fade';
+import {puffInAnimation} from '../../animations/puffCenter';
 
 const Toast = function(props) {
 	const {children, position, entryAnimation = 'fade', onClose = null} = props;
@@ -53,6 +54,9 @@ const Toast = function(props) {
 
 			case 'swing-in-top-fwd':
 				return swingInTopFwdAnimation();
+
+			case 'puff-in-center':
+				return puffInAnimation();
 
 			// no default
 		}
@@ -95,7 +99,8 @@ Toast.propTypes = {
 		'flip-in-horizontal-bottom',
 		'slit-in-horizontal',
 		'slide-in-bck-center',
-		'swing-in-top-fwd'
+		'swing-in-top-fwd',
+    'puff-in-center'
 	]),
 	onClose: PropTypes.func
 };

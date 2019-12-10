@@ -6,14 +6,10 @@ import styled, {css} from 'styled-components';
 import ThemeContext from '../../theme/ThemeContext';
 import Overlay from '../Overlay/Overlay';
 import {getAnimationDuration, getPixelsOrString, stopPropagation} from '../../util/helpers';
-import {slideInRightAnimation} from '../../animations/slideInRight';
-import {slideInLeftAnimation} from '../../animations/slideInLeft';
-import {slideInTopAnimation} from '../../animations/slideInTop';
-import {slideInBottomAnimation} from '../../animations/slideInBottom';
-import {slideOutRightAnimation} from '../../animations/slideOutRight';
-import {slideOutLeftAnimation} from '../../animations/slideOutLeft';
-import {slideOutTopAnimation} from '../../animations/slideOutTop';
-import {slideOutBottomAnimation} from '../../animations/slideOutBottom';
+import { slideInRightAnimation, slideOutRightAnimation } from "../../animations/slideRight";
+import { slideInLeftAnimation, slideOutLeftAnimation } from "../../animations/slideLeft";
+import {slideInTopAnimation, slideOutTopAnimation} from '../../animations/slideTop';
+import { slideInBottomAnimation, slideOutBottomAnimation } from "../../animations/slideBottom";
 import useZIndex from '../../hooks/useZIndex';
 
 const Drawer = function(props) {
