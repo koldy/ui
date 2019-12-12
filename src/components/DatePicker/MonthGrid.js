@@ -95,7 +95,7 @@ const Button = function(props) {
 			e.stopPropagation();
 			pickDate(date);
 		},
-		[date]
+		[date, pickDate]
 	);
 
 	return (

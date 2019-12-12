@@ -168,7 +168,7 @@ const DatePicker = function(props) {
 				setSelectedDate(newDate);
 			}
 		},
-		[selectedDate]
+		[selectedDate, controlledComponent, setSelectedDate, lastOnChange]
 	);
 
 	const minDate = useMemo(() => {
@@ -198,7 +198,7 @@ const DatePicker = function(props) {
 			return null;
 		}
 
-		if (typeof valueFormat === 'function') {
+		if (isFunction(valueFormat)) {
 			return valueFormat(selectedDate);
 		}
 
@@ -232,7 +232,7 @@ const DatePicker = function(props) {
 				setSelectedDate(newDate);
 			}
 		},
-		[selectedDate]
+		[selectedDate, controlledComponent, setSelectedDate, lastOnChange]
 	);
 
 	/**
@@ -302,6 +302,7 @@ const DatePicker = function(props) {
 				date: isValidDate(value) ? value : null
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
 	/**
@@ -323,6 +324,7 @@ const DatePicker = function(props) {
 				name: lastName.current
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedDate]);
 
 	/**
@@ -398,7 +400,7 @@ const DatePicker = function(props) {
 				{children && (
 					<>
 						<Line lineColor={lineColor} />
-						{typeof children === 'function'
+						{isFunction(children)
 							? children({
 									setSelectedDate,
 									setViewDate,

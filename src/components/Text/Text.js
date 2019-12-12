@@ -129,7 +129,7 @@ const StyledText = styled.span`
 	vertical-align: inherit;
 	line-height: inherit;
 	box-sizing: border-box;
-	cursor: ${({hasClick}) => (hasClick ? 'pointer' : 'unset')};
+	cursor: ${({hasClick, as}) => (hasClick || as === 'a' ? 'pointer' : 'unset')};
 	font-weight: inherit;
 	font-family: inherit;
 	font-size: inherit;

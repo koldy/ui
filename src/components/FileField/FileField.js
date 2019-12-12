@@ -180,7 +180,7 @@ const FileField = forwardRef(function(props, ref) {
 			handleBlur,
 			onChange,
 			focusField,
-			props
+      otherProps
 		]
 	);
 

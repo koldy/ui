@@ -133,7 +133,7 @@ const Box = forwardRef(function(props, ref) {
 		width,
 		height,
 		minWidth,
-		maxWidth,
+    minHeight,
 		maxWidth,
 		maxHeight,
 		userStyle,

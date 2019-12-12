@@ -80,7 +80,7 @@ const Nav = function() {
 				setViewDate(d);
 			}
 		},
-		[viewDate, selectedDate, disabled]
+		[viewDate, selectedDate, disabled, controlledComponent, minDate, maxDate, setSelectedDate, setViewDate, lastOnChange]
 	);
 
 	const handleMonthChange = useCallback(
@@ -122,7 +122,7 @@ const Nav = function() {
 				setViewDate(d);
 			}
 		},
-		[viewDate, selectedDate, minDate, maxDate, disabled]
+		[viewDate, selectedDate, minDate, maxDate, disabled, controlledComponent, setSelectedDate, setViewDate, lastOnChange]
 	);
 
 	const goToPreviousMonth = useCallback(
@@ -173,7 +173,7 @@ const Nav = function() {
 				setViewDate(d);
 			}
 		},
-		[viewDate, selectedDate, disabled]
+		[viewDate, selectedDate, disabled, minDate, maxDate, setViewDate, setSelectedDate, lastOnChange, controlledComponent]
 	);
 
 	const goToNextMonth = useCallback(
@@ -225,7 +225,7 @@ const Nav = function() {
 				setViewDate(d);
 			}
 		},
-		[viewDate, selectedDate, disabled]
+		[viewDate, selectedDate, disabled, setViewDate, setSelectedDate, lastOnChange, minDate, maxDate, controlledComponent]
 	);
 
 	return (

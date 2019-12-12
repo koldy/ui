@@ -230,7 +230,24 @@ const Select = forwardRef(function(props, ref) {
 			focusField,
 			otherProps
 		}),
-		[innerRef, name, disabled, containerCss, inputCss, focusField, multiple, visibleOptions, props]
+		[
+			innerRef,
+			name,
+			value,
+			defaultValue,
+			disabled,
+			multiple,
+			visibleOptions,
+			containerCss,
+			inputCss,
+			handleClick,
+			handleDoubleClick,
+			handleFocus,
+			handleBlur,
+			handleChange,
+			focusField,
+			otherProps
+		]
 	);
 
 	return (

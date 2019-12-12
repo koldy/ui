@@ -225,7 +225,24 @@ const TextField = forwardRef(function(props, ref) {
 			focusField,
 			otherProps
 		}),
-		[innerRef, type, name, placeholder, disabled, readOnly, inputCss, focusField, props]
+		[
+			innerRef,
+			type,
+			name,
+			value,
+			defaultValue,
+			placeholder,
+			disabled,
+			readOnly,
+			inputCss,
+			handleClick,
+			handleDoubleClick,
+			handleFocus,
+			handleBlur,
+			handleChange,
+			focusField,
+			otherProps
+		]
 	);
 
 	return (

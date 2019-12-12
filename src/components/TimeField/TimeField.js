@@ -20,7 +20,7 @@ import Text from '../InputField/Text';
 
 /**
  * Local context for sharing crucial pieces of data between the TimeField and the components down the line
- * @type {React.Context<null>}
+ * @type {string[]}
  */
 const PARTIALS = ['hours', 'minutes', 'seconds', 'milliseconds'];
 
@@ -346,7 +346,7 @@ const TimeField = function(props) {
 				}
 			}
 		];
-	}, [theme, variant, color, disabled, readOnly, m, mt, mr, mb, ml]);
+	}, [theme, variant, color, size, disabled, readOnly, m, mt, mr, mb, ml]);
 
 	/**
 	 * Useful methods
@@ -355,7 +355,7 @@ const TimeField = function(props) {
 	const clearValue = useCallback(() => dispatch({type: 'set-value', value: null}), []);
 
 	const focusField = useCallback(() => {
-		if (focusFieldRef && focusFieldRef.current && isFunction(focusFieldRef.current.focus())) {
+		if (focusFieldRef && focusFieldRef.current && isFunction(focusFieldRef.current.focus)) {
 			focusFieldRef.current.focus();
 		}
 	}, [focusFieldRef]);
@@ -547,7 +547,7 @@ const Input = function() {
 				});
 			}
 		},
-		[selectAllOnFocus, onFocus, date]
+		[selectAllOnFocus, onFocus, date, innerContainerRef]
 	);
 
 	const handleBlur = useCallback(
@@ -561,7 +561,7 @@ const Input = function() {
 				});
 			}
 		},
-		[onBlur, date]
+		[onBlur, date, innerContainerRef]
 	);
 
 	/**
@@ -580,7 +580,7 @@ const Input = function() {
 				});
 			}
 		},
-		[onClick, date]
+		[onClick, date, innerContainerRef]
 	);
 
 	const handleDoubleClick = useCallback(
@@ -595,7 +595,7 @@ const Input = function() {
 				});
 			}
 		},
-		[onDoubleClick, date]
+		[onDoubleClick, date, innerContainerRef]
 	);
 
 	/**
@@ -636,7 +636,7 @@ const Input = function() {
 				value: partialValue
 			});
 		}
-	}, []);
+	}, [dispatch, lastOnChange, innerContainerRef, controlledComponent]);
 
 	/**
 	 * ******************************** JUMP to NEXT / PREV **************************************
@@ -824,7 +824,7 @@ const Input = function() {
 
 			// no default
 		}
-	}, []);
+	}, [jumpToNext, jumpToPrevious, setPartialValue]);
 
 	/**
 	 * ******************************** AFTER ON KEY DOWN - ON CHANGE **************************************
@@ -876,7 +876,7 @@ const Input = function() {
 		} else {
 			setPartialValue(name, null);
 		}
-	}, []);
+	}, [jumpToNext, setPartialValue]);
 
 	const filteredInputCss = {...inputCss};
 	delete filteredInputCss.textAlign;
@@ -915,6 +915,7 @@ const Input = function() {
 				value: date
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [date]);
 
 	/**
@@ -935,6 +936,7 @@ const Input = function() {
 				value
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
 	return (

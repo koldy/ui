@@ -141,7 +141,7 @@ const Menu = forwardRef(function(props, ref) {
 				}
 			}
 		},
-		[internalValues, multiple, disabled]
+		[internalValues, multiple, disabled, controlledComponent]
 	);
 
 	/**
@@ -274,6 +274,7 @@ const Menu = forwardRef(function(props, ref) {
 				internalValues: isArray(value) ? value : [value]
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
 	/**
@@ -306,7 +307,7 @@ const Menu = forwardRef(function(props, ref) {
 			multiple,
 			inline
 		}),
-		[name, itemCss, lineCss, disabled, internalValues, pickValue, multiple]
+		[name, itemCss, lineCss, disabled, internalValues, pickValue, multiple, inline]
 	);
 
 	return (

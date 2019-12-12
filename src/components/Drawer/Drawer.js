@@ -113,14 +113,16 @@ const Drawer = function(props) {
 			backgroundColor: theme.processColor(backgroundColor),
 			...positionCss
 		};
-	}, [backgroundColor, size, position, theme, entryAnimationDuration]);
+	}, [backgroundColor, size, position, theme]);
 
 	useEffect(() => {
 		if (ref.current) {
 			ref.current.style.zIndex = register(ref.current);
 		}
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 		return () => unregister(ref.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [theme]);
 
 	if (overlayBackgroundColor) {
