@@ -17,7 +17,7 @@ import {fadeInAnimation} from '../../animations/fade';
 import {puffInAnimation} from '../../animations/puffCenter';
 
 const Toast = function(props) {
-	const {children, position, entryAnimation = 'fade', onClose = null} = props;
+	const {children, position, entryAnimation = 'fade', onClose = null, ...otherProps} = props;
 
 	const {appIndex, theme} = useContext(ThemeContext);
 	const defaults = theme.json('toast.defaults');
@@ -66,7 +66,7 @@ const Toast = function(props) {
 
 	if (targetExists) {
 		return createPortal(
-			<StyledToast animation={animation}>{isFunction(children) ? children({closeFn: onClose}) : children}</StyledToast>,
+			<StyledToast animation={animation} {...otherProps}>{isFunction(children) ? children({closeFn: onClose}) : children}</StyledToast>,
 			target
 		);
 	}

@@ -12,7 +12,7 @@ import InputFieldContext from './InputFieldContext';
  * @constructor
  */
 const Text = function(props) {
-	const {children, flex, width, alignSelf, textAlign = 'unset', p, pt, pr, pb, pl} = props;
+	const {children, flex, width, alignSelf, textAlign = 'unset', p, pt, pr, pb, pl, ...otherProps} = props;
 	const {disabled, focusField, inputCss} = useContext(InputFieldContext);
 
 	const paddingCss = {
@@ -40,6 +40,7 @@ const Text = function(props) {
 			cssTextAlign={textAlign}
 			paddingCss={paddingCss}
 			onClick={handleClick}
+			{...otherProps}
 		>
 			{children}
 		</StyledText>

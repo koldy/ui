@@ -9,11 +9,13 @@ export default {
 			github: 'https://github.com/vkoudela'
 		}
 	],
-	version: '0.1.5',
 	html: {},
 	body: {},
 	zIndex: 5000,
 	mediaQueries: {
+		mobile: '(max-width: 787px)',
+		tablet: '(min-width: 788px) and (max-width: 991px)',
+		desktop: '(min-width: 992px)',
 		xs: '(max-width: 499px)',
 		sm: '(min-width: 500px) and (max-width: 787px)',
 		md: '(min-width: 788px) and (max-width: 991px)',

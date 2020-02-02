@@ -22,7 +22,8 @@ const ProgressBar = function(props) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const {containerStyle, containerCss, barCss, padding} = useMemo(() => {
@@ -102,7 +103,7 @@ const ProgressBar = function(props) {
 	}
 
 	return (
-		<StyledProgressBar containerCss={containerCss} barCss={barCss} padding={padding} style={containerStyle}>
+		<StyledProgressBar containerCss={containerCss} barCss={barCss} padding={padding} style={containerStyle} {...otherProps}>
 			<div style={barStyle} />
 		</StyledProgressBar>
 	);

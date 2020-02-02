@@ -45,7 +45,7 @@ export const Documentation = function() {
 			</DocsCode>
 			<DocsText>
 				This is example of file field without any props. It looks nothing special, but it's actually very powerful component ready to be
-				customized much more than you expect. If you click on it, you'll be asked to select file, but after that, nothing fill happen.
+				customized much more than you expect. If you click on it, you'll be asked to select file, but after that, nothing will happen.
 			</DocsText>
 			<p>&nbsp;</p>
 			<DocsText>

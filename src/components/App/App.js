@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {createGlobalStyle, css} from 'styled-components';
 
@@ -9,11 +9,8 @@ import useToaster from '../Toast/useToaster';
 import Toast from '../Toast/Toast';
 import MediaQueriesDetector from '../MediaQuery/MediaQueriesDetector';
 
-let appCounter = 0;
-
 const App = function(props) {
-	const {children = null, theme, useGlobalCss = false} = props;
-	const [appIndex] = useState((appCounter += 1));
+	const {children = null, theme, useGlobalCss = false, id: appIndex = 1} = props;
 	const [addToast, toasters, removeToast, removeAllToasts] = useToaster();
 
 	const GlobalStyleComponent = createGlobalStyle`
@@ -42,7 +39,8 @@ const App = function(props) {
 App.propTypes = {
 	children: PropTypes.node,
 	theme: PropTypes.instanceOf(ThemeManager).isRequired,
-	useGlobalCss: PropTypes.bool
+	useGlobalCss: PropTypes.bool,
+	id: PropTypes.number
 };
 
 export default App;

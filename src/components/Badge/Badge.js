@@ -57,21 +57,8 @@ const Badge = forwardRef(function(props, ref) {
 	}
 
 	let variantCss = null;
-	// depending on variant, let's process it; it has to be either object or function
-	// TODO: Remove the ability for variant to be a function
-	if (typeof useVariant === 'function') {
-		// if it's a function, then return value must be object, otherwise it's invalid
-
-		variantCss = useVariant({theme, ...props});
-
-		if (!isObject(variantCss)) {
-			theme.warning(`Variant function from badge.variant.${variantKey} returned invalid value; expected object, got: ${typeof variantCss}`);
-			variantCss = null;
-		} else {
-			// it's valid, let's process it
-			variantCss = theme.processColors(variantCss);
-		}
-	} else if (isObject(useVariant)) {
+	// depending on variant, let's process it; it has to be object
+	if (isObject(useVariant)) {
 		variantCss = theme.processColors(useVariant);
 	} else {
 		theme.warning(`Can not process badge.variant.${variantKey}; value not function nor object`);

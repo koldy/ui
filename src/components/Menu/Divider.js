@@ -3,9 +3,9 @@ import styled, {css} from 'styled-components';
 
 import MenuContext from './MenuContext';
 
-const Divider = function() {
+const Divider = function({...otherProps}) {
 	const {lineCss} = useContext(MenuContext);
-	return <Line lineCss={lineCss} />;
+	return <Line lineCss={lineCss} {...otherProps} />;
 };
 
 const Line = styled.div`

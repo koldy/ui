@@ -33,7 +33,8 @@ const Drawer = function(props) {
 		backgroundColor = null,
 		size = defaultSize,
 		position,
-		onClose
+		onClose,
+		...otherProps
 	} = props;
 
 	const ref = useRef(null);
@@ -136,6 +137,7 @@ const Drawer = function(props) {
 					onClick={stopPropagation}
 					onDoubleClick={stopPropagation}
 					styleCss={styleCss}
+					{...otherProps}
 				>
 					{content}
 				</Container>
@@ -155,6 +157,7 @@ const Drawer = function(props) {
 			onDoubleClick={stopPropagation}
 			styleCss={styleCss}
 			zIndex={null}
+			{...otherProps}
 		>
 			{content}
 		</Container>,

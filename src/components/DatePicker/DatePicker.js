@@ -109,7 +109,8 @@ const DatePicker = function(props) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const lastOnChange = useRef(null);
@@ -371,6 +372,7 @@ const DatePicker = function(props) {
 			onClick={preventDefaultAndStopPropagation}
 			onDoubleClick={preventDefaultAndStopPropagation()}
 			ref={containerRef}
+			{...otherProps}
 		>
 			<DatePickerContext.Provider value={context}>
 				{name && <input type="hidden" name={name} value={hiddenValue} />}

@@ -226,7 +226,8 @@ const TimeField = function(props) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	if (value !== undefined && defaultValue === undefined && !onChange) {
@@ -432,7 +433,7 @@ const TimeField = function(props) {
 	}
 
 	return (
-		<Container containerCss={containerCss} ref={innerContainerRef}>
+		<Container containerCss={containerCss} ref={innerContainerRef} {...otherProps}>
 			{name && <input type="hidden" name={name} value={fieldValue} />}
 			<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 		</Container>

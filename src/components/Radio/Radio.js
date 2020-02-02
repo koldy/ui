@@ -129,7 +129,8 @@ const Option = forwardRef(function(props, ref) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const {name, disabled: allDisabled = false, value: radioValue, setValue, Input, inputProps} = useContext(RadioContext);
@@ -160,6 +161,7 @@ const Option = forwardRef(function(props, ref) {
 				onChange={handleChange}
 				onDoubleClick={stopPropagation}
 				checked={radioValue === optionValue}
+				{...otherProps}
 			/>
 			<span />
 		</Input>

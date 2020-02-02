@@ -78,7 +78,8 @@ const Menu = forwardRef(function(props, ref) {
 		mt = null,
 		mr = null,
 		mb = null,
-		ml = null
+		ml = null,
+		...otherProps
 	} = props;
 
 	const [{internalValues}, dispatch] = useReducer(reducer, {value, defaultValue}, init);
@@ -311,7 +312,7 @@ const Menu = forwardRef(function(props, ref) {
 	);
 
 	return (
-		<StyledMenu ref={ref} menuCss={menuCss} inline={inline} style={menuStyle}>
+		<StyledMenu ref={ref} menuCss={menuCss} inline={inline} style={menuStyle} {...otherProps}>
 			{htmlValue}
 			<MenuContext.Provider value={context}>{children}</MenuContext.Provider>
 		</StyledMenu>

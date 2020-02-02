@@ -27,7 +27,8 @@ const Box = function(props) {
 		pt = null,
 		pr = null,
 		pb = null,
-		pl = null
+		pl = null,
+		...otherProps
 	} = props;
 
 	const marginCss = getStyleForMargins({m, mt, mr, mb, ml});
@@ -43,6 +44,7 @@ const Box = function(props) {
 			cssTextAlign={textAlign}
 			marginCss={marginCss}
 			paddingCss={paddingCss}
+			{...otherProps}
 		>
 			{typeof children === 'function' ? children({focusField}) : children}
 		</StyledBox>

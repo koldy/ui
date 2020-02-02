@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui-dark-theme",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Koldy UI Dark Theme",
 	"main": "lib/index.js",
 	"scripts": {
@@ -19,9 +19,9 @@
 		"directory": "themes/koldy-ui-dark-theme"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.7.0",
-		"@babel/core": "^7.7.2",
-		"@babel/preset-env": "^7.7.1"
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.8.4",
+		"@babel/preset-env": "^7.8.4"
 	},
 	"files": [
 		"lib/*"
