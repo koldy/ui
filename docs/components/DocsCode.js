@@ -247,8 +247,9 @@ const Pre = styled.pre`
 	display: block;
 	font-size: 1rem !important;
 
-	> code {
+	code {
 		font-size: 0.85rem !important;
+		background-color: transparent !important;
 	}
 `;
 

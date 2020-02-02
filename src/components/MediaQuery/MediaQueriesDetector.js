@@ -72,7 +72,7 @@ const MediaQueriesDetector = function(props) {
 				mediaQueryData[`is${brk}`] = typeof matches === 'boolean' ? matches : false;
 			});
 		} else {
-			theme.warning('window.matchMedia is not available, all media queries will be set to null');
+			theme.debug('window.matchMedia is not available, all media queries will be set to null');
 
 			mediaQueryData.portrait = innerHeight > innerWidth;
 			mediaQueryData.landscape = innerWidth > innerHeight;

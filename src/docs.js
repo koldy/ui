@@ -33,6 +33,13 @@ import {
 import {title as ColorsTitle, slug as ColorsSlug, json as ColorsJson, Documentation as ColorsDocumentation} from '../docs/Colors.docs';
 
 import {
+	title as ColumnLayoutTitle,
+	slug as ColumnLayoutSlug,
+	json as ColumnLayoutJson,
+	Documentation as ColumnLayoutDocumentation
+} from './components/ColumnLayout/ColumnLayout.docs';
+
+import {
 	title as DrawerTitle,
 	slug as DrawerSlug,
 	json as DrawerJson,
@@ -246,6 +253,13 @@ export const components = [
 		json: CheckboxJson,
 		Documentation: CheckboxDocumentation,
 		group: INPUT_COMPONENT
+	},
+	{
+		title: ColumnLayoutTitle,
+		slug: ColumnLayoutSlug,
+		json: ColumnLayoutJson,
+		Documentation: ColumnLayoutDocumentation,
+		group: COMPONENT
 	},
 	{
 		title: DrawerTitle,
