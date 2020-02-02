@@ -111,7 +111,7 @@ export const Documentation = function() {
 						<code>stretch</code>.
 					</p>
 				</Props.Prop>
-				<Props.Prop name="textAlign" type="string">
+				<Props.Prop name="textAlign" type="string" defaultValue="inherit">
 					<p>
 						This is shorthand for aligning text within the Flexbox.Item. Use one of <code>left</code>, <code>center</code>,{' '}
 						<code>right</code> or <code>justify</code> values.

@@ -22,7 +22,7 @@ const BoxDocs = function({component}) {
 				of this component, then use this prop. It is standard CSS <code>align-self</code> property, so allowed values are:
 				<AvailableKeys data={['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']} />
 			</Props.Prop>
-			<Props.Prop name="textAlign" type="string">
+			<Props.Prop name="textAlign" type="string" defaultValue="inherit">
 				If this component is wider then its inner content, then you may want to set the <code>text-align</code> explicitly.
 			</Props.Prop>
 			<Props.Prop name="p" />

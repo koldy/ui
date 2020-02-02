@@ -148,7 +148,7 @@ const StyledFlexboxItem = styled.div`
 	order: ${({order}) => order || 'unset'};
 	align-self: ${({alignSelf}) => alignSelf || 'unset'};
 	flex: ${({flex}) => flex || 'unset'};
-	text-align: ${({textAlignValue}) => textAlignValue || 'unset'};
+	text-align: ${({textAlignValue}) => textAlignValue || 'inherit'};
 `;
 
 FlexboxItem.propTypes = {
@@ -156,7 +156,7 @@ FlexboxItem.propTypes = {
 	order: PropTypes.number,
 	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
-	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify']),
+	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify', 'inherit', 'initial']),
 
 	// some standard box props
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

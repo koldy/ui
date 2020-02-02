@@ -435,8 +435,8 @@ export const Documentation = function() {
 				<Props.Prop name="width" type={['string', 'number']}>
 					Set the cell width. If number is passed, it'll be treated as pixels. If string is passed, it'll be used as is.
 				</Props.Prop>
-				<Props.Prop name="textAlign" type="string">
-					One of: <code>left</code>, <code>center</code>, <code>right</code>, <code>justify</code>
+				<Props.Prop name="textAlign" type="string" defaultValue="inherit">
+					One of: <code>left</code>, <code>center</code>, <code>right</code>, <code>justify</code>, <code>inherit</code>
 				</Props.Prop>
 				<Props.Prop name="verticalAlign" type="string">
 					One of: <code>baseline</code>, <code>sub</code>, <code>super</code>, <code>text-top</code>, <code>text-bottom</code>,{' '}
@@ -469,7 +469,7 @@ export const Documentation = function() {
 				<Props.Prop name="width" type={['string', 'number']}>
 					Set the cell width. If number is passed, it'll be treated as pixels. If string is passed, it'll be used as is.
 				</Props.Prop>
-				<Props.Prop name="textAlign" type="string">
+				<Props.Prop name="textAlign" type="string" defaultValue="inherit">
 					One of: <code>left</code>, <code>center</code>, <code>right</code>, <code>justify</code>
 				</Props.Prop>
 				<Props.Prop name="verticalAlign" type="string">

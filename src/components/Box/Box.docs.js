@@ -87,9 +87,9 @@ export const Documentation = function() {
 						background's prop value, then you'll get the color definition from the theme instead of #ff0000.
 					</p>
 				</Props.Prop>
-				<Props.Prop name="textAlign" type="string">
-					This is shorthand for aligning text within the box. Use one of <code>left</code>, <code>center</code>, <code>right</code> or{' '}
-					<code>justify</code> values.
+				<Props.Prop name="textAlign" type="string" defaultValue="inherit">
+					This is shorthand for aligning text within the box. Use one of <code>left</code>, <code>center</code>, <code>right</code>,{' '}
+					<code>justify</code> or <code>inherit</code> values.
 				</Props.Prop>
 				<Props.Prop name="position" type="string" defaultValue="static">
 					<p>

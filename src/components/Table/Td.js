@@ -53,7 +53,7 @@ Td.propTypes = {
 	onDoubleClick: PropTypes.func,
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify']),
+	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify', 'inherit', 'initial']),
 	verticalAlign: PropTypes.oneOf(['baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom']),
 	colSpan: PropTypes.number,
 	rowSpan: PropTypes.number,

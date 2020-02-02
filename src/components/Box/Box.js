@@ -181,7 +181,7 @@ Box.propTypes = {
 	minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	minHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	background: PropTypes.string,
-	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify']),
+	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify', 'inherit', 'initial']),
 	position: PropTypes.oneOf(['static', 'absolute', 'fixed', 'relative', 'sticky', 'initial', 'inherit']),
 	// eslint-disable-next-line
 	style: PropTypes.object,

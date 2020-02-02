@@ -12,7 +12,7 @@ import InputFieldContext from './InputFieldContext';
  * @constructor
  */
 const Text = function(props) {
-	const {children, flex, width, alignSelf, textAlign = 'unset', p, pt, pr, pb, pl, ...otherProps} = props;
+	const {children, flex, width, alignSelf, textAlign = 'inherit', p, pt, pr, pb, pl, ...otherProps} = props;
 	const {disabled, focusField, inputCss} = useContext(InputFieldContext);
 
 	const paddingCss = {
@@ -52,7 +52,7 @@ Text.propTypes = {
 	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
-	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'unset']),
+	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'initial']),
 
 	// padding:
 	p: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

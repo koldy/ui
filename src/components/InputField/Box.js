@@ -17,7 +17,7 @@ const Box = function(props) {
 		flex,
 		width,
 		alignSelf,
-		textAlign = 'unset',
+		textAlign = 'inherit',
 		m = null,
 		mt = null,
 		mr = null,
@@ -56,7 +56,7 @@ Box.propTypes = {
 	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
-	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'unset']),
+	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'unset', 'initial']),
 
 	// margins:
 	m: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
