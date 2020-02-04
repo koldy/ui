@@ -135,6 +135,7 @@ const StyledText = styled.span`
 	font-size: inherit;
 	margin: 0;
 	padding: 0;
+	text-decoration: none;
 	margin-block-start: 0;
 	margin-block-end: 0;
 	margin-inline-start: 0;

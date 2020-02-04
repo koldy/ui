@@ -55,7 +55,7 @@ ColumnLayout.propTypes = {
 	breakOn: PropTypes.bool,
 	space: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	gridTemplateColumns: PropTypes.string,
-	align: PropTypes.oneOf('stretch', 'start', 'end', 'center'),
+	align: PropTypes.oneOf(['stretch', 'start', 'end', 'center']),
 
 	m: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	mt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

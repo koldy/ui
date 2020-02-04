@@ -251,6 +251,20 @@ export const Documentation = function() {
 					<DocsCode.Code>{`<Text variant="${variant}">I'm using color "${variant}" from theme.</Text>`}</DocsCode.Code>
 				</DocsCode>
 			))}
+			<DocsSubTitle hash="other-examples">Other examples</DocsSubTitle>
+			<DocsText>
+				One of the common examples for using the Text is usage with anchor (<code>&lt;a&gt;</code>).
+			</DocsText>
+			<DocsCode>
+				<DocsCode.Example>
+					<Text as="a" href="https://koldy.io" target="_blank" rel="noopener noreferrer">
+						I'm external link
+					</Text>
+				</DocsCode.Example>
+				<DocsCode.Code>
+					{'<Text as="a" href="https://koldy.io" target="_blank" rel="noopener noreferrer">I\'m external link</Text>'}
+				</DocsCode.Code>
+			</DocsCode>
 		</>
 	);
 };

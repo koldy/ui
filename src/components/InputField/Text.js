@@ -2,7 +2,7 @@ import React, {useContext, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getPixelsOrString, getStyleForPaddings, isEmpty} from '../../util/helpers';
+import { getPixelsOrString, getStyleForPaddings, isEmpty, isFunction } from "../../util/helpers";
 import InputFieldContext from './InputFieldContext';
 
 /**
@@ -25,7 +25,7 @@ const Text = function(props) {
 			e.preventDefault();
 			e.stopPropagation();
 
-			if (typeof focusField === 'function' && !disabled) {
+			if (isFunction(focusField) && !disabled) {
 				focusField();
 			}
 		},
