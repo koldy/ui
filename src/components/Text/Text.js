@@ -110,8 +110,8 @@ const Text = forwardRef(function(props, ref) {
 	return (
 		<StyledText
 			ref={ref}
-			onClick={handleClick}
-			onDoubleClick={handleDoubleClick}
+			onClick={isFunction(onClick) ? handleClick : undefined}
+			onDoubleClick={isFunction(onDoubleClick) ? handleDoubleClick : undefined}
 			hasClick={hasClick}
 			textCss={textCss}
 			blockCss={block}

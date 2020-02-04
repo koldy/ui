@@ -157,8 +157,8 @@ const Box = forwardRef(function(props, ref) {
 	return (
 		<StyledBox
 			ref={innerRef}
-			onClick={handleClick}
-			onDoubleClick={handleDoubleClick}
+			onClick={isFunction(onClick) ? handleClick : undefined}
+			onDoubleClick={isFunction(onDoubleClick) ? handleDoubleClick : undefined}
 			textAlignValue={textAlign}
 			positionValue={position}
 			style={style}

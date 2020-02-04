@@ -130,10 +130,10 @@ const Badge = forwardRef(function(props, ref) {
 
 	const handleClick = useCallback(
 		(e) => {
-			e.preventDefault();
-			e.stopPropagation();
-
 			if (isFunction(onClick)) {
+				e.preventDefault();
+				e.stopPropagation();
+
 				onClick({
 					element: innerRef.current
 				});
@@ -144,10 +144,10 @@ const Badge = forwardRef(function(props, ref) {
 
 	const handleDoubleClick = useCallback(
 		(e) => {
-			e.preventDefault();
-			e.stopPropagation();
-
 			if (isFunction(onDoubleClick)) {
+				e.preventDefault();
+				e.stopPropagation();
+
 				onDoubleClick({
 					element: innerRef.current
 				});
@@ -165,8 +165,8 @@ const Badge = forwardRef(function(props, ref) {
 			sizeCss={sizeCss}
 			style={style}
 			hasClick={onClick !== null}
-			onClick={handleClick}
-			onDoubleClick={handleDoubleClick}
+			onClick={isFunction(onClick) ? handleClick : undefined}
+			onDoubleClick={isFunction(onDoubleClick) ? handleDoubleClick : undefined}
 			{...otherProps}
 		>
 			{children}

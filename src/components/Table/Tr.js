@@ -22,7 +22,9 @@ const Tr = function(props) {
 
 	const rowContext = {
 		onClick,
-		onDoubleClick
+		onDoubleClick,
+		hasClick: isFunction(userOnClick),
+		hasDoubleClick: isFunction(userOnDoubleClick)
 	};
 
 	return (

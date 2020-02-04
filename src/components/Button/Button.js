@@ -199,10 +199,10 @@ const Button = forwardRef(function(props, ref) {
 
 	const handleDoubleClick = useCallback(
 		(e) => {
-			e.preventDefault();
 			e.stopPropagation();
 
 			if (isFunction(onDoubleClick)) {
+				e.preventDefault();
 				onDoubleClick({
 					element: innerRef.current,
 					name: lastName.current
@@ -246,10 +246,10 @@ const Button = forwardRef(function(props, ref) {
 		<StyledButton
 			ref={innerRef}
 			type={selectedType}
-			onClick={handleClick}
-			onDoubleClick={handleDoubleClick}
-			onFocus={handleFocus}
-			onBlur={handleBlur}
+			onClick={isFunction(onClick) ? handleClick : undefined}
+			onDoubleClick={isFunction(onDoubleClick) ? handleDoubleClick : undefined}
+			onFocus={isFunction(onFocus) ? handleFocus : undefined}
+			onBlur={isFunction(onBlur) ? handleBlur : undefined}
 			name={name}
 			disabled={disabled}
 			theme={theme}

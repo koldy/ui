@@ -25,7 +25,9 @@ const Cell = function(props) {
 		pl = null,
 		...otherProps
 	} = props;
-	const {onClick: onRowClick, onDoubleClick: onRowDoubleClick} = useContext(RowContext);
+	const {onClick: onRowClick, onDoubleClick: onRowDoubleClick, hasClick: hasRowClick, hasDoubleClick: hasRowDoubleClick} = useContext(
+		RowContext
+	);
 
 	const handleClick = useCallback(
 		(e) => {
@@ -66,8 +68,8 @@ const Cell = function(props) {
 
 	return (
 		<StyledCell
-			onClick={handleClick}
-			onDoubleClick={handleDoubleClick}
+			onClick={isFunction(onClick) || hasRowClick ? handleClick : undefined}
+			onDoubleClick={isFunction(onDoubleClick) || hasRowDoubleClick ? handleDoubleClick : undefined}
 			textAlign={textAlign}
 			verticalAlign={verticalAlign}
 			colSpan={colSpan}
