@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui",
-	"version": "0.3.0-beta.5",
+	"version": "0.3.0-beta.6",
 	"description": "Koldy UI - React UI component library",
 	"main": "lib/index.js",
 	"module": "esm/index.js",
@@ -28,7 +28,7 @@
 		"prop-types": "^15.7.2",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
-		"styled-components": "^5.0.0"
+		"styled-components": "^5.0.1"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.8.4",

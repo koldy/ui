@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {createGlobalStyle, css} from 'styled-components';
 
 import ThemeManager from '../../theme/ThemeManager';
 import ThemeContext from '../../theme/ThemeContext';
@@ -8,22 +7,27 @@ import Toasts from '../Toast/Toasts';
 import useToaster from '../Toast/useToaster';
 import Toast from '../Toast/Toast';
 import MediaQueriesDetector from '../MediaQuery/MediaQueriesDetector';
+import {isEmpty, isObject} from '../../util/helpers';
+import GlobalHtmlCss from './GlobalHtmlCss';
+import GlobalBodyCss from './GlobalBodyCss';
 
 const App = function(props) {
-	const {children = null, theme, useGlobalCss = false, id: appIndex = 1} = props;
+	const {children = null, theme, id: appIndex = 1} = props;
 	const [addToast, toasters, removeToast, removeAllToasts] = useToaster();
-
-	const GlobalStyleComponent = createGlobalStyle`
-		${useGlobalCss && css(theme.json('html'))}
-		${useGlobalCss && css(theme.json('body'))}
-	`;
 
 	const contextValues = {theme, appIndex, addToast, removeToast, removeAllToasts};
 
+	const htmlCss = theme.json('html');
+	const bodyCss = theme.json('body');
+
+	const hasHtmlCss = isObject(htmlCss) && !isEmpty(htmlCss);
+	const hasBodyCss = isObject(bodyCss) && !isEmpty(bodyCss);
+
 	return (
 		<ThemeContext.Provider value={contextValues}>
+			{hasHtmlCss && <GlobalHtmlCss htmlCss={htmlCss} />}
+			{hasBodyCss && <GlobalBodyCss bodyCss={bodyCss} />}
 			<MediaQueriesDetector>
-				<GlobalStyleComponent />
 				{children}
 				<Toasts appIndex={appIndex} />
 				{toasters.map(({componentRenderProp, id, position, entryAnimation, closeFn}) => (
@@ -39,8 +43,22 @@ const App = function(props) {
 App.propTypes = {
 	children: PropTypes.node,
 	theme: PropTypes.instanceOf(ThemeManager).isRequired,
-	useGlobalCss: PropTypes.bool,
 	id: PropTypes.number
 };
+
+// for some unknown reason, global styles are created on each render and updating the style
+// through theme doesn't work as expected in ^5.0.0; will fix it manually
+
+// const GlobalHtmlStyle = createGlobalStyle`
+//   html {
+//     ${({html}) => css(html)}
+//   }
+// `;
+//
+// const GlobalBodyStyle = createGlobalStyle`
+//   body {
+//     ${({body}) => body}
+//   }
+// `;
 
 export default App;
