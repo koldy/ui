@@ -177,12 +177,11 @@ TextArea.propTypes = {
 const Container = styled.span`
 	display: inline-block;
 	vertical-align: middle;
-	border: 2px solid #cfcfcf;
+	border: none;
 	height: auto;
 	padding: 0 !important;
 	box-sizing: border-box;
 	position: relative;
-	transition: all 300ms ease-in-out 10ms;
 	${({containerCss}) => css(containerCss)}
 `;
 
@@ -209,7 +208,7 @@ const Field = styled.textarea`
 
 	text-shadow: none;
 	cursor: text;
-	white-space: pre;
+	white-space: pre-line;
 	align-items: center;
 	text-align: start;
 	text-indent: 0;

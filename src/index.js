@@ -28,6 +28,7 @@ import ThemeManager from './theme/ThemeManager';
 import ThemeError from './theme/ThemeError';
 
 // hooks
+import useBoolean from './hooks/useBoolean';
 import useMediaQueries from './components/MediaQuery/useMediaQueries';
 
 export {
@@ -38,13 +39,13 @@ export {
 	Box,
 	Button,
 	Checkbox,
-  ColumnLayout,
+	ColumnLayout,
 	DatePicker,
 	Drawer,
 	FileField,
 	Flexbox,
 	Menu,
-  ProgressBar,
+	ProgressBar,
 	Overlay,
 	Radio,
 	Select,
@@ -59,5 +60,6 @@ export {
 	ThemeError,
 	ThemeManager,
 	// hooks
+	useBoolean,
 	useMediaQueries
 };

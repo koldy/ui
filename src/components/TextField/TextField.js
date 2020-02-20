@@ -307,7 +307,6 @@ const Container = styled.span`
 	padding: 0 !important;
 	box-sizing: border-box;
 	position: relative;
-	transition: all 300ms ease-in-out 10ms;
 	${({containerCss}) => css(containerCss)}
 `;
 
@@ -382,7 +381,6 @@ const Field = styled.input`
 	border-radius: 0;
 	background: transparent;
 	word-spacing: normal;
-	transition: all 300ms ease-in-out 10ms;
 
 	text-shadow: none;
 	cursor: text;

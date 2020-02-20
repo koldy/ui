@@ -299,7 +299,6 @@ const Container = styled.span`
 	padding: 0 !important;
 	box-sizing: border-box;
 	position: relative;
-	transition: all 300ms ease-in-out 10ms;
 	${({containerCss}) => css(containerCss)}
 	
 	${({minWidthCss}) => (minWidthCss !== null ? `min-width: ${getPixelsOrString(minWidthCss)};` : '')}
@@ -386,7 +385,6 @@ const Field = styled.span`
 		background: transparent;
 		word-spacing: normal;
 		outline: none;
-		transition: width 300ms ease-in-out 50ms, opacity 200ms ease, background-color 300ms ease-in-out;
 		overflow: hidden;
 
 		text-shadow: none;
