@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import ThemeContext from '../../theme/ThemeContext';
 import {addDocumentEvent, emptyFn, isFunction, removeDocumentEvent} from '../../util/helpers';
 import useZIndex from '../../hooks/useZIndex';
-import { fadeInAnimation } from "../../animations/fade";
+import {fadeInAnimation} from '../../animations/fade';
 
 const overlays = []; // the array of all active overlays
 const closeFunctions = {}; // index:fn pairs of closing functions called from ESC key
@@ -166,7 +166,6 @@ const Overlay = function(props) {
 			...userStyle
 		};
 	}, [theme, backgroundColor, userStyle]);
-
 
 	return createPortal(
 		<Wrapper

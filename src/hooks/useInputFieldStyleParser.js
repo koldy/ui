@@ -34,7 +34,20 @@ export default ({
 				`Wrong <TextField variant="${variant}" /> - "${variant}" is not properly defined in theme.inputField.variant.${variant}`
 			);
 		}
-		const {borderRadius = null, borderWidth = null, fontFamily = null, textAlign = 'start'} = variants[variant];
+		const {
+			borderRadius = null,
+			borderWidth = null,
+			borderStyle = null,
+			fontFamily = null,
+			textAlign = 'start',
+			transition = null,
+			transitionDelay = null,
+			transitionDuration = null,
+			transitionProperty = null,
+			transform = null,
+			transformOrigin = null,
+			transformStyle = null
+		} = variants[variant];
 
 		// =============================    SIZE    ========================================
 		const sizes = theme.json('inputField.size');
@@ -113,12 +126,20 @@ export default ({
 				cursor: disabled ? 'not-allowed' : 'unset',
 				borderRadius,
 				borderWidth,
+				borderStyle,
 				borderColor: theme.processColor(borderColor),
 				background: theme.processColor(background),
 				boxShadow: theme.processColor(boxShadow),
 				outline,
 				outlineOffset,
 				backgroundSize,
+				transition,
+				transitionDelay,
+				transitionDuration,
+				transitionProperty,
+				transform,
+				transformOrigin,
+				transformStyle,
 				'&:hover': {
 					backgroundColor: theme.processColor(hoverBackground),
 					borderColor: theme.processColor(hoverBorderColor),

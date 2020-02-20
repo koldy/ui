@@ -368,17 +368,17 @@ export default {
 			sm: {
 				fontSize: '0.6em',
 				padding: '0.1em 0.3em',
-				minWidth: '1.9em'
+				minWidth: '1.8em'
 			},
 			md: {
-				fontSize: '0.7em',
+				fontSize: '0.77em',
 				padding: '0.2em 0.4em',
-				minWidth: '1.9em'
+				minWidth: '1.95em'
 			},
 			lg: {
-				fontSize: '0.8em',
+				fontSize: '1em',
 				padding: '0.3em 0.5em',
-				minWidth: '1.9em'
+				minWidth: '2.2em'
 			}
 		}
 	},
@@ -570,17 +570,20 @@ export default {
 				// these are the only CSS values we're going to apply
 				borderRadius: 'none',
 				borderWidth: '1px',
+				borderStyle: 'solid',
 				fontFamily: undefined,
 				textAlign: 'left'
 			},
 			rounded: {
 				borderRadius: '4px',
 				borderWidth: '1px',
+				borderStyle: 'solid',
 				fontFamily: undefined
 			},
 			round: {
 				borderRadius: '2rem',
 				borderWidth: '1px',
+				borderStyle: 'solid',
 				fontFamily: undefined
 			}
 		},
