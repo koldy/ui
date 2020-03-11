@@ -15,7 +15,8 @@ import {
 	isValidDate,
 	preventDefaultAndStopPropagation,
 	dateToISOString,
-	dateToISOStringWithMilliseconds
+	dateToISOStringWithMilliseconds,
+	isNumberOrString
 } from '../../util/helpers';
 import Nav from './Nav';
 import ThemeError from '../../theme/ThemeError';
@@ -200,7 +201,18 @@ const DatePicker = function(props) {
 		}
 
 		if (isFunction(valueFormat)) {
-			return valueFormat(selectedDate);
+			let customFormat = null;
+			try {
+				customFormat = valueFormat(selectedDate);
+
+				if (isNumberOrString(customFormat)) {
+					return customFormat;
+				}
+
+				return '';
+			} catch (e) {
+				theme.error('Function for getting custom value format in DatePicker failed', e);
+			}
 		}
 
 		if (isValidDate(selectedDate)) {
@@ -209,7 +221,7 @@ const DatePicker = function(props) {
 		}
 
 		return '';
-	}, [name, selectedDate, valueFormat]);
+	}, [name, selectedDate, valueFormat, theme]);
 
 	const handleTimeChange = useCallback(
 		({value: timeDate}) => {

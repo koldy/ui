@@ -6,7 +6,7 @@ import Box from '../InputField/Box';
 import Text from '../InputField/Text';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, isNumberOrString} from '../../util/helpers';
+import {getPixelsOrString, isControlledComponent, isNumberOrString} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
@@ -213,6 +213,7 @@ const TextField = forwardRef(function(props, ref) {
 			name,
 			value,
 			defaultValue,
+      controlledComponent: isControlledComponent(value, defaultValue),
 			placeholder,
 			disabled,
 			readOnly,
@@ -323,6 +324,7 @@ const Input = function(props) {
 		name,
 		value,
 		defaultValue,
+    controlledComponent,
 		placeholder,
 		disabled,
 		readOnly,
@@ -340,8 +342,8 @@ const Input = function(props) {
 			ref={innerRef}
 			type={type}
 			name={name}
-			value={value || undefined}
-			defaultValue={defaultValue || undefined}
+			value={controlledComponent ? value : undefined}
+			defaultValue={!controlledComponent ? defaultValue : undefined}
 			placeholder={placeholder}
 			disabled={disabled}
 			readOnly={readOnly}
