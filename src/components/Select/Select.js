@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, isFunction, isNumberOrString} from '../../util/helpers';
+import {getPixelsOrString, isControlledComponent, isFunction, isNumberOrString} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
@@ -217,6 +217,7 @@ const Select = forwardRef(function(props, ref) {
 			name,
 			value,
 			defaultValue,
+			controlledComponent: isControlledComponent(value, defaultValue),
 			disabled,
 			multiple,
 			visibleOptions,
@@ -316,9 +317,10 @@ const Input = function(props) {
 		innerRef,
 		name,
 		value,
+		defaultValue,
+		controlledComponent,
 		multiple,
 		visibleOptions,
-		defaultValue,
 		disabled,
 		inputCss,
 		containerCss,
@@ -335,8 +337,8 @@ const Input = function(props) {
 			<select
 				ref={innerRef}
 				name={name}
-				value={value || undefined}
-				defaultValue={defaultValue || undefined}
+				value={controlledComponent ? value : undefined}
+				defaultValue={!controlledComponent ? defaultValue : undefined}
 				multiple={multiple}
 				size={visibleOptions}
 				disabled={disabled}

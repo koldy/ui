@@ -1,13 +1,6 @@
 import {title as AppTitle, slug as AppSlug, json as AppJson, Documentation as AppDocumentation} from './components/App/App.docs';
 
 import {
-	title as AutoCompleteTitle,
-	slug as AutoCompleteSlug,
-	json as AutoCompleteJson,
-	Documentation as AutoCompleteDocumentation
-} from './components/AutoComplete/AutoComplete.docs';
-
-import {
 	title as BadgeTitle,
 	slug as BadgeSlug,
 	json as BadgeJson,
@@ -218,13 +211,6 @@ export const components = [
 		json: AppJson,
 		Documentation: AppDocumentation,
 		group: COMPONENT
-	},
-	{
-		title: AutoCompleteTitle,
-		slug: AutoCompleteSlug,
-		json: AutoCompleteJson,
-		Documentation: AutoCompleteDocumentation,
-		group: INPUT_COMPONENT
 	},
 	{
 		title: BadgeTitle,

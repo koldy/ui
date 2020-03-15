@@ -2,7 +2,7 @@ import React, {forwardRef, useContext, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {isFunction} from '../../util/helpers';
+import {isControlledComponent, isFunction} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
 
@@ -120,13 +120,15 @@ const TextArea = forwardRef(function(props, ref) {
 		ml
 	});
 
+	const controlledComponent = isControlledComponent(value, defaultValue);
+
 	return (
 		<Container containerCss={containerCss} style={containerStyle} ref={containerRef}>
 			<Field
 				ref={ref}
 				name={name}
-				value={value || undefined}
-				defaultValue={defaultValue || undefined}
+				value={controlledComponent ? value : undefined}
+				defaultValue={!controlledComponent ? defaultValue : undefined}
 				onChange={handleChange}
 				onClick={handleClick}
 				onDoubleClick={handleDoubleClick}
