@@ -106,6 +106,7 @@ const Button = function(props) {
 			className={isSelected ? 'selected' : undefined}
 			onClick={handleClick}
 			disabled={isDisabled}
+			tabIndex="-1"
 		>
 			{date.getDate()}
 		</StyledButton>

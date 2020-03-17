@@ -3,13 +3,14 @@ import React, {useContext} from 'react';
 import styled, {css} from 'styled-components';
 import DatePickerContext from './DatePickerContext';
 
+const DAY_NAMES = ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
 const DayNames = function() {
 	const {firstDayOfWeek, dayNameCss} = useContext(DatePickerContext);
 
-	const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S'];
 	return (
 		<StyledDayNames dayNameCss={dayNameCss}>
-			{dayNames.slice(firstDayOfWeek, 7 + firstDayOfWeek).map((d, i) => (
+			{DAY_NAMES.slice(firstDayOfWeek, 7 + firstDayOfWeek).map((d, i) => (
 				<span key={`${d}_${i}`}>{d}</span>
 			))}
 		</StyledDayNames>

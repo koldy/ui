@@ -231,12 +231,12 @@ const Nav = function() {
 	return (
 		<StyledNav dayInMonthCss={dayInMonthCss}>
 			<div>
-				<button type="button" onClick={goToPreviousMonth} onDoubleClick={preventDefaultAndStopPropagation}>
+				<button type="button" onClick={goToPreviousMonth} onDoubleClick={preventDefaultAndStopPropagation} tabIndex="-1">
 					&larr;
 				</button>
 			</div>
 			<div>
-				<select value={viewDate.getMonth()} onChange={handleMonthChange}>
+				<select value={viewDate.getMonth()} onChange={handleMonthChange} tabIndex="-1">
 					<option value={0} disabled={!isMonthAllowed(viewDate, 0, minDate, maxDate)}>
 						January
 					</option>
@@ -276,14 +276,14 @@ const Nav = function() {
 				</select>
 			</div>
 			<div>
-				<select value={viewDate.getFullYear()} onChange={handleYearChange}>
+				<select value={viewDate.getFullYear()} onChange={handleYearChange} tabIndex="-1">
 					{years.map((year) => (
 						<option key={year}>{year}</option>
 					))}
 				</select>
 			</div>
 			<div>
-				<button type="button" onClick={goToNextMonth} onDoubleClick={preventDefaultAndStopPropagation}>
+				<button type="button" onClick={goToNextMonth} onDoubleClick={preventDefaultAndStopPropagation} tabIndex="-1">
 					&rarr;
 				</button>
 			</div>

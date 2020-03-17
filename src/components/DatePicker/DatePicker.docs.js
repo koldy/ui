@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useState} from 'react';
+import React, {Fragment, useContext} from 'react';
 import DocsTitle from '../../../docs/components/DocsTitle';
 
 import DatePicker from './DatePicker';
