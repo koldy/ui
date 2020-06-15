@@ -1,8 +1,8 @@
 {
 	"name": "koldy-ui-dark-theme",
-	"version": "0.3.1",
+	"version": "0.4.0-alpha.1",
 	"description": "Koldy UI Dark Theme",
-	"main": "lib/index.js",
+	"main": "lib/koldy-ui-dark-theme.js",
 	"scripts": {
 		"build": "babel --delete-dir-on-start src/ --out-dir ./lib",
 		"prepublishOnly": "npm run build"

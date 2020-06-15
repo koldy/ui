@@ -265,7 +265,7 @@ export const isNativeColor = function(color) {
  * @param e
  */
 export const stopPropagation = function(e) {
-	if (e && typeof e.stopPropagation === 'function') {
+	if (e && isFunction(e.stopPropagation)) {
 		e.stopPropagation();
 	}
 };
@@ -274,7 +274,7 @@ export const stopPropagation = function(e) {
  * @param e
  */
 export const preventDefault = function(e) {
-	if (e && typeof e.preventDefault === 'function') {
+	if (e && isFunction(e.preventDefault)) {
 		e.preventDefault();
 	}
 };
@@ -284,10 +284,10 @@ export const preventDefault = function(e) {
  */
 export const preventDefaultAndStopPropagation = function(e) {
 	if (e) {
-		if (typeof e.preventDefault === 'function') {
+		if (isFunction(e.preventDefault)) {
 			e.preventDefault();
 		}
-		if (typeof e.stopPropagation === 'function') {
+		if (isFunction(e.stopPropagation)) {
 			e.stopPropagation();
 		}
 	}

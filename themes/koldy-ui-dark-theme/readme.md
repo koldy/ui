@@ -5,7 +5,7 @@ This is a theme that should be plugged in [koldy-ui](https://github.com/koldy/ui
 ```ecmascript 6
 import React from 'react';
 import {App, ThemeManager} from 'koldy-ui';
-import darkTheme from 'koldy-ui-dark-theme';
+import darkTheme from 'themes/koldy-ui-dark-theme/src/koldy-ui-dark-theme';
 
 const theme = new ThemeManager({
   json: darkTheme,

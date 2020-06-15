@@ -1,21 +1,21 @@
 import React, {useContext} from 'react';
-import DocsTitle from '../../../docs/components/DocsTitle';
 
 import Badge from './Badge';
 import ThemeContext from '../../theme/ThemeContext';
 
 import Props from '../../../docs/components/Props';
-import DocsSubTitle from '../../../docs/components/DocsSubTitle';
-import DocsText from '../../../docs/components/DocsText';
-import ImportComponent from '../../../docs/components/ImportComponent';
-import DocsCode from '../../../docs/components/DocsCode';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
+import H1 from '../../../docs/components/H1';
+import H2 from '../../../docs/components/H2';
+import Code from '../../../docs/components/Code';
+import Paragraph from '../../../docs/components/Paragraph';
+import List from '../../../docs/components/List';
 
 export const title = 'Badge';
-export const slug = 'badge';
+export const route = '/badge';
 export const json = 'badge';
 
-export const Documentation = function() {
+export default function BadgeDocs() {
 	const {theme} = useContext(ThemeContext);
 
 	const colors = theme.json('badge.color');
@@ -24,58 +24,49 @@ export const Documentation = function() {
 
 	return (
 		<>
-			<DocsTitle hash="badge">Badge</DocsTitle>
-			<ImportComponent name="Badge" />
-			<DocsCode>
-				<DocsCode.Example>
-					Hey, look at this: <Badge>I'm badge</Badge>
-				</DocsCode.Example>
-				<DocsCode.Code>{"Hey, look at this: <Badge>I'm badge</Badge>"}</DocsCode.Code>
-			</DocsCode>
+			<H1>Badge</H1>
+			<Code language="js" code="import {Badge} from 'koldy-ui';" />
+			<Code language="js" code="Hey, look at this: <Badge>I'm badge</Badge>">
+				Hey, look at this: <Badge>I'm badge</Badge>
+			</Code>
 			<Props>
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick" type="function">
 					<p>Fires function with object on first parameter with the following keys:</p>
 					<ul>
-						<li>
+						<List.Item>
 							<strong>element</strong> - HTMLElement
-						</li>
+						</List.Item>
 					</ul>
-					<DocsCode>
-						<DocsCode.Example>
-							<Badge onClick={(x) => console.log(x)}>Click me!</Badge>
-						</DocsCode.Example>
-						<DocsCode.Code>{'<Badge onClick={(x) => console.log(x)}>Click me!</Badge>'}</DocsCode.Code>
-					</DocsCode>
+					<Code language="js" code="<Badge onClick={(x) => console.log(x)}>Click me!</Badge>">
+						<Badge onClick={(x) => console.log(x)}>Click me!</Badge>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="onDoubleClick" type="function">
-					<p>Fires function with object on first parameter with the following keys:</p>
-					<ul>
-						<li>
+					<Paragraph>Fires function with object on first parameter with the following keys:</Paragraph>
+					<List>
+						<List.Item>
 							<strong>element</strong> - HTMLElement
-						</li>
-					</ul>
-					<DocsCode>
-						<DocsCode.Example>
-							<Badge onDoubleClick={(x) => console.log(x)}>Double click me!</Badge>
-						</DocsCode.Example>
-						<DocsCode.Code>{'<Badge onDoubleClick={(x) => console.log(x)}>Double click me!</Badge>'}</DocsCode.Code>
-					</DocsCode>
+						</List.Item>
+					</List>
+					<Code language="js" code="<Badge onDoubleClick={(x) => console.log(x)}>Double click me!</Badge>">
+						<Badge onDoubleClick={(x) => console.log(x)}>Double click me!</Badge>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="color" type="string" defaultValue="theme.badge.defaults.color">
-					<p>
+					<Paragraph>
 						One of the colors defined in <code>theme.badge.color</code>.
-					</p>
+					</Paragraph>
 					<AvailableKeys data={colors} />
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.badge.defaults.variant">
-					<p>Variant is used to shape the badge.</p>
+					<Paragraph>Variant is used to shape the badge.</Paragraph>
 					<AvailableKeys data={variants} name="theme.badge.variant" />
 				</Props.Prop>
 				<Props.Prop name="size" type="string" defaultValue="theme.badge.defaults.size">
-					<p>
+					<Paragraph>
 						One of the defined sizes in <code>theme.badge.size</code>.
-					</p>
+					</Paragraph>
 					<AvailableKeys data={sizes} />
 				</Props.Prop>
 				<Props.Prop name="style" />
@@ -87,95 +78,83 @@ export const Documentation = function() {
 				<Props.Prop name="as" />
 				<Props.Prop name="ref" />
 			</Props>
-			<DocsSubTitle hash="some-theory">Some theory</DocsSubTitle>
-			<DocsText>
+			<H2 hash="some-theory">Some theory</H2>
+			<Paragraph>
 				Badge is standard component that usually show off some number (like unread message count) or any other information that requires
 				user's attention. In theory, there are few things you need about every badge:
-			</DocsText>
-			<DocsText>
-				<ul>
-					<li>color</li>
-					<li>size - usually three different sizes, sometimes more</li>
-					<li>variant - the badge's shape</li>
-				</ul>
-			</DocsText>
-			<DocsText>
+			</Paragraph>
+			<List>
+				<List.Item>color</List.Item>
+				<List.Item>size - usually three different sizes, sometimes more</List.Item>
+				<List.Item>variant - the badge's shape</List.Item>
+			</List>
+			<Paragraph>
 				Badge's size should be always expressed in <em>em</em> units so the size can inherit the size of the places where it's added (for
 				example, if you put normal size Badge in &lt;h1&gt; tag, it has to have the same size as title).
-			</DocsText>
-			<DocsSubTitle hash="color">Color</DocsSubTitle>
-			<DocsText>You may use anything in CSS to customize the color of badge, including the hover state.</DocsText>
-			<DocsText>Available badge colors are:</DocsText>
+			</Paragraph>
+			<H2 hash="color">Color</H2>
+			<Paragraph>You may use anything in CSS to customize the color of badge, including the hover state.</Paragraph>
+			<Paragraph>Available badge colors are:</Paragraph>
 			{Object.keys(colors).map((val) => (
-				<DocsCode key={val} label={val} labelWidth="auto">
-					<DocsCode.Example>
-						<Badge color={val}>1</Badge>
-					</DocsCode.Example>
-					<DocsCode.Code>{`<Badge color="${val}">1</Badge>`}</DocsCode.Code>
-				</DocsCode>
+				<Code language="js" key={val} label={val} labelWidth="auto" code={`<Badge color="${val}">1</Badge>`}>
+					<Badge color={val}>1</Badge>
+				</Code>
 			))}
-			<DocsSubTitle hash="size">Size</DocsSubTitle>
-			<DocsText>
+			<H2 hash="size">Size</H2>
+			<Paragraph>
 				Badge size is automatic and it'll inherit the size of parent component, so when talking about badge size, you just have to define do
 				you want bigger or smaller badge according to the parent component. So, when defining badge size in theme, we recommend that you
 				define the font size and padding in <code>em</code> units instead in pixels, rems or any other fixed size unit.
-			</DocsText>
-			<DocsText>Available badge sizes are:</DocsText>
+			</Paragraph>
+			<Paragraph>Available badge sizes are:</Paragraph>
 			{Object.keys(sizes).map((val) => (
-				<DocsCode key={val} label={val} labelWidth="auto">
-					<DocsCode.Example>
-						{Object.keys(colors).map((color) => (
-							<Badge size={val} color={color} key={color} mr={10}>
-								1
-							</Badge>
-						))}
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{Object.keys(colors)
-							.map((color) => `<Badge size="${val}" color="${color}" mr={10}>1</Badge>`)
-							.join('\n')}
-					</DocsCode.Code>
-				</DocsCode>
+				<Code
+					key={val}
+					label={val}
+					labelWidth="auto"
+					language="js"
+					code={Object.keys(colors)
+						.map((color) => `<Badge size="${val}" color="${color}" mr={10}>1</Badge>`)
+						.join('\n')}
+				>
+					{Object.keys(colors).map((color) => (
+						<Badge size={val} color={color} key={color} mr={10}>
+							1
+						</Badge>
+					))}
+				</Code>
 			))}
-			<DocsText>
+			<Paragraph>
 				Here's example of Badge without defined size, but placed in <code>h2</code> tag which, by default, has bigger font size:
-			</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<h2>
-						Some title <Badge color="danger">1</Badge>
-					</h2>
-				</DocsCode.Example>
-				<DocsCode.Code>
-					{`
-					<h2>
-						Some title <Badge color="danger">2</Badge>
-					</h2>
-					`}
-				</DocsCode.Code>
-			</DocsCode>
-			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
-			<DocsText>
+			</Paragraph>
+			<Code language="js" code={`<h2>Some title <Badge color="danger">2</Badge></h2>`}>
+				<h2>
+					Some title <Badge color="danger">1</Badge>
+				</h2>
+			</Code>
+			<H2 hash="variant">Variant</H2>
+			<Paragraph>
 				Variant is the badge's shape. By using variants, you can completely redefine badge's shape. Most common case is when you want to
 				have standard square badge or circle badge. You're not limited to any predefined properties and you can define anything you want.
-			</DocsText>
-			<DocsText>Available variants in theme are:</DocsText>
+			</Paragraph>
+			<Paragraph>Available variants in theme are:</Paragraph>
 			{Object.keys(variants).map((val) => (
-				<DocsCode key={val} label={val} labelWidth="auto">
-					<DocsCode.Example>
-						{Object.keys(colors).map((color) => (
-							<Badge variant={val} color={color} key={color} mr={10}>
-								1
-							</Badge>
-						))}
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{Object.keys(colors)
-							.map((color) => `<Badge variant="${val}" color="${color}" mr={10}>1</Badge>`)
-							.join('\n')}
-					</DocsCode.Code>
-				</DocsCode>
+				<Code
+					language="js"
+					key={val}
+					label={val}
+					labelWidth="auto"
+					code={Object.keys(colors)
+						.map((color) => `<Badge variant="${val}" color="${color}" mr={10}>1</Badge>`)
+						.join('\n')}
+				>
+					{Object.keys(colors).map((color) => (
+						<Badge variant={val} color={color} key={color} mr={10}>
+							1
+						</Badge>
+					))}
+				</Code>
 			))}
 		</>
 	);
-};
+}

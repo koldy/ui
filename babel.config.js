@@ -1,9 +1,10 @@
-module.exports = function (api) {
+module.exports = function(api) {
 	api.cache.never();
 
 	const presets = ['@babel/preset-env', '@babel/preset-react'];
 
 	const plugins = [
+		'react-hot-loader/babel',
 		'@babel/plugin-proposal-class-properties',
 		'@babel/plugin-proposal-object-rest-spread',
 		'@babel/plugin-proposal-throw-expressions',
@@ -17,7 +18,7 @@ module.exports = function (api) {
 
 	const env = {
 		cjs: {
-			presets: ['@babel/preset-env', '@babel/preset-react'],
+			presets: ['@babel/preset-env', '@babel/preset-react']
 		},
 		esm: {
 			presets: [

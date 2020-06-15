@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import lightTheme from '../../../themes/koldy-ui-light-theme/src';
+import lightTheme from '../../../themes/koldy-ui-light-theme/src/koldy-ui-light-theme';
 
 import TextArea from './TextArea';
 import TestApp from '../../../test/TestApp';

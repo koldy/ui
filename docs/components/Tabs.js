@@ -51,13 +51,13 @@ const StyledTab = styled.div`
 	display: block;
 	width: auto;
 	border: none;
-	border-bottom: 2px solid ${({active}) => (active ? 'black' : 'transparent')};
+	border-bottom: 2px solid ${({active}) => (active ? '#ea8786' : 'transparent')};
 	margin: 0.25em 0;
 	padding: 0.2rem 0.5rem;
 	cursor: ${({active}) => (active ? 'default' : 'pointer')};
-	
+
 	&:hover {
-		border-bottom-color: ${({active}) => (active ? 'black' : '#cfcfcf')};
+		border-bottom-color: #a81817;
 	}
 `;
 

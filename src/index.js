@@ -1,6 +1,5 @@
 // components
 import App from './components/App/App';
-import AutoComplete from './components/AutoComplete/AutoComplete';
 import Badge from './components/Badge/Badge';
 import Box from './components/Box/Box';
 import Button from './components/Button/Button';
@@ -28,13 +27,17 @@ import ThemeManager from './theme/ThemeManager';
 import ThemeError from './theme/ThemeError';
 
 // hooks
-import useBoolean from './hooks/useBoolean';
-import useMediaQueries from './components/MediaQuery/useMediaQueries';
+import useBoolean from './hooks/useBoolean/useBoolean';
+import useMediaQueries from './hooks/useMediaQueries/useMediaQueries';
+import useOutsideClick from './hooks/useOutsideClick/useOutsideClick';
+import useToast from './hooks/useToast/useToast';
+
+// util
+import CSSReset from './util/CSSReset';
 
 export {
 	// components
 	App,
-	AutoComplete,
 	Badge,
 	Box,
 	Button,
@@ -61,5 +64,9 @@ export {
 	ThemeManager,
 	// hooks
 	useBoolean,
-	useMediaQueries
+	useMediaQueries,
+	useOutsideClick,
+	useToast,
+	// util
+	CSSReset
 };

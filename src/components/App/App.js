@@ -11,8 +11,7 @@ import {isEmpty, isObject} from '../../util/helpers';
 import GlobalHtmlCss from './GlobalHtmlCss';
 import GlobalBodyCss from './GlobalBodyCss';
 
-const App = function(props) {
-	const {children = null, theme, id: appIndex = 1} = props;
+const App = function({children = null, theme, id: appIndex = 1, ignoreGlobalCss = false}) {
 	const [addToast, toasters, removeToast, removeAllToasts] = useToaster();
 
 	const contextValues = {theme, appIndex, addToast, removeToast, removeAllToasts};
@@ -25,8 +24,8 @@ const App = function(props) {
 
 	return (
 		<ThemeContext.Provider value={contextValues}>
-			{hasHtmlCss && <GlobalHtmlCss htmlCss={htmlCss} />}
-			{hasBodyCss && <GlobalBodyCss bodyCss={bodyCss} />}
+			{hasHtmlCss && !ignoreGlobalCss && <GlobalHtmlCss htmlCss={htmlCss} />}
+			{hasBodyCss && !ignoreGlobalCss && <GlobalBodyCss bodyCss={bodyCss} />}
 			<MediaQueriesDetector>
 				{children}
 				<Toasts appIndex={appIndex} />
@@ -43,7 +42,8 @@ const App = function(props) {
 App.propTypes = {
 	children: PropTypes.node,
 	theme: PropTypes.instanceOf(ThemeManager).isRequired,
-	id: PropTypes.number
+	id: PropTypes.number,
+	ignoreGlobalCss: PropTypes.bool
 };
 
 // for some unknown reason, global styles are created on each render and updating the style
