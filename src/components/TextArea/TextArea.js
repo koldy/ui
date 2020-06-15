@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components';
 
 import {isControlledComponent, isFunction} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
-import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
+import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser/useInputFieldStyleParser';
 
 const TextArea = forwardRef(function(props, ref) {
 	const {theme} = useContext(ThemeContext);

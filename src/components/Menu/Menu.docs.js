@@ -1,85 +1,25 @@
 import React, {useContext, useState} from 'react';
-import DocsTitle from '../../../docs/components/DocsTitle';
 
 import Menu from './Menu';
 import ThemeContext from '../../theme/ThemeContext';
 
 import Props from '../../../docs/components/Props';
-import DocsSubTitle from '../../../docs/components/DocsSubTitle';
-import DocsText from '../../../docs/components/DocsText';
-import ImportComponent from '../../../docs/components/ImportComponent';
-import DocsCode from '../../../docs/components/DocsCode';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
 import Button from '../Button/Button';
 import Flexbox from '../Flexbox/Flexbox';
 import Checkbox from '../Checkbox/Checkbox';
+
 import {emptyFn} from '../../util/helpers';
+import states from '../../../docs/util/example-data/states';
+import H1 from '../../../docs/components/H1';
+import Code from '../../../docs/components/Code';
+import H2 from '../../../docs/components/H2';
+import Paragraph from '../../../docs/components/Paragraph';
+import List from '../../../docs/components/List';
 
 export const title = 'Menu';
-export const slug = 'menu';
+export const route = '/menu';
 export const json = 'menu';
-
-const states = [
-	'Alabama',
-	'Alaska',
-	'American Samoa',
-	'Arizona',
-	'Arkansas',
-	'California',
-	'Colorado',
-	'Connecticut',
-	'Delaware',
-	'District of Columbia',
-	'Federated States of Micronesia',
-	'Florida',
-	'Georgia',
-	'Guam',
-	'Hawaii',
-	'Idaho',
-	'Illinois',
-	'Indiana',
-	'Iowa',
-	'Kansas',
-	'Kentucky',
-	'Louisiana',
-	'Maine',
-	'Marshall Islands',
-	'Maryland',
-	'Massachusetts',
-	'Michigan',
-	'Minnesota',
-	'Mississippi',
-	'Missouri',
-	'Montana',
-	'Nebraska',
-	'Nevada',
-	'New Hampshire',
-	'New Jersey',
-	'New Mexico',
-	'New York',
-	'North Carolina',
-	'North Dakota',
-	'Northern Mariana Islands',
-	'Ohio',
-	'Oklahoma',
-	'Oregon',
-	'Palau',
-	'Pennsylvania',
-	'Puerto Rico',
-	'Rhode Island',
-	'South Carolina',
-	'South Dakota',
-	'Tennessee',
-	'Texas',
-	'Utah',
-	'Vermont',
-	'Virgin Island',
-	'Virginia',
-	'Washington',
-	'West Virginia',
-	'Wisconsin',
-	'Wyoming'
-];
 
 const customOptions = [
 	{country: 'Austria', icon: 'at'},
@@ -87,7 +27,7 @@ const customOptions = [
 	{country: 'Germany', icon: 'de'}
 ];
 
-export const Documentation = function() {
+export default function MenuDocs() {
 	const {theme} = useContext(ThemeContext);
 
 	const variants = theme.json('menu.variant');
@@ -98,92 +38,88 @@ export const Documentation = function() {
 
 	return (
 		<>
-			<DocsTitle hash="menu">Menu</DocsTitle>
-			<ImportComponent name="Menu" />
-			<DocsText>Sub components:</DocsText>
-			<ul>
-				<li>
+			<H1>Menu (deprecated)</H1>
+			<Code language="js" code="import {Menu} from 'koldy-ui';" />
+			<Paragraph>Sub components:</Paragraph>
+			<List>
+				<List.Item>
 					<a href="#item">
 						<code>Menu.Item</code>
 					</a>
-				</li>
-				<li>
+				</List.Item>
+				<List.Item>
 					<a href="#divider">
 						<code>Menu.Divider</code>
 					</a>
-				</li>
-			</ul>
-			<DocsText>
+				</List.Item>
+			</List>
+			<Paragraph>
 				<code>Menu</code> component is one of the most useful components created in this UI library and here's why.
-			</DocsText>
-			<DocsText>
+			</Paragraph>
+			<Paragraph>
 				It can be used both as navigation menu and it can be used as input component (that's why it's placed under input components). When
 				used as input component, then it behaves similar to <code>Select</code> component. Other UI libraries and frameworks would offer
 				components like Select2, SelectMenu, Navs, Vertical menus, Tag inputs and similar. So, in order not to "hardcode" all these
 				derivatives, Koldy UI offers just a tool which can be used to build all those components and that tool is <code>Menu</code>.
-			</DocsText>
-			<DocsText>Here's an example of simple vertical menu:</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<Menu>
-						<Menu.Item as="a" href="https://google.com" target="_blank">
-							Google
-						</Menu.Item>
-						<Menu.Item as="a" href="https://reactjs.org" target="_blank">
-							React.js
-						</Menu.Item>
-						<Menu.Divider />
-						<Menu.Item as="a" href="https://koldy.io" target="_blank">
-							Koldy.io
-						</Menu.Item>
-					</Menu>
-				</DocsCode.Example>
-				<DocsCode.Code>
-					{`
-					<Menu>
-						<Menu.Item as="a" href="https://google.com" target="_blank">
-							Google
-						</Menu.Item>
-						<Menu.Item as="a" href="https://reactjs.org" target="_blank">
-							React.js
-						</Menu.Item>
-						<Menu.Divider />
-						<Menu.Item as="a" href="https://koldy.io" target="_blank">
-							Koldy.io
-						</Menu.Item>
-					</Menu>
-					`}
-				</DocsCode.Code>
-			</DocsCode>
-			<DocsText>
+			</Paragraph>
+			<Paragraph>Here's an example of simple vertical menu:</Paragraph>
+			<Code
+				language="js"
+				code={`
+<Menu>
+  <Menu.Item as="a" href="https://google.com" target="_blank">
+    Google
+  </Menu.Item>
+  <Menu.Item as="a" href="https://reactjs.org" target="_blank">
+    React.js
+  </Menu.Item>
+  <Menu.Divider />
+  <Menu.Item as="a" href="https://koldy.io" target="_blank">
+    Koldy.io
+  </Menu.Item>
+</Menu>
+        `}
+			>
+				<Menu>
+					<Menu.Item as="a" href="https://google.com" target="_blank">
+						Google
+					</Menu.Item>
+					<Menu.Item as="a" href="https://reactjs.org" target="_blank">
+						React.js
+					</Menu.Item>
+					<Menu.Divider />
+					<Menu.Item as="a" href="https://koldy.io" target="_blank">
+						Koldy.io
+					</Menu.Item>
+				</Menu>
+			</Code>
+			<Paragraph>
 				And here's an example of <code>Menu</code> as input component. Watch the browser's console to see the changes on click.
-			</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<Menu onChange={(x) => console.log(x)}>
-						{customOptions.map(({country}) => (
-							<Menu.Item value={country} key={country}>
-								{country}
-							</Menu.Item>
-						))}
-					</Menu>
-				</DocsCode.Example>
-				<DocsCode.Code>
-					{`
-					<Menu onChange={(x) => console.log(x)}>
-						{customOptions.map(({country}) => (
-							<Menu.Item value={country} key={country}>
-								{country}
-							</Menu.Item>
-						))}
-					</Menu>
-					`}
-				</DocsCode.Code>
-			</DocsCode>
-			<DocsText>
+			</Paragraph>
+			<Code
+				language="js"
+				code={`
+<Menu onChange={(x) => console.log(x)}>
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
+        `}
+			>
+				<Menu onChange={(x) => console.log(x)}>
+					{customOptions.map(({country}) => (
+						<Menu.Item value={country} key={country}>
+							{country}
+						</Menu.Item>
+					))}
+				</Menu>
+			</Code>
+			<Paragraph>
 				Notice that as soon as you give a value to the <code>Item</code>, it applies "input" behaviour. Check props docs for more
 				explanation and examples.
-			</DocsText>
+			</Paragraph>
 			<Props>
 				<Props.Prop name="children" type="node" required>
 					This prop is required and you're free to put literally anything in there, but to use this component's features, we recommend that
@@ -194,165 +130,161 @@ export const Documentation = function() {
 					but if you put the menu inside the form, form serialization will automatically collect the selected options as well.
 				</Props.Prop>
 				<Props.Prop name="multiple" type="bool" defaultValue={false}>
-					<p>
+					<Paragraph>
 						If set to <code>true</code>, it'll allow multiple options to be active at the same time. If <code>onChange</code> is provided as
 						well, then the value given through the onChange function will be either array (if multiple) or scalar value (if not multiple).
 						Check your browser's console to see the case.
-					</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu onChange={({value}) => console.log(value)} multiple>
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							<Menu onChange={({value}) => console.log(value)} multiple>
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+<Menu onChange={({value}) => console.log(value)} multiple>
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
 							`}
-						</DocsCode.Code>
-					</DocsCode>
+					>
+						<Menu onChange={({value}) => console.log(value)} multiple>
+							{customOptions.map(({country}) => (
+								<Menu.Item value={country} key={country}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="value" type={['number', 'string', 'array']}>
-					<p>If set, it means you're using this component as controlled component and you are responsible for the values all the time.</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu onChange={({value}) => setExample1(value)} value={example1}>
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-							<Button onClick={() => setExample1('Germany')}>Set Germany</Button>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							const [example1, setExample1] = useState('Croatia');
+					<Paragraph>
+						If set, it means you're using this component as controlled component and you are responsible for the values all the time.
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+const [example1, setExample1] = useState('Croatia');
 
-							<Menu onChange={({value}) => setExample1(value)} value={example1}>
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-							`}
-						</DocsCode.Code>
-					</DocsCode>
+<Menu onChange={({value}) => setExample1(value)} value={example1}>
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
+            `}
+					>
+						<Menu onChange={({value}) => setExample1(value)} value={example1}>
+							{customOptions.map(({country}) => (
+								<Menu.Item value={country} key={country}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+						<Button onClick={() => setExample1('Germany')}>Set Germany</Button>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type={['number', 'string', 'array']}>
-					<p>If set, it means you're using this component as uncontrolled component and you're just setting initial value.</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu onChange={({value}) => console.log(value)} defaultValue="Croatia">
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							<Menu onChange={({value}) => console.log(value)} defaultValue="Croatia">
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-							`}
-						</DocsCode.Code>
-					</DocsCode>
+					<Paragraph>
+						If set, it means you're using this component as uncontrolled component and you're just setting initial value.
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+<Menu onChange={({value}) => console.log(value)} defaultValue="Croatia">
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
+            `}
+					>
+						<Menu onChange={({value}) => console.log(value)} defaultValue="Croatia">
+							{customOptions.map(({country}) => (
+								<Menu.Item value={country} key={country}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.menu.defaults.variant">
-					<p>The shape of menu and its elements.</p>
+					<Paragraph>The shape of menu and its elements.</Paragraph>
 					<AvailableKeys data={variants} />
 				</Props.Prop>
 				<Props.Prop name="size" type="string" defaultValue="theme.menu.defaults.size">
-					<p>The size of menu and its elements.</p>
+					<Paragraph>The size of menu and its elements.</Paragraph>
 					<AvailableKeys data={sizes} />
 				</Props.Prop>
 				<Props.Prop name="color" type="string" defaultValue="theme.menu.defaults.color">
-					<p>The color of menu and its elements.</p>
+					<Paragraph>The color of menu and its elements.</Paragraph>
 					<AvailableKeys data={colors} />
 				</Props.Prop>
 				<Props.Prop name="height" type={['string', 'number']}>
-					<p>
+					<Paragraph>
 						If set, it'll fixate the height of menu and if there's more content inside of <code>Menu</code>
 						component that its height, vertical scroll will appear.
-					</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu height={240}>
-								{states.map((country) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							<Menu height={240}>
-								{states.map((country) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+<Menu height={240}>
+  {states.map((country) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
 							`}
-						</DocsCode.Code>
-					</DocsCode>
+					>
+						<Menu height={240}>
+							{states.map((country) => (
+								<Menu.Item value={country} key={country}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
-					<p>Fires when there's a change on selected value(s). Function will get the object for first parameter with the following keys:</p>
-					<ul>
-						<li>
+					<Paragraph>
+						Fires when there's a change on selected value(s). Function will get the object for first parameter with the following keys:
+					</Paragraph>
+					<List>
+						<List.Item>
 							<strong>name</strong> - the name of <code>Menu</code> component or <code>null</code>
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>value</strong> - if <code>Menu</code> has <code>multiple</code> prop set to true, then value will be array, otherwise
 							it'll be scalar value or <code>null</code> if nothing is selected.
-						</li>
-					</ul>
+						</List.Item>
+					</List>
 				</Props.Prop>
 				<Props.Prop name="disabled" type="bool" defaultValue={false}>
-					<p>
+					<Paragraph>
 						If set to <code>true</code>, all items in within the Menu will be disabled.
-					</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu name="country" disabled defaultValue="Croatia">
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							<Menu name="country" disabled defaultValue="Croatia">
-								{customOptions.map(({country}) => (
-									<Menu.Item value={country} key={country}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+<Menu name="country" disabled defaultValue="Croatia">
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
 							`}
-						</DocsCode.Code>
-					</DocsCode>
+					>
+						<Menu name="country" disabled defaultValue="Croatia">
+							{customOptions.map(({country}) => (
+								<Menu.Item value={country} key={country}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="m" />
 				<Props.Prop name="mt" />
@@ -361,224 +293,224 @@ export const Documentation = function() {
 				<Props.Prop name="ml" />
 				<Props.Prop name="ref" />
 			</Props>
-			<DocsSubTitle hash="variant">Variants</DocsSubTitle>
-			<DocsText>
+			<H2 hash="variant">Variants</H2>
+			<Paragraph>
 				You may use variants as a chance to do some component styling, like having another font, or having another border style.
-			</DocsText>
+			</Paragraph>
 			<AvailableKeys data={variants} />
 			{Object.keys(variants).map((val) => (
-				<DocsCode label={val} labelWidth="auto" key={val}>
-					<DocsCode.Example>
-						<Menu variant={val}>
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{`
-						<Menu variant="${val}">
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
+				<Code
+					language="js"
+					code={`
+<Menu variant="${val}">
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
 						`}
-					</DocsCode.Code>
-				</DocsCode>
+					label={val}
+					labelWidth="auto"
+					key={val}
+				>
+					<Menu variant={val}>
+						{customOptions.map(({country}) => (
+							<Menu.Item value={country} key={country}>
+								{country}
+							</Menu.Item>
+						))}
+					</Menu>
+				</Code>
 			))}
-			<DocsSubTitle hash="size">Sizes</DocsSubTitle>
-			<DocsText>
+			<H2 hash="size">Sizes</H2>
+			<Paragraph>
 				You may have multiple sizes defined in theme for each of the subcomponents. Under size, you may define font size, padding and some
 				margins.
-			</DocsText>
-			<DocsText>
+			</Paragraph>
+			<Paragraph>
 				<AvailableKeys data={sizes} />
-			</DocsText>
+			</Paragraph>
 			{Object.keys(sizes).map((val) => (
-				<DocsCode label={val} labelWidth="auto" key={val}>
-					<DocsCode.Example>
-						<Menu size={val}>
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{`
-						<Menu size="${val}">
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
-						`}
-					</DocsCode.Code>
-				</DocsCode>
+				<Code
+					language="js"
+					code={`
+<Menu size="${val}">
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
+          `}
+					label={val}
+					labelWidth="auto"
+					key={val}
+				>
+					<Menu size={val}>
+						{customOptions.map(({country}) => (
+							<Menu.Item value={country} key={country}>
+								{country}
+							</Menu.Item>
+						))}
+					</Menu>
+				</Code>
 			))}
-			<DocsSubTitle hash="color">Colors</DocsSubTitle>
-			<DocsText>You may have multiple colors defined in theme for each of the subcomponents. Check the theme for more options.</DocsText>
-			<DocsText>
+			<H2 hash="color">Colors</H2>
+			<Paragraph>You may have multiple colors defined in theme for each of the subcomponents. Check the theme for more options.</Paragraph>
+			<Paragraph>
 				<AvailableKeys data={colors} />
-			</DocsText>
+			</Paragraph>
 			{Object.keys(colors).map((val) => (
-				<DocsCode label={val} labelWidth="auto" key={val}>
-					<DocsCode.Example>
-						<Menu color={val}>
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{`
-						<Menu color="${val}">
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
+				<Code
+					language="js"
+					code={`
+<Menu color="${val}">
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
 						`}
-					</DocsCode.Code>
-				</DocsCode>
+					label={val}
+					labelWidth="auto"
+					key={val}
+				>
+					<Menu color={val}>
+						{customOptions.map(({country}) => (
+							<Menu.Item value={country} key={country}>
+								{country}
+							</Menu.Item>
+						))}
+					</Menu>
+				</Code>
 			))}
-			<DocsText>
+			<Paragraph>
 				These color combinations might not look attractive when having "vertical menus", so here's the same example with inline elements and
 				variant rounded:
-			</DocsText>
+			</Paragraph>
 			{Object.keys(colors).map((val) => (
-				<DocsCode label={val} labelWidth="auto" key={val}>
-					<DocsCode.Example>
-						<Menu color={val} variant="rounded">
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} inline m="0.25rem" key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{`
-						<Menu color="${val}" variant="rounded">
-							{customOptions.map(({country}) => (
-								<Menu.Item value={country} inline m="0.25rem" key={country}>
-									{country}
-								</Menu.Item>
-							))}
-						</Menu>
+				<Code
+					language="js"
+					code={`
+<Menu color="${val}" variant="rounded">
+  {customOptions.map(({country}) => (
+    <Menu.Item value={country} inline m="0.25rem" key={country}>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
 						`}
-					</DocsCode.Code>
-				</DocsCode>
+					label={val}
+					labelWidth="auto"
+					key={val}
+				>
+					<Menu color={val} variant="rounded">
+						{customOptions.map(({country}) => (
+							<Menu.Item value={country} inline m="0.25rem" key={country}>
+								{country}
+							</Menu.Item>
+						))}
+					</Menu>
+				</Code>
 			))}
-			<DocsSubTitle hash="item">Menu.Item</DocsSubTitle>
-			<DocsText>
+			<H2 hash="item">Menu.Item</H2>
+			<Paragraph>
 				This component provides the core functionality of <code>Menu</code> component while still keeping the possibility of completely
 				visually customizing it. Check its props for more explanation and examples.
-			</DocsText>
+			</Paragraph>
 			<Props hash="item-props" title="Props for Menu.Item">
 				<Props.Prop name="children" type={['string', 'number', 'node', 'func']}>
-					<p>
+					<Paragraph>
 						If passing <code>string</code>, <code>number</code> or <code>node</code>, then it'll be rendered as is, but respecting all
 						styling from the theme. <code>node</code> allows you to put, for example, <code>Flexbox</code>
 						inside to achieve more complex layout (for example, you want to put icon, then text).
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						If using function, then it's possible to get some internal Item's state in order to customize whatever you need to customize.
 						So, the first parameter of this function is object with the following keys:
-					</p>
-					<ul>
-						<li>
+					</Paragraph>
+					<List>
+						<List.Item>
 							<strong>name</strong> - the name of <code>Menu</code> component
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>isSelected</strong> - boolean - true if current Item is currently selected (item must have <code>value</code> prop set
 							in order for this to work)
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>isDisabled</strong> - boolean - true if menu or this item are set to be disabled
-						</li>
-					</ul>
+						</List.Item>
+					</List>
 				</Props.Prop>
 				<Props.Prop name="value" type={['string', 'number']}>
-					<p>
+					<Paragraph>
 						If set, Item will start to behave like select's <code>option</code> tag.
-					</p>
-					<p>If Menu's value is equal to this value, it means that this item is then selected.</p>
-					<p>
+					</Paragraph>
+					<Paragraph>If Menu's value is equal to this value, it means that this item is then selected.</Paragraph>
+					<Paragraph>
 						Be aware the difference between string and number. <code>1</code> is not equal to <code>'1'</code>.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="inline" type="bool" defaultValue={false}>
-					<p>
+					<Paragraph>
 						If set to true, item will be rendered as <code>inline-block</code>.
-					</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu>
-								{states.map((country) => (
-									<Menu.Item value={country} key={country} inline>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							<Menu>
-								{states.map((country) => (
-									<Menu.Item value={country} key={country} inline>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+<Menu>
+  {states.map((country) => (
+    <Menu.Item value={country} key={country} inline>
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
 							`}
-						</DocsCode.Code>
-					</DocsCode>
+					>
+						<Menu>
+							{states.map((country) => (
+								<Menu.Item value={country} key={country} inline>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="disabled" type="bool" defaultValue={false}>
-					<p>If set to true, this Item will be disabled.</p>
+					<Paragraph>If set to true, this Item will be disabled.</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="onClick">
-					<p>Fires function with object on first parameter with the following keys:</p>
-					<ul>
-						<li>
+					<Paragraph>Fires function with object on first parameter with the following keys:</Paragraph>
+					<List>
+						<List.Item>
 							<strong>value</strong> - value given as prop
-						</li>
-					</ul>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu>
-								{customOptions.map(({country}) => (
-									<Menu.Item key={country} value={country} inline onClick={(x) => console.log(x)}>
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-						</DocsCode.Example>
-					</DocsCode>
-					<p>
+						</List.Item>
+					</List>
+					<Code language="js">
+						<Menu>
+							{customOptions.map(({country}) => (
+								<Menu.Item key={country} value={country} inline onClick={(x) => console.log(x)}>
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</Code>
+					<Paragraph>
 						Bw aware that if <code>onClick</code> prop is set, then <code>onChange</code> in <code>Menu</code> component won't work because
 						internal click handler will be overridden with your function.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="onDoubleClick">
-					<p>Fires function with object on first parameter with the following keys:</p>
-					<ul>
-						<li>
+					<Paragraph>Fires function with object on first parameter with the following keys:</Paragraph>
+					<List>
+						<List.Item>
 							<strong>value</strong> - value given as prop
-						</li>
-					</ul>
-					<DocsCode>
-						<DocsCode.Example>
+						</List.Item>
+					</List>
+					<Code language="js" code="">
+						<>
 							<Menu>
 								{customOptions.map(({country}) => (
 									<Menu.Item key={country} value={country} inline onDoubleClick={(x) => console.log(x)}>
@@ -586,8 +518,8 @@ export const Documentation = function() {
 									</Menu.Item>
 								))}
 							</Menu>
-						</DocsCode.Example>
-					</DocsCode>
+						</>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="m" />
 				<Props.Prop name="mt" />
@@ -596,86 +528,82 @@ export const Documentation = function() {
 				<Props.Prop name="ml" />
 				<Props.Prop name="ref" />
 				<Props.Prop name="as">
-					<p>
+					<Paragraph>
 						If you're just building vertical menus with this component, then you may use this prop as opportunity to completely change its
 						internal behaviour. Here are few examples:
-					</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<Menu>
-								{customOptions.map(({country}) => (
-									<Menu.Item key={country} as="a" href={`https://google.com/?q=${country}`} target="_blank">
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							<Menu>
-								{customOptions.map(({country}) => (
-									<Menu.Item key={country} as="a" href={\`https://google.com/?q=\${country}\`} target="_blank">
-										{country}
-									</Menu.Item>
-								))}
-							</Menu>
-							`}
-						</DocsCode.Code>
-					</DocsCode>
-					<p>
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+<Menu>
+  {customOptions.map(({country}) => (
+    <Menu.Item key={country} as="a" href={\`https://google.com/?q=\${country}\`} target="_blank">
+      {country}
+    </Menu.Item>
+  ))}
+</Menu>
+            `}
+					>
+						<Menu>
+							{customOptions.map(({country}) => (
+								<Menu.Item key={country} as="a" href={`https://google.com/?q=${country}`} target="_blank">
+									{country}
+								</Menu.Item>
+							))}
+						</Menu>
+					</Code>
+					<Paragraph>
 						Bw aware that if you're using this component on this way, then you shouldn't pass <code>value</code> prop because that would
 						override the click events.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 			</Props>
-			<DocsText>Here's more complex example when you want to put a checkbox and icon before the text.</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<Menu defaultValue="Croatia">
-						{customOptions.map(({country, icon}) => (
-							<Menu.Item value={country} key={country} inline>
-								{({isSelected}) => (
-									<Flexbox alignItems="center">
-										<Flexbox.Item width={30}>
-											<Checkbox checked={isSelected} onChange={emptyFn} />
-										</Flexbox.Item>
-										<Flexbox.Item width={30}>
-											<span className={`flag-icon flag-icon-${icon}`} />
-										</Flexbox.Item>
-										<Flexbox.Item>{country}</Flexbox.Item>
-									</Flexbox>
-								)}
-							</Menu.Item>
-						))}
-					</Menu>
-				</DocsCode.Example>
-				<DocsCode.Code>
-					{`
-					<Menu defaultValue="Croatia">
-						{customOptions.map(({country, icon}) => (
-							<Menu.Item value={country} key={country} inline>
-								{({isSelected}) => (
-									<Flexbox alignItems="center">
-										<Flexbox.Item width={30}>
-											<Checkbox checked={isSelected} onChange={emptyFn} />
-										</Flexbox.Item>
-										<Flexbox.Item width={30}>
-											<span className={\`flag-icon flag-icon-\${icon}\`} />
-										</Flexbox.Item>
-										<Flexbox.Item>{country}</Flexbox.Item>
-									</Flexbox>
-								)}
-							</Menu.Item>
-						))}
-					</Menu>
-					`}
-				</DocsCode.Code>
-			</DocsCode>
-			<DocsSubTitle hash="divider">Menu.Divider</DocsSubTitle>
-			<DocsText>
+			<Paragraph>Here's more complex example when you want to put a checkbox and icon before the text.</Paragraph>
+			<Code
+				language="js"
+				code={`
+<Menu defaultValue="Croatia">
+  {customOptions.map(({country, icon}) => (
+    <Menu.Item value={country} key={country} inline>
+      {({isSelected}) => (
+        <Flexbox alignItems="center">
+          <Flexbox.Item width={30}>
+            <Checkbox checked={isSelected} onChange={emptyFn} />
+          </Flexbox.Item>
+          <Flexbox.Item width={30}>
+            <span className={\`flag-icon flag-icon-\${icon}\`} />
+          </Flexbox.Item>
+          <Flexbox.Item>{country}</Flexbox.Item>
+        </Flexbox>
+      )}
+    </Menu.Item>
+  ))}
+</Menu>
+        `}
+			>
+				<Menu defaultValue="Croatia">
+					{customOptions.map(({country, icon}) => (
+						<Menu.Item value={country} key={country} inline>
+							{({isSelected}) => (
+								<Flexbox alignItems="center">
+									<Flexbox.Item width={30}>
+										<Checkbox checked={isSelected} onChange={emptyFn} />
+									</Flexbox.Item>
+									<Flexbox.Item width={30}>
+										<span className={`flag-icon flag-icon-${icon}`} />
+									</Flexbox.Item>
+									<Flexbox.Item>{country}</Flexbox.Item>
+								</Flexbox>
+							)}
+						</Menu.Item>
+					))}
+				</Menu>
+			</Code>
+			<H2 hash="divider">Menu.Divider</H2>
+			<Paragraph>
 				Divider is simple component that puts the horizontal line 100% wide. Its color can be customized in theme, as well as thickness in
 				variant. This component has no props.
-			</DocsText>
+			</Paragraph>
 		</>
 	);
-};
+}

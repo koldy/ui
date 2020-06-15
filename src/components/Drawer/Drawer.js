@@ -10,7 +10,7 @@ import { slideInRightAnimation, slideOutRightAnimation } from "../../animations/
 import { slideInLeftAnimation, slideOutLeftAnimation } from "../../animations/slideLeft";
 import {slideInTopAnimation, slideOutTopAnimation} from '../../animations/slideTop';
 import { slideInBottomAnimation, slideOutBottomAnimation } from "../../animations/slideBottom";
-import useZIndex from '../../hooks/useZIndex';
+import useZIndex from '../../hooks/useZIndex/useZIndex';
 
 const Drawer = function(props) {
 	const {theme} = useContext(ThemeContext);

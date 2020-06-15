@@ -111,7 +111,7 @@ const Dot = styled.label`
 		left: 0;
 		height: ${({sizeCss}) => sizeCss}px;
 		width: ${({sizeCss}) => sizeCss}px;
-		border: ${({checkBorderCss}) => checkBorderCss}px solid ${({inactiveContainerBackground}) => inactiveContainerBackground};
+		border: ${({checkBorderCss}) => checkBorderCss}px solid ${({activeContainerBackground}) => activeContainerBackground};
 		transition: all 200ms ease;
 		border-radius: ${({borderRadiusCss}) => borderRadiusCss};
 		box-sizing: border-box;
@@ -188,7 +188,7 @@ const Dot = styled.label`
 	/* On mouse-over, add a grey background color */
 	&:hover {
 		> input ~ span {
-			border-color: ${({inactiveContainerHoverBackground}) => inactiveContainerHoverBackground};
+			border-color: ${({activeContainerHoverBackground}) => activeContainerHoverBackground};
 		}
 	}
 `;

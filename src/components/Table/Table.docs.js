@@ -1,21 +1,21 @@
 import React, {useContext} from 'react';
-import DocsTitle from '../../../docs/components/DocsTitle';
 
 import Table from './Table';
 import ThemeContext from '../../theme/ThemeContext';
 
 import Props from '../../../docs/components/Props';
-import DocsSubTitle from '../../../docs/components/DocsSubTitle';
-import DocsText from '../../../docs/components/DocsText';
-import ImportComponent from '../../../docs/components/ImportComponent';
+import H1 from '../../../docs/components/H1';
+import Code from '../../../docs/components/Code';
+import Paragraph from '../../../docs/components/Paragraph';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
-import DocsCode from '../../../docs/components/DocsCode';
+import List from '../../../docs/components/List';
+import H2 from '../../../docs/components/H2';
 
 export const title = 'Table';
-export const slug = 'table';
+export const route = '/table';
 export const json = 'table';
 
-export const Documentation = function() {
+export default function TableDocs() {
 	const {theme} = useContext(ThemeContext);
 
 	const colors = theme.json('table.color');
@@ -23,73 +23,71 @@ export const Documentation = function() {
 
 	return (
 		<>
-			<DocsTitle hash="table">Table</DocsTitle>
-			<ImportComponent name="Table" />
-			<DocsText>
+			<H1>Table</H1>
+			<Code language="js" code="import {Table} from 'koldy-ui';" />
+			<Paragraph>
 				This is Koldy <strong>UI</strong> and that's why this component offers only styled User Interface and nothing else. Here's an
 				example of Table:
-			</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<Table color="gray" border="table|head|row|column" striped hover="row">
-						<Table.Head>
-							<Table.Tr>
-								<Table.Th>continent</Table.Th>
-								<Table.Th>country</Table.Th>
-								<Table.Th>population</Table.Th>
-							</Table.Tr>
-						</Table.Head>
-						<Table.Body>
-							<Table.Tr>
-								<Table.Td>Australia</Table.Td>
-								<Table.Td>Australia</Table.Td>
-								<Table.Td>20M</Table.Td>
-							</Table.Tr>
-							<Table.Tr>
-								<Table.Td>Europe</Table.Td>
-								<Table.Td>Croatia</Table.Td>
-								<Table.Td>4M</Table.Td>
-							</Table.Tr>
-							<Table.Tr>
-								<Table.Td>Europe</Table.Td>
-								<Table.Td>Germany</Table.Td>
-								<Table.Td>81M</Table.Td>
-							</Table.Tr>
-						</Table.Body>
-					</Table>
-				</DocsCode.Example>
-				<DocsCode.Code>
-					{`
-					<Table color="gray" border="table|head|row|column" striped hover="row">
-						<Table.Head>
-							<Table.Tr>
-								<Table.Th>continent</Table.Th>
-								<Table.Th>country</Table.Th>
-								<Table.Th>population</Table.Th>
-							</Table.Tr>
-						</Table.Head>
-						<Table.Body>
-							<Table.Tr>
-								<Table.Td>Australia</Table.Td>
-								<Table.Td>Australia</Table.Td>
-								<Table.Td>20M</Table.Td>
-							</Table.Tr>
-							<Table.Tr>
-								<Table.Td>Europe</Table.Td>
-								<Table.Td>Croatia</Table.Td>
-								<Table.Td>4M</Table.Td>
-							</Table.Tr>
-							<Table.Tr>
-								<Table.Td>Europe</Table.Td>
-								<Table.Td>Germany</Table.Td>
-								<Table.Td>81M</Table.Td>
-							</Table.Tr>
-						</Table.Body>
-					</Table>
+			</Paragraph>
+			<Code
+				language="js"
+				code={`
+<Table color="gray" border="table|head|row|column" striped hover="row">
+  <Table.Head>
+    <Table.Tr>
+      <Table.Th>continent</Table.Th>
+      <Table.Th>country</Table.Th>
+      <Table.Th>population</Table.Th>
+    </Table.Tr>
+  </Table.Head>
+  <Table.Body>
+    <Table.Tr>
+      <Table.Td>Australia</Table.Td>
+      <Table.Td>Australia</Table.Td>
+      <Table.Td>20M</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Europe</Table.Td>
+      <Table.Td>Croatia</Table.Td>
+      <Table.Td>4M</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Europe</Table.Td>
+      <Table.Td>Germany</Table.Td>
+      <Table.Td>81M</Table.Td>
+    </Table.Tr>
+  </Table.Body>
+</Table>
 					`}
-				</DocsCode.Code>
-			</DocsCode>
-			<DocsText>
+			>
+				<Table color="gray" border="table|head|row|column" striped hover="row">
+					<Table.Head>
+						<Table.Tr>
+							<Table.Th>continent</Table.Th>
+							<Table.Th>country</Table.Th>
+							<Table.Th>population</Table.Th>
+						</Table.Tr>
+					</Table.Head>
+					<Table.Body>
+						<Table.Tr>
+							<Table.Td>Australia</Table.Td>
+							<Table.Td>Australia</Table.Td>
+							<Table.Td>20M</Table.Td>
+						</Table.Tr>
+						<Table.Tr>
+							<Table.Td>Europe</Table.Td>
+							<Table.Td>Croatia</Table.Td>
+							<Table.Td>4M</Table.Td>
+						</Table.Tr>
+						<Table.Tr>
+							<Table.Td>Europe</Table.Td>
+							<Table.Td>Germany</Table.Td>
+							<Table.Td>81M</Table.Td>
+						</Table.Tr>
+					</Table.Body>
+				</Table>
+			</Code>
+			<Paragraph>
 				Jump to subcomponent:{' '}
 				<a href="#head">
 					<code>Head</code>
@@ -114,15 +112,15 @@ export const Documentation = function() {
 				<a href="#td">
 					<code>Td</code>
 				</a>
-			</DocsText>
+			</Paragraph>
 			<Props>
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="color" type="string" defaultValue="theme.table.defaults.color">
-					<p>Set the table's predefined color set.</p>
+					<Paragraph>Set the table's predefined color set.</Paragraph>
 					<AvailableKeys data={colors} />
 				</Props.Prop>
 				<Props.Prop name="size" type="string" defaultValue="theme.table.defaults.size">
-					<p>Sets the table's size using parameters from the theme.</p>
+					<Paragraph>Sets the table's size using parameters from the theme.</Paragraph>
 					<AvailableKeys data={sizes} />
 				</Props.Prop>
 				<Props.Prop name="tableLayout" type="string" defaultValue="theme.table.defaults.tableLayout">
@@ -132,19 +130,19 @@ export const Documentation = function() {
 					Defines the width. If passed as number, it'll be used as pixels, otherwise it'll be used as is.
 				</Props.Prop>
 				<Props.Prop name="border" type="string" defaultValue="theme.table.defaults.border">
-					<p>
+					<Paragraph>
 						Defines where you want to have a border visible on table. This prop can accept multiple border values by separating the string
 						with <code>|</code>. So if you want to have a border around the whole table, plus under every row, then set the border to{' '}
 						<code>table|row</code>.
-					</p>
+					</Paragraph>
 					<AvailableKeys data={['table', 'row', 'column', 'head', 'foot']} />
 				</Props.Prop>
 				<Props.Prop name="hover" type="string" defaultValue="theme.table.defaults.hover">
-					<p>Defines which elements should change its color on hover.</p>
+					<Paragraph>Defines which elements should change its color on hover.</Paragraph>
 					<AvailableKeys data={['table', 'row', 'cell']} />
 				</Props.Prop>
 				<Props.Prop name="striped" type="boolean" defaultValue="theme.table.defaults.striped">
-					<p>Tells the component to have different background on every even row.</p>
+					<Paragraph>Tells the component to have different background on every even row.</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="style" />
 				<Props.Prop name="m" />
@@ -153,278 +151,270 @@ export const Documentation = function() {
 				<Props.Prop name="mb" />
 				<Props.Prop name="ml" />
 			</Props>
-			<DocsText>Table is a component for showing tabular data. Don't ever use Table component for layout.</DocsText>
-			<DocsText>
+			<Paragraph>Table is a component for showing tabular data. Don't ever use Table component for layout.</Paragraph>
+			<Paragraph>
 				This component wraps basic HTML and CSS properties into several components provided as static properties of <code>Table</code>:
-			</DocsText>
-			<DocsText>
-				<ul>
-					<li>
-						<a href="#head">
-							<code>Table.Head</code>
-						</a>
-					</li>
-					<li>
-						<a href="#body">
-							<code>Table.Body</code>
-						</a>
-					</li>
-					<li>
-						<a href="#foot">
-							<code>Table.Foot</code>
-						</a>
-					</li>
-					<li>
-						<a href="#tr">
-							<code>Table.Tr</code>
-						</a>
-					</li>
-					<li>
-						<a href="#th">
-							<code>Table.Th</code>
-						</a>
-					</li>
-					<li>
-						<a href="#td">
-							<code>Table.Td</code>
-						</a>
-					</li>
-				</ul>
-			</DocsText>
-			<DocsText>
+			</Paragraph>
+			<List>
+				<List.Item>
+					<a href="#head">
+						<code>Table.Head</code>
+					</a>
+				</List.Item>
+				<List.Item>
+					<a href="#body">
+						<code>Table.Body</code>
+					</a>
+				</List.Item>
+				<List.Item>
+					<a href="#foot">
+						<code>Table.Foot</code>
+					</a>
+				</List.Item>
+				<List.Item>
+					<a href="#tr">
+						<code>Table.Tr</code>
+					</a>
+				</List.Item>
+				<List.Item>
+					<a href="#th">
+						<code>Table.Th</code>
+					</a>
+				</List.Item>
+				<List.Item>
+					<a href="#td">
+						<code>Table.Td</code>
+					</a>
+				</List.Item>
+			</List>
+			<Paragraph>
 				Table component always expect <code>Head</code>, <code>Body</code> or <code>Foot</code> as its direct children and to keep
 				everything consistent, it won't allow <code>&lt;tr&gt;</code> tags as direct children of <code>&lt;table&gt;</code> tag.
-			</DocsText>
-			<DocsSubTitle hash="theory">Some theory about styling</DocsSubTitle>
-			<DocsText>
+			</Paragraph>
+			<H2 hash="theory">Some theory about styling</H2>
+			<Paragraph>
 				When you're thinking about styling the table, there's just few things reasonable enough that should go to the theme definition:
-			</DocsText>
-			<DocsText>
-				<ul>
-					<li>size</li>
-					<li>colors</li>
-				</ul>
-			</DocsText>
-			<DocsText>
+			</Paragraph>
+			<List>
+				<List.Item>size</List.Item>
+				<List.Item>colors</List.Item>
+			</List>
+			<Paragraph>
 				When we're talking about the size, we're talking about default cell padding, spacing and default font size within the cell. Avoid
 				defining CSS for the children in cells.
-			</DocsText>
-			<DocsText>
+			</Paragraph>
+			<Paragraph>
 				And when we're talking about the colors, we talk about backgrounds, text color, hover effects, border colors and the colors of the
 				child elements within the table's cell.
-			</DocsText>
-			<DocsText>Both size and colors can be defined in the theme. Please note:</DocsText>
-			<DocsText>
-				<ul>
-					<li>table's column widths, row heights and etc. shouldn't be defined in the theme</li>
-					<li>table's column widths, row heights and etc. should be defined while implementing table's components</li>
-				</ul>
-			</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<Table width="100%" tableLayout="fixed">
-						<Table.Head>
-							<Table.Tr>
-								<Table.Th width={70}>-</Table.Th>
-								<Table.Th>1st</Table.Th>
-								<Table.Th>2nd</Table.Th>
-								<Table.Th>3rd</Table.Th>
-							</Table.Tr>
-						</Table.Head>
-						<Table.Body>
-							<Table.Tr>
-								<Table.Th>first</Table.Th>
-								<Table.Td>1.1</Table.Td>
-								<Table.Td>1.2</Table.Td>
-								<Table.Td>1.3</Table.Td>
-							</Table.Tr>
-							<Table.Tr>
-								<Table.Th>second</Table.Th>
-								<Table.Td>2.1</Table.Td>
-								<Table.Td>2.2</Table.Td>
-								<Table.Td>2.3</Table.Td>
-							</Table.Tr>
-						</Table.Body>
-					</Table>
-				</DocsCode.Example>
-				<DocsCode.Code>
-					{`
-					<Table width="100%" tableLayout="fixed">
-						<Table.Head>
-							<Table.Tr>
-								<Table.Th width={70}>-</Table.Th>
-								<Table.Th>1st</Table.Th>
-								<Table.Th>2nd</Table.Th>
-								<Table.Th>3rd</Table.Th>
-							</Table.Tr>
-						</Table.Head>
-						<Table.Body>
-							<Table.Tr>
-								<Table.Th>first</Table.Th>
-								<Table.Td>1.1</Table.Td>
-								<Table.Td>1.2</Table.Td>
-								<Table.Td>1.3</Table.Td>
-							</Table.Tr>
-							<Table.Tr>
-								<Table.Th>second</Table.Th>
-								<Table.Td>2.1</Table.Td>
-								<Table.Td>2.2</Table.Td>
-								<Table.Td>2.3</Table.Td>
-							</Table.Tr>
-						</Table.Body>
-					</Table>
+			</Paragraph>
+			<Paragraph>Both size and colors can be defined in the theme. Please note:</Paragraph>
+			<List>
+				<List.Item>table's column widths, row heights and etc. shouldn't be defined in the theme</List.Item>
+				<List.Item>table's column widths, row heights and etc. should be defined while implementing table's components</List.Item>
+			</List>
+			<Code
+				language="js"
+				code={`
+<Table width="100%" tableLayout="fixed">
+  <Table.Head>
+    <Table.Tr>
+      <Table.Th width={70}>-</Table.Th>
+      <Table.Th>1st</Table.Th>
+      <Table.Th>2nd</Table.Th>
+      <Table.Th>3rd</Table.Th>
+    </Table.Tr>
+  </Table.Head>
+  <Table.Body>
+    <Table.Tr>
+      <Table.Th>first</Table.Th>
+      <Table.Td>1.1</Table.Td>
+      <Table.Td>1.2</Table.Td>
+      <Table.Td>1.3</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Th>second</Table.Th>
+      <Table.Td>2.1</Table.Td>
+      <Table.Td>2.2</Table.Td>
+      <Table.Td>2.3</Table.Td>
+    </Table.Tr>
+  </Table.Body>
+</Table>
 					`}
-				</DocsCode.Code>
-			</DocsCode>
-			<DocsSubTitle hash="size">Size</DocsSubTitle>
-			<DocsText>
+			>
+				<Table width="100%" tableLayout="fixed">
+					<Table.Head>
+						<Table.Tr>
+							<Table.Th width={70}>-</Table.Th>
+							<Table.Th>1st</Table.Th>
+							<Table.Th>2nd</Table.Th>
+							<Table.Th>3rd</Table.Th>
+						</Table.Tr>
+					</Table.Head>
+					<Table.Body>
+						<Table.Tr>
+							<Table.Th>first</Table.Th>
+							<Table.Td>1.1</Table.Td>
+							<Table.Td>1.2</Table.Td>
+							<Table.Td>1.3</Table.Td>
+						</Table.Tr>
+						<Table.Tr>
+							<Table.Th>second</Table.Th>
+							<Table.Td>2.1</Table.Td>
+							<Table.Td>2.2</Table.Td>
+							<Table.Td>2.3</Table.Td>
+						</Table.Tr>
+					</Table.Body>
+				</Table>
+			</Code>
+			<H2 hash="size">Size</H2>
+			<Paragraph>
 				<AvailableKeys data={sizes} name="theme.table.size" />
-			</DocsText>
+			</Paragraph>
 			{Object.keys(sizes).map((size) => (
-				<DocsCode key={size} label={size}>
-					<DocsCode.Example>
-						<Table size={size}>
-							<Table.Head>
-								<Table.Tr>
-									<Table.Th>continent</Table.Th>
-									<Table.Th>country</Table.Th>
-									<Table.Th>population</Table.Th>
-								</Table.Tr>
-							</Table.Head>
-							<Table.Body>
-								<Table.Tr>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>20M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Croatia</Table.Td>
-									<Table.Td>4M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Germany</Table.Td>
-									<Table.Td>81M</Table.Td>
-								</Table.Tr>
-							</Table.Body>
-						</Table>
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{`
-						<Table size="${size}">
-							<Table.Head>
-								<Table.Tr>
-									<Table.Th>continent</Table.Th>
-									<Table.Th>country</Table.Th>
-									<Table.Th>population</Table.Th>
-								</Table.Tr>
-							</Table.Head>
-							<Table.Body>
-								<Table.Tr>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>20M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Croatia</Table.Td>
-									<Table.Td>4M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Germany</Table.Td>
-									<Table.Td>81M</Table.Td>
-								</Table.Tr>
-							</Table.Body>
-						</Table>
+				<Code
+					language="js"
+					code={`
+<Table size="${size}">
+  <Table.Head>
+    <Table.Tr>
+      <Table.Th>continent</Table.Th>
+      <Table.Th>country</Table.Th>
+      <Table.Th>population</Table.Th>
+    </Table.Tr>
+  </Table.Head>
+  <Table.Body>
+    <Table.Tr>
+      <Table.Td>Australia</Table.Td>
+      <Table.Td>Australia</Table.Td>
+      <Table.Td>20M</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Europe</Table.Td>
+      <Table.Td>Croatia</Table.Td>
+      <Table.Td>4M</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Europe</Table.Td>
+      <Table.Td>Germany</Table.Td>
+      <Table.Td>81M</Table.Td>
+    </Table.Tr>
+  </Table.Body>
+</Table>
 						`}
-					</DocsCode.Code>
-				</DocsCode>
+					key={size}
+					label={size}
+				>
+					<Table size={size}>
+						<Table.Head>
+							<Table.Tr>
+								<Table.Th>continent</Table.Th>
+								<Table.Th>country</Table.Th>
+								<Table.Th>population</Table.Th>
+							</Table.Tr>
+						</Table.Head>
+						<Table.Body>
+							<Table.Tr>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>20M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Croatia</Table.Td>
+								<Table.Td>4M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Germany</Table.Td>
+								<Table.Td>81M</Table.Td>
+							</Table.Tr>
+						</Table.Body>
+					</Table>
+				</Code>
 			))}
-			<DocsSubTitle hash="color">Color</DocsSubTitle>
-			<DocsText>
+			<H2 hash="color">Color</H2>
+			<Paragraph>
 				<AvailableKeys data={colors} name="theme.table.color" />
-			</DocsText>
+			</Paragraph>
 			{Object.keys(colors).map((color) => (
-				<DocsCode key={color} label={color}>
-					<DocsCode.Example>
-						<Table color={color} border="row|column|table|head">
-							<Table.Head>
-								<Table.Tr>
-									<Table.Th>continent</Table.Th>
-									<Table.Th>country</Table.Th>
-									<Table.Th>population</Table.Th>
-								</Table.Tr>
-							</Table.Head>
-							<Table.Body>
-								<Table.Tr>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>20M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Croatia</Table.Td>
-									<Table.Td>4M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Germany</Table.Td>
-									<Table.Td>81M</Table.Td>
-								</Table.Tr>
-							</Table.Body>
-						</Table>
-					</DocsCode.Example>
-					<DocsCode.Code>
-						{`
-						<Table color="${color}" border="row|column|table|head">
-							<Table.Head>
-								<Table.Tr>
-									<Table.Th>continent</Table.Th>
-									<Table.Th>country</Table.Th>
-									<Table.Th>population</Table.Th>
-								</Table.Tr>
-							</Table.Head>
-							<Table.Body>
-								<Table.Tr>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>Australia</Table.Td>
-									<Table.Td>20M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Croatia</Table.Td>
-									<Table.Td>4M</Table.Td>
-								</Table.Tr>
-								<Table.Tr>
-									<Table.Td>Europe</Table.Td>
-									<Table.Td>Germany</Table.Td>
-									<Table.Td>81M</Table.Td>
-								</Table.Tr>
-							</Table.Body>
-						</Table>
+				<Code
+					language="js"
+					code={`
+<Table color="${color}" border="row|column|table|head">
+  <Table.Head>
+    <Table.Tr>
+      <Table.Th>continent</Table.Th>
+      <Table.Th>country</Table.Th>
+      <Table.Th>population</Table.Th>
+    </Table.Tr>
+  </Table.Head>
+  <Table.Body>
+    <Table.Tr>
+      <Table.Td>Australia</Table.Td>
+      <Table.Td>Australia</Table.Td>
+      <Table.Td>20M</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Europe</Table.Td>
+      <Table.Td>Croatia</Table.Td>
+      <Table.Td>4M</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Europe</Table.Td>
+      <Table.Td>Germany</Table.Td>
+      <Table.Td>81M</Table.Td>
+    </Table.Tr>
+  </Table.Body>
+</Table>
 						`}
-					</DocsCode.Code>
-				</DocsCode>
+					key={color}
+					label={color}
+				>
+					<Table color={color} border="row|column|table|head">
+						<Table.Head>
+							<Table.Tr>
+								<Table.Th>continent</Table.Th>
+								<Table.Th>country</Table.Th>
+								<Table.Th>population</Table.Th>
+							</Table.Tr>
+						</Table.Head>
+						<Table.Body>
+							<Table.Tr>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>Australia</Table.Td>
+								<Table.Td>20M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Croatia</Table.Td>
+								<Table.Td>4M</Table.Td>
+							</Table.Tr>
+							<Table.Tr>
+								<Table.Td>Europe</Table.Td>
+								<Table.Td>Germany</Table.Td>
+								<Table.Td>81M</Table.Td>
+							</Table.Tr>
+						</Table.Body>
+					</Table>
+				</Code>
 			))}
-			<DocsSubTitle hash="head">Head</DocsSubTitle>
-			<DocsSubTitle hash="body">Body</DocsSubTitle>
-			<DocsSubTitle hash="foot">Foot</DocsSubTitle>
-			<DocsText>All these components accept only children prop which should be node.</DocsText>
-			<DocsSubTitle hash="tr">Tr</DocsSubTitle>
-			<DocsText>
+			<H2 hash="head">Head</H2>
+			<H2 hash="body">Body</H2>
+			<H2 hash="foot">Foot</H2>
+			<Paragraph>All these components accept only children prop which should be node.</Paragraph>
+			<H2 hash="tr">Tr</H2>
+			<Paragraph>
 				Use this component as direct child of <code>Table.Head</code>, <code>Table.Body</code> or <code>Table.Foot</code> component.
-			</DocsText>
+			</Paragraph>
 			<Props hash="tr-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick">If defined, it'll be triggered if any cell within the row is clicked on.</Props.Prop>
 				<Props.Prop name="onDoubleClick">If defined, it'll be triggered if any cell within the row is double clicked on.</Props.Prop>
 			</Props>
-			<DocsSubTitle hash="th">Th</DocsSubTitle>
-			<DocsText>
+			<H2 hash="th">Th</H2>
+			<Paragraph>
 				Use this component as direct child of <code>Table.Tr</code> component.
-			</DocsText>
+			</Paragraph>
 			<Props hash="th-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick">
@@ -455,10 +445,10 @@ export const Documentation = function() {
 				<Props.Prop name="pl" />
 				<Props.Prop name="style" />
 			</Props>
-			<DocsSubTitle hash="td">Td</DocsSubTitle>
-			<DocsText>
+			<H2 hash="td">Td</H2>
+			<Paragraph>
 				Use this component as direct child of <code>Table.Tr</code> component.
-			</DocsText>
+			</Paragraph>
 			<Props hash="td-props">
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick">
@@ -491,4 +481,4 @@ export const Documentation = function() {
 			</Props>
 		</>
 	);
-};
+}

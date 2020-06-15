@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import lightTheme from '../themes/koldy-ui-light-theme/src';
+import lightTheme from '../themes/koldy-ui-light-theme/src/koldy-ui-light-theme';
 
 import App from '../src/components/App/App';
 import ThemeManager from '../src/theme/ThemeManager';

@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 
 import ProgressBar from './ProgressBar';
 import TestApp from '../../../test/TestApp';
-import lightTheme from '../../../themes/koldy-ui-light-theme/src';
+import lightTheme from '../../../themes/koldy-ui-light-theme/src/koldy-ui-light-theme';
 
 describe('ProgressBar test in light theme', () => {
 	Object.keys(lightTheme.progressBar.color).forEach((color) => {

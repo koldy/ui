@@ -1,10 +1,10 @@
-import React, {useState, useCallback, Fragment} from 'react';
+import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import {isArray} from '../../src/util/helpers';
-import DocsSubTitle from './DocsSubTitle';
 import Tabs from './Tabs';
+import H2 from './H2';
 
 const VIEW_MAIN = 'main';
 const VIEW_ADDITIONAL = 'additional';
@@ -13,23 +13,7 @@ const VIEW_ADVANCED = 'advanced';
 const Props = function(props) {
 	const {children, hash, title} = props;
 
-	const additional = [
-		'm',
-		'mt',
-		'mr',
-		'mb',
-		'ml',
-		'p',
-		'pt',
-		'pr',
-		'pb',
-		'pl',
-		'top',
-		'right',
-		'bottom',
-		'left',
-		'style'
-	];
+	const additional = ['m', 'mt', 'mr', 'mb', 'ml', 'p', 'pt', 'pr', 'pb', 'pl', 'top', 'right', 'bottom', 'left', 'style'];
 	const advanced = ['as', 'ref'];
 
 	const additionalJsx = [];
@@ -68,7 +52,7 @@ const Props = function(props) {
 
 	return (
 		<Wrapper>
-			<DocsSubTitle hash={hash}>{title}</DocsSubTitle>
+			<H2 hash={hash}>{title}</H2>
 			{view !== null && (
 				<Tabs>
 					{mainJsx.length > 0 && (
@@ -294,7 +278,7 @@ const Prop = function(props) {
 	}
 
 	return (
-		<Fragment>
+		<>
 			<FirstTr onClick={toggle} hasDescription={!!description}>
 				<Cell>
 					<div>
@@ -327,7 +311,7 @@ const Prop = function(props) {
 					<Cell colSpan={3}>{description}</Cell>
 				</LastTr>
 			)}
-		</Fragment>
+		</>
 	);
 };
 
@@ -350,8 +334,6 @@ const Cell = styled.td`
 	code {
 		font-feature-settings: normal;
 		font-family: ibm-plex-mono, Menlo, Monaco, OperatorMono-Book, monospace;
-		background-color: rgb(243, 244, 243);
-		padding: 2px 4px;
 		display: inline-block;
 		overflow-wrap: normal;
 		border-radius: 3px;
@@ -361,7 +343,7 @@ const Cell = styled.td`
 		&.type {
 			font-size: 0.7rem;
 			background-color: transparent;
-			color: #999999;
+			color: #888888;
 			font-weight: bold;
 		}
 	}
@@ -370,12 +352,12 @@ const Cell = styled.td`
 const RequiredCell = styled.td`
 	text-align: center;
 	padding: 1rem;
-	color: ${({required}) => (required ? 'red' : '#5d88d0')};
+	color: ${({required}) => (required ? 'red' : '#cfcfcf')};
 `;
 
 const FirstTr = styled.tr`
 	> td {
-		border-top: 1px solid #efefef;
+		border-top: 1px solid #4a1b1a;
 		padding: 0.5rem;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -384,7 +366,7 @@ const FirstTr = styled.tr`
 
 	&:hover {
 		> td {
-			background-color: #efefef;
+			background-color: ${({hasDescription}) => (hasDescription ? '#4a1b1a' : 'unset')};
 			cursor: ${({hasDescription}) => (hasDescription ? 'pointer' : 'default')};
 		}
 	}
@@ -392,9 +374,9 @@ const FirstTr = styled.tr`
 
 const LastTr = styled.tr`
 	> td {
-		border-bottom: 1px solid #efefef;
+		border-bottom: 1px solid #4a1b1a;
 		padding: 1rem;
-		font-weight: 300;
+		font-weight: normal;
 		line-height: 1.2;
 
 		p {
@@ -406,12 +388,11 @@ const LastTr = styled.tr`
 
 		> code,
 		> p > code {
-			font-size: 0.8em;
-			border: 1px solid #efefef;
-
-			&:hover {
-				border: 1px solid #bfbfbf;
-			}
+			display: inline-block;
+			vertical-align: initial;
+			font-size: 0.925em;
+			margin-left: 3px;
+			margin-right: 3px;
 		}
 	}
 `;

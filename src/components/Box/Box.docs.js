@@ -2,61 +2,54 @@ import React from 'react';
 
 import Box from './Box';
 
-import {Title, Props, ImportComponent} from '../../../docs/components';
-import DocsSubTitle from '../../../docs/components/DocsSubTitle';
-import DocsText from '../../../docs/components/DocsText';
-import DocsCode from '../../../docs/components/DocsCode';
+import Code from '../../../docs/components/Code';
+import H1 from '../../../docs/components/H1';
+import Paragraph from '../../../docs/components/Paragraph';
+import Props from '../../../docs/components/Props';
+import H2 from '../../../docs/components/H2';
+import List from '../../../docs/components/List';
 
 export const title = 'Box';
-export const slug = 'box';
+export const route = '/box';
 export const json = null;
 
-export const Documentation = function() {
+export default function BoxDocs() {
 	return (
 		<>
-			<Title hash="box">Box</Title>
-			<ImportComponent name="Box" />
-			<DocsCode>
-				<DocsCode.Example>
-					<Box>I'm in the box</Box>
-				</DocsCode.Example>
-				<DocsCode.Code>{"<Box>I'm in the box</Box>"}</DocsCode.Code>
-			</DocsCode>
-			<DocsSubTitle hash="some-theory">Some theory</DocsSubTitle>
-			<DocsText>
+			<H1>Box</H1>
+			<Code language="js" code="import {Box} from 'koldy-ui';" />
+			<Code language="js" code="<Box>I'm in the box</Box>">
+				<Box>I'm in the box</Box>
+			</Code>
+			<H2 hash="some-theory">Some theory</H2>
+			<Paragraph>
 				<code>Box</code> component is wrapper for <code>div</code> element and its main purpose is to be used for positioning. Although it
 				can be used like <code>&lt;Box as="p"/&gt;</code>, don't use it for content. So, any time when you want to create menu, some
 				subelements, or place anything else, use this component.
-			</DocsText>
+			</Paragraph>
 			<Props>
 				<Props.Prop name="children" type="node" />
 				<Props.Prop name="onClick">
-					<p>Fires function with object on first parameter with the following keys:</p>
-					<ul>
-						<li>
+					<Paragraph>Fires function with object on first parameter with the following keys:</Paragraph>
+					<List>
+						<List.Item>
 							<strong>element</strong> - HTMLElement
-						</li>
-					</ul>
-					<DocsCode>
-						<DocsCode.Example>
-							<Box onClick={(x) => console.log(x)}>Hi! Click me</Box>
-						</DocsCode.Example>
-						<DocsCode.Code>{`<Box onClick={(x) => console.log(x)}>Hi! Click me</Box>`}</DocsCode.Code>
-					</DocsCode>
+						</List.Item>
+					</List>
+					<Code language="js" code={`<Box onClick={(x) => console.log(x)}>Hi! Click me</Box>`}>
+						<Box onClick={(x) => console.log(x)}>Hi! Click me</Box>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="onDoubleClick">
-					<p>Fires function with object on first parameter with the following keys:</p>
-					<ul>
-						<li>
+					<Paragraph>Fires function with object on first parameter with the following keys:</Paragraph>
+					<List>
+						<List.Item>
 							<strong>element</strong> - HTMLElement
-						</li>
-					</ul>
-					<DocsCode>
-						<DocsCode.Example>
-							<Box onDoubleClick={(x) => console.log(x)}>Hi! Double click me</Box>
-						</DocsCode.Example>
-						<DocsCode.Code>{`<Box onDoubleClick={(x) => console.log(x)}>Hi! Double click me</Box>`}</DocsCode.Code>
-					</DocsCode>
+						</List.Item>
+					</List>
+					<Code language="js" code={`<Box onDoubleClick={(x) => console.log(x)}>Hi! Double click me</Box>`}>
+						<Box onDoubleClick={(x) => console.log(x)}>Hi! Double click me</Box>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="width" type={['string', 'number']} defaultValue="100%">
 					Defines the width. If passed as number, it'll be used as pixels, otherwise it'll be used as is.
@@ -77,39 +70,39 @@ export const Documentation = function() {
 					Defines the min-height. If passed as number, it'll be used as pixels, otherwise it'll be used as is.
 				</Props.Prop>
 				<Props.Prop name="background" type="string">
-					<p>
+					<Paragraph>
 						Defines the CSS's background value. You can pass any color value from the defined colors in theme in format{' '}
 						<code>color|tone</code>, otherwise, it'll be used as is, which means that you're able to pass any other valid CSS color or the
 						whole background definition.
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						Be aware that if you defined, for example, color <code>red</code> in the theme and then you pass <code>red</code> as a
 						background's prop value, then you'll get the color definition from the theme instead of #ff0000.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="textAlign" type="string" defaultValue="inherit">
 					This is shorthand for aligning text within the box. Use one of <code>left</code>, <code>center</code>, <code>right</code>,{' '}
 					<code>justify</code> or <code>inherit</code> values.
 				</Props.Prop>
 				<Props.Prop name="position" type="string" defaultValue="static">
-					<p>
+					<Paragraph>
 						Set the box's position. Use one of <code>static</code>, <code>absolute</code>, <code>fixed</code>, <code>relative</code>,{' '}
 						<code>sticky</code>, <code>initial</code> or <code>inheirt</code> values.
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						Please note: if <code>Box</code> has position of <code>absolute</code> or <code>fixed</code>, then:
-					</p>
-					<ul>
-						<li>
+					</Paragraph>
+					<List>
+						<List.Item>
 							you may use props: <code>top</code>, <code>right</code>, <code>bottom</code> and <code>left</code>.
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<code>width</code> prop has NO default value
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<code>height</code> prop has NO default value
-						</li>
-					</ul>
+						</List.Item>
+					</List>
 				</Props.Prop>
 				<Props.Prop name="m" />
 				<Props.Prop name="mt" />
@@ -122,63 +115,54 @@ export const Documentation = function() {
 				<Props.Prop name="pb" />
 				<Props.Prop name="pl" />
 				<Props.Prop name="top" type={['string', 'number']}>
-					<p>
+					<Paragraph>
 						Pass any valid CSS value for <code>top</code> property here.
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						It won't work unless <code>position</code> prop is not set to <code>absolute</code> or <code>fixed</code>.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="right" type={['string', 'number']}>
-					<p>
+					<Paragraph>
 						Pass any valid CSS value for <code>right</code> property here.
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						It won't work unless <code>position</code> prop is not set to <code>absolute</code> or <code>fixed</code>.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="bottom" type={['string', 'number']}>
-					<p>
+					<Paragraph>
 						Pass any valid CSS value for <code>bottom</code> property here.
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						It won't work unless <code>position</code> prop is not set to <code>absolute</code> or <code>fixed</code>.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="left" type={['string', 'number']}>
-					<p>
+					<Paragraph>
 						Pass any valid CSS value for <code>left</code> property here.
-					</p>
-					<p>
+					</Paragraph>
+					<Paragraph>
 						It won't work unless <code>position</code> prop is not set to <code>absolute</code> or <code>fixed</code>.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="style" />
 				<Props.Prop name="as" />
 				<Props.Prop name="ref" />
 			</Props>
-			<DocsSubTitle hash="color">Color</DocsSubTitle>
-			<DocsText>
+			<H2 hash="color">Color</H2>
+			<Paragraph>
 				The only color prop that <code>Box</code> accepts is <code>background</code>.
-			</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<Box background="aqua">This box has aqua background</Box>
-				</DocsCode.Example>
-				<DocsCode.Code>{'<Box background="aqua">This box has aqua background</Box>'}</DocsCode.Code>
-			</DocsCode>
-			<DocsCode>
-				<DocsCode.Example>
-					<Box background="primary">This box has primary background</Box>
-				</DocsCode.Example>
-				<DocsCode.Code>{'<Box background="primary">This box has primary background</Box>'}</DocsCode.Code>
-			</DocsCode>
-			<DocsCode>
-				<DocsCode.Example>
-					<Box background="primary|2">This box has dark primary background</Box>
-				</DocsCode.Example>
-				<DocsCode.Code>{'<Box background="primary|2">This box has dark primary background</Box>'}</DocsCode.Code>
-			</DocsCode>
+			</Paragraph>
+			<Code language="js" code='<Box background="aqua">This box has aqua background</Box>'>
+				<Box background="aqua">This box has aqua background</Box>
+			</Code>
+			<Code language="js" code='<Box background="primary">This box has primary background</Box>'>
+				<Box background="primary">This box has primary background</Box>
+			</Code>
+			<Code language="js" code='<Box background="primary|2">This box has dark primary background</Box>'>
+				<Box background="primary|2">This box has dark primary background</Box>
+			</Code>
 		</>
 	);
-};
+}

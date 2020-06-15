@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import lightTheme from '../../../themes/koldy-ui-light-theme/src';
+import lightTheme from '../../../themes/koldy-ui-light-theme/src/koldy-ui-light-theme';
 
 import TimeField from './TimeField';
 import TestApp from '../../../test/TestApp';

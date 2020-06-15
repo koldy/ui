@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
 import {getPixelsOrString, isControlledComponent, isFunction, isNumberOrString} from '../../util/helpers';
-import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
+import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
 import Box from '../InputField/Box';

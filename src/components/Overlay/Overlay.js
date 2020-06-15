@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import ThemeContext from '../../theme/ThemeContext';
 import {addDocumentEvent, emptyFn, isFunction, removeDocumentEvent} from '../../util/helpers';
-import useZIndex from '../../hooks/useZIndex';
+import useZIndex from '../../hooks/useZIndex/useZIndex';
 import {fadeInAnimation} from '../../animations/fade';
 
 const overlays = []; // the array of all active overlays

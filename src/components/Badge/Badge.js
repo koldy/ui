@@ -196,7 +196,7 @@ export default Badge;
 
 const StyledBadge = styled.span`
 	display: inline-block;
-	vertical-align: middle;
+	vertical-align: text-top;
 	outline: none;
 	text-decoration: none;
 	box-sizing: border-box;

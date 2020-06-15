@@ -3,20 +3,22 @@ import React, {useCallback, useContext, useState} from 'react';
 import Overlay from './Overlay';
 import ThemeContext from '../../theme/ThemeContext';
 
-import {Title, Props, ImportComponent} from '../../../docs/components';
-import DocsSubTitle from '../../../docs/components/DocsSubTitle';
-import DocsText from '../../../docs/components/DocsText';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
-import DocsCode from '../../../docs/components/DocsCode';
 import Box from '../Box/Box';
 import {preventDefaultAndStopPropagation} from '../../util/helpers';
+import H1 from '../../../docs/components/H1';
+import Code from '../../../docs/components/Code';
+import Paragraph from '../../../docs/components/Paragraph';
+import H2 from '../../../docs/components/H2';
+import Props from '../../../docs/components/Props';
+import List from '../../../docs/components/List';
 
 export const title = 'Overlay';
-export const slug = 'overlay';
+export const route = '/overlay';
 export const json = 'overlay';
 
-export const Documentation = function() {
+export default function OverlayDocs() {
 	const {theme, addToast} = useContext(ThemeContext);
 
 	const [mainExample, setMainExample] = useState(false);
@@ -41,78 +43,74 @@ export const Documentation = function() {
 
 	return (
 		<>
-			<Title hash="overlay">Overlay</Title>
-			<ImportComponent name="Overlay" />
-			<DocsText>
+			<H1>Overlay</H1>
+			<Code language="js" code="import {Overlay} from 'koldy-ui';" />
+			<Paragraph>
 				Overlay is a div useful for creating customized modals, alerts or confirmation alerts. It's usually in some semi-transparent color,
 				but it can be completely transparent. Koldy UI provides complete functionality over overlay's animations, zIndexes, background color
 				and etc.
-			</DocsText>
-			<DocsText>
+			</Paragraph>
+			<Paragraph>
 				Koldy UI DOES NOT provide modals, alert and similar components because there can be so many variations and there's no logical reason
 				why would you be forced to use our way. Instead, use the <code>Overlay</code> component as a powerful tool to quickly create your
 				own modals, alert and any other component that needs to be in "overlay".
-			</DocsText>
-			<DocsText>Here's basic example that opens overlay with 500ms animation and semi-transparent background:</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					{mainExample && (
-						<Overlay onClose={() => setMainExample(false)} animationDuration="500ms" backgroundColor="rgba(65,120,198,0.8)">
-							{() => (
-								<Text color="yellow" m="2rem">
-									I am content in overlay. Use ESC or click outside to close me.
-								</Text>
-							)}
-						</Overlay>
-					)}
+			</Paragraph>
+			<Paragraph>Here's basic example that opens overlay with 500ms animation and semi-transparent background:</Paragraph>
+			<Code
+				language="js"
+				code={`
+const [mainExample, setMainExample] = useState(false);
 
-					<Button onClick={() => setMainExample(true)}>Show Overlay example</Button>
-				</DocsCode.Example>
-				<DocsCode.Code>
-					{`
-					const [mainExample, setMainExample] = useState(false);
-					
-					return (
-						{mainExample && (
-							<Overlay
-								onClose={() => setMainExample(false)}
-								animationDuration="500ms"
-								backgroundColor="rgba(65,120,198,0.8)"
-							>
-								{() => (
-									<Text color="yellow" m="2rem">
-										I am content in overlay. Use ESC or click outside to close me.
-									</Text>
-								)}
-							</Overlay>
-						)}
-	
-						<Button onClick={() => setMainExample(true)}>Show Overlay example</Button>
-					);
+return (
+  {mainExample && (
+    <Overlay
+      onClose={() => setMainExample(false)}
+      animationDuration="500ms"
+      backgroundColor="rgba(65,120,198,0.8)"
+    >
+      {() => (
+        <Text color="yellow" m="2rem">
+          I am content in overlay. Use ESC or click outside to close me.
+        </Text>
+      )}
+    </Overlay>
+  )}
+
+  <Button onClick={() => setMainExample(true)}>Show Overlay example</Button>
+);
 					`}
-				</DocsCode.Code>
-			</DocsCode>
-			<DocsSubTitle hash="some-theory">Some theory</DocsSubTitle>
-			<DocsText>
-				Overlay is simple div that:
-				<ul>
-					<li>covers the whole viewport (100% width and 100% height)</li>
-					<li>
-						renders as the last element under <code>&lt;body&gt;</code> tag
-					</li>
-					<li>has high and calculated z-index</li>
-					<li>blocks body scrolling on first appearance</li>
-				</ul>
-			</DocsText>
+			>
+				{mainExample && (
+					<Overlay onClose={() => setMainExample(false)} animationDuration="500ms" backgroundColor="rgba(65,120,198,0.8)">
+						{() => (
+							<Text color="yellow" m="2rem">
+								I am content in overlay. Use ESC or click outside to close me.
+							</Text>
+						)}
+					</Overlay>
+				)}
+
+				<Button onClick={() => setMainExample(true)}>Show Overlay example</Button>
+			</Code>
+			<H2 hash="some-theory">Some theory</H2>
+			<Paragraph>Overlay is simple div that:</Paragraph>
+			<List>
+				<List.Item>covers the whole viewport (100% width and 100% height)</List.Item>
+				<List.Item>
+					renders as the last element under <code>&lt;body&gt;</code> tag
+				</List.Item>
+				<List.Item>has high and calculated z-index</List.Item>
+				<List.Item>blocks body scrolling on first appearance</List.Item>
+			</List>
 			<Props>
 				<Props.Prop name="children" type={['function', 'node']} required>
 					Use the function as opportunity to get some of the Overlay's properties useful for creating UI on top of overlay. This function
 					gets object for parameter which contains:
 					<ul>
-						<li>
+						<List.Item>
 							<strong>closeFn</strong> - function that should be used for triggering the overlay close action (useful if you want to have
 							your own close button)
-						</li>
+						</List.Item>
 					</ul>
 				</Props.Prop>
 				<Props.Prop name="backgroundColor" type="string" defaultValue="theme.overlay.defaults.backgroundColor">
@@ -141,14 +139,12 @@ export const Documentation = function() {
 				<Props.Prop name="style" />
 			</Props>
 
-			<DocsText>
+			<Paragraph>
 				You can "render" overlays one inside of other, but thanks to React portals, it'll be rendered on correct place in DOM.
-			</DocsText>
-			<DocsCode>
-				<DocsCode.Example>
-					<Button onClick={() => setExample1(!example1)}>Show 1st overlay</Button>
-				</DocsCode.Example>
-			</DocsCode>
+			</Paragraph>
+			<Code language="js">
+				<Button onClick={() => setExample1(!example1)}>Show 1st overlay</Button>
+			</Code>
 			{example1 && (
 				<Overlay onClose={() => setExample1(false)} backgroundColor="semiBlack">
 					{({closeFn}) => (
@@ -164,8 +160,8 @@ export const Documentation = function() {
 								<Overlay onClose={() => setExample2(false)} backgroundColor="semiBlack">
 									{({closeFn: onClose2}) => (
 										<Box p="4rem" textAlign="center" background="#ffffff" onClick={preventDefaultAndStopPropagation}>
-											<p>This is content of 2nd overlay</p>
-											<p>
+											<Paragraph>This is content of 2nd overlay</Paragraph>
+											<Paragraph>
 												<Button
 													onClick={() => {
 														closeFn();
@@ -174,10 +170,10 @@ export const Documentation = function() {
 												>
 													Close 1st overlay
 												</Button>
-											</p>
-											<p>
+											</Paragraph>
+											<Paragraph>
 												<Button onClick={onClose2}>Close 2nd overlay</Button>
-											</p>
+											</Paragraph>
 										</Box>
 									)}
 								</Overlay>
@@ -188,4 +184,4 @@ export const Documentation = function() {
 			)}
 		</>
 	);
-};
+}

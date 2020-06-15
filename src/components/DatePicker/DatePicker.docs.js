@@ -1,22 +1,22 @@
-import React, {Fragment, useContext} from 'react';
-import DocsTitle from '../../../docs/components/DocsTitle';
+import React, {useContext} from 'react';
 
 import DatePicker from './DatePicker';
 import ThemeContext from '../../theme/ThemeContext';
 
 import Props from '../../../docs/components/Props';
-import DocsText from '../../../docs/components/DocsText';
-import ImportComponent from '../../../docs/components/ImportComponent';
-import DocsCode from '../../../docs/components/DocsCode';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
 import Button from '../Button/Button';
-import DocsSubTitle from '../../../docs/components/DocsSubTitle';
+import H1 from '../../../docs/components/H1';
+import Code from '../../../docs/components/Code';
+import List from '../../../docs/components/List';
+import H2 from '../../../docs/components/H2';
+import Paragraph from '../../../docs/components/Paragraph';
 
 export const title = 'Date Picker';
-export const slug = 'date-picker';
+export const route = '/date-picker';
 export const json = 'datePicker';
 
-export const Documentation = function() {
+export default function DatePickerDocumentation() {
 	const {theme} = useContext(ThemeContext);
 
 	const sizes = theme.json('datePicker.size');
@@ -28,85 +28,77 @@ export const Documentation = function() {
 
 	return (
 		<>
-			<DocsTitle hash="text">Date Picker</DocsTitle>
-			<ImportComponent name="DatePicker" />
-			<DocsCode>
-				<DocsCode.Example>
-					<DatePicker />
-				</DocsCode.Example>
-				<DocsCode.Code>{'<DatePicker />'}</DocsCode.Code>
-			</DocsCode>
-			<DocsText>
+			<H1 hash="text">Date Picker</H1>
+			<Code language="js" code="import {DatePicker} from 'koldy-ui';" />
+			<Code language="js" code="<DatePicker />">
+				<DatePicker />
+			</Code>
+			<Paragraph>
 				DatePicker component is a calendar that can be used as input component for selecting date and time. Check the props to explore more
 				options.
-			</DocsText>
+			</Paragraph>
 			<Props>
 				<Props.Prop name="children" type={['node', 'func']}>
-					<p>
+					<Paragraph>
 						Children can be used for adding additional content under the calendar itself. If it's used as <code>node</code>, then the
 						content will be just appended. If it's used as <code>function</code>, then the function will get some useful information. First
 						parameter of the function is object with the following keys:
-					</p>
-					<ul>
-						<li>
+					</Paragraph>
+					<List>
+						<List.Item>
 							<strong>setSelectedDate</strong> - function that can be used for setting the calendar's internal date. Pass instance of{' '}
 							<code>Date</code> as first parameter.
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>selectedDate</strong> - instance of <code>Date</code> or <code>null</code> - current date in the component
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>setViewDate</strong> - using this function you're able to set the month that is currently being seen by end user. This
 							can be used when <code>selectedDate</code> is not yet set.
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>minDate</strong> - instance of <code>Date</code> - if you didn't pass the <code>minDate</code> by yourself, then
 							you'll get the calculated minimum date here
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>maxDate</strong> - instance of <code>Date</code> - if you didn't pass the <code>maxDate</code> by yourself, then
 							you'll get the calculated maximum date here
-						</li>
-					</ul>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker>
-								{({setSelectedDate}) => (
-									<Fragment>
-										<Button onClick={() => setSelectedDate(new Date())}>Set today</Button>
-										<Button onClick={() => setSelectedDate(null)}>Clear</Button>
-									</Fragment>
-								)}
-							</DatePicker>
-						</DocsCode.Example>
-						<DocsCode.Code>
-							{`
-							<DatePicker>
-								{({setSelectedDate}) => (
-									<Fragment>
-										<Button onClick={() => setSelectedDate(new Date())}>Set today</Button>
-										<Button onClick={() => setSelectedDate(null)}>Clear</Button>
-									</Fragment>
-								)}
-							</DatePicker>
-							`}
-						</DocsCode.Code>
-					</DocsCode>
+						</List.Item>
+					</List>
+					<Code
+						language="js"
+						code={`
+<DatePicker>
+  {({setSelectedDate}) => (
+    <>
+      <Button onClick={() => setSelectedDate(new Date())}>Set today</Button>
+      <Button onClick={() => setSelectedDate(null)}>Clear</Button>
+    </>
+  )}
+</DatePicker>
+            `}
+					>
+						<DatePicker>
+							{({setSelectedDate}) => (
+								<>
+									<Button onClick={() => setSelectedDate(new Date())}>Set today</Button>
+									<Button onClick={() => setSelectedDate(null)}>Clear</Button>
+								</>
+							)}
+						</DatePicker>
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="name" type="string">
-					<p>If set, value will be rendered as hidden field and will be visible while serializing data in form.</p>
-					<p>
+					<Paragraph>If set, value will be rendered as hidden field and will be visible while serializing data in form.</Paragraph>
+					<Paragraph>
 						To customize value in hidden field, use <code>valueFormat</code> prop.
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="firstDayOfWeek" type="number" defaultValue={1}>
-					<p>First day of week. 1 for Monday, 0 for Sunday. Here's an example when first day of week is Sunday:</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker firstDayOfWeek={0} />
-						</DocsCode.Example>
-						<DocsCode.Code>{`<DatePicker firstDayOfWeek={0} />`}</DocsCode.Code>
-					</DocsCode>
+					<Paragraph>First day of week. 1 for Monday, 0 for Sunday. Here's an example when first day of week is Sunday:</Paragraph>
+					<Code language="js" code={`<DatePicker firstDayOfWeek={0} />`}>
+						<DatePicker firstDayOfWeek={0} />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="value" type="Date">
 					If you plan to use this component as controlled component, then set the Date. If you want to use it as controlled component
@@ -124,117 +116,105 @@ export const Documentation = function() {
 					may do that by setting this prop.
 				</Props.Prop>
 				<Props.Prop name="minDate" type="Date" defaultValue="last 100 years">
-					<p>If set, it won't be possible to select date lower than this date. In this example, min date is set to today.</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker minDate={new Date()} />
-						</DocsCode.Example>
-						<DocsCode.Code>{`<DatePicker minDate={new Date()} />`}</DocsCode.Code>
-					</DocsCode>
+					<Paragraph>
+						If set, it won't be possible to select date lower than this date. In this example, min date is set to today.
+					</Paragraph>
+					<Code language="js" code={`<DatePicker minDate={new Date()} />`}>
+						<DatePicker minDate={new Date()} />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="maxDate" type="Date" defaultValue="next 100 years">
-					<p>If set, it won't be possible to select date greater than this date. In this example, min date is set to today.</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker maxDate={new Date()} />
-						</DocsCode.Example>
-						<DocsCode.Code>{`<DatePicker maxDate={new Date()} />`}</DocsCode.Code>
-					</DocsCode>
+					<Paragraph>
+						If set, it won't be possible to select date greater than this date. In this example, min date is set to today.
+					</Paragraph>
+					<Code language="js" code={`<DatePicker maxDate={new Date()} />`}>
+						<DatePicker maxDate={new Date()} />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="color" type="string" defaultValue="theme.datePicker.defaults.color">
-					<p>
+					<Paragraph>
 						Use one of the keys set in <code>theme.datePicker.color</code>.
-					</p>
+					</Paragraph>
 					<AvailableKeys data={colors} name="theme.datePicker.color" />
-					<p>See the color section for more examples.</p>
+					<Paragraph>See the color section for more examples.</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="size" type="string" defaultValue="theme.datePicker.defaults.size">
-					<p>
+					<Paragraph>
 						Use one of the keys set in <code>theme.datePicker.size</code>.
-					</p>
+					</Paragraph>
 					<AvailableKeys data={sizes} name="theme.datePicker.size" />
-					<p>See the size section for more examples.</p>
+					<Paragraph>See the size section for more examples.</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="variant" type="string" defaultValue="theme.datePicker.defaults.variant">
-					<p>
+					<Paragraph>
 						Use one of the keys set in <code>theme.datePicker.variant</code>. Possible variants in current theme are:
-					</p>
+					</Paragraph>
 					<AvailableKeys data={variants} />
-					<p>See the variant section for more examples.</p>
+					<Paragraph>See the variant section for more examples.</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
-					<p>Called when value has changed. This is required prop when DatePicker is used as controlled component.</p>
-					<p>Called function will get the object as first parameter that has the following keys:</p>
-					<ul>
-						<li>
+					<Paragraph>Called when value has changed. This is required prop when DatePicker is used as controlled component.</Paragraph>
+					<Paragraph>Called function will get the object as first parameter that has the following keys:</Paragraph>
+					<List>
+						<List.Item>
 							<strong>name</strong>
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>value</strong> - new <code>Date</code> instance or <code>null</code>
-						</li>
-						<li>
+						</List.Item>
+						<List.Item>
 							<strong>containerElement</strong> - instance of <code>HTMLElement</code>
-						</li>
-					</ul>
-					<p>Check the example and watch your browser's console to see the change.</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker onChange={(x) => console.log(x)} />
-						</DocsCode.Example>
-						<DocsCode.Code>{'<DatePicker onChange={(x) => console.log(x)} />'}</DocsCode.Code>
-					</DocsCode>
+						</List.Item>
+					</List>
+					<Paragraph>Check the example and watch your browser's console to see the change.</Paragraph>
+					<Code language="js" code={'<DatePicker onChange={(x) => console.log(x)} />'}>
+						<DatePicker onChange={(x) => console.log(x)} />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="hideNav" type="boolean" defaultValue={false}>
-					<p>If you want to hide the navigation (previous/next month, month selector and year) for any reason, use this prop.</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker hideNav />
-						</DocsCode.Example>
-						<DocsCode.Code>{'<DatePicker hideNav />'}</DocsCode.Code>
-					</DocsCode>
+					<Paragraph>
+						If you want to hide the navigation (previous/next month, month selector and year) for any reason, use this prop.
+					</Paragraph>
+					<Code language="js" code="<DatePicker hideNav />">
+						<DatePicker hideNav />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="disabled" type="boolean" defaultValue={false}>
-					<p>
+					<Paragraph>
 						Acting as standard <code>disabled</code> attribute on input fields. If set to <code>true</code>, all dates inside of calendar
 						will become disabled.
-					</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker disabled onChange={(x) => console.log(x)} />
-						</DocsCode.Example>
-						<DocsCode.Code>{'<DatePicker disabled onChange={(x) => console.log(x)} />'}</DocsCode.Code>
-					</DocsCode>
+					</Paragraph>
+					<Code language="js" code="<DatePicker disabled onChange={(x) => console.log(x)} />">
+						<DatePicker disabled onChange={(x) => console.log(x)} />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="timePrecision" type="string">
-					<p>
+					<Paragraph>
 						If set, then <code>TimeField</code> component will be rendered under the calendar and user will have ability to set the time
 						next to selected date. When this prop is set, other <code>time</code> props can be set in order to customize TimeField.
-					</p>
-					<DocsCode>
-						<DocsCode.Example>
-							<DatePicker timePrecision="seconds" />
-						</DocsCode.Example>
-						<DocsCode.Code>{'<DatePicker timePrecision="seconds" />'}</DocsCode.Code>
-					</DocsCode>
+					</Paragraph>
+					<Code language="js" code={'<DatePicker timePrecision="seconds" />'}>
+						<DatePicker timePrecision="seconds" />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="timeColor" type="string" defaultValue="theme.inputField.defaults.color">
-					<p>
+					<Paragraph>
 						To adjust the color of <code>TimeField</code> under the calendar, use one of the keys set in <code>theme.inputField.color</code>
 						.
-					</p>
+					</Paragraph>
 					<AvailableKeys data={colors2} name="theme.inputField.color" />
 				</Props.Prop>
 				<Props.Prop name="timeSize" type="string" defaultValue="theme.inputField.defaults.size">
-					<p>
+					<Paragraph>
 						To adjust the size of <code>TimeField</code> under the calendar, use one of the keys set in <code>theme.inputField.size</code>.
-					</p>
+					</Paragraph>
 					<AvailableKeys data={sizes2} name="theme.inputField.size" />
 				</Props.Prop>
 				<Props.Prop name="timeVariant" type="string" defaultValue="theme.inputField.defaults.variant">
-					<p>
+					<Paragraph>
 						To adjust the variant of <code>TimeField</code> under the calendar, use one of the keys set in{' '}
 						<code>theme.inputField.variant</code>. Possible variants in current theme are:
-					</p>
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="m" />
 				<Props.Prop name="mt" />
@@ -242,42 +222,39 @@ export const Documentation = function() {
 				<Props.Prop name="mb" />
 				<Props.Prop name="ml" />
 			</Props>
-			<DocsSubTitle hash="color">Color</DocsSubTitle>
-			<DocsText>
+			<H2 hash="color">Color</H2>
+			<H2>
 				Available colors for <code>DatePicker</code> are:
-			</DocsText>
+			</H2>
 			{Object.keys(colors).map((color) => (
-				<DocsCode key={color} label={color} labelWidth="auto">
-					<DocsCode.Example>
-						<DatePicker color={color} defaultValue={new Date()} />
-					</DocsCode.Example>
-					<DocsCode.Code>{`<DatePicker color="${color}" defaultValue={new Date()} />`}</DocsCode.Code>
-				</DocsCode>
+				<Code language="js" code={`<DatePicker color="${color}" defaultValue={new Date()} />`} key={color} label={color} labelWidth="auto">
+					<DatePicker color={color} defaultValue={new Date()} />
+				</Code>
 			))}
-			<DocsSubTitle hash="variant">Variant</DocsSubTitle>
-			<DocsText>
+			<H2 hash="variant">Variant</H2>
+			<H2>
 				Available variants for <code>DatePicker</code> are:
-			</DocsText>
+			</H2>
 			{Object.keys(variants).map((variant) => (
-				<DocsCode key={variant} label={variant} labelWidth="auto">
-					<DocsCode.Example>
-						<DatePicker variant={variant} defaultValue={new Date()} />
-					</DocsCode.Example>
-					<DocsCode.Code>{`<DatePicker variant="${variant}" defaultValue={new Date()} />`}</DocsCode.Code>
-				</DocsCode>
+				<Code
+					language="js"
+					code={`<DatePicker variant="${variant}" defaultValue={new Date()} />`}
+					key={variant}
+					label={variant}
+					labelWidth="auto"
+				>
+					<DatePicker variant={variant} defaultValue={new Date()} />
+				</Code>
 			))}
-			<DocsSubTitle hash="size">Size</DocsSubTitle>
-			<DocsText>
+			<H2 hash="size">Size</H2>
+			<H2>
 				Available sizes for <code>DatePicker</code> are:
-			</DocsText>
+			</H2>
 			{Object.keys(sizes).map((size) => (
-				<DocsCode key={size} label={size} labelWidth="auto">
-					<DocsCode.Example>
-						<DatePicker size={size} defaultValue={new Date()} />
-					</DocsCode.Example>
-					<DocsCode.Code>{`<DatePicker size="${size}" defaultValue={new Date()} />`}</DocsCode.Code>
-				</DocsCode>
+				<Code language="js" code={`<DatePicker size="${size}" defaultValue={new Date()} />`} key={size} label={size} labelWidth="auto">
+					<DatePicker size={size} defaultValue={new Date()} />
+				</Code>
 			))}
 		</>
 	);
-};
+}

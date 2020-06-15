@@ -7,7 +7,7 @@ import Text from '../InputField/Text';
 
 import ThemeContext from '../../theme/ThemeContext';
 import {getPixelsOrString, isControlledComponent, isNumberOrString} from '../../util/helpers';
-import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser';
+import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 
 let inputTimeout = null;
