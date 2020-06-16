@@ -2,11 +2,7 @@
 	"name": "koldy-ui-dark-theme",
 	"version": "0.4.0-alpha.1",
 	"description": "Koldy UI Dark Theme",
-	"main": "lib/koldy-ui-dark-theme.js",
-	"scripts": {
-		"build": "babel --delete-dir-on-start src/ --out-dir ./lib",
-		"prepublishOnly": "npm run build"
-	},
+	"main": "src/koldy-ui-dark-theme.js",
 	"author": "Vlatko Koudela",
 	"license": "MIT",
 	"bugs": {
@@ -18,12 +14,7 @@
 		"url": "https://github.com/koldy/ui.git",
 		"directory": "themes/koldy-ui-dark-theme"
 	},
-	"devDependencies": {
-		"@babel/cli": "^7.8.4",
-		"@babel/core": "^7.8.4",
-		"@babel/preset-env": "^7.8.4"
-	},
 	"files": [
-		"lib/*"
+		"src/*"
 	]
 }

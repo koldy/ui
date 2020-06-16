@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 	name: 'Default Koldy UI Dark Theme',
 	description: 'A theme suitable for dark user interfaces',
 	license: 'MIT',
