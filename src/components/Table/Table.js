@@ -391,7 +391,6 @@ Table.propTypes = {
 	border: PropTypes.string,
 	hover: PropTypes.oneOf(['table', 'row', 'cell']),
 	striped: PropTypes.bool,
-	// eslint-disable-next-line
 	style: PropTypes.object,
 
 	// margins:

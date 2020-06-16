@@ -280,7 +280,6 @@ Select.propTypes = {
 	disabled: PropTypes.bool,
 	multiple: PropTypes.bool,
 	visibleOptions: PropTypes.number,
-	// eslint-disable-next-line
 	containerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({current: PropTypes.any})]),
 
 	// margins:

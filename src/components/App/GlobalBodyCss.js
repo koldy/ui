@@ -15,7 +15,6 @@ const GlobalBodyCss = function({bodyCss}) {
 };
 
 GlobalBodyCss.propTypes = {
-	// eslint-disable-next-line
 	bodyCss: PropTypes.object
 };
 

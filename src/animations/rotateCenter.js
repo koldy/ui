@@ -17,11 +17,14 @@ export const rotateInCenterKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const rotateInCenterAnimation = ({animationDuration = '600ms'} = {}) => {
+export const rotateInCenterAnimation = ({animationDuration = '600ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${rotateInCenterKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+		${rotateInCenterKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) ${delay} ${count} ${fillMode}
 	`;
 };
 
@@ -42,10 +45,13 @@ export const rotateOutCenterKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const rotateOutCenterAnimation = ({animationDuration = '600ms'} = {}) => {
+export const rotateOutCenterAnimation = ({animationDuration = '600ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${rotateOutCenterKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) both
+		${rotateOutCenterKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) ${delay} ${count} ${fillMode}
 	`;
 };

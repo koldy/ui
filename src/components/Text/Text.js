@@ -155,7 +155,6 @@ Text.propTypes = {
 	lineHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onClick: PropTypes.func,
 	onDoubleClick: PropTypes.func,
-	// eslint-disable-next-line
 	style: PropTypes.object,
 
 	// padding

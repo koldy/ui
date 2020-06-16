@@ -18,7 +18,6 @@ const Body = function(props) {
 
 Body.propTypes = {
 	children: PropTypes.node,
-	// eslint-disable-next-line
 	style: PropTypes.object
 };
 

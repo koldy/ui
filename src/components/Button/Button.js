@@ -278,7 +278,6 @@ Button.propTypes = {
 	variant: PropTypes.string,
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	size: PropTypes.string,
-	// eslint-disable-next-line
 	style: PropTypes.object,
 
 	// margins:

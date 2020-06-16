@@ -19,11 +19,14 @@ export const swingInTopFwdKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const swingInTopFwdAnimation = ({animationDuration = '500ms'} = {}) => {
+export const swingInTopFwdAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${swingInTopFwdKeyframes} ${animationDuration} cubic-bezier(0.175, 0.885, 0.320, 1.275) both
+		${swingInTopFwdKeyframes} ${animationDuration} cubic-bezier(0.175, 0.885, 0.320, 1.275) ${delay} ${count} ${fillMode}
 	`;
 };
 
@@ -47,10 +50,13 @@ export const swingOutTopFwdKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const swingOutTopFwdAnimation = ({animationDuration = '550ms'} = {}) => {
+export const swingOutTopFwdAnimation = ({animationDuration = '550ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		animation: ${swingOutTopFwdKeyframes} ${animationDuration} cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
+		${swingOutTopFwdKeyframes} ${animationDuration} cubic-bezier(0.6, -0.28, 0.735, 0.045) ${delay} ${count} ${fillMode};
 	`;
 };

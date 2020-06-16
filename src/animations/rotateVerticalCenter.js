@@ -16,10 +16,13 @@ export const rotateVerticalCenterKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const rotateVerticalCenterAnimation = ({animationDuration = '500ms'} = {}) => {
+export const rotateVerticalCenterAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${rotateVerticalCenterKeyframes} ${animationDuration} cubic-bezier(0.455, 0.030, 0.515, 0.955) both
+		${rotateVerticalCenterKeyframes} ${animationDuration} cubic-bezier(0.455, 0.030, 0.515, 0.955) ${delay} ${count} ${fillMode}
 	`;
 };

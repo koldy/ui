@@ -15,9 +15,9 @@ export const slideInTopKeyframes = keyframes`
 }
 `;
 
-export const slideInTopAnimation = ({animationDuration = '500ms'} = {}) => {
+export const slideInTopAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${slideInTopKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+		${slideInTopKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) ${delay} ${count} ${fillMode}
 	`;
 };
 
@@ -36,8 +36,8 @@ export const slideOutTopKeyframes = keyframes`
 }
 `;
 
-export const slideOutTopAnimation = ({animationDuration = '500ms'} = {}) => {
+export const slideOutTopAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${slideOutTopKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) both
+		${slideOutTopKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) ${delay} ${count} ${fillMode}
 	`;
 };

@@ -26,7 +26,6 @@ const animations = [
 	'fade-in',
 	'rotate-in-center',
 	'rotate-vertical-center',
-	'rotate-horizontal-center',
 	'rotate-scale-up-vertical',
 	'flip-in-horizontal-bottom',
 	'slit-in-horizontal',

@@ -17,11 +17,14 @@ export const flipInHorizontalBottomKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const flipInHorizontalBottomAnimation = ({animationDuration = '500ms'} = {}) => {
+export const flipInHorizontalBottomAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${flipInHorizontalBottomKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+		${flipInHorizontalBottomKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) ${delay} ${count} ${fillMode}
 	`;
 };
 
@@ -42,10 +45,13 @@ export const flipOutHorizontalBottomKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const flipOutHorizontalBottomAnimation = ({animationDuration = '450ms'} = {}) => {
+export const flipOutHorizontalBottomAnimation = ({animationDuration = '450ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${flipOutHorizontalBottomKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) both
+		${flipOutHorizontalBottomKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) ${delay} ${count} ${fillMode}
 	`;
 };

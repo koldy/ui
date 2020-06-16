@@ -17,11 +17,14 @@ export const slideInRightKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const slideInRightAnimation = ({animationDuration = '500ms'} = {}) => {
+export const slideInRightAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${slideInRightKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+		${slideInRightKeyframes} ${animationDuration} cubic-bezier(0.250, 0.460, 0.450, 0.940) ${delay} ${count} ${fillMode}
 	`;
 };
 
@@ -42,10 +45,13 @@ export const slideOutRightKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const slideOutRightAnimation = ({animationDuration = '500ms'} = {}) => {
+export const slideOutRightAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${slideOutRightKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) both
+		${slideOutRightKeyframes} ${animationDuration} cubic-bezier(0.550, 0.085, 0.680, 0.530) ${delay} ${count} ${fillMode}
 	`;
 };

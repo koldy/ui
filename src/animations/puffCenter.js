@@ -4,7 +4,7 @@ import {css, keyframes} from 'styled-components';
  * @link https://animista.net/play/entrances/puff-in/puff-in-center
  * @type {Keyframes}
  */
-export const puffInKeyframes = keyframes`
+export const puffInCenterKeyframes = keyframes`
 0% {
   transform: scale(2);
   filter: blur(4px);
@@ -20,16 +20,16 @@ export const puffInKeyframes = keyframes`
 /**
  * @link https://animista.net/play/entrances/puff-in/puff-in
  */
-export const puffInAnimation = ({animationDuration = '700ms'} = {}) => {
+export const puffInCenterAnimation = ({animationDuration = '700ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${puffInKeyframes} ${animationDuration} cubic-bezier(0.470, 0.000, 0.745, 0.715) both
+		${puffInCenterKeyframes} ${animationDuration} cubic-bezier(0.470, 0.000, 0.745, 0.715) ${delay} ${count} ${fillMode}
 	`;
 };
 
 /**
  * @type {Keyframes}
  */
-export const puffOutKeyframes = keyframes`
+export const puffOutCenterKeyframes = keyframes`
 0% {
   transform: scale(1);
   filter: blur(0px);
@@ -45,8 +45,8 @@ export const puffOutKeyframes = keyframes`
 /**
  * @link https://animista.net/play/exits/puff-out/puff-out-center
  */
-export const puffOutAnimation = ({animationDuration = '1s'} = {}) => {
+export const puffOutCenterAnimation = ({animationDuration = '1s', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${puffOutKeyframes} ${animationDuration} cubic-bezier(0.165, 0.840, 0.440, 1.000) both
+		${puffOutCenterKeyframes} ${animationDuration} cubic-bezier(0.165, 0.840, 0.440, 1.000) ${delay} ${count} ${fillMode}
 	`;
 };

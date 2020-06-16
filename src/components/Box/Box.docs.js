@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useReducer} from 'react';
+import {css, keyframes} from 'styled-components';
 
 import Box from './Box';
+import {fadeInAnimation, fadeOutAnimation} from '../../animations/fade';
+import {rotateInCenterAnimation, rotateOutCenterAnimation} from '../../animations/rotateCenter';
+import {slideInTopAnimation, slideOutTopAnimation} from '../../animations/slideTop';
+import {slitInHorizontalAnimation, slitOutHorizontalAnimation} from '../../animations/slitHorizontal';
 
 import Code from '../../../docs/components/Code';
 import H1 from '../../../docs/components/H1';
@@ -8,12 +13,97 @@ import Paragraph from '../../../docs/components/Paragraph';
 import Props from '../../../docs/components/Props';
 import H2 from '../../../docs/components/H2';
 import List from '../../../docs/components/List';
+import Button from '../Button/Button';
+
+const fadeInKeyframes = keyframes`
+0% {
+  opacity: 0;
+}
+
+100% {
+  opacity: 1;
+}
+`;
+
+const animation = css`
+	${fadeInKeyframes} ease-in-out 2000ms
+`;
 
 export const title = 'Box';
 export const route = '/box';
 export const json = null;
 
+const init = {
+	importedAnimation: 'fadeInAnimation',
+	anim: fadeInAnimation(),
+};
+
+const reducer = function (state, action) {
+	switch (action.type) {
+		case 'fadeInAnimation':
+			return {
+				...state,
+				importedAnimation: 'fadeInAnimation',
+				anim: fadeInAnimation(),
+			};
+
+		case 'fadeOutAnimation':
+			return {
+				...state,
+				importedAnimation: 'fadeOutAnimation',
+				anim: fadeOutAnimation(),
+			};
+
+		case 'rotateInCenterAnimation':
+			return {
+				...state,
+				importedAnimation: 'rotateInCenterAnimation',
+				anim: rotateInCenterAnimation(),
+			};
+
+		case 'rotateOutCenterAnimation':
+			return {
+				...state,
+				importedAnimation: 'rotateOutCenterAnimation',
+				anim: rotateOutCenterAnimation(),
+			};
+
+		case 'slideInTopAnimation':
+			return {
+				...state,
+				importedAnimation: 'slideInTopAnimation',
+				anim: slideInTopAnimation(),
+			};
+
+		case 'slideOutTopAnimation':
+			return {
+				...state,
+				importedAnimation: 'slideOutTopAnimation',
+				anim: slideOutTopAnimation(),
+			};
+
+		case 'slitInHorizontalAnimation':
+			return {
+				...state,
+				importedAnimation: 'slitInHorizontalAnimation',
+				anim: slitInHorizontalAnimation(),
+			};
+
+		case 'slitOutHorizontalAnimation':
+			return {
+				...state,
+				importedAnimation: 'slitOutHorizontalAnimation',
+				anim: slitOutHorizontalAnimation(),
+			};
+
+		default:
+			return state;
+	}
+};
+
 export default function BoxDocs() {
+	const [{anim, importedAnimation}, dispatch] = useReducer(reducer, init);
+
 	return (
 		<>
 			<H1>Box</H1>
@@ -104,6 +194,17 @@ export default function BoxDocs() {
 						</List.Item>
 					</List>
 				</Props.Prop>
+				<Props.Prop name="animation" type="array">
+					<Paragraph>
+						<code>Box</code> component can be used to animate its children on any way you want.
+					</Paragraph>
+					<Paragraph>
+						To animate, pass the result of styled-component <code>css</code> function with keyframes definition.
+					</Paragraph>
+					<Paragraph>
+						Read more in <a href="#animation">animation</a> section.
+					</Paragraph>
+				</Props.Prop>
 				<Props.Prop name="m" />
 				<Props.Prop name="mt" />
 				<Props.Prop name="mr" />
@@ -163,6 +264,62 @@ export default function BoxDocs() {
 			<Code language="js" code='<Box background="primary|2">This box has dark primary background</Box>'>
 				<Box background="primary|2">This box has dark primary background</Box>
 			</Code>
+			<H2 hash="animation">Animation</H2>
+			<Paragraph>
+				<code>Box</code> component can be used to animate its content. To start the animation, pass the result of styled-component's{' '}
+				<code>css</code> function as <code>animation</code> prop:
+			</Paragraph>
+			<Code
+				language="js"
+				code={`
+import {css, keyframes} from 'styled-components';
+const fadeInKeyframes = keyframes\`
+0% {opacity: 0;}
+100% {opacity: 1;}
+\`;
+
+const animation = css\`
+  \${fadeInKeyframes} ease-in-out 2000ms
+\`;
+
+<Box animation={animation}>Hey, I'm animated!</Box>
+				`}
+			>
+				<Box animation={animation}>Hey, I'm animated!</Box>
+			</Code>
+			<Paragraph>
+				<code>Koldy UI</code> comes with many predefined CSS animations you can use for your components thanks to{' '}
+				<a href="https://animista.net" target="_blank">
+					Animista
+				</a>
+				. Check next example so you can get better understanding how it works.
+			</Paragraph>
+			<Code
+				language="js"
+				code={`
+import {Box, ${importedAnimation}} from 'koldy-ui';
+
+export default () => (
+  <Box animation={${importedAnimation}()} width="fit-content">
+    Hey, I'm the content in Box!
+  </Box>
+);
+`}
+			>
+				<Box animation={anim} width="fit-content">
+					Hey, I'm the content in Box!
+				</Box>
+			</Code>
+			<Box>
+				<Button onClick={() => dispatch({type: 'fadeInAnimation'})}>Fade In</Button>
+				<Button onClick={() => dispatch({type: 'fadeOutAnimation'})}>Fade Out</Button>
+				<Button onClick={() => dispatch({type: 'rotateInCenterAnimation'})}>Rotate In</Button>
+				<Button onClick={() => dispatch({type: 'rotateOutCenterAnimation'})}>Rotate Out</Button>
+				<Button onClick={() => dispatch({type: 'slideInTopAnimation'})}>Slide Top In</Button>
+				<Button onClick={() => dispatch({type: 'slideOutTopAnimation'})}>Slide Top Out</Button>
+				<Button onClick={() => dispatch({type: 'slitInHorizontalAnimation'})}>Slit In</Button>
+				<Button onClick={() => dispatch({type: 'slitOutHorizontalAnimation'})}>Slit Out</Button>
+			</Box>
 		</>
 	);
 }

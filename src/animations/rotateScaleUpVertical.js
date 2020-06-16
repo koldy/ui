@@ -18,10 +18,13 @@ export const rotateScaleUpVerticalKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const rotateScaleUpVerticalAnimation = ({animationDuration = '650ms'} = {}) => {
+export const rotateScaleUpVerticalAnimation = ({animationDuration = '650ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${rotateScaleUpVerticalKeyframes} ${animationDuration} linear both
+		${rotateScaleUpVerticalKeyframes} ${animationDuration} linear ${delay} ${count} ${fillMode}
 	`;
 };

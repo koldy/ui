@@ -190,7 +190,6 @@ Overlay.propTypes = {
 	disableCloseOnESC: PropTypes.bool,
 	disableCloseOnClick: PropTypes.bool,
 	onClose: PropTypes.func.isRequired,
-	// eslint-disable-next-line
 	style: PropTypes.object,
 	zIndex: PropTypes.number
 };

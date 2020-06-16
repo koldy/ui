@@ -88,7 +88,6 @@ Flexbox.propTypes = {
 	// some standard box props
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	// eslint-disable-next-line
 	style: PropTypes.object,
 
 	// margins:
@@ -161,7 +160,6 @@ FlexboxItem.propTypes = {
 	// some standard box props
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	// eslint-disable-next-line
 	style: PropTypes.object
 };
 

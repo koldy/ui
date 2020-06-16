@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {getStyleForMargins, getStyleForPaddings, getStyleForStringOrNumber, isFunction} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
-const Box = forwardRef(function(props, ref) {
+const Box = forwardRef(function (props, ref) {
 	const {
 		children = null,
 		style: userStyle = null,
@@ -20,6 +20,7 @@ const Box = forwardRef(function(props, ref) {
 		maxHeight = null,
 		onClick = null,
 		onDoubleClick = null,
+		animation = null,
 		m = null,
 		mt = null,
 		mr = null,
@@ -54,7 +55,7 @@ const Box = forwardRef(function(props, ref) {
 				e.stopPropagation();
 
 				onClick({
-					element: innerRef.current
+					element: innerRef.current,
 				});
 			}
 		},
@@ -68,7 +69,7 @@ const Box = forwardRef(function(props, ref) {
 				e.stopPropagation();
 
 				onDoubleClick({
-					element: innerRef.current
+					element: innerRef.current,
 				});
 			}
 		},
@@ -94,7 +95,7 @@ const Box = forwardRef(function(props, ref) {
 				...getStyleForStringOrNumber('top', top),
 				...getStyleForStringOrNumber('right', right),
 				...getStyleForStringOrNumber('bottom', bottom),
-				...getStyleForStringOrNumber('left', left)
+				...getStyleForStringOrNumber('left', left),
 			};
 		} else {
 			if (top) {
@@ -125,7 +126,7 @@ const Box = forwardRef(function(props, ref) {
 			...getStyleForMargins({m, mt, mr, mb, ml}),
 			...getStyleForPaddings({p, pt, pr, pb, pl}),
 			...positions,
-			...userStyle
+			...userStyle,
 		};
 	}, [
 		theme,
@@ -133,7 +134,7 @@ const Box = forwardRef(function(props, ref) {
 		width,
 		height,
 		minWidth,
-    minHeight,
+		minHeight,
 		maxWidth,
 		maxHeight,
 		userStyle,
@@ -151,7 +152,7 @@ const Box = forwardRef(function(props, ref) {
 		pt,
 		pr,
 		pb,
-		pl
+		pl,
 	]);
 
 	return (
@@ -159,8 +160,9 @@ const Box = forwardRef(function(props, ref) {
 			ref={innerRef}
 			onClick={isFunction(onClick) ? handleClick : undefined}
 			onDoubleClick={isFunction(onDoubleClick) ? handleDoubleClick : undefined}
-			textAlignValue={textAlign}
-			positionValue={position}
+			$textAlignValue={textAlign}
+			$positionValue={position}
+			$animation={animation}
 			style={style}
 			as={as}
 			{...otherProps}
@@ -183,7 +185,7 @@ Box.propTypes = {
 	background: PropTypes.string,
 	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify', 'inherit', 'initial']),
 	position: PropTypes.oneOf(['static', 'absolute', 'fixed', 'relative', 'sticky', 'initial', 'inherit']),
-	// eslint-disable-next-line
+	animation: PropTypes.array,
 	style: PropTypes.object,
 
 	// margins:
@@ -207,14 +209,15 @@ Box.propTypes = {
 	left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})])
+	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})]),
 };
 
 const StyledBox = styled.div`
 	display: block;
 	box-sizing: border-box;
-	text-align: ${({textAlignValue}) => textAlignValue || 'unset'};
-	position: ${({positionValue}) => positionValue || 'static'};
+	text-align: ${({$textAlignValue}) => $textAlignValue || 'unset'};
+	position: ${({$positionValue}) => $positionValue || 'static'};
+	animation: ${({$animation}) => $animation || 'none'};
 `;
 
 export default Box;

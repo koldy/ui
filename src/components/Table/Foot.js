@@ -18,7 +18,6 @@ const Foot = function(props) {
 
 Foot.propTypes = {
 	children: PropTypes.node,
-	// eslint-disable-next-line
 	style: PropTypes.object
 };
 

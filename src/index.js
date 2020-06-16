@@ -35,6 +35,20 @@ import useToast from './hooks/useToast/useToast';
 // util
 import CSSReset from './util/CSSReset';
 
+// animations
+import {fadeInAnimation, fadeOutAnimation} from './animations/fade';
+import {flipInHorizontalBottomAnimation, flipOutHorizontalBottomAnimation} from './animations/flipHorizontalBottom';
+import {puffInCenterAnimation, puffOutCenterAnimation} from './animations/puffCenter';
+import {rotateInCenterAnimation, rotateOutCenterAnimation} from './animations/rotateCenter';
+import {rotateScaleUpVerticalAnimation} from './animations/rotateScaleUpVertical';
+import {rotateVerticalCenterAnimation} from './animations/rotateVerticalCenter';
+import {slideInBottomAnimation, slideOutBottomAnimation} from './animations/slideBottom';
+import {slideInLeftAnimation, slideOutLeftAnimation} from './animations/slideLeft';
+import {slideInRightAnimation, slideOutRightAnimation} from './animations/slideRight';
+import {slideInTopAnimation, slideOutTopAnimation} from './animations/slideTop';
+import {slitInHorizontalAnimation, slitOutHorizontalAnimation} from './animations/slitHorizontal';
+import {swingInTopFwdAnimation, swingOutTopFwdAnimation} from './animations/swingTopFwd';
+
 export {
 	// components
 	App,
@@ -68,5 +82,28 @@ export {
 	useOutsideClick,
 	useToast,
 	// util
-	CSSReset
+	CSSReset,
+	// animations
+	fadeInAnimation,
+	fadeOutAnimation,
+	flipInHorizontalBottomAnimation,
+	flipOutHorizontalBottomAnimation,
+	puffInCenterAnimation,
+	puffOutCenterAnimation,
+	rotateInCenterAnimation,
+	rotateOutCenterAnimation,
+	rotateScaleUpVerticalAnimation,
+	rotateVerticalCenterAnimation,
+	slideInBottomAnimation,
+	slideOutBottomAnimation,
+	slideInLeftAnimation,
+	slideOutLeftAnimation,
+	slideInRightAnimation,
+	slideOutRightAnimation,
+	slideInTopAnimation,
+	slideOutTopAnimation,
+	slitInHorizontalAnimation,
+	slitOutHorizontalAnimation,
+	swingInTopFwdAnimation,
+	swingOutTopFwdAnimation,
 };

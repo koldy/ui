@@ -15,7 +15,6 @@ const GlobalHtmlCss = function({htmlCss}) {
 };
 
 GlobalHtmlCss.propTypes = {
-	// eslint-disable-next-line
 	htmlCss: PropTypes.object
 };
 

@@ -20,11 +20,14 @@ export const slitInHorizontalKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const slitInHorizontalAnimation = ({animationDuration = '450ms'} = {}) => {
+export const slitInHorizontalAnimation = ({animationDuration = '450ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		${slitInHorizontalKeyframes} ${animationDuration} ease-out both
+		${slitInHorizontalKeyframes} ${animationDuration} ease-out ${delay} ${count} ${fillMode}
 	`;
 };
 
@@ -49,10 +52,13 @@ export const slitOutHorizontalKeyframes = keyframes`
 
 /**
  * @param animationDuration
+ * @param delay
+ * @param count
+ * @param fillMode
  * @return {[]|null|*}
  */
-export const slitOutHorizontalAnimation = ({animationDuration = '500ms'} = {}) => {
+export const slitOutHorizontalAnimation = ({animationDuration = '500ms', delay = null, count = null, fillMode = 'both'} = {}) => {
 	return css`
-		animation: ${slitInHorizontalKeyframes} ${animationDuration} ease-in both;
+		${slitOutHorizontalKeyframes} ${animationDuration} ease-in ${delay} ${count} ${fillMode};
 	`;
 };

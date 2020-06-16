@@ -181,7 +181,6 @@ Badge.propTypes = {
 	color: PropTypes.string,
 	variant: PropTypes.string,
 	size: PropTypes.string,
-	// eslint-disable-next-line
 	style: PropTypes.object,
 
 	// margins:

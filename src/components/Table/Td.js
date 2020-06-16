@@ -57,7 +57,6 @@ Td.propTypes = {
 	verticalAlign: PropTypes.oneOf(['baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom']),
 	colSpan: PropTypes.number,
 	rowSpan: PropTypes.number,
-	// eslint-disable-next-line
 	style: PropTypes.object,
 
 	// padding:

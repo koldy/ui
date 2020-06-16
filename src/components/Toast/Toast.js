@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import ThemeContext from '../../theme/ThemeContext';
 import {rotateInCenterAnimation} from '../../animations/rotateCenter';
 import {rotateVerticalCenterAnimation} from '../../animations/rotateVerticalCenter';
-import {rotateHorizontalCenterAnimation} from '../../animations/rotateHorizontalCenter';
 import {rotateScaleUpVerticalAnimation} from '../../animations/rotateScaleUpVertical';
 import {flipInHorizontalBottomAnimation} from '../../animations/flipHorizontalBottom';
 import {slitInHorizontalAnimation} from '../../animations/slitHorizontal';
@@ -14,7 +13,7 @@ import {slideInBckCenterAnimation} from '../../animations/slideBckCenter';
 import {swingInTopFwdAnimation} from '../../animations/swingTopFwd';
 import {isFunction} from '../../util/helpers';
 import {fadeInAnimation} from '../../animations/fade';
-import {puffInAnimation} from '../../animations/puffCenter';
+import {puffInCenterAnimation} from '../../animations/puffCenter';
 
 const Toast = function(props) {
 	const {children, position, entryAnimation = 'fade', onClose = null, ...otherProps} = props;
@@ -37,9 +36,6 @@ const Toast = function(props) {
 			case 'rotate-vertical-center':
 				return rotateVerticalCenterAnimation({animationDuration: '1300ms'});
 
-			case 'rotate-horizontal-center':
-				return rotateHorizontalCenterAnimation({animationDuration: '1300ms'});
-
 			case 'rotate-scale-up-vertical':
 				return rotateScaleUpVerticalAnimation();
 
@@ -56,7 +52,7 @@ const Toast = function(props) {
 				return swingInTopFwdAnimation();
 
 			case 'puff-in-center':
-				return puffInAnimation();
+				return puffInCenterAnimation();
 
 			// no default
 		}
