@@ -910,7 +910,8 @@ module.exports = {
 					border: '1px solid transparent',
 					outline: 'none',
 					'&:hover': {
-						borderColor: '#cfcfcf'
+						borderColor: '#cfcfcf',
+            backgroundColor: '#efefef'
 					},
 					color: '#222222',
 					'&.selected': {
@@ -923,6 +924,7 @@ module.exports = {
 				},
 				dayOutOfMonth: {
 					color: '#aaaaaa',
+          border: '1px solid transparent',
 					outline: 'none',
 					'&:disabled': {
 						cursor: 'not-allowed',

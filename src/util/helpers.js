@@ -50,7 +50,7 @@ export const isObject = function(obj) {
 		return false;
 	}
 
-	return !isArray(obj);
+	return obj !== null && !isArray(obj);
 };
 
 /**

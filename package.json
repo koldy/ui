@@ -4,6 +4,7 @@
 	"description": "Koldy UI - React UI component library",
 	"main": "lib/index.js",
 	"module": "esm/index.js",
+	"sideEffects": false,
 	"scripts": {
 		"test": "jest --silent",
 		"dev": "webpack-dev-server --config webpack.config.development.js",
@@ -25,11 +26,13 @@
 		"url": "https://github.com/koldy/ui.git"
 	},
 	"peerDependencies": {
-		"core-js": "^3.6.4",
+		"@popperjs/core": "^2.4.2",
+		"core-js": "^3.6.5",
 		"prop-types": "^15.7.2",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
-		"styled-components": "^5.0.1"
+		"react-popper": "^2.2.3",
+		"styled-components": "^5.1.1"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.10.1",
@@ -39,6 +42,7 @@
 		"@babel/polyfill": "^7.10.1",
 		"@babel/preset-env": "^7.10.2",
 		"@babel/preset-react": "^7.10.1",
+		"@popperjs/core": "^2.4.2",
 		"acorn": "^7.3.1",
 		"babel-eslint": "^10.1.0",
 		"babel-loader": "^8.1.0",
@@ -69,6 +73,7 @@
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-hot-loader": "^4.12.21",
+		"react-popper": "^2.2.3",
 		"react-router-dom": "^5.2.0",
 		"react-test-renderer": "^16.13.1",
 		"react-use": "^15.2.5",
@@ -83,6 +88,6 @@
 		"esm/*"
 	],
 	"dependencies": {
-		"popper.js": "^1.16.1"
+		"date-fns": "^2.14.0"
 	}
 }

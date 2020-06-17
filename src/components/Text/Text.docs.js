@@ -15,7 +15,7 @@ export const route = '/text';
 export const json = 'text';
 
 // eslint-disable-next-line
-const H1Example = function({children}) {
+const H1Example = function ({children}) {
 	return (
 		<Text block as="h1" fontWeight="bold" fontSize="1.5rem">
 			{children}
@@ -177,6 +177,14 @@ const H1 = function({children}) {
 							height of 2
 						</Text>
 					</Code>
+				</Props.Prop>
+				<Props.Prop name="animation" type="array">
+					<Paragraph>
+						<code>Text</code> component can be used to animate its children on any way you want.
+					</Paragraph>
+					<Paragraph>
+						To animate, pass the result of styled-component <code>css</code> function with keyframes definition.
+					</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="style" />
 				<Props.Prop name="m" />

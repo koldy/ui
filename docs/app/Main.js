@@ -30,8 +30,9 @@ import ToastDocs, {route as toastRoute} from '../../src/components/Toast/Toast.d
 // input components
 import CheckboxDocs, {route as checkboxRoute} from '../../src/components/Checkbox/Checkbox.docs';
 import FileFieldDocs, {route as fileFieldRoute} from '../../src/components/FileField/FileField.docs';
-import MenuDocs, {route as menuRoute} from '../../src/components/Menu/Menu.docs';
+import DateFieldDocs, {route as dateFieldRoute} from '../../src/components/DateField/DateField.docs';
 import DatePickerDocs, {route as datePickerRoute} from '../../src/components/DatePicker/DatePicker.docs';
+import MenuDocs, {route as menuRoute} from '../../src/components/Menu/Menu.docs';
 import RadioDocs, {route as radioRoute} from '../../src/components/Radio/Radio.docs';
 import SelectDocs, {route as selectRoute} from '../../src/components/Select/Select.docs';
 import TextAreaDocs, {route as textAreaRoute} from '../../src/components/TextArea/TextArea.docs';
@@ -73,8 +74,9 @@ const Main = function() {
 					{/* Input Components */}
 					<Route path={checkboxRoute} component={CheckboxDocs} />
 					<Route path={fileFieldRoute} component={FileFieldDocs} />
-					<Route path={menuRoute} component={MenuDocs} />
-					<Route path={datePickerRoute} component={DatePickerDocs} />
+          <Route path={dateFieldRoute} component={DateFieldDocs} />
+          <Route path={datePickerRoute} component={DatePickerDocs} />
+          <Route path={menuRoute} component={MenuDocs} />
 					<Route path={radioRoute} component={RadioDocs} />
 					<Route path={selectRoute} component={SelectDocs} />
 					<Route path={textAreaRoute} component={TextAreaDocs} />

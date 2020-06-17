@@ -12,7 +12,7 @@ import List from '../../../docs/components/List';
 import H2 from '../../../docs/components/H2';
 import Paragraph from '../../../docs/components/Paragraph';
 
-export const title = 'Date Picker';
+export const title = 'DatePicker';
 export const route = '/date-picker';
 export const json = 'datePicker';
 
@@ -28,7 +28,7 @@ export default function DatePickerDocumentation() {
 
 	return (
 		<>
-			<H1 hash="text">Date Picker</H1>
+			<H1 hash="text">DatePicker</H1>
 			<Code language="js" code="import {DatePicker} from 'koldy-ui';" />
 			<Code language="js" code="<DatePicker />">
 				<DatePicker />

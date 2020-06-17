@@ -8,11 +8,11 @@ import {
 	getStyleForStringOrNumber,
 	getStyleForValue,
 	isFunction,
-	isObject
+	isObject,
 } from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
-const Text = forwardRef(function(props, ref) {
+const Text = forwardRef(function (props, ref) {
 	const {theme} = useContext(ThemeContext);
 	const defaults = theme.json('text.defaults');
 
@@ -28,6 +28,7 @@ const Text = forwardRef(function(props, ref) {
 		fontSize = null,
 		fontWeight = null,
 		lineHeight = null,
+		animation = null,
 		as = 'span',
 		m = null,
 		mt = null,
@@ -85,7 +86,7 @@ const Text = forwardRef(function(props, ref) {
 			c = {
 				...theme.processColors(variants[variant]),
 				fontFamily,
-				fontWeight
+				fontWeight,
 			};
 		}
 
@@ -102,7 +103,7 @@ const Text = forwardRef(function(props, ref) {
 			...getStyleForMargins({m, mt, mr, mb, ml}),
 			...getStyleForStringOrNumber('fontSize', fontSize),
 			...getStyleForValue('lineHeight', lineHeight),
-			...theme.processColors(userStyle || {})
+			...theme.processColors(userStyle || {}),
 		}),
 		[theme, userStyle, fontSize, lineHeight, p, pt, pr, pb, pl, m, mt, mr, mb, ml]
 	);
@@ -112,9 +113,10 @@ const Text = forwardRef(function(props, ref) {
 			ref={ref}
 			onClick={isFunction(onClick) ? handleClick : undefined}
 			onDoubleClick={isFunction(onDoubleClick) ? handleDoubleClick : undefined}
-			hasClick={hasClick}
-			textCss={textCss}
-			blockCss={block}
+			$hasClick={hasClick}
+			$textCss={textCss}
+			$blockCss={block}
+			$animation={animation}
 			style={style}
 			as={as}
 			{...otherProps}
@@ -125,11 +127,11 @@ const Text = forwardRef(function(props, ref) {
 });
 
 const StyledText = styled.span`
-	display: ${({blockCss}) => (blockCss ? 'block' : 'inline')};
+	display: ${({$blockCss}) => ($blockCss ? 'block' : 'inline')};
 	vertical-align: inherit;
 	line-height: inherit;
 	box-sizing: border-box;
-	cursor: ${({hasClick, as}) => (hasClick || as === 'a' ? 'pointer' : 'unset')};
+	cursor: ${({$hasClick, as}) => ($hasClick || as === 'a' ? 'pointer' : 'unset')};
 	font-weight: inherit;
 	font-family: inherit;
 	font-size: inherit;
@@ -140,8 +142,9 @@ const StyledText = styled.span`
 	margin-block-end: 0;
 	margin-inline-start: 0;
 	margin-inline-end: 0;
+	animation: ${({$animation}) => $animation || 'none'};
 
-	${({textCss}) => css(textCss)}
+	${({$textCss}) => css($textCss)}
 `;
 
 Text.propTypes = {
@@ -155,6 +158,7 @@ Text.propTypes = {
 	lineHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onClick: PropTypes.func,
 	onDoubleClick: PropTypes.func,
+	animation: PropTypes.array,
 	style: PropTypes.object,
 
 	// padding
@@ -172,7 +176,7 @@ Text.propTypes = {
 	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})])
+	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})]),
 };
 
 export default Text;
