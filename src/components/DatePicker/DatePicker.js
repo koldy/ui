@@ -464,6 +464,7 @@ const StyledDatePicker = styled.div`
 	vertical-align: middle;
 	width: auto;
 	height: auto;
+	user-select: none;
 `;
 
 const Line = styled.hr`

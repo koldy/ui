@@ -1,7 +1,7 @@
-import React, {useContext, forwardRef, useCallback, useRef, useImperativeHandle, useMemo, useState} from 'react';
+import React, {useContext, forwardRef, useCallback, useRef, useImperativeHandle, useMemo, useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
-import {usePopper} from 'react-popper';
+import {createPopper} from '@popperjs/core';
 
 import Box from '../InputField/Box';
 import Text from '../InputField/Text';
@@ -20,9 +20,13 @@ let inputTimeout = null;
 const DateField = forwardRef(function (props, ref) {
 	const {theme} = useContext(ThemeContext);
 
-	const {size: defaultSize = null, width: defaultWidth = null, variant: defaultVariant, color: defaultColor} = theme.json(
-		'inputField.defaults'
-	);
+	const {
+		size: defaultSize = null,
+		width: defaultWidth = null,
+		variant: defaultVariant,
+		color: defaultColor,
+		zIndex: baseZIndex = 5000
+	} = theme.json('inputField.defaults');
 
 	const {
 		children = null,
@@ -57,15 +61,10 @@ const DateField = forwardRef(function (props, ref) {
 		...otherProps
 	} = props;
 
+	const popper = useRef(null);
+	const popperRef = useRef(null);
 	const innerRef = useRef(null);
 	useImperativeHandle(ref, () => innerRef.current);
-
-	const [referenceElement, setReferenceElement] = useState(null);
-	const [popperElement, setPopperElement] = useState(null);
-	const [arrowElement, setArrowElement] = useState(null);
-	const {styles, attributes} = usePopper(referenceElement, popperElement, {
-		modifiers: [{name: 'arrow', options: {element: arrowElement}}],
-	});
 
 	if (value !== undefined && defaultValue === undefined && !onChange) {
 		theme.error('You must set onChange prop to <DateField/> component when using it as controlled component');
@@ -85,7 +84,7 @@ const DateField = forwardRef(function (props, ref) {
 				onClick({
 					name,
 					value: e.currentTarget.value,
-					element: e.currentTarget,
+					element: e.currentTarget
 				});
 			}
 		},
@@ -100,7 +99,7 @@ const DateField = forwardRef(function (props, ref) {
 				onDoubleClick({
 					name,
 					value: e.currentTarget.value,
-					element: e.currentTarget,
+					element: e.currentTarget
 				});
 			}
 		},
@@ -119,7 +118,7 @@ const DateField = forwardRef(function (props, ref) {
 				onChange({
 					name,
 					value: newValue,
-					element: e.currentTarget,
+					element: e.currentTarget
 				});
 			}
 
@@ -137,7 +136,7 @@ const DateField = forwardRef(function (props, ref) {
 						onInput({
 							name: delayedName,
 							value: delayedValue,
-							element: delayedElement,
+							element: delayedElement
 						});
 					}
 
@@ -162,7 +161,7 @@ const DateField = forwardRef(function (props, ref) {
 				onFocus({
 					name,
 					value: newValue,
-					element: e.currentTarget,
+					element: e.currentTarget
 				});
 			}
 		},
@@ -179,7 +178,7 @@ const DateField = forwardRef(function (props, ref) {
 				onBlur({
 					name,
 					value: newValue,
-					element: e.currentTarget,
+					element: e.currentTarget
 				});
 			}
 		},
@@ -210,7 +209,7 @@ const DateField = forwardRef(function (props, ref) {
 		mt,
 		mr,
 		mb,
-		ml,
+		ml
 	});
 
 	/**
@@ -234,7 +233,7 @@ const DateField = forwardRef(function (props, ref) {
 			handleBlur,
 			handleChange,
 			focusField,
-			otherProps,
+			otherProps
 		}),
 		[
 			innerRef,
@@ -251,19 +250,39 @@ const DateField = forwardRef(function (props, ref) {
 			handleBlur,
 			handleChange,
 			focusField,
-			otherProps,
+			otherProps
 		]
 	);
 
+	useEffect(() => {
+		popper.current = createPopper(innerRef.current, popperRef.current, {
+			placement: 'bottom',
+			modifiers: [
+				{
+					name: 'offset',
+					options: {
+						offset: [0, 16]
+					}
+				},
+				{
+					name: 'flip',
+					options: {
+						fallbackPlacements: ['top', 'right']
+					}
+				}
+			]
+		});
+	}, []);
+
 	return (
 		<>
-			<Container containerCss={containerCss} style={containerStyle} ref={setReferenceElement}>
+			<Container $containerCss={containerCss} style={containerStyle} ref={containerRef}>
 				<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 			</Container>
-			<div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-				Popper element
-				<div ref={setArrowElement} style={styles.arrow} />
-			</div>
+			<PopperWrapper $containerCss={containerCss} $baseZIndex={baseZIndex} ref={popperRef}>
+				<DatePicker />
+				<div className="arrow" data-popper-arrow="" />
+			</PopperWrapper>
 		</>
 	);
 });
@@ -296,7 +315,7 @@ DateField.propTypes = {
 	mt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	mr: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	mb: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 const Container = styled.span`
@@ -308,7 +327,7 @@ const Container = styled.span`
 	padding: 0 !important;
 	box-sizing: border-box;
 	position: relative;
-	${({containerCss}) => css(containerCss)}
+	${({$containerCss}) => css($containerCss)}
 `;
 
 /**
@@ -333,7 +352,7 @@ const Input = function (props) {
 		handleFocus,
 		handleBlur,
 		handleChange,
-		otherProps,
+		otherProps
 	} = useContext(InputFieldContext);
 
 	return (
@@ -361,7 +380,7 @@ const Input = function (props) {
 
 Input.propTypes = {
 	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 const Field = styled.input`
@@ -407,6 +426,86 @@ const Field = styled.input`
 	${({inputCss}) => css(inputCss)}
 	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
 	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
+`;
+
+const PopperWrapper = styled.div`
+	background: ${({$containerCss}) => $containerCss.background || '#fff'};
+	padding: 0.3rem;
+	box-sizing: border-box;
+	border: 2px solid ${({$containerCss}) => $containerCss.borderColor || 'transparent'};
+	width: fit-content;
+	z-index: ${({$baseZIndex}) => $baseZIndex + 1};
+	box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 2px 4px rgba(16, 22, 26, 0.2), 0 8px 24px rgba(16, 22, 26, 0.2);
+	user-select: none;
+
+	> .arrow,
+	> .arrow::before {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+	}
+
+	> .arrow::before {
+		content: '';
+		width: 0;
+		height: 0;
+	}
+
+	> .arrow::after {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 0;
+	}
+
+	&[data-popper-placement^='top'] > .arrow {
+		bottom: -20px;
+
+		&:before {
+			border-left: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-top: 12px solid ${({$containerCss}) => $containerCss.borderColor || 'transparent'};
+		}
+
+		&:after {
+			bottom: 12px;
+			left: 4px;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-top: 8px solid ${({$containerCss}) => $containerCss.background || '#ffffff'};
+		}
+	}
+
+	&[data-popper-placement^='bottom'] > .arrow {
+		top: -12px;
+
+		&:before {
+			border-left: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-bottom: 12px solid ${({$containerCss}) => $containerCss.borderColor || 'transparent'};
+		}
+
+		&:after {
+			top: 4px;
+			left: 4px;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-bottom: 8px solid ${({$containerCss}) => $containerCss.background || '#ffffff'};
+		}
+	}
+
+	&[data-popper-placement^='left'] > .arrow {
+		right: -10px;
+	}
+
+	&[data-popper-placement^='right'] > .arrow {
+		left: -10px;
+	}
+
+	&[data-popper-reference-hidden] {
+		visibility: hidden;
+		pointer-events: none;
+	}
 `;
 
 /**
