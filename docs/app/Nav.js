@@ -26,7 +26,7 @@ import {route as toastRoute, title as toastTitle} from '../../src/components/Toa
 // input components
 import {route as checkboxRoute, title as checkboxTitle} from '../../src/components/Checkbox/Checkbox.docs';
 import {route as fileFieldRoute, title as fileFieldTitle} from '../../src/components/FileField/FileField.docs';
-import {route as dateFieldRoute, title as dateFieldTitle} from '../../src/components/DateField/DateField.docs';
+import {route as dateInputRoute, title as dateInputTitle} from '../../src/components/DateInput/DateInput.docs';
 import {route as datePickerRoute, title as datePickerTitle} from '../../src/components/DatePicker/DatePicker.docs';
 import {route as radioRoute, title as radioTitle} from '../../src/components/Radio/Radio.docs';
 import {route as selectRoute, title as selectTitle} from '../../src/components/Select/Select.docs';
@@ -112,8 +112,8 @@ const Nav = function () {
 					<NavLink activeClassName="active" to={fileFieldRoute}>
 						{fileFieldTitle}
 					</NavLink>
-					<NavLink activeClassName="active" to={dateFieldRoute}>
-						{dateFieldTitle}
+					<NavLink activeClassName="active" to={dateInputRoute}>
+						{dateInputTitle}
 					</NavLink>
 					<NavLink activeClassName="active" to={datePickerRoute}>
 						{datePickerTitle}

@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getPixelsOrString, getStyleForMargins, getStyleForPaddings, isEmpty} from '../../util/helpers';
+import {getPixelsOrString, getStyleForMargins, getStyleForPaddings, isEmpty, isFunction, isNumberOrString} from '../../util/helpers';
 import InputFieldContext from './InputFieldContext';
 
 /**
@@ -11,7 +11,7 @@ import InputFieldContext from './InputFieldContext';
  * @return {*}
  * @constructor
  */
-const Box = function(props) {
+const Box = function (props) {
 	const {
 		children,
 		flex,
@@ -34,7 +34,7 @@ const Box = function(props) {
 	const marginCss = getStyleForMargins({m, mt, mr, mb, ml});
 	const paddingCss = getStyleForPaddings({p, pt, pr, pb, pl});
 
-	const {focusField} = useContext(InputFieldContext);
+	const {focusField, name, clearValue} = useContext(InputFieldContext);
 
 	return (
 		<StyledBox
@@ -46,7 +46,7 @@ const Box = function(props) {
 			paddingCss={paddingCss}
 			{...otherProps}
 		>
-			{typeof children === 'function' ? children({focusField}) : children}
+			{isFunction(children) ? children({focusField, name, clearValue}) : children}
 		</StyledBox>
 	);
 };
@@ -85,7 +85,7 @@ const StyledBox = styled.span`
 
 	align-self: ${({cssAlignSelf}) => cssAlignSelf || 'unset'};
 	flex: ${({cssFlex}) => cssFlex || 'unset'};
-	width: ${({cssWidth}) => (typeof cssWidth === 'string' || typeof cssWidth === 'number' ? getPixelsOrString(cssWidth) : 'unset')};
+	width: ${({cssWidth}) => (isNumberOrString(cssWidth) ? getPixelsOrString(cssWidth) : 'unset')};
 `;
 
 export default Box;

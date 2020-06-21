@@ -2,7 +2,7 @@ import React, {useContext, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import { getPixelsOrString, getStyleForPaddings, isEmpty, isFunction } from "../../util/helpers";
+import {getPixelsOrString, getStyleForPaddings, isEmpty, isFunction, isNumberOrString} from '../../util/helpers';
 import InputFieldContext from './InputFieldContext';
 
 /**
@@ -11,9 +11,9 @@ import InputFieldContext from './InputFieldContext';
  * @return {*}
  * @constructor
  */
-const Text = function(props) {
+const Text = function (props) {
 	const {children, flex, width, alignSelf, textAlign = 'inherit', p, pt, pr, pb, pl, ...otherProps} = props;
-	const {disabled, focusField, inputCss} = useContext(InputFieldContext);
+	const {disabled, focusField, inputCss, name, clearValue} = useContext(InputFieldContext);
 
 	const paddingCss = {
 		padding: inputCss.padding || null,
@@ -23,7 +23,6 @@ const Text = function(props) {
 	const handleClick = useCallback(
 		(e) => {
 			e.preventDefault();
-			e.stopPropagation();
 
 			if (isFunction(focusField) && !disabled) {
 				focusField();
@@ -42,13 +41,13 @@ const Text = function(props) {
 			onClick={handleClick}
 			{...otherProps}
 		>
-			{children}
+			{isFunction(children) ? children({focusField, name, clearValue}) : children}
 		</StyledText>
 	);
 };
 
 Text.propTypes = {
-	children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]).isRequired,
+	children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node, PropTypes.func]).isRequired,
 	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
@@ -71,7 +70,7 @@ const StyledText = styled.span`
 
 	align-self: ${({cssAlignSelf}) => cssAlignSelf || 'unset'};
 	flex: ${({cssFlex}) => cssFlex || 'unset'};
-	width: ${({cssWidth}) => (typeof cssWidth === 'string' || typeof cssWidth === 'number' ? getPixelsOrString(cssWidth) : 'unset')};
+	width: ${({cssWidth}) => (isNumberOrString(cssWidth) ? getPixelsOrString(cssWidth) : 'unset')};
 
 	${({paddingCss}) => (!isEmpty(paddingCss) ? css(paddingCss) : '')}
 `;

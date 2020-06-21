@@ -42,6 +42,7 @@ import {puffInCenterAnimation, puffOutCenterAnimation} from './animations/puffCe
 import {rotateInCenterAnimation, rotateOutCenterAnimation} from './animations/rotateCenter';
 import {rotateScaleUpVerticalAnimation} from './animations/rotateScaleUpVertical';
 import {rotateVerticalCenterAnimation} from './animations/rotateVerticalCenter';
+import {scaleInTopAnimation, scaleOutTopAnimation} from './animations/scaleInTop';
 import {slideInBottomAnimation, slideOutBottomAnimation} from './animations/slideBottom';
 import {slideInLeftAnimation, slideOutLeftAnimation} from './animations/slideLeft';
 import {slideInRightAnimation, slideOutRightAnimation} from './animations/slideRight';
@@ -94,6 +95,8 @@ export {
 	rotateOutCenterAnimation,
 	rotateScaleUpVerticalAnimation,
 	rotateVerticalCenterAnimation,
+	scaleInTopAnimation,
+	scaleOutTopAnimation,
 	slideInBottomAnimation,
 	slideOutBottomAnimation,
 	slideInLeftAnimation,
@@ -105,5 +108,5 @@ export {
 	slitInHorizontalAnimation,
 	slitOutHorizontalAnimation,
 	swingInTopFwdAnimation,
-	swingOutTopFwdAnimation,
+	swingOutTopFwdAnimation
 };

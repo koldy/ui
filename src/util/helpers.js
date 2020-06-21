@@ -1,14 +1,14 @@
 /**
  * Returns object without the props passed to 2nd argument
  *
- * @param {object} obj
+ * @param {object} o
  * @param {Array} omitKeys
  */
-export const omit = function(obj, omitKeys) {
+export const omit = function (o, omitKeys) {
 	const result = {};
-	Object.keys(obj).forEach((key) => {
+	Object.keys(o).forEach((key) => {
 		if (omitKeys.indexOf(key) === -1) {
-			result[key] = obj[key];
+			result[key] = o[key];
 		}
 	});
 	return result;
@@ -17,14 +17,14 @@ export const omit = function(obj, omitKeys) {
 /**
  * Returns object without the props passed to 2nd argument
  *
- * @param {object} obj
+ * @param {object} o
  * @param {Array} keys
  */
-export const pick = function(obj, keys) {
+export const pick = function (o, keys) {
 	const result = {};
-	Object.keys(obj).forEach((key) => {
+	Object.keys(o).forEach((key) => {
 		if (keys.indexOf(key) >= 0) {
-			result[key] = obj[key];
+			result[key] = o[key];
 		}
 	});
 	return result;
@@ -33,46 +33,55 @@ export const pick = function(obj, keys) {
 /**
  * Checks if given variable is array
  *
- * @param {*} object
+ * @param {*} o
  * @return {boolean}
  */
-export const isArray = function(object) {
-	return typeof object === 'object' && object !== null && object.constructor === Array;
+export const isArray = function (o) {
+	return typeof o === 'object' && o !== null && o.constructor === Array;
 };
 
 /**
  *
- * @param {*} obj
+ * @param {*} o
  * @returns {boolean} true if object is object, and not array
  */
-export const isObject = function(obj) {
-	if (typeof obj !== 'object') {
+export const isObject = function (o) {
+	if (typeof o !== 'object') {
 		return false;
 	}
 
-	return obj !== null && !isArray(obj);
+	return o !== null && !isArray(o);
 };
 
 /**
  * Is object (including array) empty?
  *
- * @param {object} object
+ * @param {object} o
  * @returns {boolean}
  */
-export const isEmpty = function(object) {
-	if (isArray(object)) {
-		return object.length === 0;
+export const isEmpty = function (o) {
+	if (isArray(o)) {
+		return o.length === 0;
 	}
 
-	return Object.getOwnPropertyNames(object).length === 0;
+	return Object.getOwnPropertyNames(o).length === 0;
 };
 
 /**
  * @param {*} val
  * @return {boolean}
  */
-export const isFunction = function(val) {
+export const isFunction = function (val) {
 	return typeof val === 'function';
+};
+
+/**
+ * @param val
+ * @param defaultValue
+ * @returns {*}
+ */
+export const isFunctionOr = function (val, defaultValue) {
+	return isFunction(val) ? val : defaultValue;
 };
 
 /**
@@ -83,7 +92,7 @@ export const isFunction = function(val) {
  * @param value
  * @return {string}
  */
-export const getPixelsOrString = function(value) {
+export const getPixelsOrString = function (value) {
 	return typeof value === 'number' ? `${value}px` : value;
 };
 
@@ -93,7 +102,7 @@ export const getPixelsOrString = function(value) {
  * @param props
  * @return {{margin: string}|{margin: *}}
  */
-export const getStyleForMargins = function(props) {
+export const getStyleForMargins = function (props) {
 	const {m = null, mt = null, mr = null, mb = null, ml = null} = props;
 
 	if (m !== null) {
@@ -114,7 +123,7 @@ export const getStyleForMargins = function(props) {
  * @param props
  * @return {{padding: *}|{padding: string}}
  */
-export const getStyleForPaddings = function(props) {
+export const getStyleForPaddings = function (props) {
 	const {p = null, pt = null, pr = null, pb = null, pl = null} = props;
 
 	if (p !== null) {
@@ -134,7 +143,7 @@ export const getStyleForPaddings = function(props) {
  * @param {string|number|null} value
  * @return {{}}
  */
-export const getStyleForStringOrNumber = function(name, value) {
+export const getStyleForStringOrNumber = function (name, value) {
 	if (value === null) {
 		return {};
 	}
@@ -149,7 +158,7 @@ export const getStyleForStringOrNumber = function(name, value) {
  * @param {string|number|null} value
  * @return {{}}
  */
-export const getStyleForValue = function(name, value) {
+export const getStyleForValue = function (name, value) {
 	if (value === null) {
 		return {};
 	}
@@ -162,7 +171,7 @@ export const getStyleForValue = function(name, value) {
 /**
  * @param props
  */
-export const getStyleForPositions = function(props) {
+export const getStyleForPositions = function (props) {
 	const style = {};
 
 	['top', 'right', 'bottom', 'left'].forEach((position) => {
@@ -180,7 +189,7 @@ export const getStyleForPositions = function(props) {
  * @param {string|*} str
  * @returns {boolean}
  */
-export const hasUnit = function(str) {
+export const hasUnit = function (str) {
 	if (!str || typeof str !== 'string') {
 		return false;
 	}
@@ -213,7 +222,7 @@ export const hasUnit = function(str) {
  * @param {object} widths
  * @returns {null|{width: *}|{width: string}|{width: (*|null)}}
  */
-export const getStyleForWidth = function(userWidth, widths) {
+export const getStyleForWidth = function (userWidth, widths) {
 	if (userWidth === undefined || userWidth === null) {
 		return null;
 	}
@@ -245,7 +254,7 @@ export const getStyleForWidth = function(userWidth, widths) {
  * @param {string|*} color
  * @returns {boolean}
  */
-export const isNativeColor = function(color) {
+export const isNativeColor = function (color) {
 	if (typeof color === 'string') {
 		const hasHex = color.substr(0, 1) === '#';
 		const hasRgb = color.substr(0, 4).toLowerCase() === 'rgb(';
@@ -264,7 +273,7 @@ export const isNativeColor = function(color) {
 /**
  * @param e
  */
-export const stopPropagation = function(e) {
+export const stopPropagation = function (e) {
 	if (e && isFunction(e.stopPropagation)) {
 		e.stopPropagation();
 	}
@@ -273,7 +282,7 @@ export const stopPropagation = function(e) {
 /**
  * @param e
  */
-export const preventDefault = function(e) {
+export const preventDefault = function (e) {
 	if (e && isFunction(e.preventDefault)) {
 		e.preventDefault();
 	}
@@ -282,7 +291,7 @@ export const preventDefault = function(e) {
 /**
  * @param e
  */
-export const preventDefaultAndStopPropagation = function(e) {
+export const preventDefaultAndStopPropagation = function (e) {
 	if (e) {
 		if (isFunction(e.preventDefault)) {
 			e.preventDefault();
@@ -296,7 +305,7 @@ export const preventDefaultAndStopPropagation = function(e) {
 /**
  *
  */
-export const emptyFn = function() {};
+export const emptyFn = function () {};
 
 /**
  * Bind event listener on window object
@@ -304,7 +313,7 @@ export const emptyFn = function() {};
  * @param {string} evt for example "scroll" or "keydown"
  * @param {function} fn
  */
-export const addDocumentEvent = function(evt, fn) {
+export const addDocumentEvent = function (evt, fn) {
 	if (document.attachEvent) {
 		document.attachEvent(evt, fn);
 	} else if (document.addEventListener) {
@@ -318,7 +327,7 @@ export const addDocumentEvent = function(evt, fn) {
  * @param {string} evt for example "scroll" or "keydown"
  * @param {function} fn
  */
-export const removeDocumentEvent = function(evt, fn) {
+export const removeDocumentEvent = function (evt, fn) {
 	if (document.detachEvent) {
 		document.detachEvent(evt, fn);
 	} else if (document.removeEventListener) {
@@ -331,7 +340,7 @@ export const removeDocumentEvent = function(evt, fn) {
  * @param {*} value
  * @return {string}
  */
-export const getHtmlValue = function(value) {
+export const getHtmlValue = function (value) {
 	switch (typeof value) {
 		case 'number':
 			return value.toString();
@@ -349,7 +358,7 @@ export const getHtmlValue = function(value) {
  * @param {string} value
  * @return {null|number|*}
  */
-export const getAnimationDuration = function(value) {
+export const getAnimationDuration = function (value) {
 	if (!value) {
 		return null;
 	}
@@ -385,7 +394,7 @@ export const getAnimationDuration = function(value) {
  * Get the currently selected text in the window
  * @return {string|null}
  */
-export const getSelectedText = function() {
+export const getSelectedText = function () {
 	let selection = null;
 
 	if (typeof window.getSelection === 'function') {
@@ -408,7 +417,7 @@ export const getSelectedText = function() {
  * Select text inside of given HTMLElement
  * @param {HTMLElement} input
  */
-export const selectText = function(input) {
+export const selectText = function (input) {
 	if (input instanceof HTMLElement) {
 		if (typeof input.select === 'function') {
 			input.select();
@@ -426,7 +435,7 @@ export const selectText = function(input) {
  * @returns {boolean}
  * @link https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
  */
-export const isValidDate = function(date) {
+export const isValidDate = function (date) {
 	return date instanceof Date && !Number.isNaN(date);
 };
 
@@ -435,7 +444,7 @@ export const isValidDate = function(date) {
  * @param {*} value
  * @return {boolean}
  */
-export const isNumberOrString = function(value) {
+export const isNumberOrString = function (value) {
 	return typeof value === 'number' || typeof value === 'string';
 };
 
@@ -443,22 +452,19 @@ export const isNumberOrString = function(value) {
  * @param {Date|*} date
  * @return {string|null}
  */
-export const dateToDateString = function(date) {
+export const dateToDateString = function (date) {
 	if (!isValidDate(date)) {
 		return null;
 	}
 
-	return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date
-		.getDate()
-		.toString()
-		.padStart(2, '0')}`;
+	return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
 };
 
 /**
  * @param {Date|*} date
  * @return {string|null}
  */
-export const dateToYearMonthString = function(date) {
+export const dateToYearMonthString = function (date) {
 	if (!isValidDate(date)) {
 		return null;
 	}
@@ -470,7 +476,7 @@ export const dateToYearMonthString = function(date) {
  * @param {Date|*} date
  * @return {string|null}
  */
-export const dateToISOString = function(date) {
+export const dateToISOString = function (date) {
 	if (!isValidDate(date)) {
 		return null;
 	}
@@ -478,31 +484,22 @@ export const dateToISOString = function(date) {
 	return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date
 		.getDate()
 		.toString()
-		.padStart(2, '0')} ${date
-		.getHours()
-		.toString()
-		.padStart(2, '0')}:${date
+		.padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date
 		.getMinutes()
 		.toString()
-		.padStart(2, '0')}:${date
-		.getSeconds()
-		.toString()
-		.padStart(2, '0')}`;
+		.padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
 };
 
 /**
  * @param {Date|*} date
  * @return {string|null}
  */
-export const dateToISOStringWithMilliseconds = function(date) {
+export const dateToISOStringWithMilliseconds = function (date) {
 	if (!isValidDate(date)) {
 		return null;
 	}
 
-	return `${dateToISOString(date)}.${date
-		.getMilliseconds()
-		.toString()
-		.padStart(3, '0')}`;
+	return `${dateToISOString(date)}.${date.getMilliseconds().toString().padStart(3, '0')}`;
 };
 
 /**
@@ -513,7 +510,7 @@ export const dateToISOStringWithMilliseconds = function(date) {
  *
  * @link https://stackoverflow.com/a/27947860
  */
-export const getDaysInMonth = function(year, month) {
+export const getDaysInMonth = function (year, month) {
 	// eslint-disable-next-line
 	return month === 2 ? (year & 3 || (!(year % 25) && year & 15) ? 28 : 29) : 30 + ((month + (month >> 3)) & 1);
 };
@@ -522,16 +519,13 @@ export const getDaysInMonth = function(year, month) {
  * @param {Date|*} date
  * @return {null|number}
  */
-export const getDateAsInteger = function(date) {
+export const getDateAsInteger = function (date) {
 	if (!isValidDate(date)) {
 		return null;
 	}
 
 	return Number.parseInt(
-		`${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date
-			.getDate()
-			.toString()
-			.padStart(2, '0')}`,
+		`${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}`,
 		10
 	);
 };
@@ -541,7 +535,7 @@ export const getDateAsInteger = function(date) {
  * @param {*} defaultValue
  * @return {boolean}
  */
-export const isControlledComponent = function(value, defaultValue) {
+export const isControlledComponent = function (value, defaultValue) {
 	// controlled component is when value is other than undefined and default value is undefined
 	return value !== undefined && defaultValue === undefined;
 	// in every other case, it's uncontrolled component

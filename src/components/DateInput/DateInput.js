@@ -1,23 +1,50 @@
-import React, {useContext, forwardRef, useCallback, useRef, useImperativeHandle, useMemo, useState, useEffect} from 'react';
+import React, {useContext, forwardRef, useCallback, useRef, useImperativeHandle, useMemo, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 import {createPopper} from '@popperjs/core';
+import isValidDate from 'date-fns/isValid';
+import lightFormat from 'date-fns/lightFormat';
+import parseISO from 'date-fns/parseISO';
 
 import Box from '../InputField/Box';
 import Text from '../InputField/Text';
 import DatePicker from '../DatePicker/DatePicker';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, isControlledComponent, isNumberOrString} from '../../util/helpers';
+import {getPixelsOrString, isControlledComponent, isFunction, isFunctionOr, isNumberOrString} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
+import useOutsideClick from '../../hooks/useOutsideClick/useOutsideClick';
+import {fadeInAnimation} from '../../animations/fade';
 
 let inputTimeout = null;
+let closeGlobalPopper = null;
+
+/**
+ * @param dt
+ * @returns {string | *}
+ */
+const defaultValueFormat = function (dt) {
+	return lightFormat(dt, 'yyyy-MM-dd');
+};
+
+/**
+ * @type {function(*=): string | *}
+ */
+const defaultDisplayFormat = defaultValueFormat;
+
+/**
+ * @param str
+ * @returns {Date | *}
+ */
+const defaultInputParser = function (str) {
+	return parseISO(str);
+};
 
 /**
  * ******************************** DateField **************************************
  */
-const DateField = forwardRef(function (props, ref) {
+const DateInput = forwardRef(function (props, ref) {
 	const {theme} = useContext(ThemeContext);
 
 	const {
@@ -51,6 +78,8 @@ const DateField = forwardRef(function (props, ref) {
 		readOnly = false,
 		containerRef = null,
 		// calendar props
+		minDate = null,
+		maxDate = null,
 
 		// other props
 		m = null,
@@ -60,6 +89,10 @@ const DateField = forwardRef(function (props, ref) {
 		ml = null,
 		...otherProps
 	} = props;
+
+	const valueFormat = isFunctionOr(props.valueFormat, defaultValueFormat);
+	const displayFormat = isFunctionOr(props.displayFormat, defaultDisplayFormat);
+	const inputParser = isFunctionOr(props.inputParser, defaultInputParser);
 
 	const popper = useRef(null);
 	const popperRef = useRef(null);
@@ -72,15 +105,65 @@ const DateField = forwardRef(function (props, ref) {
 		theme.error('When using <DateField/>, you can set the value OR defaultValue prop, not both');
 	}
 
+	const controlledComponent = isControlledComponent(value, defaultValue);
+	const [internalValue, setInternalValue] = useState(controlledComponent ? value : defaultValue);
+
+	/**
+	 * ******************************** Popper stuff **************************************
+	 */
+
+	const hidePopper = useCallback(() => {
+		popperRef.current.dataset.show = 'no';
+
+		if (popper.current && isFunction(popper.current.destroy)) {
+			popper.current.destroy();
+			popper.current = null;
+			closeGlobalPopper = null;
+		}
+	}, []);
+
+	const showPopper = useCallback(() => {
+		if (!disabled) {
+			popperRef.current.dataset.show = 'yes';
+
+			if (popper.current === null) {
+				if (isFunction(closeGlobalPopper)) {
+					closeGlobalPopper();
+				}
+
+				popper.current = createPopper(innerRef.current, popperRef.current, {
+					placement: 'bottom',
+					modifiers: [
+						{
+							name: 'offset',
+							options: {
+								offset: [0, 16]
+							}
+						},
+						{
+							name: 'flip',
+							options: {
+								fallbackPlacements: ['top', 'right', 'left']
+							}
+						}
+					]
+				});
+
+				closeGlobalPopper = hidePopper;
+			}
+		}
+	}, [hidePopper, disabled]);
+
+	useOutsideClick(popperRef, hidePopper, innerRef);
+
 	/**
 	 * ******************************** CLICK and DOUBLE CLICK **************************************
 	 */
-
 	const handleClick = useCallback(
 		(e) => {
 			e.stopPropagation();
 
-			if (typeof onClick === 'function') {
+			if (isFunction(onClick)) {
 				onClick({
 					name,
 					value: e.currentTarget.value,
@@ -95,7 +178,7 @@ const DateField = forwardRef(function (props, ref) {
 		(e) => {
 			e.stopPropagation();
 
-			if (typeof onDoubleClick === 'function') {
+			if (isFunction(onDoubleClick)) {
 				onDoubleClick({
 					name,
 					value: e.currentTarget.value,
@@ -112,30 +195,42 @@ const DateField = forwardRef(function (props, ref) {
 
 	const handleChange = useCallback(
 		(e) => {
-			const {value: newValue} = e.currentTarget;
+			const {value: stringValue} = e.currentTarget;
+			showPopper();
 
-			if (typeof onChange === 'function') {
+			let date = null;
+
+			try {
+				date = inputParser(stringValue);
+			} catch (ignored) {
+				date = 'Invalid Date';
+			}
+
+			if (isFunction(onChange)) {
 				onChange({
 					name,
-					value: newValue,
+					value: date,
+					valueString: stringValue,
 					element: e.currentTarget
 				});
 			}
 
-			if (typeof onInput === 'function' && typeof inputDelay === 'number' && inputDelay > 0) {
+			if (isFunction(onInput) && typeof inputDelay === 'number' && inputDelay > 0) {
 				if (inputTimeout) {
 					clearTimeout(inputTimeout);
 				}
 
 				const delayedName = name;
-				const delayedValue = newValue;
+				const delayedValue = date;
+				const delayedValueString = stringValue;
 				const delayedElement = e.currentTarget;
 
 				inputTimeout = setTimeout(() => {
-					if (delayedElement && typeof onInput === 'function') {
+					if (delayedElement && isFunction(onInput)) {
 						onInput({
 							name: delayedName,
 							value: delayedValue,
+							valueString: delayedValueString,
 							element: delayedElement
 						});
 					}
@@ -144,8 +239,34 @@ const DateField = forwardRef(function (props, ref) {
 				}, inputDelay);
 			}
 		},
-		[onChange, onInput, inputDelay, name]
+		[onChange, onInput, inputDelay, name, showPopper, inputParser]
 	);
+
+	const handleDateChange = useCallback(
+		({value: selectedDateValue}) => {
+			setInternalValue(selectedDateValue);
+			innerRef.current.value = isFunction(displayFormat) ? displayFormat(selectedDateValue) : lightFormat(selectedDateValue, 'yyyy-MM-dd');
+
+			if (isFunction(onChange)) {
+				onChange({
+					name,
+					value: selectedDateValue,
+					valueString: innerRef.current.value,
+					element: innerRef.current
+				});
+			}
+		},
+		[displayFormat, onChange, name]
+	);
+
+	const clearValue = useCallback(() => {
+		setInternalValue(null);
+
+		if (!controlledComponent) {
+			innerRef.current.value = '';
+			showPopper();
+		}
+	}, [controlledComponent, showPopper]);
 
 	/**
 	 * ******************************** FOCUS and BLUR **************************************
@@ -155,7 +276,7 @@ const DateField = forwardRef(function (props, ref) {
 		(e) => {
 			e.stopPropagation();
 
-			if (typeof onFocus === 'function') {
+			if (isFunction(onFocus)) {
 				const {value: newValue} = e.currentTarget;
 
 				onFocus({
@@ -164,15 +285,17 @@ const DateField = forwardRef(function (props, ref) {
 					element: e.currentTarget
 				});
 			}
+
+			showPopper();
 		},
-		[onFocus, name]
+		[onFocus, name, showPopper]
 	);
 
 	const handleBlur = useCallback(
 		(e) => {
 			e.stopPropagation();
 
-			if (typeof onBlur === 'function') {
+			if (isFunction(onBlur)) {
 				const {value: newValue} = e.currentTarget;
 
 				onBlur({
@@ -186,7 +309,7 @@ const DateField = forwardRef(function (props, ref) {
 	);
 
 	const focusField = useCallback(() => {
-		if (innerRef && innerRef.current && typeof innerRef.current.focus === 'function') {
+		if (innerRef && innerRef.current && isFunction(innerRef.current.focus)) {
 			innerRef.current.focus();
 		}
 	}, [innerRef]);
@@ -222,7 +345,7 @@ const DateField = forwardRef(function (props, ref) {
 			name,
 			value,
 			defaultValue,
-			controlledComponent: isControlledComponent(value, defaultValue),
+			controlledComponent,
 			placeholder,
 			disabled,
 			readOnly,
@@ -233,6 +356,12 @@ const DateField = forwardRef(function (props, ref) {
 			handleBlur,
 			handleChange,
 			focusField,
+			hidePopper,
+			internalValue,
+			setInternalValue,
+			displayFormat,
+			inputParser,
+			clearValue,
 			otherProps
 		}),
 		[
@@ -240,6 +369,7 @@ const DateField = forwardRef(function (props, ref) {
 			name,
 			value,
 			defaultValue,
+			controlledComponent,
 			placeholder,
 			disabled,
 			readOnly,
@@ -250,48 +380,35 @@ const DateField = forwardRef(function (props, ref) {
 			handleBlur,
 			handleChange,
 			focusField,
+			hidePopper,
+			internalValue,
+			setInternalValue,
+			displayFormat,
+			inputParser,
+			clearValue,
 			otherProps
 		]
 	);
 
-	useEffect(() => {
-		popper.current = createPopper(innerRef.current, popperRef.current, {
-			placement: 'bottom',
-			modifiers: [
-				{
-					name: 'offset',
-					options: {
-						offset: [0, 16]
-					}
-				},
-				{
-					name: 'flip',
-					options: {
-						fallbackPlacements: ['top', 'right']
-					}
-				}
-			]
-		});
-	}, []);
-
 	return (
 		<>
-			<Container $containerCss={containerCss} style={containerStyle} ref={containerRef}>
+			<Container $containerCss={containerCss} style={containerStyle} ref={containerRef} onClick={showPopper}>
+				{name && <input type="hidden" name={name} value={isValidDate(internalValue) ? valueFormat(internalValue) : ''} />}
 				<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 			</Container>
-			<PopperWrapper $containerCss={containerCss} $baseZIndex={baseZIndex} ref={popperRef}>
-				<DatePicker />
+			<PopperWrapper $containerCss={containerCss} $baseZIndex={baseZIndex} ref={popperRef} data-show="no">
+				<DatePicker minDate={minDate} maxDate={maxDate} value={internalValue || null} onChange={handleDateChange} />
 				<div className="arrow" data-popper-arrow="" />
 			</PopperWrapper>
 		</>
 	);
 });
 
-DateField.propTypes = {
+DateInput.propTypes = {
 	children: PropTypes.node,
 	name: PropTypes.string,
-	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	value: PropTypes.instanceOf(Date),
+	defaultValue: PropTypes.instanceOf(Date),
 	placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	color: PropTypes.string,
 	size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -309,6 +426,14 @@ DateField.propTypes = {
 	disabled: PropTypes.bool,
 	readOnly: PropTypes.bool,
 	containerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({current: PropTypes.any})]),
+	// calendar props
+	minDate: PropTypes.instanceOf(Date),
+	maxDate: PropTypes.instanceOf(Date),
+
+	// component specific props
+	valueFormat: PropTypes.func,
+	displayFormat: PropTypes.func,
+	inputParser: PropTypes.func,
 
 	// margins:
 	m: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -339,8 +464,6 @@ const Input = function (props) {
 
 	const {
 		innerRef,
-		name,
-		value,
 		defaultValue,
 		controlledComponent,
 		placeholder,
@@ -352,16 +475,75 @@ const Input = function (props) {
 		handleFocus,
 		handleBlur,
 		handleChange,
+		hidePopper,
+		internalValue,
+		setInternalValue,
+		inputParser,
+		displayFormat,
 		otherProps
 	} = useContext(InputFieldContext);
+
+	const mounted = useRef(false);
+
+	useEffect(() => {
+		const handleKeyDown = (e) => {
+			if (e.keyCode === 9) {
+				hidePopper();
+			}
+		};
+
+		innerRef.current.addEventListener('keydown', handleKeyDown, true);
+
+		return () => {
+			innerRef.current.removeEventListener('keydown', handleKeyDown, true);
+		};
+	}, []);
+
+	useEffect(() => {
+		const handleInputChange = (e) => {
+			// parse value and set the internal value if possible
+			try {
+				const date = inputParser(e.currentTarget.value);
+
+				if (isValidDate(date)) {
+					setInternalValue(date);
+				} else {
+					setInternalValue(null);
+				}
+			} catch (ignored) {}
+		};
+
+		if (!mounted.current) {
+			innerRef.current.addEventListener('input', handleInputChange, true);
+		}
+
+		mounted.current = true;
+
+		return () => {
+			mounted.current = false;
+			innerRef.current.removeEventListener('input', handleInputChange, true);
+		};
+	}, [inputParser]);
+
+	let givenValue;
+	let givenDefaultValue;
+
+	if (controlledComponent) {
+		if (isValidDate(internalValue)) {
+			givenValue = displayFormat(internalValue);
+		} else {
+			givenValue = '';
+		}
+	} else if (isValidDate(defaultValue)) {
+		givenDefaultValue = displayFormat(defaultValue);
+	}
 
 	return (
 		<Field
 			ref={innerRef}
 			type="text"
-			name={name}
-			value={controlledComponent ? value : undefined}
-			defaultValue={!controlledComponent ? defaultValue : undefined}
+			value={givenValue}
+			defaultValue={givenDefaultValue}
 			placeholder={placeholder}
 			disabled={disabled}
 			readOnly={readOnly}
@@ -437,6 +619,15 @@ const PopperWrapper = styled.div`
 	z-index: ${({$baseZIndex}) => $baseZIndex + 1};
 	box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 2px 4px rgba(16, 22, 26, 0.2), 0 8px 24px rgba(16, 22, 26, 0.2);
 	user-select: none;
+	border-radius: 3px;
+	display: none;
+	position: absolute;
+	animation: none;
+
+	&[data-show='yes'] {
+		display: block;
+		animation: ${fadeInAnimation({animationDuration: '180ms'})};
+	}
 
 	> .arrow,
 	> .arrow::before {
@@ -472,7 +663,7 @@ const PopperWrapper = styled.div`
 			left: 4px;
 			border-left: 8px solid transparent;
 			border-right: 8px solid transparent;
-			border-top: 8px solid ${({$containerCss}) => $containerCss.background || '#ffffff'};
+			border-top: 8px solid ${({$containerCss}) => $containerCss.background || '#fff'};
 		}
 	}
 
@@ -490,16 +681,44 @@ const PopperWrapper = styled.div`
 			left: 4px;
 			border-left: 8px solid transparent;
 			border-right: 8px solid transparent;
-			border-bottom: 8px solid ${({$containerCss}) => $containerCss.background || '#ffffff'};
+			border-bottom: 8px solid ${({$containerCss}) => $containerCss.background || '#fff'};
 		}
 	}
 
 	&[data-popper-placement^='left'] > .arrow {
-		right: -10px;
+		right: -20px;
+
+		&:before {
+			border-top: 12px solid transparent;
+			border-bottom: 12px solid transparent;
+			border-left: 12px solid ${({$containerCss}) => $containerCss.borderColor || 'transparent'};
+		}
+
+		&:after {
+			top: 4px;
+			left: 0;
+			border-top: 8px solid transparent;
+			border-bottom: 8px solid transparent;
+			border-left: 8px solid ${({$containerCss}) => $containerCss.background || '#fff'};
+		}
 	}
 
 	&[data-popper-placement^='right'] > .arrow {
-		left: -10px;
+		left: -12px;
+
+		&:before {
+			border-top: 12px solid transparent;
+			border-bottom: 12px solid transparent;
+			border-right: 12px solid ${({$containerCss}) => $containerCss.borderColor || 'transparent'};
+		}
+
+		&:after {
+			top: 4px;
+			left: 4px;
+			border-top: 8px solid transparent;
+			border-bottom: 8px solid transparent;
+			border-right: 8px solid ${({$containerCss}) => $containerCss.background || '#fff'};
+		}
 	}
 
 	&[data-popper-reference-hidden] {
@@ -512,8 +731,8 @@ const PopperWrapper = styled.div`
  * ******************************** EXPORTS **************************************
  */
 
-DateField.Input = Input;
-DateField.Text = Text;
-DateField.Box = Box;
+DateInput.Input = Input;
+DateInput.Text = Text;
+DateInput.Box = Box;
 
-export default DateField;
+export default DateInput;
