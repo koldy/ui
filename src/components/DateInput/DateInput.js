@@ -19,26 +19,22 @@ import {fadeInAnimation} from '../../animations/fade';
 
 let inputTimeout = null;
 let closeGlobalPopper = null;
+const DEFAULT_FORMAT = 'yyyy-MM-dd';
 
 /**
  * @param dt
  * @returns {string | *}
  */
-const defaultValueFormat = function (dt) {
-	return lightFormat(dt, 'yyyy-MM-dd');
+const defaultValueFormat = function ({value}) {
+	return lightFormat(value, DEFAULT_FORMAT);
 };
-
-/**
- * @type {function(*=): string | *}
- */
-const defaultDisplayFormat = defaultValueFormat;
 
 /**
  * @param str
  * @returns {Date | *}
  */
-const defaultInputParser = function (str) {
-	return parseISO(str);
+const defaultInputParser = function ({value}) {
+	return parseISO(value);
 };
 
 /**
@@ -91,7 +87,7 @@ const DateInput = forwardRef(function (props, ref) {
 	} = props;
 
 	const valueFormat = isFunctionOr(props.valueFormat, defaultValueFormat);
-	const displayFormat = isFunctionOr(props.displayFormat, defaultDisplayFormat);
+	const displayValue = isFunctionOr(props.displayValue, defaultValueFormat);
 	const inputParser = isFunctionOr(props.inputParser, defaultInputParser);
 
 	const popper = useRef(null);
@@ -123,7 +119,7 @@ const DateInput = forwardRef(function (props, ref) {
 	}, []);
 
 	const showPopper = useCallback(() => {
-		if (!disabled) {
+		if (!disabled && !readOnly) {
 			popperRef.current.dataset.show = 'yes';
 
 			if (popper.current === null) {
@@ -152,7 +148,7 @@ const DateInput = forwardRef(function (props, ref) {
 				closeGlobalPopper = hidePopper;
 			}
 		}
-	}, [hidePopper, disabled]);
+	}, [hidePopper, disabled, readOnly]);
 
 	useOutsideClick(popperRef, hidePopper, innerRef);
 
@@ -201,7 +197,7 @@ const DateInput = forwardRef(function (props, ref) {
 			let date = null;
 
 			try {
-				date = inputParser(stringValue);
+				date = inputParser({value: stringValue, minDate, maxDate, name, element: e.currentTarget});
 			} catch (ignored) {
 				date = 'Invalid Date';
 			}
@@ -239,34 +235,58 @@ const DateInput = forwardRef(function (props, ref) {
 				}, inputDelay);
 			}
 		},
-		[onChange, onInput, inputDelay, name, showPopper, inputParser]
+		[onChange, onInput, inputDelay, name, showPopper, inputParser, minDate, maxDate]
 	);
 
 	const handleDateChange = useCallback(
 		({value: selectedDateValue}) => {
-			setInternalValue(selectedDateValue);
-			innerRef.current.value = isFunction(displayFormat) ? displayFormat(selectedDateValue) : lightFormat(selectedDateValue, 'yyyy-MM-dd');
+			const stringValue = isFunction(displayValue)
+				? displayValue({value: selectedDateValue})
+				: lightFormat(selectedDateValue, DEFAULT_FORMAT);
 
 			if (isFunction(onChange)) {
 				onChange({
 					name,
 					value: selectedDateValue,
-					valueString: innerRef.current.value,
+					valueString: stringValue,
 					element: innerRef.current
 				});
 			}
+
+			if (!controlledComponent) {
+				setInternalValue(selectedDateValue);
+				innerRef.current.value = stringValue;
+			}
 		},
-		[displayFormat, onChange, name]
+		[displayValue, onChange, name, controlledComponent]
 	);
 
 	const clearValue = useCallback(() => {
-		setInternalValue(null);
-
-		if (!controlledComponent) {
+		if (controlledComponent) {
+			onChange({
+				name,
+				value: null,
+				valueString: '',
+				element: innerRef.current
+			});
+		} else {
+			setInternalValue(null);
 			innerRef.current.value = '';
 			showPopper();
 		}
-	}, [controlledComponent, showPopper]);
+	}, [controlledComponent, showPopper, name]);
+
+	useEffect(() => {
+		if (controlledComponent) {
+			if (isValidDate(value)) {
+				innerRef.current.value = isFunction(displayValue) ? displayValue({value}) : lightFormat(value, DEFAULT_FORMAT);
+				setInternalValue(value);
+			} else {
+				innerRef.current.value = '';
+				setInternalValue(null);
+			}
+		}
+	}, [value, displayValue]);
 
 	/**
 	 * ******************************** FOCUS and BLUR **************************************
@@ -359,9 +379,11 @@ const DateInput = forwardRef(function (props, ref) {
 			hidePopper,
 			internalValue,
 			setInternalValue,
-			displayFormat,
+			displayValue,
 			inputParser,
 			clearValue,
+			minDate,
+			maxDate,
 			otherProps
 		}),
 		[
@@ -383,9 +405,11 @@ const DateInput = forwardRef(function (props, ref) {
 			hidePopper,
 			internalValue,
 			setInternalValue,
-			displayFormat,
+			displayValue,
 			inputParser,
 			clearValue,
+			minDate,
+			maxDate,
 			otherProps
 		]
 	);
@@ -432,7 +456,7 @@ DateInput.propTypes = {
 
 	// component specific props
 	valueFormat: PropTypes.func,
-	displayFormat: PropTypes.func,
+	displayValue: PropTypes.func,
 	inputParser: PropTypes.func,
 
 	// margins:
@@ -463,6 +487,7 @@ const Input = function (props) {
 	const {flex = null, width = '100%'} = props;
 
 	const {
+		name,
 		innerRef,
 		defaultValue,
 		controlledComponent,
@@ -479,7 +504,9 @@ const Input = function (props) {
 		internalValue,
 		setInternalValue,
 		inputParser,
-		displayFormat,
+		displayValue,
+		minDate,
+		maxDate,
 		otherProps
 	} = useContext(InputFieldContext);
 
@@ -497,13 +524,16 @@ const Input = function (props) {
 		return () => {
 			innerRef.current.removeEventListener('keydown', handleKeyDown, true);
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
-		const handleInputChange = (e) => {
+		const handleInputChange = () => {
+			const val = innerRef.current.value;
+
 			// parse value and set the internal value if possible
 			try {
-				const date = inputParser(e.currentTarget.value);
+				const date = inputParser({value: val, minDate, maxDate, name, element: innerRef.current});
 
 				if (isValidDate(date)) {
 					setInternalValue(date);
@@ -521,8 +551,12 @@ const Input = function (props) {
 
 		return () => {
 			mounted.current = false;
-			innerRef.current.removeEventListener('input', handleInputChange, true);
+
+			if (innerRef.current) {
+				innerRef.current.removeEventListener('input', handleInputChange, true);
+			}
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inputParser]);
 
 	let givenValue;
@@ -530,12 +564,12 @@ const Input = function (props) {
 
 	if (controlledComponent) {
 		if (isValidDate(internalValue)) {
-			givenValue = displayFormat(internalValue);
+			givenValue = displayValue({value: internalValue});
 		} else {
 			givenValue = '';
 		}
 	} else if (isValidDate(defaultValue)) {
-		givenDefaultValue = displayFormat(defaultValue);
+		givenDefaultValue = displayValue({value: defaultValue});
 	}
 
 	return (
@@ -546,7 +580,7 @@ const Input = function (props) {
 			defaultValue={givenDefaultValue}
 			placeholder={placeholder}
 			disabled={disabled}
-			readOnly={readOnly}
+			readOnly={readOnly || controlledComponent}
 			onClick={handleClick}
 			onDoubleClick={handleDoubleClick}
 			onFocus={handleFocus}

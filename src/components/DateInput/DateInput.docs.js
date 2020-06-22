@@ -13,12 +13,13 @@ import Code from '../../../docs/components/Code';
 import H2 from '../../../docs/components/H2';
 import Paragraph from '../../../docs/components/Paragraph';
 import List from '../../../docs/components/List';
+import DatePicker from '../DatePicker/DatePicker';
 
 export const title = 'DateInput';
 export const route = '/date-input';
 export const json = 'inputField';
 
-const displayFormat = function (dt) {
+const displayValue = function (dt) {
 	return lightFormat(dt, 'dd/MM/yyyy');
 };
 
@@ -55,7 +56,7 @@ export default function DateInputDocs() {
 
 	return (
 		<>
-			<H1>DateInput</H1>
+			<H1>DateInput (unstable)</H1>
 			<Code language="js" code="import {DateInput} from 'koldy-ui';" />
 			<Code language="js" code={'<Text as="label">The label <DateInput /></Text>'}>
 				<Text as="label">
@@ -99,10 +100,10 @@ export default function DateInputDocs() {
 					<Code
 						language="js"
 						code={`
-			<DateInput>
-			  <DateInput.Text>$</DateInput.Text>
-			  <DateInput.Input />
-			</DateInput>
+<DateInput>
+	<DateInput.Text>$</DateInput.Text>
+	<DateInput.Input />
+</DateInput>
 								`}
 					>
 						<DateInput>
@@ -124,6 +125,16 @@ export default function DateInputDocs() {
 					>
 						<DateInput value={date} onChange={({value}) => console.log('New value is', value)} />
 					</Code>
+					<Paragraph>Fully controlled component:</Paragraph>
+					<Code
+						language="js"
+						code={`
+const [val, setVal] = useState(new Date(Date.parse('2020-06-08')));
+<DateInput value={val} onChange={({value}) => setVal(value)} />
+						`}
+					>
+						<DateInput value={val} onChange={({value}) => setVal(value)} />
+					</Code>
 				</Props.Prop>
 				<Props.Prop name="defaultValue" type="Date">
 					<Paragraph>
@@ -131,6 +142,90 @@ export default function DateInputDocs() {
 					</Paragraph>
 					<Code language="js" code={"<DateInput defaultValue={new Date(Date.parse('2020-06-08'))} />"}>
 						<DateInput defaultValue={date} />
+					</Code>
+				</Props.Prop>
+				<Props.Prop name="valueFormat" type="func">
+					<Paragraph>
+						Value format gives you ability to put the custom value in the DOM as hidden value so you can customize what you'd like to get on
+						your backend. If you don't provide this function, then value in the DOM will be in <code>yyyy-MM-dd</code> format.
+					</Paragraph>
+					<Paragraph>Function arguments:</Paragraph>
+					<List>
+						<List.Item>
+							first argument - object with keys:
+							<List>
+								<List.Item>
+									<code>value</code> - Javascript's instance of <code>Date</code> or <code>null</code> or falsy instance of{' '}
+									<code>Date</code>
+								</List.Item>
+							</List>
+						</List.Item>
+					</List>
+				</Props.Prop>
+				<Props.Prop name="displayValue" type="func">
+					<Paragraph>
+						Display format gives you ability to format the text in text field so you can customize what user will see. If you don't provide
+						this function, then value in the field will be in <code>yyyy-MM-dd</code> format.
+					</Paragraph>
+					<Paragraph>Function arguments:</Paragraph>
+					<List>
+						<List.Item>
+							first argument - object with keys:
+							<List>
+								<List.Item>
+									<code>value</code> - Javascript's instance of <code>Date</code> or <code>null</code> or falsy instance of{' '}
+									<code>Date</code>
+								</List.Item>
+							</List>
+						</List.Item>
+					</List>
+				</Props.Prop>
+				<Props.Prop name="inputParser" type="func">
+					<Paragraph>
+						This function gives you ability to make custom parser of the text in text field. This function will be used after every change
+						in the text field. Returned value should be <code>null</code> or Javascript's instance of <code>Date</code>. When Date is
+						returned, DateInput will know the new date value.
+					</Paragraph>
+					<Paragraph>Function arguments:</Paragraph>
+					<List>
+						<List.Item>
+							first argument - object with keys:
+							<List>
+								<List.Item>
+									<code>value</code> - the actual string from the text field
+								</List.Item>
+								<List.Item>
+									<code>minDate</code> - a prop passed to <code>DateInput</code>
+								</List.Item>
+								<List.Item>
+									<code>maxDate</code> - a prop passed to <code>DateInput</code>
+								</List.Item>
+								<List.Item>
+									<code>element</code> - a <code>HTMLElement</code> of the input field you can use to eventually modify the input (for
+									example, user enters two digits and you add <code>/</code> (slash) after that)
+								</List.Item>
+							</List>
+						</List.Item>
+					</List>
+				</Props.Prop>
+				<Props.Prop name="minDate" type="Date" defaultValue="last 100 years">
+					<Paragraph>
+						Passed to <code>DatePicker</code>. If set, it won't be possible to select date lower than this date. In this example, min date
+						is set to today. If user enters date before than <code>minDate</code>, then <code>inputParser</code> function should return the
+						minimum date.
+					</Paragraph>
+					<Code language="js" code={`<DateInput minDate={new Date()} />`}>
+						<DateInput minDate={new Date()} />
+					</Code>
+				</Props.Prop>
+				<Props.Prop name="maxDate" type="Date" defaultValue="next 100 years">
+					<Paragraph>
+						Passed to <code>DatePicker</code>. If set, it won't be possible to select date greater than this date. In this example, min date
+						is set to today. If user enters date after than <code>maxDate</code>, then <code>inputParser</code> function should return the
+						maximum date.
+					</Paragraph>
+					<Code language="js" code={`<DateInput maxDate={new Date()} />`}>
+						<DateInput maxDate={new Date()} />
 					</Code>
 				</Props.Prop>
 				<Props.Prop name="placeholder" type={['string', 'number']}>
@@ -370,20 +465,20 @@ export default function DateInputDocs() {
 					<Paragraph>
 						This is standard HTML's <code>readOnly</code> attribute.
 					</Paragraph>
-					<Code language="js" code={'<DateInput name="readOnlyExample" defaultValue="Default value" readOnly />'}>
-						<DateInput name="readOnlyExample" defaultValue="Default value" readOnly />
+					<Code language="js" code={'<DateInput name="readOnlyExample" defaultValue={new Date(Date.parse(\'2020-06-08\'))} readOnly />'}>
+						<DateInput name="readOnlyExample" defaultValue={new Date(Date.parse('2020-06-08'))} readOnly />
 					</Code>
 					<Paragraph>More complex example:</Paragraph>
 					<Code
 						language="js"
 						code={`
-			<DateInput name="readOnlyExample2" defaultValue="Default value" readOnly>
+			<DateInput name="readOnlyExample2" defaultValue={new Date(Date.parse('2020-06-08'))} readOnly>
 			  <DateInput.Text>$</DateInput.Text>
 			  <DateInput.Input />
 			</DateInput>
 								`}
 					>
-						<DateInput name="readOnlyExample2" defaultValue="Default value" readOnly>
+						<DateInput name="readOnlyExample2" defaultValue={new Date(Date.parse('2020-06-08'))} readOnly>
 							<DateInput.Text>$</DateInput.Text>
 							<DateInput.Input />
 						</DateInput>
