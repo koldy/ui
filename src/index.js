@@ -5,6 +5,7 @@ import Box from './components/Box/Box';
 import Button from './components/Button/Button';
 import Checkbox from './components/Checkbox/Checkbox';
 import ColumnLayout from './components/ColumnLayout/ColumnLayout';
+import DateInput from './components/DateInput/DateInput';
 import DatePicker from './components/DatePicker/DatePicker';
 import Drawer from './components/Drawer/Drawer';
 import FileField from './components/FileField/FileField';
@@ -58,6 +59,7 @@ export {
 	Button,
 	Checkbox,
 	ColumnLayout,
+	DateInput,
 	DatePicker,
 	Drawer,
 	FileField,

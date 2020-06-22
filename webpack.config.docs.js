@@ -2,9 +2,9 @@ const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const CONTENT_BASE = path.join(__dirname, './');
-// const {version} = require('./package.json');
+const {version} = require('./package.json');
 
-module.exports = function() {
+module.exports = function () {
 	return {
 		mode: 'production',
 		target: 'web',
@@ -16,7 +16,7 @@ module.exports = function() {
 
 		output: {
 			path: path.resolve(__dirname, 'dist/'),
-			filename: `docs.js`
+			filename: `docs-${version}.js`
 		},
 
 		module: {
