@@ -2,7 +2,6 @@ import React, {useContext, forwardRef, useCallback, useRef, useImperativeHandle,
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 import {createPopper} from '@popperjs/core';
-import isValidDate from 'date-fns/isValid';
 import lightFormat from 'date-fns/lightFormat';
 import parseISO from 'date-fns/parseISO';
 
@@ -11,7 +10,7 @@ import Text from '../InputField/Text';
 import DatePicker from '../DatePicker/DatePicker';
 
 import ThemeContext from '../../theme/ThemeContext';
-import {getPixelsOrString, isControlledComponent, isFunction, isFunctionOr, isNumberOrString} from '../../util/helpers';
+import {getPixelsOrString, isControlledComponent, isFunction, isFunctionOr, isNumberOrString, isValidDate} from '../../util/helpers';
 import useInputFieldStyleParser from '../../hooks/useInputFieldStyleParser/useInputFieldStyleParser';
 import InputFieldContext from '../InputField/InputFieldContext';
 import useOutsideClick from '../../hooks/useOutsideClick/useOutsideClick';
@@ -23,18 +22,26 @@ const DEFAULT_FORMAT = 'yyyy-MM-dd';
 
 /**
  * @param dt
- * @returns {string | *}
+ * @returns {string}
  */
 const defaultValueFormat = function ({value}) {
-	return lightFormat(value, DEFAULT_FORMAT);
+	if (isValidDate(value)) {
+		return lightFormat(value, DEFAULT_FORMAT);
+	}
+
+	return '';
 };
 
 /**
  * @param str
- * @returns {Date | *}
+ * @returns {Date}
  */
 const defaultInputParser = function ({value}) {
-	return parseISO(value);
+	if (typeof value === 'string') {
+		return parseISO(value);
+	}
+
+	return null;
 };
 
 /**
@@ -102,7 +109,21 @@ const DateInput = forwardRef(function (props, ref) {
 	}
 
 	const controlledComponent = isControlledComponent(value, defaultValue);
-	const [internalValue, setInternalValue] = useState(controlledComponent ? value : defaultValue);
+	const [internalValue, setInternalValue] = useState(() => {
+		if (controlledComponent) {
+			if (isValidDate(value)) {
+				return value;
+			}
+
+			return null;
+		} else {
+			if (isValidDate(defaultValue)) {
+				return defaultValue;
+			}
+
+			return null;
+		}
+	});
 
 	/**
 	 * ******************************** Popper stuff **************************************
@@ -199,7 +220,7 @@ const DateInput = forwardRef(function (props, ref) {
 			try {
 				date = inputParser({value: stringValue, minDate, maxDate, name, element: e.currentTarget});
 			} catch (ignored) {
-				date = 'Invalid Date';
+				date = null;
 			}
 
 			if (isFunction(onChange)) {
@@ -240,9 +261,12 @@ const DateInput = forwardRef(function (props, ref) {
 
 	const handleDateChange = useCallback(
 		({value: selectedDateValue}) => {
-			const stringValue = isFunction(displayValue)
-				? displayValue({value: selectedDateValue})
-				: lightFormat(selectedDateValue, DEFAULT_FORMAT);
+			const stringValue = displayValue({value: selectedDateValue});
+
+			if (!controlledComponent) {
+				setInternalValue(isValidDate(selectedDateValue) ? selectedDateValue : null);
+				innerRef.current.value = stringValue;
+			}
 
 			if (isFunction(onChange)) {
 				onChange({
@@ -251,11 +275,6 @@ const DateInput = forwardRef(function (props, ref) {
 					valueString: stringValue,
 					element: innerRef.current
 				});
-			}
-
-			if (!controlledComponent) {
-				setInternalValue(selectedDateValue);
-				innerRef.current.value = stringValue;
 			}
 		},
 		[displayValue, onChange, name, controlledComponent]
@@ -417,7 +436,7 @@ const DateInput = forwardRef(function (props, ref) {
 	return (
 		<>
 			<Container $containerCss={containerCss} style={containerStyle} ref={containerRef} onClick={showPopper}>
-				{name && <input type="hidden" name={name} value={isValidDate(internalValue) ? valueFormat(internalValue) : ''} />}
+				{name && <input type="hidden" name={name} value={isValidDate(internalValue) ? valueFormat({value: internalValue}) : ''} />}
 				<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 			</Container>
 			<PopperWrapper $containerCss={containerCss} $baseZIndex={baseZIndex} ref={popperRef} data-show="no">

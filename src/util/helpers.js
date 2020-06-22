@@ -436,7 +436,7 @@ export const selectText = function (input) {
  * @link https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
  */
 export const isValidDate = function (date) {
-	return date instanceof Date && !Number.isNaN(date);
+	return date instanceof Date && !Number.isNaN(date.getDate());
 };
 
 /**

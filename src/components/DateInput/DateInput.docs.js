@@ -13,7 +13,6 @@ import Code from '../../../docs/components/Code';
 import H2 from '../../../docs/components/H2';
 import Paragraph from '../../../docs/components/Paragraph';
 import List from '../../../docs/components/List';
-import DatePicker from '../DatePicker/DatePicker';
 
 export const title = 'DateInput';
 export const route = '/date-input';
@@ -140,8 +139,8 @@ const [val, setVal] = useState(new Date(Date.parse('2020-06-08')));
 					<Paragraph>
 						If you plan to use DateInput as uncontrolled component, then use <code>defaultValue</code> to set the initial value.
 					</Paragraph>
-					<Code language="js" code={"<DateInput defaultValue={new Date(Date.parse('2020-06-08'))} />"}>
-						<DateInput defaultValue={date} />
+					<Code language="js" code={'<DateInput name="date" defaultValue={new Date(Date.parse(\'2020-06-08\'))} />'}>
+						<DateInput name="date" defaultValue={date} />
 					</Code>
 				</Props.Prop>
 				<Props.Prop name="valueFormat" type="func">
