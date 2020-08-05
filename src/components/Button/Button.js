@@ -5,7 +5,7 @@ import styled, {css} from 'styled-components';
 import {getPixelsOrString, getStyleForMargins, getStyleForWidth, isFunction, isObject} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
-const Button = forwardRef(function(props, ref) {
+const Button = forwardRef(function (props, ref) {
 	const {
 		children = null,
 		type = null,
@@ -252,10 +252,9 @@ const Button = forwardRef(function(props, ref) {
 			onBlur={isFunction(onBlur) ? handleBlur : undefined}
 			name={name}
 			disabled={disabled}
-			theme={theme}
-			variantCss={variantCss || ''}
-			colorsCss={colorsCss || ''}
-			sizeCss={sizeCss}
+			$variantCss={variantCss || ''}
+			$colorsCss={colorsCss || ''}
+			$sizeCss={sizeCss}
 			role="button"
 			style={style}
 			{...otherProps}
@@ -312,10 +311,9 @@ const StyledButton = styled.button`
 	user-select: none;
 	line-height: normal;
 
-	${({sizeCss}) => css(sizeCss)}
-
-	${({variantCss}) => css(variantCss)};
-	${({colorsCss}) => css(colorsCss)}
+	${({$sizeCss}) => css($sizeCss)}
+	${({$variantCss}) => css($variantCss)};
+	${({$colorsCss}) => css($colorsCss)}
 `;
 
 export default Button;

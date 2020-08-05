@@ -5,7 +5,7 @@ import styled, {css} from 'styled-components';
 import {getStyleForMargins, isFunction, isObject} from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
-const Badge = forwardRef(function(props, ref) {
+const Badge = forwardRef(function (props, ref) {
 	const {
 		children = null,
 		onClick = null,
@@ -159,12 +159,11 @@ const Badge = forwardRef(function(props, ref) {
 	return (
 		<StyledBadge
 			ref={innerRef}
-			theme={theme}
-			variantCss={variantCss || ''}
-			colorsCss={colorsCss || ''}
-			sizeCss={sizeCss}
+			$variantCss={variantCss || ''}
+			$colorsCss={colorsCss || ''}
+			$sizeCss={sizeCss}
 			style={style}
-			hasClick={onClick !== null}
+			$hasClick={onClick !== null}
 			onClick={isFunction(onClick) ? handleClick : undefined}
 			onDoubleClick={isFunction(onDoubleClick) ? handleDoubleClick : undefined}
 			{...otherProps}
@@ -200,7 +199,7 @@ const StyledBadge = styled.span`
 	text-decoration: none;
 	box-sizing: border-box;
 
-	cursor: ${({hasClick}) => (hasClick ? 'pointer' : 'default')};
+	cursor: ${({$hasClick}) => ($hasClick ? 'pointer' : 'default')};
 	border: 1px solid transparent;
 
 	text-align: center;
@@ -212,8 +211,7 @@ const StyledBadge = styled.span`
 
 	width: auto;
 
-	${({sizeCss}) => css(sizeCss)}
-
-	${({variantCss}) => css(variantCss)};
-	${({colorsCss}) => css(colorsCss)}
+	${({$sizeCss}) => css($sizeCss)}
+	${({$variantCss}) => css($variantCss)};
+	${({$colorsCss}) => css($colorsCss)}
 `;

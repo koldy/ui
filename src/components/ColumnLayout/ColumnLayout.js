@@ -9,7 +9,7 @@ import {getPixelsOrString, getStyleForMargins} from '../../util/helpers';
  * but its main purpose is for creating two or multi column content. Width of each column can be defined. Since this component
  * is not made of flexbox, the "flex" space should be defined in "fr" units.
  */
-const ColumnLayout = forwardRef(function(props, ref) {
+const ColumnLayout = forwardRef(function (props, ref) {
 	const {
 		children,
 		breakOn = false,
@@ -29,8 +29,8 @@ const ColumnLayout = forwardRef(function(props, ref) {
 	const columnsCount = React.Children.count(children);
 
 	if (['stretch', 'start', 'end', 'center'].indexOf(givenAlign) === -1) {
-	  align = 'stretch';
-  }
+		align = 'stretch';
+	}
 
 	return (
 		<StyledColumnLayout
@@ -40,7 +40,7 @@ const ColumnLayout = forwardRef(function(props, ref) {
 			gridTemplateColumns={gridTemplateColumns}
 			style={{...getStyleForMargins({m, mt, mr, mb, ml})}}
 			align={align}
-      ref={ref}
+			ref={ref}
 			{...otherProps}
 		>
 			{React.Children.map(children, (child) => (
@@ -68,7 +68,7 @@ const StyledColumnLayout = styled.div`
 	display: ${({hasColumns}) => (hasColumns ? 'grid' : 'block')};
 	margin: 0;
 	padding: 0;
-	font-size: 1rem;
+	font-size: inherit;
 	width: 100%;
 	grid-template-columns: ${({hasColumns, columnsCount, gridTemplateColumns}) =>
 		hasColumns ? gridTemplateColumns || `repeat(${columnsCount}, 1fr)` : 'unset'};

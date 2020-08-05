@@ -7,6 +7,7 @@ import Box from '../../components/Box/Box';
 import Text from '../../components/Text/Text';
 import Button from '../../components/Button/Button';
 import useToast from './useToast';
+import {slitInHorizontalAnimation} from '../../animations/slitHorizontal';
 
 export const title = 'useToast';
 export const route = '/use-toast';
@@ -22,7 +23,7 @@ export default function useToastDocs() {
 					<Text color="white">I'm content in toast!</Text>
 				</Box>
 			),
-			{duration: 5000, entryAnimation: 'slit-in-horizontal'}
+			{duration: 5000, entryAnimation: slitInHorizontalAnimation()}
 		)
 	);
 
@@ -39,7 +40,7 @@ export default function useToastDocs() {
 				showCodeFirst
 				code={`
 import React, {useCallback} from 'react';
-import {useToast, Box, Text, Button} from 'koldy-ui';
+import {useToast, Box, Text, Button, slitInHorizontalAnimation} from 'koldy-ui';
 
 export default function MyApp() {
   const {addToast, removeToast, removeAllToasts} = useToast();
@@ -49,7 +50,7 @@ export default function MyApp() {
       <Box background="primary" p="1rem">
         <Text color="white">I'm content in toast!</Text>
       </Box>
-    ), {duration: 5000, entryAnimation: 'slit-in-horizontal'})
+    ), {duration: 5000, entryAnimation: slitInHorizontalAnimation()})
   ));
   
   return (

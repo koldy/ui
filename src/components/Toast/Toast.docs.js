@@ -16,23 +16,45 @@ import Paragraph from '../../../docs/components/Paragraph';
 import H2 from '../../../docs/components/H2';
 import List from '../../../docs/components/List';
 
+import {fadeInAnimation} from '../../animations/fade';
+import {flipInHorizontalBottomAnimation} from '../../animations/flipHorizontalBottom';
+import {puffInCenterAnimation} from '../../animations/puffCenter';
+import {rotateInCenterAnimation} from '../../animations/rotateCenter';
+import {rotateScaleUpVerticalAnimation} from '../../animations/rotateScaleUpVertical';
+import {rotateVerticalCenterAnimation} from '../../animations/rotateVerticalCenter';
+import {slitInHorizontalAnimation} from '../../animations/slitHorizontal';
+import {swingInTopFwdAnimation} from '../../animations/swingTopFwd';
+import {slideInBckCenterAnimation} from '../../animations/slideBckCenter';
+
 export const title = 'Toast';
 export const route = '/toast';
 export const json = 'toast';
 
 const positions = ['top-left', 'top-center', 'top-right', 'top-stretch', 'bottom-left', 'bottom-center', 'bottom-right', 'bottom-stretch'];
 
-const animations = [
-	'fade-in',
-	'rotate-in-center',
-	'rotate-vertical-center',
-	'rotate-scale-up-vertical',
-	'flip-in-horizontal-bottom',
-	'slit-in-horizontal',
-	'slide-in-bck-center',
-	'swing-in-top-fwd',
-	'puff-in-center'
-];
+const animations = {
+	'fade-in': fadeInAnimation(),
+	'rotate-in-center': rotateInCenterAnimation(),
+	'rotate-vertical-center': rotateVerticalCenterAnimation(),
+	'rotate-scale-up-vertical': rotateScaleUpVerticalAnimation(),
+	'flip-in-horizontal-bottom': flipInHorizontalBottomAnimation(),
+	'slit-in-horizontal': slitInHorizontalAnimation(),
+	'slide-in-bck-center': slideInBckCenterAnimation(),
+	'swing-in-top-fwd': swingInTopFwdAnimation(),
+	'puff-in-center': puffInCenterAnimation()
+};
+
+const animationsString = {
+	'fade-in': 'fadeInAnimation()',
+	'rotate-in-center': 'rotateInCenterAnimation()',
+	'rotate-vertical-center': 'rotateVerticalCenterAnimation()',
+	'rotate-scale-up-vertical': 'rotateScaleUpVerticalAnimation()',
+	'flip-in-horizontal-bottom': 'flipInHorizontalBottomAnimation()',
+	'slit-in-horizontal': 'slitInHorizontalAnimation()',
+	'slide-in-bck-center': 'slideInBckCenterAnimation()',
+	'swing-in-top-fwd': 'swingInTopFwdAnimation()',
+	'puff-in-center': 'puffInCenterAnimation()'
+};
 
 export default function ToastDocs() {
 	const {theme, addToast} = useContext(ThemeContext);
@@ -66,7 +88,7 @@ export default function ToastDocs() {
 					</Box>
 				</Box>
 			),
-			{entryAnimation: 'slit-in-horizontal'}
+			{entryAnimation: slitInHorizontalAnimation()}
 		);
 	}, [secondColor, secondButtonColor]);
 
@@ -89,7 +111,7 @@ export default function ToastDocs() {
 				<Flexbox.Item flex={1}>
 					<Paragraph>Animation</Paragraph>
 					<Radio value={animation} onChange={({value}) => setAnimation(value)}>
-						{animations.map((ani) => (
+						{Object.keys(animations).map((ani) => (
 							<Box as="label" key={ani}>
 								<Radio.Option value={ani} /> {ani}
 							</Box>
@@ -101,7 +123,9 @@ export default function ToastDocs() {
 			<Code
 				language="js"
 				code={`
-<Toast position="${position}" entryAnimation="${animation}">
+import {Toast, Box, Text, ${animationsString[animation].substr(0, animationsString[animation].length - 2)}} from 'koldy-ui';
+
+<Toast position="${position}" entryAnimation={${animationsString[animation]}}>
   {() => (
     <Box background="primary" p="1rem">
       <Text color="white">I'm content in toast!</Text>
@@ -110,7 +134,7 @@ export default function ToastDocs() {
 </Toast>
         `}
 			/>
-			<Toast position={position} entryAnimation={animation}>
+			<Toast position={position} entryAnimation={animations[animation]}>
 				{() => (
 					<Box background="primary" p="1rem">
 						<Text color="white">I'm content in toast!</Text>
@@ -157,17 +181,17 @@ export default function ToastDocs() {
 				language="js"
 				code={`
 import React, {useCallback} from 'react';
-import {ThemeContext} from 'koldy-ui';
+import {Box, Text, Button, useToast, slitInHorizontalAnimation} from 'koldy-ui';
 
 const Component = function (props) {
-  const {addToast, removeToast, removeAllToasts} = useContext(ThemeContext);
+  const {addToast, removeToast, removeAllToasts} = useToast();
   
   const doAddToast = useCallback(() => {
     addToast(() => (
       <Box background="primary" p="1rem">
         <Text color="white">I'm content in toast!</Text>
       </Box>
-    ), {duration: 5000, entryAnimation: 'slit-in-horizontal'});
+    ), {entryAnimation: slitInHorizontalAnimation()});
   });
   
   return (
@@ -184,7 +208,7 @@ const Component = function (props) {
 									<Text color="white">I'm content in toast!</Text>
 								</Box>
 							),
-							{duration: 5000, entryAnimation: 'slit-in-horizontal'}
+							{duration: 5000, entryAnimation: slitInHorizontalAnimation()}
 						)
 					}
 				>
@@ -266,7 +290,7 @@ const showAdvancedExample = useCallback(
           </Box>
         </Box>
       ),
-      {entryAnimation: 'slit-in-horizontal'}
+      {entryAnimation: slitInHorizontalAnimation()}
     ),
   []
 );
