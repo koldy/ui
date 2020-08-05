@@ -31,6 +31,7 @@ import ThemeError from './theme/ThemeError';
 import useBoolean from './hooks/useBoolean/useBoolean';
 import useMediaQueries from './hooks/useMediaQueries/useMediaQueries';
 import useOutsideClick from './hooks/useOutsideClick/useOutsideClick';
+import useTheme from './hooks/useTheme/useTheme';
 import useToast from './hooks/useToast/useToast';
 
 // util
@@ -83,6 +84,7 @@ export {
 	useBoolean,
 	useMediaQueries,
 	useOutsideClick,
+	useTheme,
 	useToast,
 	// util
 	CSSReset,
