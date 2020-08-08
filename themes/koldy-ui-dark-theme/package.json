@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui-dark-theme",
-	"version": "0.4.0-alpha.1",
+	"version": "0.4.0-alpha.2",
 	"description": "Koldy UI Dark Theme",
 	"main": "src/koldy-ui-dark-theme.js",
 	"author": "Vlatko Koudela",

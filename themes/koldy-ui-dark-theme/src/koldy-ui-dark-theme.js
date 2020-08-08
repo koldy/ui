@@ -591,6 +591,15 @@ module.exports = {
 				borderWidth: '2px',
 				borderStyle: 'solid',
 				fontFamily: undefined
+			},
+			line: {
+				borderRadius: 0,
+				borderWidth: '2px',
+				borderStyle: 'solid',
+				fontFamily: undefined,
+				borderTopWidth: 0,
+				borderLeftWidth: 0,
+				borderRightWidth: 0
 			}
 		},
 		color: {
