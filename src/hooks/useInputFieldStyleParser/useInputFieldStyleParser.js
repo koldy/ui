@@ -75,7 +75,18 @@ export default ({
 			colorSet = colors[color].normal || {};
 		}
 
-		const {background, backgroundSize, color: fontColor, borderColor, boxShadow, outline, outlineOffset, hover = {}, focus = {}} = colorSet;
+		const {
+			background,
+			backgroundSize,
+			color: fontColor,
+			borderColor,
+			boxShadow,
+			outline,
+			outlineOffset,
+			hover = {},
+			focus = {},
+			placeholder = {}
+		} = colorSet;
 
 		const {
 			background: hoverBackground,
@@ -94,6 +105,8 @@ export default ({
 			outline: focusOutline,
 			outlineOffset: focusOutlineOffset
 		} = focus;
+
+		const {color: placeholderFontColor = null} = placeholder;
 
 		const containerStyle = {
 			...getStyleForMargins({m, mt, mr, mb, ml})
@@ -169,6 +182,9 @@ export default ({
 				},
 				'&:focus': {
 					color: theme.processColor(focusFontColor)
+				},
+				'&::placeholder': {
+					color: theme.processColor(placeholderFontColor)
 				}
 			}
 		};
