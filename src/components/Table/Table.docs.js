@@ -10,6 +10,7 @@ import Paragraph from '../../../docs/components/Paragraph';
 import AvailableKeys from '../../../docs/components/AvailableKeys';
 import List from '../../../docs/components/List';
 import H2 from '../../../docs/components/H2';
+import Button from '../Button/Button';
 
 export const title = 'Table';
 export const route = '/table';
@@ -186,10 +187,19 @@ export default function TableDocs() {
 						<code>Table.Td</code>
 					</a>
 				</List.Item>
+				<List.Item>
+					<a href="#on-row-hover">
+						<code>Table.OnRowHover</code>
+					</a>
+				</List.Item>
 			</List>
 			<Paragraph>
 				Table component always expect <code>Head</code>, <code>Body</code> or <code>Foot</code> as its direct children and to keep
 				everything consistent, it won't allow <code>&lt;tr&gt;</code> tags as direct children of <code>&lt;table&gt;</code> tag.
+			</Paragraph>
+			<Paragraph>
+				<code>Table.OnRowHover</code> is special component that's initially hidden, unless you hover over table's row. Show/hide effect is
+				achieved with pure CSS, so no Javascript or internal state updates are made.
 			</Paragraph>
 			<H2 hash="theory">Some theory about styling</H2>
 			<Paragraph>
@@ -479,6 +489,88 @@ export default function TableDocs() {
 				<Props.Prop name="pl" />
 				<Props.Prop name="style" />
 			</Props>
+			<H2 hash="on-row-hover">OnRowHover</H2>
+			<Paragraph>
+				Use this component when you want to show some content inside table's cell while hovering mouse pointer over the table's row.
+			</Paragraph>
+			<Props hash="on-row-hover-props">
+				<Props.Prop name="children" type="node" />
+			</Props>
+			<Paragraph>Check the example:</Paragraph>
+			<Code
+				language="js"
+				code={`
+<Table color="gray" border="table|head|row|column" striped hover="row">
+  <Table.Head>
+    <Table.Tr>
+      <Table.Th>country</Table.Th>
+      <Table.Th width={180} textAlign="right">action</Table.Th>
+    </Table.Tr>
+  </Table.Head>
+  <Table.Body>
+    <Table.Tr>
+      <Table.Td>Australia</Table.Td>
+      <Table.Td textAlign="right">
+        <Table.OnRowHover>
+          <Button color="danger" size="sm">Delete</Button>
+        </Table.OnRowHover>
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Croatia</Table.Td>
+      <Table.Td textAlign="right">
+        <Table.OnRowHover>
+          <Button color="danger" size="sm">Delete</Button>
+        </Table.OnRowHover>
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Germany</Table.Td>
+      <Table.Td textAlign="right">
+        <Table.OnRowHover>
+          <Button color="danger" size="sm">Delete</Button>
+        </Table.OnRowHover>
+      </Table.Td>
+    </Table.Tr>
+  </Table.Body>
+</Table>
+					`}
+			>
+				<Table color="gray" border="table|head|row|column" striped hover="row">
+					<Table.Head>
+						<Table.Tr>
+							<Table.Th>country</Table.Th>
+							<Table.Th width={180} textAlign="right">action</Table.Th>
+						</Table.Tr>
+					</Table.Head>
+					<Table.Body>
+						<Table.Tr>
+							<Table.Td>Australia</Table.Td>
+							<Table.Td textAlign="right">
+								<Table.OnRowHover>
+									<Button color="danger" size="sm">Delete</Button>
+								</Table.OnRowHover>
+							</Table.Td>
+						</Table.Tr>
+						<Table.Tr>
+							<Table.Td>Croatia</Table.Td>
+							<Table.Td textAlign="right">
+								<Table.OnRowHover>
+									<Button color="danger" size="sm">Delete</Button>
+								</Table.OnRowHover>
+							</Table.Td>
+						</Table.Tr>
+						<Table.Tr>
+							<Table.Td>Germany</Table.Td>
+							<Table.Td textAlign="right">
+								<Table.OnRowHover>
+									<Button color="danger" size="sm">Delete</Button>
+								</Table.OnRowHover>
+							</Table.Td>
+						</Table.Tr>
+					</Table.Body>
+				</Table>
+			</Code>
 		</>
 	);
 }

@@ -10,6 +10,7 @@ import Foot from './Foot';
 import Tr from './Tr';
 import Th from './Th';
 import Td from './Td';
+import OnRowHover from './OnRowHover';
 
 import ThemeContext from '../../theme/ThemeContext';
 
@@ -416,5 +417,7 @@ Table.Foot = Foot;
 Table.Tr = Tr;
 Table.Th = Th;
 Table.Td = Td;
+
+Table.OnRowHover = OnRowHover;
 
 export default Table;

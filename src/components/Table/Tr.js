@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import RowContext from './RowContext';
 import {isFunction} from '../../util/helpers';
 
-const Tr = function(props) {
+const Tr = function (props) {
 	const {children = null, onClick: userOnClick = null, onDoubleClick: userOnDoubleClick = null, ...otherProps} = props;
 
 	const onClick = useCallback(() => {
@@ -42,6 +42,19 @@ Tr.propTypes = {
 
 const StyledTr = styled.tr`
 	display: table-row;
+
+	.on-row-hover {
+		display: none;
+	}
+
+	&:hover {
+		> th,
+		> td {
+			> .on-row-hover {
+				display: block;
+			}
+		}
+	}
 `;
 
 export default Tr;
