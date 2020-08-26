@@ -29,6 +29,7 @@ import ThemeError from './theme/ThemeError';
 
 // hooks
 import useBoolean from './hooks/useBoolean/useBoolean';
+import useColor from './hooks/useColor/useColor';
 import useMediaQueries from './hooks/useMediaQueries/useMediaQueries';
 import useOutsideClick from './hooks/useOutsideClick/useOutsideClick';
 import useTheme from './hooks/useTheme/useTheme';
@@ -82,6 +83,7 @@ export {
 	ThemeManager,
 	// hooks
 	useBoolean,
+	useColor,
 	useMediaQueries,
 	useOutsideClick,
 	useTheme,

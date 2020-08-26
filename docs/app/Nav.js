@@ -36,6 +36,7 @@ import {route as timeFieldRoute, title as timeFieldTitle} from '../../src/compon
 
 // hooks
 import {route as useBooleanRoute, title as useBooleanTitle} from '../../src/hooks/useBoolean/useBoolean.docs';
+import {route as useColorRoute, title as useColorTitle} from '../../src/hooks/useColor/useColor.docs';
 import {route as useMediaQueriesRoute, title as useMediaQueriesTitle} from '../../src/hooks/useMediaQueries/useMediaQueries.docs';
 import {route as useOutsideClickRoute, title as useOutsideClickTitle} from '../../src/hooks/useOutsideClick/useOutsideClick.docs';
 import {route as useToastRoute, title as useToastTitle} from '../../src/hooks/useToast/useToast.docs';
@@ -136,6 +137,9 @@ const Nav = function () {
 					<strong>Hooks</strong>
 					<NavLink activeClassName="active" to={useBooleanRoute}>
 						{useBooleanTitle}
+					</NavLink>
+					<NavLink activeClassName="active" to={useColorRoute}>
+						{useColorTitle}
 					</NavLink>
 					<NavLink activeClassName="active" to={useMediaQueriesRoute}>
 						{useMediaQueriesTitle}

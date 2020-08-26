@@ -41,11 +41,12 @@ import TimeFieldDocs, {route as timeFieldRoute} from '../../src/components/TimeF
 
 // hooks
 import useBooleanDocs, {route as useBooleanRoute} from '../../src/hooks/useBoolean/useBoolean.docs';
+import useColorDocs, {route as useColorRoute} from '../../src/hooks/useColor/useColor.docs';
 import useMediaQueriesDocs, {route as useMediaQueriesRoute} from '../../src/hooks/useMediaQueries/useMediaQueries.docs';
 import useOutsideClickDocs, {route as useOutsideClickRoute} from '../../src/hooks/useOutsideClick/useOutsideClick.docs';
 import useToastDocs, {route as useToastRoute} from '../../src/hooks/useToast/useToast.docs';
 
-const Main = function() {
+const Main = function () {
 	return (
 		<StyledMain>
 			<ScrollToTop />
@@ -74,9 +75,9 @@ const Main = function() {
 					{/* Input Components */}
 					<Route path={checkboxRoute} component={CheckboxDocs} />
 					<Route path={fileFieldRoute} component={FileFieldDocs} />
-          <Route path={dateInputRoute} component={DateInputDocs} />
-          <Route path={datePickerRoute} component={DatePickerDocs} />
-          <Route path={menuRoute} component={MenuDocs} />
+					<Route path={dateInputRoute} component={DateInputDocs} />
+					<Route path={datePickerRoute} component={DatePickerDocs} />
+					<Route path={menuRoute} component={MenuDocs} />
 					<Route path={radioRoute} component={RadioDocs} />
 					<Route path={selectRoute} component={SelectDocs} />
 					<Route path={textAreaRoute} component={TextAreaDocs} />
@@ -84,6 +85,7 @@ const Main = function() {
 					<Route path={timeFieldRoute} component={TimeFieldDocs} />
 					{/* Hooks */}
 					<Route path={useBooleanRoute} component={useBooleanDocs} />
+					<Route path={useColorRoute} component={useColorDocs} />
 					<Route path={useMediaQueriesRoute} component={useMediaQueriesDocs} />
 					<Route path={useOutsideClickRoute} component={useOutsideClickDocs} />
 					<Route path={useToastRoute} component={useToastDocs} />
