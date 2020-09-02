@@ -105,6 +105,10 @@ export default ({
 			background: hoverBackground,
 			color: hoverFontColor,
 			borderColor: hoverBorderColor,
+			borderTopColor: hoverBorderTopColor,
+			borderRightColor: hoverBorderRightColor,
+			borderBottomColor: hoverBorderBottomColor,
+			borderLeftColor: hoverBorderLeftColor,
 			boxShadow: hoverBoxShadow,
 			outline: hoverOutline,
 			outlineOffset: hoverOutlineOffset
@@ -114,6 +118,10 @@ export default ({
 			background: focusBackground,
 			color: focusFontColor,
 			borderColor: focusBorderColor,
+			borderTopColor: focusBorderTopColor,
+			borderRightColor: focusBorderRightColor,
+			borderBottomColor: focusBorderBottomColor,
+			borderLeftColor: focusBorderLeftColor,
 			boxShadow: focusBoxShadow,
 			outline: focusOutline,
 			outlineOffset: focusOutlineOffset
@@ -182,6 +190,10 @@ export default ({
 				'&:hover': {
 					backgroundColor: theme.processColor(hoverBackground),
 					borderColor: theme.processColor(hoverBorderColor),
+					borderTopColor: theme.processColor(hoverBorderTopColor),
+					borderRightColor: theme.processColor(hoverBorderRightColor),
+					borderBottomColor: theme.processColor(hoverBorderBottomColor),
+					borderLeftColor: theme.processColor(hoverBorderLeftColor),
 					boxShadow: theme.processColor(hoverBoxShadow),
 					outline: hoverOutline,
 					outlineOffset: hoverOutlineOffset
@@ -189,6 +201,10 @@ export default ({
 				'&:focus-within': {
 					backgroundColor: theme.processColor(focusBackground),
 					borderColor: theme.processColor(focusBorderColor),
+					borderTopColor: theme.processColor(focusBorderTopColor),
+					borderRightColor: theme.processColor(focusBorderRightColor),
+					borderBottomColor: theme.processColor(focusBorderBottomColor),
+					borderLeftColor: theme.processColor(focusBorderLeftColor),
 					boxShadow: theme.processColor(focusBoxShadow),
 					outline: focusOutline,
 					outlineOffset: focusOutlineOffset
