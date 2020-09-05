@@ -53,8 +53,8 @@ module.exports = {
 			'rgba(255, 255, 255, 0.8)',
 			'rgba(255, 255, 255, 0.95)'
 		],
-    textColor: ['#aaaaaa', '#cccccc', '#dddddd', '#eeeeee', '#efefef', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
-    textColorInverse: ['#666666', '#444444', '#333333', '#222222', '#111111', '#000000', '#000000', '#000000', '#000000']
+		textColor: ['#aaaaaa', '#cccccc', '#dddddd', '#eeeeee', '#efefef', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
+		textColorInverse: ['#666666', '#444444', '#333333', '#222222', '#111111', '#000000', '#000000', '#000000', '#000000']
 	},
 	badge: {
 		defaults: {
@@ -609,17 +609,20 @@ module.exports = {
 					background: '#161622',
 					backgroundSize: undefined,
 					color: 'textColor',
-					borderColor: 'gray',
+					borderColor: 'gray|4',
 					outline: undefined,
 					outlineOffset: undefined,
 					hover: {
 						backgroundSize: undefined,
-						borderColor: 'gray|3'
+						borderColor: 'gray'
 					},
 					focus: {
 						boxShadow: '0 0 1px 2px primary|-2',
 						outline: 'none',
 						borderColor: 'primary|-2'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				disabled: {
@@ -628,6 +631,9 @@ module.exports = {
 					borderColor: 'gray|-2',
 					hover: {
 						background: '#29293c'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				readOnly: {
@@ -640,6 +646,9 @@ module.exports = {
 						backgroundSize: undefined,
 						color: 'primary|2',
 						borderColor: 'gray'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				}
 			},
@@ -660,6 +669,9 @@ module.exports = {
 						boxShadow: '0 0 1px 2px success|-2',
 						outline: 'none',
 						borderColor: 'success|-2'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				disabled: {
@@ -668,6 +680,9 @@ module.exports = {
 					borderColor: 'success|-2',
 					hover: {
 						background: '#29293c'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				readOnly: {
@@ -679,7 +694,10 @@ module.exports = {
 						background: '#29293c',
 						backgroundSize: undefined,
 						color: 'success|2',
-						borderColor: 'gray'
+						borderColor: 'success|2'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				}
 			},
@@ -700,6 +718,9 @@ module.exports = {
 						boxShadow: '0 0 1px 2px warning|-2',
 						outline: 'none',
 						borderColor: 'warning|-2'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				disabled: {
@@ -708,6 +729,9 @@ module.exports = {
 					borderColor: 'warning|-2',
 					hover: {
 						background: '#29293c'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				readOnly: {
@@ -719,7 +743,10 @@ module.exports = {
 						background: '#29293c',
 						backgroundSize: undefined,
 						color: 'warning|2',
-						borderColor: 'gray'
+						borderColor: 'warning|2'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				}
 			},
@@ -740,6 +767,9 @@ module.exports = {
 						boxShadow: '0 0 1px 2px danger|-2',
 						outline: 'none',
 						borderColor: 'danger|-2'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				disabled: {
@@ -748,6 +778,9 @@ module.exports = {
 					borderColor: 'danger|-2',
 					hover: {
 						background: '#29293c'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				},
 				readOnly: {
@@ -759,7 +792,10 @@ module.exports = {
 						background: '#29293c',
 						backgroundSize: undefined,
 						color: 'danger|2',
-						borderColor: 'gray'
+						borderColor: 'danger|2'
+					},
+					placeholder: {
+						color: '#555555'
 					}
 				}
 			}
@@ -919,7 +955,7 @@ module.exports = {
 					outline: 'none',
 					'&:hover': {
 						borderColor: 'transparent',
-            backgroundColor: '#333333'
+						backgroundColor: '#333333'
 					},
 					color: '#efefef',
 					'&.selected': {
@@ -933,7 +969,7 @@ module.exports = {
 				dayOutOfMonth: {
 					color: '#666666',
 					outline: 'none',
-          border: '1px solid transparent',
+					border: '1px solid transparent',
 					'&:disabled': {
 						cursor: 'not-allowed',
 						background: '#333333'

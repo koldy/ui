@@ -621,6 +621,9 @@ module.exports = {
 						boxShadow: '0 0 1px 2px primary|-2',
 						outline: 'none',
 						borderColor: 'primary|-2'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				disabled: {
@@ -629,6 +632,9 @@ module.exports = {
 					borderColor: 'gray|-2',
 					hover: {
 						background: undefined
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				readOnly: {
@@ -640,7 +646,10 @@ module.exports = {
 						background: '#ffffff',
 						backgroundSize: undefined,
 						color: 'primary|2',
-						borderColor: 'gray'
+						borderColor: 'gray|3'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				}
 			},
@@ -661,6 +670,9 @@ module.exports = {
 						boxShadow: '0 0 1px 2px success|-2',
 						outline: 'none',
 						borderColor: 'success|-2'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				disabled: {
@@ -669,6 +681,9 @@ module.exports = {
 					borderColor: 'success|-2',
 					hover: {
 						background: undefined
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				readOnly: {
@@ -680,7 +695,10 @@ module.exports = {
 						background: '#ffffff',
 						backgroundSize: undefined,
 						color: 'success|2',
-						borderColor: 'gray'
+						borderColor: 'success|2'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				}
 			},
@@ -701,6 +719,9 @@ module.exports = {
 						boxShadow: '0 0 1px 2px warning|-2',
 						outline: 'none',
 						borderColor: 'warning|-2'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				disabled: {
@@ -709,6 +730,9 @@ module.exports = {
 					borderColor: 'warning|-2',
 					hover: {
 						background: undefined
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				readOnly: {
@@ -720,7 +744,10 @@ module.exports = {
 						background: '#ffffff',
 						backgroundSize: undefined,
 						color: 'warning|2',
-						borderColor: 'gray'
+						borderColor: 'warning|2'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				}
 			},
@@ -741,6 +768,9 @@ module.exports = {
 						boxShadow: '0 0 1px 2px danger|-2',
 						outline: 'none',
 						borderColor: 'danger|-2'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				disabled: {
@@ -749,6 +779,9 @@ module.exports = {
 					borderColor: 'danger|-2',
 					hover: {
 						background: undefined
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				},
 				readOnly: {
@@ -760,7 +793,10 @@ module.exports = {
 						background: '#ffffff',
 						backgroundSize: undefined,
 						color: 'danger|2',
-						borderColor: 'gray'
+						borderColor: 'danger|2'
+					},
+					placeholder: {
+						color: '#ababab'
 					}
 				}
 			}
@@ -920,7 +956,7 @@ module.exports = {
 					outline: 'none',
 					'&:hover': {
 						borderColor: '#cfcfcf',
-            backgroundColor: '#efefef'
+						backgroundColor: '#efefef'
 					},
 					color: '#222222',
 					'&.selected': {
@@ -933,7 +969,7 @@ module.exports = {
 				},
 				dayOutOfMonth: {
 					color: '#aaaaaa',
-          border: '1px solid transparent',
+					border: '1px solid transparent',
 					outline: 'none',
 					'&:disabled': {
 						cursor: 'not-allowed',

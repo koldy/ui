@@ -477,6 +477,7 @@ export default function TextFieldDocs() {
 							language="js"
 							code={`
 <TextField width={120} variant="${variant}" color="${color}" />
+<TextField width={120} variant="${variant}" color="${color}" ml={10} placeholder="Placeholder" />
 <TextField width={120} variant="${variant}" color="${color}" ml={10} disabled defaultValue="Disabled value" />
 <TextField width={120} variant="${variant}" color="${color}" ml={10} readOnly defaultValue="Read only value" />
 						`}
@@ -485,6 +486,7 @@ export default function TextFieldDocs() {
 							labelWidth="auto"
 						>
 							<TextField width={120} variant={variant} color={color} />
+							<TextField width={120} variant={variant} color={color} ml={10} placeholder="Placeholder" />
 							<TextField width={120} variant={variant} color={color} ml={10} disabled defaultValue="Disabled value" />
 							<TextField width={120} variant={variant} color={color} ml={10} readOnly defaultValue="Read only value" />
 						</Code>
