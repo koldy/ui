@@ -1,6 +1,6 @@
 {
 	"name": "koldy-ui-light-theme",
-	"version": "0.4.0-alpha.3",
+	"version": "0.4.0-beta.1",
 	"description": "Koldy UI Light Theme",
 	"main": "src/koldy-ui-light-theme.js",
 	"author": "Vlatko Koudela",
