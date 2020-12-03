@@ -541,7 +541,9 @@ const Input = function (props) {
 		innerRef.current.addEventListener('keydown', handleKeyDown, true);
 
 		return () => {
-			innerRef.current.removeEventListener('keydown', handleKeyDown, true);
+			if (innerRef.current && isFunction(innerRef.current.removeEventListener)) {
+				innerRef.current.removeEventListener('keydown', handleKeyDown, true);
+			}
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -571,7 +573,7 @@ const Input = function (props) {
 		return () => {
 			mounted.current = false;
 
-			if (innerRef.current) {
+			if (innerRef.current && isFunction(innerRef.current.removeEventListener)) {
 				innerRef.current.removeEventListener('input', handleInputChange, true);
 			}
 		};
@@ -645,13 +647,13 @@ const Field = styled.input`
 	text-indent: 0;
 	letter-spacing: normal;
 	text-rendering: optimizeSpeed;
-	
+
 	&:-webkit-autofill,
 	&:-webkit-autofill:hover,
 	&:-webkit-autofill:focus,
 	&:-webkit-autofill:active {
-	    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
-	    -webkit-transition-delay: 9999s;
+		-webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+		-webkit-transition-delay: 9999s;
 	}
 
 	&:disabled {
@@ -660,7 +662,8 @@ const Field = styled.input`
 
 	${({inputCss}) => css(inputCss)}
 	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
+	${({cssWidth}) =>
+		isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : ''}
 `;
 
 const PopperWrapper = styled.div`
