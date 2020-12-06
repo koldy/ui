@@ -178,6 +178,21 @@ const H1 = function({children}) {
 						</Text>
 					</Code>
 				</Props.Prop>
+				<Props.Prop name="verticalAlign" type={['string', 'number']} defaultValue="inherit">
+					<Paragraph>
+						To set the vertical align, use any valid <code>vertical-align</code> CSS value and pass it here.{' '}
+					</Paragraph>
+					<Code
+						language="js"
+						code={`
+<Text verticalAlign="text-bottom">
+  I have vertical-align height of text-bottom
+</Text>
+							`}
+					>
+						<Text verticalAlign="text-bottom">I have vertical align of text-bottom</Text>
+					</Code>
+				</Props.Prop>
 				<Props.Prop name="animation" type="array">
 					<Paragraph>
 						<code>Text</code> component can be used to animate its children on any way you want.

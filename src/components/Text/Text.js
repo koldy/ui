@@ -6,9 +6,9 @@ import {
 	getStyleForMargins,
 	getStyleForPaddings,
 	getStyleForStringOrNumber,
-	getStyleForValue,
 	isFunction,
-	isObject,
+	isNumberOrString,
+	isObject
 } from '../../util/helpers';
 import ThemeContext from '../../theme/ThemeContext';
 
@@ -29,6 +29,7 @@ const Text = forwardRef(function (props, ref) {
 		fontWeight = null,
 		lineHeight = null,
 		animation = null,
+		verticalAlign = null,
 		as = 'span',
 		m = null,
 		mt = null,
@@ -86,7 +87,7 @@ const Text = forwardRef(function (props, ref) {
 			c = {
 				...theme.processColors(variants[variant]),
 				fontFamily,
-				fontWeight,
+				fontWeight
 			};
 		}
 
@@ -102,10 +103,9 @@ const Text = forwardRef(function (props, ref) {
 			...getStyleForPaddings({p, pt, pr, pb, pl}),
 			...getStyleForMargins({m, mt, mr, mb, ml}),
 			...getStyleForStringOrNumber('fontSize', fontSize),
-			...getStyleForValue('lineHeight', lineHeight),
-			...theme.processColors(userStyle || {}),
+			...theme.processColors(userStyle || {})
 		}),
-		[theme, userStyle, fontSize, lineHeight, p, pt, pr, pb, pl, m, mt, mr, mb, ml]
+		[theme, userStyle, fontSize, p, pt, pr, pb, pl, m, mt, mr, mb, ml]
 	);
 
 	return (
@@ -117,6 +117,8 @@ const Text = forwardRef(function (props, ref) {
 			$textCss={textCss}
 			$blockCss={block}
 			$animation={animation}
+			$verticalAlign={verticalAlign}
+			$lineHeight={lineHeight}
 			style={style}
 			as={as}
 			{...otherProps}
@@ -128,8 +130,8 @@ const Text = forwardRef(function (props, ref) {
 
 const StyledText = styled.span`
 	display: ${({$blockCss}) => ($blockCss ? 'block' : 'inline')};
-	vertical-align: inherit;
-	line-height: inherit;
+	vertical-align: ${({$verticalAlign}) => (isNumberOrString($verticalAlign) ? $verticalAlign : 'inherit')};
+	line-height: ${({$lineHeight}) => (isNumberOrString($lineHeight) ? $lineHeight : 'inherit')};
 	box-sizing: border-box;
 	cursor: ${({$hasClick, as}) => ($hasClick || as === 'a' ? 'pointer' : 'unset')};
 	font-weight: inherit;
@@ -156,6 +158,7 @@ Text.propTypes = {
 	fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	fontWeight: PropTypes.oneOf(['normal', 'bold', 'bolder', 'lighter', 'initial', 'inherit', 100, 200, 300, 400, 500, 600, 700, 800, 900]),
 	lineHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	verticalAlign: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onClick: PropTypes.func,
 	onDoubleClick: PropTypes.func,
 	animation: PropTypes.array,
@@ -176,7 +179,7 @@ Text.propTypes = {
 	ml: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 	// advanced props:
-	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})]),
+	as: PropTypes.oneOfType([PropTypes.func, PropTypes.string, PropTypes.shape({render: PropTypes.func.isRequired})])
 };
 
 export default Text;
