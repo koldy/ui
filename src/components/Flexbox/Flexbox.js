@@ -152,7 +152,6 @@ const StyledFlexboxItem = styled.div`
 	align-self: ${({$alignSelf}) => $alignSelf || 'unset'};
 	flex: ${({$flex}) => $flex || 'unset'};
 	text-align: ${({$textAlignValue}) => $textAlignValue || 'inherit'};
-	min-width: 0;
 `;
 
 FlexboxItem.propTypes = {

@@ -139,7 +139,7 @@ export default function FlexboxDocs() {
 				<Props.Prop name="width" type={['string', 'number']}>
 					<Paragraph>Fixed width. If passed as number, it'll be used as pixels, otherwise as is.</Paragraph>
 				</Props.Prop>
-				<Props.Prop name="minWidth" type={['string', 'number']} defaultValue={0}>
+				<Props.Prop name="minWidth" type={['string', 'number']}>
 					<Paragraph>The minimum width of the item. If passed as number, it'll be used as pixels, otherwise as is.</Paragraph>
 				</Props.Prop>
 				<Props.Prop name="maxWidth" type={['string', 'number']}>
