@@ -10,7 +10,7 @@ import InputFieldContext from '../InputField/InputFieldContext';
 import Box from '../InputField/Box';
 import Text from '../InputField/Text';
 
-const Select = forwardRef(function(props, ref) {
+const Select = forwardRef(function (props, ref) {
 	const {theme} = useContext(ThemeContext);
 
 	const {size: defaultSize = null, width: defaultWidth = null, variant: defaultVariant, color: defaultColor} = theme.json(
@@ -27,10 +27,10 @@ const Select = forwardRef(function(props, ref) {
 		onDoubleClick = null,
 		onFocus = null,
 		onBlur = null,
-		variant = defaultVariant,
-		color = defaultColor,
-		size = defaultSize,
-		width = defaultWidth,
+		variant = null,
+		color = null,
+		size = null,
+		width = null,
 		height = null,
 		minWidth = null,
 		maxWidth = null,
@@ -192,13 +192,13 @@ const Select = forwardRef(function(props, ref) {
 
 	const {containerStyle, containerCss, inputCss} = useInputFieldStyleParser({
 		theme,
-		size,
-		width,
+		size: size || defaultSize,
+		width: isNumberOrString(width) ? width : defaultWidth,
 		height,
 		minWidth,
 		maxWidth,
-		variant,
-		color,
+		variant: variant || defaultVariant,
+		color: color || defaultColor,
 		disabled,
 		m,
 		mt,
@@ -252,7 +252,7 @@ const Select = forwardRef(function(props, ref) {
 	);
 
 	return (
-		<Container containerCss={containerCss} style={containerStyle} ref={containerRef}>
+		<Container $containerCss={containerCss} style={containerStyle} ref={containerRef}>
 			<InputFieldContext.Provider value={context}>
 				{childrenIsStandardHTMLDom ? <Input>{children}</Input> : children}
 			</InputFieldContext.Provider>
@@ -299,17 +299,14 @@ const Container = styled.span`
 	padding: 0 !important;
 	box-sizing: border-box;
 	position: relative;
-	${({containerCss}) => css(containerCss)}
-	
-	${({minWidthCss}) => (minWidthCss !== null ? `min-width: ${getPixelsOrString(minWidthCss)};` : '')}
-	${({maxWidthCss}) => (maxWidthCss !== null ? `max-width: ${getPixelsOrString(maxWidthCss)};` : '')}
+	${({$containerCss}) => css($containerCss)}
 `;
 
 /**
  * ******************************** Input **************************************
  */
 
-const Input = function(props) {
+const Input = function (props) {
 	const {children = null, flex = null, width = '100%'} = props;
 
 	const {
@@ -332,7 +329,7 @@ const Input = function(props) {
 	} = useContext(InputFieldContext);
 
 	return (
-		<Field containerCss={containerCss} inputCss={inputCss} cssFlex={flex} cssWidth={width}>
+		<Field $containerCss={containerCss} $inputCss={inputCss} $cssFlex={flex} $cssWidth={width}>
 			<select
 				ref={innerRef}
 				name={name}
@@ -362,10 +359,10 @@ Input.propTypes = {
 
 const Field = styled.span`
 	display: inline-block;
-	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
+	${({$cssFlex}) => (isNumberOrString($cssFlex) ? `flex: ${$cssFlex};` : '')}
+	${({$cssWidth}) => (isNumberOrString($cssWidth) ? `width: ${getPixelsOrString($cssWidth)};` : '')}
 	position: relative;
-	font-size: ${({inputCss}) => inputCss.fontSize || '1rem'};
+	font-size: ${({$inputCss}) => $inputCss.fontSize || '1rem'};
 
 	> select {
 		display: block;
@@ -405,7 +402,7 @@ const Field = styled.span`
 			font-weight: normal;
 		}
 
-		${({inputCss}) => css(inputCss)}
+		${({$inputCss}) => css($inputCss)}
 	}
 
 	&:after {
@@ -420,7 +417,7 @@ const Field = styled.span`
 		border-left: 0.3em solid transparent;
 		border-right: 0.3em solid transparent;
 
-		border-top: 0.3em solid ${({containerCss}) => containerCss.borderColor || 'gray'};
+		border-top: 0.3em solid ${({$containerCss}) => $containerCss.borderColor || 'gray'};
 		pointer-events: none;
 	}
 `;

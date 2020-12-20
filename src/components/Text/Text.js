@@ -20,7 +20,7 @@ const Text = forwardRef(function (props, ref) {
 		children = null,
 		block = false,
 		style: userStyle = null,
-		variant = defaults.variant,
+		variant: userVariant = null,
 		color = null,
 		onClick = null,
 		onDoubleClick = null,
@@ -43,6 +43,8 @@ const Text = forwardRef(function (props, ref) {
 		pl = null,
 		...otherProps
 	} = props;
+
+	const variant = userVariant || defaults.variant;
 
 	/**
 	 * ******************************** CLICK EVENTS **************************************

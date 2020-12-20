@@ -15,7 +15,7 @@ let inputTimeout = null;
 /**
  * ******************************** TextField **************************************
  */
-const TextField = forwardRef(function(props, ref) {
+const TextField = forwardRef(function (props, ref) {
 	const {theme} = useContext(ThemeContext);
 
 	const {size: defaultSize = null, width: defaultWidth = null, variant: defaultVariant, color: defaultColor} = theme.json(
@@ -24,20 +24,20 @@ const TextField = forwardRef(function(props, ref) {
 
 	const {
 		children = null,
-		type = 'text',
+		type = null,
 		name = null,
 		value = undefined,
 		defaultValue = undefined,
 		placeholder = null,
-		color = defaultColor,
-		size = defaultSize,
-		variant = defaultVariant,
-		width = defaultWidth,
+		color = null,
+		size = null,
+		variant = null,
+		width = null,
 		minWidth = null,
 		maxWidth = null,
 		onChange = null,
 		onInput = null,
-		inputDelay = 300,
+		inputDelay = null,
 		onClick = null,
 		onDoubleClick = null,
 		onFocus = null,
@@ -112,7 +112,7 @@ const TextField = forwardRef(function(props, ref) {
 				});
 			}
 
-			if (typeof onInput === 'function' && typeof inputDelay === 'number' && inputDelay > 0) {
+			if (typeof onInput === 'function' && ((typeof inputDelay === 'number' && inputDelay > 0) || inputDelay === null)) {
 				if (inputTimeout) {
 					clearTimeout(inputTimeout);
 				}
@@ -121,17 +121,20 @@ const TextField = forwardRef(function(props, ref) {
 				const delayedValue = newValue;
 				const delayedElement = e.currentTarget;
 
-				inputTimeout = setTimeout(() => {
-					if (delayedElement && typeof onInput === 'function') {
-						onInput({
-							name: delayedName,
-							value: delayedValue,
-							element: delayedElement
-						});
-					}
+				inputTimeout = setTimeout(
+					() => {
+						if (delayedElement && typeof onInput === 'function') {
+							onInput({
+								name: delayedName,
+								value: delayedValue,
+								element: delayedElement
+							});
+						}
 
-					inputTimeout = null;
-				}, inputDelay);
+						inputTimeout = null;
+					},
+					typeof inputDelay === 'number' ? inputDelay : 300
+				);
 			}
 		},
 		[onChange, onInput, inputDelay, name]
@@ -187,12 +190,12 @@ const TextField = forwardRef(function(props, ref) {
 
 	const {containerStyle, containerCss, inputCss} = useInputFieldStyleParser({
 		theme,
-		size,
-		width,
+		size: size || defaultSize,
+		width: isNumberOrString(width) ? width : defaultWidth,
 		minWidth,
 		maxWidth,
-		variant,
-		color,
+		variant: variant || defaultVariant,
+		color: color || defaultColor,
 		disabled,
 		readOnly,
 		m,
@@ -247,7 +250,7 @@ const TextField = forwardRef(function(props, ref) {
 	);
 
 	return (
-		<Container containerCss={containerCss} style={containerStyle} ref={containerRef}>
+		<Container $containerCss={containerCss} style={containerStyle} ref={containerRef}>
 			<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 		</Container>
 	);
@@ -308,14 +311,14 @@ const Container = styled.span`
 	padding: 0 !important;
 	box-sizing: border-box;
 	position: relative;
-	${({containerCss}) => css(containerCss)}
+	${({$containerCss}) => css($containerCss)}
 `;
 
 /**
  * ******************************** Input **************************************
  */
 
-const Input = function(props) {
+const Input = function (props) {
 	const {flex = null, width = '100%'} = props;
 
 	const {
@@ -340,7 +343,7 @@ const Input = function(props) {
 	return (
 		<Field
 			ref={innerRef}
-			type={type}
+			type={type || 'text'}
 			name={name}
 			value={controlledComponent ? value : undefined}
 			defaultValue={!controlledComponent ? defaultValue : undefined}
@@ -352,9 +355,9 @@ const Input = function(props) {
 			onFocus={handleFocus}
 			onBlur={handleBlur}
 			onChange={handleChange}
-			inputCss={inputCss}
-			cssFlex={flex}
-			cssWidth={width}
+			$inputCss={inputCss}
+			$cssFlex={flex}
+			$cssWidth={width}
 			{...otherProps}
 		/>
 	);
@@ -392,22 +395,22 @@ const Field = styled.input`
 	text-indent: 0;
 	letter-spacing: normal;
 	text-rendering: optimizeSpeed;
-	
+
 	&:-webkit-autofill,
 	&:-webkit-autofill:hover,
 	&:-webkit-autofill:focus,
 	&:-webkit-autofill:active {
-	    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
-	    -webkit-transition-delay: 9999s;
+		-webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+		-webkit-transition-delay: 9999s;
 	}
 
 	&:disabled {
 		cursor: not-allowed;
 	}
 
-	${({inputCss}) => css(inputCss)}
-	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
+	${({$inputCss}) => css($inputCss)}
+	${({$cssFlex}) => (isNumberOrString($cssFlex) ? `flex: ${$cssFlex};` : '')}
+	${({$cssWidth}) => (isNumberOrString($cssWidth) ? `width: ${getPixelsOrString($cssWidth)};` : '')}
 `;
 
 /**

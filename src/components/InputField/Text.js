@@ -87,6 +87,7 @@ const StyledText = styled.span`
 	line-height: 1.3;
 	text-align: ${({$cssTextAlign}) => $cssTextAlign || 'inherit'};
 	position: relative;
+	min-width: 0;
 	white-space: nowrap;
 	color: ${({$color}) => $color || 'inherit'};
 	font-size: ${({$fontSize}) => (isNumberOrString($fontSize) ? getPixelsOrString($fontSize) : 'inherit')};

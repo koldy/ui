@@ -78,6 +78,7 @@ const StyledBox = styled.span`
 	align-items: center;
 	flex-wrap: nowrap;
 	padding: 0;
+  min-width: 0;
 	text-align: ${({cssTextAlign}) => cssTextAlign};
 	position: relative;
 	${({marginCss}) => (!isEmpty(marginCss) ? css(marginCss) : '')}

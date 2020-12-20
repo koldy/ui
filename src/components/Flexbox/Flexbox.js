@@ -2,7 +2,7 @@ import React, {useMemo, forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {getPixelsOrString, getStyleForMargins} from '../../util/helpers';
+import {getPixelsOrString, getStyleForMargins, isNumberOrString} from '../../util/helpers';
 
 /**
  * The container for Flexbox container - it is just mapping the flexbox properties. It's children should be only "Flexbox.Item", nothing else.
@@ -19,7 +19,7 @@ import {getPixelsOrString, getStyleForMargins} from '../../util/helpers';
  *   <Flexbox.Item>3</Flexbox.Item>
  * </Flexbox>
  */
-const Flexbox = forwardRef(function(props, ref) {
+const Flexbox = forwardRef(function (props, ref) {
 	const {
 		children,
 		inline = false,
@@ -104,11 +104,13 @@ Flexbox.propTypes = {
  * @constructor
  * @link https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  */
-const FlexboxItem = forwardRef(function(props, ref) {
+const FlexboxItem = forwardRef(function (props, ref) {
 	const {
 		children = null,
 		style: userStyle = null,
 		width = null,
+		minWidth = null,
+		maxWidth = null,
 		height = null,
 		order = null,
 		flex = null,
@@ -120,19 +122,21 @@ const FlexboxItem = forwardRef(function(props, ref) {
 	const style = useMemo(
 		() => ({
 			width: getPixelsOrString(width),
+			minWidth: isNumberOrString(minWidth) ? getPixelsOrString(minWidth) : undefined,
+			maxWidth: isNumberOrString(maxWidth) ? getPixelsOrString(maxWidth) : undefined,
 			height: getPixelsOrString(height),
 			...userStyle
 		}),
-		[width, height, userStyle]
+		[width, minWidth, maxWidth, height, userStyle]
 	);
 
 	return (
 		<StyledFlexboxItem
 			ref={ref}
-			order={order}
-			flex={flex}
-			alignSelf={alignSelf}
-			textAlignValue={textAlignValue}
+			$order={order}
+			$flex={flex}
+			$alignSelf={alignSelf}
+			$textAlignValue={textAlignValue}
 			style={style}
 			{...otherProps}
 		>
@@ -144,10 +148,11 @@ const FlexboxItem = forwardRef(function(props, ref) {
 const StyledFlexboxItem = styled.div`
 	display: block;
 	box-sizing: border-box;
-	order: ${({order}) => order || 'unset'};
-	align-self: ${({alignSelf}) => alignSelf || 'unset'};
-	flex: ${({flex}) => flex || 'unset'};
-	text-align: ${({textAlignValue}) => textAlignValue || 'inherit'};
+	order: ${({$order}) => $order || 'unset'};
+	align-self: ${({$alignSelf}) => $alignSelf || 'unset'};
+	flex: ${({$flex}) => $flex || 'unset'};
+	text-align: ${({$textAlignValue}) => $textAlignValue || 'inherit'};
+	min-width: 0;
 `;
 
 FlexboxItem.propTypes = {

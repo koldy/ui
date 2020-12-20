@@ -64,15 +64,15 @@ const DateInput = forwardRef(function (props, ref) {
 		value = undefined,
 		defaultValue = undefined,
 		placeholder = null,
-		color = defaultColor,
-		size = defaultSize,
-		variant = defaultVariant,
-		width = defaultWidth,
+		color = null,
+		size = null,
+		variant = null,
+		width = null,
 		minWidth = null,
 		maxWidth = null,
 		onChange = null,
 		onInput = null,
-		inputDelay = 300,
+		inputDelay = null,
 		onClick = null,
 		onDoubleClick = null,
 		onFocus = null,
@@ -130,7 +130,9 @@ const DateInput = forwardRef(function (props, ref) {
 	 */
 
 	const hidePopper = useCallback(() => {
-		popperRef.current.dataset.show = 'no';
+		if (popperRef.current && popperRef.current.dataset) {
+			popperRef.current.dataset.show = 'no';
+		}
 
 		if (popper.current && isFunction(popper.current.destroy)) {
 			popper.current.destroy();
@@ -232,7 +234,7 @@ const DateInput = forwardRef(function (props, ref) {
 				});
 			}
 
-			if (isFunction(onInput) && typeof inputDelay === 'number' && inputDelay > 0) {
+			if (isFunction(onInput) && ((typeof inputDelay === 'number' && inputDelay > 0) || inputDelay === null)) {
 				if (inputTimeout) {
 					clearTimeout(inputTimeout);
 				}
@@ -242,18 +244,21 @@ const DateInput = forwardRef(function (props, ref) {
 				const delayedValueString = stringValue;
 				const delayedElement = e.currentTarget;
 
-				inputTimeout = setTimeout(() => {
-					if (delayedElement && isFunction(onInput)) {
-						onInput({
-							name: delayedName,
-							value: delayedValue,
-							valueString: delayedValueString,
-							element: delayedElement
-						});
-					}
+				inputTimeout = setTimeout(
+					() => {
+						if (delayedElement && isFunction(onInput)) {
+							onInput({
+								name: delayedName,
+								value: delayedValue,
+								valueString: delayedValueString,
+								element: delayedElement
+							});
+						}
 
-					inputTimeout = null;
-				}, inputDelay);
+						inputTimeout = null;
+					},
+					typeof inputDelay === 'number' ? inputDelay : 300
+				);
 			}
 		},
 		[onChange, onInput, inputDelay, name, showPopper, inputParser, minDate, maxDate]
@@ -359,12 +364,12 @@ const DateInput = forwardRef(function (props, ref) {
 
 	const {containerStyle, containerCss, inputCss} = useInputFieldStyleParser({
 		theme,
-		size,
-		width,
+		size: size || defaultSize,
+		width: isNumberOrString(width) ? width : defaultWidth,
 		minWidth,
 		maxWidth,
-		variant,
-		color,
+		variant: variant || defaultVariant,
+		color: color || defaultColor,
 		disabled,
 		readOnly,
 		m,
@@ -662,8 +667,7 @@ const Field = styled.input`
 
 	${({inputCss}) => css(inputCss)}
 	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) =>
-		isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : ''}
+	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
 `;
 
 const PopperWrapper = styled.div`
