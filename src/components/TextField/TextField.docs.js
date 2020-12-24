@@ -12,6 +12,7 @@ import H2 from '../../../docs/components/H2';
 import Paragraph from '../../../docs/components/Paragraph';
 import List from '../../../docs/components/List';
 import TextDocs from '../InputField/Text.docs';
+import Button from '../Button/Button';
 
 export const title = 'TextField';
 export const route = '/text-field';
@@ -440,7 +441,7 @@ export default function TextFieldDocs() {
   <TextField.Input />
 </TextField>
 					`}
-				label="Example for TextField.Box:"
+				label="Example 1 for TextField.Box:"
 			>
 				<TextField>
 					<TextField.Box alignSelf="stretch">
@@ -456,6 +457,25 @@ export default function TextFieldDocs() {
 						</div>
 					</TextField.Box>
 					<TextField.Input />
+				</TextField>
+			</Code>
+			<Code
+				language="js"
+				code={`
+<TextField>
+  <TextField.Input />
+  <TextField.Box>
+    <Button>Do something</Button>
+  </TextField.Box>
+</TextField>
+					`}
+				label="Example 2 for TextField.Box:"
+			>
+				<TextField>
+					<TextField.Input />
+					<TextField.Box alignSelf="stretch">
+						<Button>Do something</Button>
+					</TextField.Box>
 				</TextField>
 			</Code>
 			<H2 hash="type">Type</H2>

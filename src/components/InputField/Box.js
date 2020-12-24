@@ -18,6 +18,7 @@ const Box = function (props) {
 		width,
 		alignSelf,
 		textAlign = 'inherit',
+		style: userStyle = null,
 		m = null,
 		mt = null,
 		mr = null,
@@ -44,6 +45,7 @@ const Box = function (props) {
 			cssTextAlign={textAlign}
 			marginCss={marginCss}
 			paddingCss={paddingCss}
+      style={userStyle}
 			{...otherProps}
 		>
 			{isFunction(children) ? children({focusField, name, clearValue}) : children}
@@ -57,6 +59,8 @@ Box.propTypes = {
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
 	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'unset', 'initial']),
+	// eslint-disable-next-line
+	style: PropTypes.object,
 
 	// margins:
 	m: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -78,7 +82,6 @@ const StyledBox = styled.span`
 	align-items: center;
 	flex-wrap: nowrap;
 	padding: 0;
-  min-width: 0;
 	text-align: ${({cssTextAlign}) => cssTextAlign};
 	position: relative;
 	${({marginCss}) => (!isEmpty(marginCss) ? css(marginCss) : '')}

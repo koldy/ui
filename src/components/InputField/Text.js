@@ -1,8 +1,8 @@
-import React, {useContext, useCallback} from 'react';
+import React, {useContext, useCallback, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
 
-import {getPixelsOrString, getStyleForPaddings, getStyleForStringOrNumber, isEmpty, isFunction, isNumberOrString} from '../../util/helpers';
+import {getPixelsOrString, getStyleForPaddings, isFunction, isNumberOrString} from '../../util/helpers';
 import InputFieldContext from './InputFieldContext';
 import useColor from '../../hooks/useColor/useColor';
 
@@ -17,6 +17,8 @@ const Text = function (props) {
 		children,
 		flex = null,
 		width = null,
+		minWidth = null,
+		maxWidth = null,
 		alignSelf = null,
 		textAlign = null,
 		p = null,
@@ -26,6 +28,7 @@ const Text = function (props) {
 		pl = null,
 		color = null,
 		fontSize = null,
+		style: userStyle = null,
 		...otherProps
 	} = props;
 
@@ -48,16 +51,26 @@ const Text = function (props) {
 		[focusField, disabled]
 	);
 
+	const style = useMemo(() => {
+		return {
+			fontSize: isNumberOrString(fontSize) ? getPixelsOrString(fontSize) : 'inherit',
+			width: isNumberOrString(width) ? getPixelsOrString(width) : 'unset',
+			minWidth: isNumberOrString(minWidth) ? getPixelsOrString(minWidth) : 'unset',
+			maxWidth: isNumberOrString(maxWidth) ? getPixelsOrString(maxWidth) : 'unset',
+			padding: inputCss.padding || null,
+			...getStyleForPaddings({p, pt, pr, pb, pl}),
+			...userStyle
+		};
+	}, [width, maxWidth, minWidth, p, pt, pr, pb, pl, fontSize, inputCss, userStyle]);
+
 	return (
 		<StyledText
 			$cssFlex={flex}
-			$cssWidth={width}
 			$cssAlignSelf={alignSelf}
 			$cssTextAlign={textAlign}
-			$paddingCss={paddingCss}
-			$fontSize={fontSize}
 			$color={cls}
 			onClick={handleClick}
+			style={style}
 			{...otherProps}
 		>
 			{isFunction(children) ? children({focusField, name, clearValue}) : <span>{children}</span>}
@@ -69,10 +82,14 @@ Text.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node, PropTypes.func]).isRequired,
 	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	alignSelf: PropTypes.oneOf(['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
 	textAlign: PropTypes.oneOf(['left', 'center', 'right', 'inherit', 'initial']),
 	color: PropTypes.string,
 	fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	// eslint-disable-next-line
+	style: PropTypes.object,
 
 	// padding:
 	p: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -87,16 +104,11 @@ const StyledText = styled.span`
 	line-height: 1.3;
 	text-align: ${({$cssTextAlign}) => $cssTextAlign || 'inherit'};
 	position: relative;
-	min-width: 0;
 	white-space: nowrap;
 	color: ${({$color}) => $color || 'inherit'};
-	font-size: ${({$fontSize}) => (isNumberOrString($fontSize) ? getPixelsOrString($fontSize) : 'inherit')};
 
 	align-self: ${({$cssAlignSelf}) => $cssAlignSelf || 'unset'};
 	flex: ${({$cssFlex}) => $cssFlex || 'unset'};
-	width: ${({$cssWidth}) => (isNumberOrString($cssWidth) ? getPixelsOrString($cssWidth) : 'unset')};
-
-	${({$paddingCss}) => (!isEmpty($paddingCss) ? css($paddingCss) : '')}
 
 	> span {
 		pointer-events: none;
