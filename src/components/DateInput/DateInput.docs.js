@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
-import lightFormat from 'date-fns/lightFormat';
-import parseISO from 'date-fns/parseISO';
+import format from 'date-fns/format';
 
 import ThemeContext from '../../theme/ThemeContext';
 
@@ -15,33 +14,46 @@ import Paragraph from '../../../docs/components/Paragraph';
 import List from '../../../docs/components/List';
 import TextDocs from '../InputField/Text.docs';
 import Button from '../Button/Button';
+import isValid from 'date-fns/isValid';
 
 export const title = 'DateInput';
 export const route = '/date-input';
 export const json = 'inputField';
 
-const displayValue = function (dt) {
-	return lightFormat(dt, 'dd/MM/yyyy');
+const displayValue = function ({value}) {
+	return format(value, 'dd.MM.yyyy');
 };
 
-const inputParser = function (str) {
-	const parts = str.split('/');
-
-	let date = '';
-
-	if (parts[2]) {
-		date += parts[2];
+const inputParser = function ({value}) {
+	if (!value) {
+		return null;
 	}
 
-	if (parts[1]) {
-		date += `-${parts[1]}`;
+	if (typeof value === 'string') {
+		// dd.MM.yyyy
+		const parts = value.split('.').map((el) => el.trim());
+		if (parts.length >= 3 && parts.length <= 4) {
+			// check if all strings are integers
+			for (let i = 0; i < parts.length; i += 1) {
+				if (Number.isNaN(parseInt(parts[i], 10))) {
+					return null;
+				}
+			}
+
+			if (parts[2].length !== 4) {
+				return null;
+			}
+
+			// if we're here, then we're all good, probably
+			const dt = new Date(Date.parse(`${parts[2]}-${parts[1]}-${parts[0]}`));
+
+			if (isValid(dt)) {
+				return dt;
+			}
+		}
 	}
 
-	if (parts[0]) {
-		date += `-${parts[0]}`;
-	}
-
-	return parseISO(date);
+	return null;
 };
 
 const date = new Date(Date.parse('2020-06-08'));
@@ -208,6 +220,8 @@ const [val, setVal] = useState(new Date(Date.parse('2020-06-08')));
 							</List>
 						</List.Item>
 					</List>
+					<Paragraph>Example: enter date in dd.MM.yyyy format:</Paragraph>
+					<DateInput width={180} inputParser={inputParser} displayValue={displayValue} placeholder="dd.MM.yyyy" />
 				</Props.Prop>
 				<Props.Prop name="minDate" type="Date" defaultValue="last 100 years">
 					<Paragraph>

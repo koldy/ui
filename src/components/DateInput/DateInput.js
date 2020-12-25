@@ -85,6 +85,10 @@ const DateInput = forwardRef(function (props, ref) {
 		minDate = null,
 		maxDate = null,
 
+		valueFormat: givenValueFormat = null,
+		inputParser: givenInputParser = null,
+		displayValue: givenDisplayValue = null,
+
 		// other props
 		m = null,
 		mt = null,
@@ -94,9 +98,9 @@ const DateInput = forwardRef(function (props, ref) {
 		...otherProps
 	} = props;
 
-	const valueFormat = isFunctionOr(props.valueFormat, defaultValueFormat);
-	const displayValue = isFunctionOr(props.displayValue, defaultValueFormat);
-	const inputParser = isFunctionOr(props.inputParser, defaultInputParser);
+	const valueFormat = isFunctionOr(givenValueFormat, defaultValueFormat);
+	const displayValue = isFunctionOr(givenDisplayValue, defaultValueFormat);
+	const inputParser = isFunctionOr(givenInputParser, defaultInputParser);
 
 	const popper = useRef(null);
 	const popperRef = useRef(null);
