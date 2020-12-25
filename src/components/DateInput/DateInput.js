@@ -514,8 +514,10 @@ const Input = function (props) {
 	const {flex = null, width = '100%'} = props;
 
 	const {
-		name,
 		innerRef,
+		name,
+		// eslint-disable-next-line
+		value,
 		defaultValue,
 		controlledComponent,
 		placeholder,
@@ -527,11 +529,15 @@ const Input = function (props) {
 		handleFocus,
 		handleBlur,
 		handleChange,
+		// eslint-disable-next-line
+		focusField,
 		hidePopper,
 		internalValue,
 		setInternalValue,
-		inputParser,
 		displayValue,
+		inputParser,
+		// eslint-disable-next-line
+		clearValue,
 		minDate,
 		maxDate,
 		otherProps
@@ -691,51 +697,6 @@ const InputWrapper = styled.span`
 		${({$inputCss}) => css($inputCss)}
 		${({$cssFlex}) => (isNumberOrString($cssFlex) ? `flex: ${$cssFlex};` : '')}
 	}
-`;
-
-const Field = styled.input`
-	display: inline-block;
-	box-sizing: border-box;
-	outline: none !important;
-
-	font-size: 1rem;
-	font-family: unset;
-	font-weight: 600;
-	color: #444;
-	line-height: 1.3;
-	padding: 0.6em;
-	margin: 0;
-	border: 0 solid transparent;
-	box-shadow: none;
-	appearance: none;
-	border-radius: 0;
-	background: transparent;
-	word-spacing: normal;
-
-	text-shadow: none;
-	cursor: text;
-	white-space: pre;
-	align-items: center;
-	text-align: start;
-	text-indent: 0;
-	letter-spacing: normal;
-	text-rendering: optimizeSpeed;
-
-	&:-webkit-autofill,
-	&:-webkit-autofill:hover,
-	&:-webkit-autofill:focus,
-	&:-webkit-autofill:active {
-		-webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
-		-webkit-transition-delay: 9999s;
-	}
-
-	&:disabled {
-		cursor: not-allowed;
-	}
-
-	${({inputCss}) => css(inputCss)}
-	${({cssFlex}) => (isNumberOrString(cssFlex) ? `flex: ${cssFlex};` : '')}
-	${({cssWidth}) => (isNumberOrString(cssWidth) ? `width: ${getPixelsOrString(cssWidth)};` : '')}
 `;
 
 const PopperWrapper = styled.div`

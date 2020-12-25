@@ -35,11 +35,6 @@ const Text = function (props) {
 	const {disabled, focusField, inputCss, name, clearValue} = useContext(InputFieldContext);
 	const cls = useColor(color);
 
-	const paddingCss = {
-		padding: inputCss.padding || null,
-		...getStyleForPaddings({p, pt, pr, pb, pl})
-	};
-
 	const handleClick = useCallback(
 		(e) => {
 			e.preventDefault();
@@ -52,13 +47,32 @@ const Text = function (props) {
 	);
 
 	const style = useMemo(() => {
+		let paddingDefinitions = {};
+		if (inputCss.padding) {
+			paddingDefinitions = {
+				padding: inputCss.padding
+			};
+		} else {
+			const hasPadding =
+				isNumberOrString(p) || isNumberOrString(pt) || isNumberOrString(pr) || isNumberOrString(pb) || isNumberOrString(pl);
+
+			if (hasPadding) {
+				paddingDefinitions = {
+					...getStyleForPaddings({p, pt, pr, pb, pl})
+				};
+			} else {
+				paddingDefinitions = {
+					padding: '0.3em'
+				};
+			}
+		}
+
 		return {
 			fontSize: isNumberOrString(fontSize) ? getPixelsOrString(fontSize) : 'inherit',
 			width: isNumberOrString(width) ? getPixelsOrString(width) : 'unset',
 			minWidth: isNumberOrString(minWidth) ? getPixelsOrString(minWidth) : 'unset',
 			maxWidth: isNumberOrString(maxWidth) ? getPixelsOrString(maxWidth) : 'unset',
-			padding: inputCss.padding || null,
-			...getStyleForPaddings({p, pt, pr, pb, pl}),
+			...paddingDefinitions,
 			...userStyle
 		};
 	}, [width, maxWidth, minWidth, p, pt, pr, pb, pl, fontSize, inputCss, userStyle]);
