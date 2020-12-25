@@ -45,7 +45,7 @@ const Box = function (props) {
 			cssTextAlign={textAlign}
 			marginCss={marginCss}
 			paddingCss={paddingCss}
-      style={userStyle}
+			style={userStyle}
 			{...otherProps}
 		>
 			{isFunction(children) ? children({focusField, name, clearValue}) : children}

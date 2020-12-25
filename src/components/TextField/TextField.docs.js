@@ -173,6 +173,10 @@ export default function TextFieldDocs() {
 					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
 					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
+				<Props.Prop name="verticalAlign" type={['string', 'number']} defaultValue="middle">
+					Standard CSS value for vertical-align. It will be applied to the input's container. By default, it's <code>middle</code>
+					so you can place multiple input components inline.
+				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
 					<Paragraph>Called when value has changed. This is required prop when TextField is used as controlled component.</Paragraph>
 					<Paragraph>Called function will get the object as first parameter that has the following keys:</Paragraph>
@@ -464,9 +468,15 @@ export default function TextFieldDocs() {
 				code={`
 <TextField>
   <TextField.Input />
+  <TextField.Box alignSelf="stretch">
+    <Button>Do something</Button>
+  </TextField.Box>
+</TextField>
+<TextField ml="1rem">
   <TextField.Box>
     <Button>Do something</Button>
   </TextField.Box>
+  <TextField.Input />
 </TextField>
 					`}
 				label="Example 2 for TextField.Box:"
@@ -476,6 +486,12 @@ export default function TextFieldDocs() {
 					<TextField.Box alignSelf="stretch">
 						<Button>Do something</Button>
 					</TextField.Box>
+				</TextField>
+				<TextField ml="1rem">
+					<TextField.Box>
+						<Button>Do something</Button>
+					</TextField.Box>
+					<TextField.Input />
 				</TextField>
 			</Code>
 			<H2 hash="type">Type</H2>

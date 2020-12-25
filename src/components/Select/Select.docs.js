@@ -94,6 +94,10 @@ export default function SelectDocs() {
 					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
 					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
+        <Props.Prop name="verticalAlign" type={['string', 'number']} defaultValue="middle">
+          Standard CSS value for vertical-align. It will be applied to the input's container. By default, it's <code>middle</code>
+          so you can place multiple input components inline.
+        </Props.Prop>
 				<Props.Prop name="onChange" type="function">
 					<Paragraph>Called when value has changed. This is required prop when Select is used as controlled component.</Paragraph>
 					<Paragraph>Called function will get the object as first parameter that has the following keys:</Paragraph>

@@ -35,6 +35,7 @@ const TextField = forwardRef(function (props, ref) {
 		width = null,
 		minWidth = null,
 		maxWidth = null,
+		verticalAlign = null,
 		onChange = null,
 		onInput = null,
 		inputDelay = null,
@@ -250,7 +251,7 @@ const TextField = forwardRef(function (props, ref) {
 	);
 
 	return (
-		<Container $containerCss={containerCss} style={containerStyle} ref={containerRef}>
+		<Container $containerCss={containerCss} style={containerStyle} ref={containerRef} $verticalAlign={verticalAlign}>
 			<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 		</Container>
 	);
@@ -283,6 +284,7 @@ TextField.propTypes = {
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	verticalAlign: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onChange: PropTypes.func,
 	onInput: PropTypes.func,
 	inputDelay: PropTypes.number,
@@ -304,6 +306,7 @@ TextField.propTypes = {
 
 const Container = styled.span`
 	display: inline-flex;
+	vertical-align: ${({$verticalAlign}) => (isNumberOrString($verticalAlign) ? $verticalAlign : 'middle')};
 	flex-wrap: nowrap;
 	align-items: center;
 	border: 2px solid #cfcfcf;
@@ -341,25 +344,24 @@ const Input = function (props) {
 	} = useContext(InputFieldContext);
 
 	return (
-		<Field
-			ref={innerRef}
-			type={type || 'text'}
-			name={name}
-			value={controlledComponent ? value : undefined}
-			defaultValue={!controlledComponent ? defaultValue : undefined}
-			placeholder={placeholder}
-			disabled={disabled}
-			readOnly={readOnly}
-			onClick={handleClick}
-			onDoubleClick={handleDoubleClick}
-			onFocus={handleFocus}
-			onBlur={handleBlur}
-			onChange={handleChange}
-			$inputCss={inputCss}
-			$cssFlex={flex}
-			$cssWidth={width}
-			{...otherProps}
-		/>
+		<InputWrapper $inputCss={inputCss} $cssFlex={flex} $cssWidth={width}>
+			<input
+				ref={innerRef}
+				type={type || 'text'}
+				name={name}
+				value={controlledComponent ? value : undefined}
+				defaultValue={!controlledComponent ? defaultValue : undefined}
+				placeholder={placeholder}
+				disabled={disabled}
+				readOnly={readOnly}
+				onClick={handleClick}
+				onDoubleClick={handleDoubleClick}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
+				onChange={handleChange}
+				{...otherProps}
+			/>
+		</InputWrapper>
 	);
 };
 
@@ -368,49 +370,70 @@ Input.propTypes = {
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
-const Field = styled.input`
-	display: inline-block;
+const InputWrapper = styled.span`
+	display: block;
 	box-sizing: border-box;
-	outline: none !important;
-
 	font-size: 1rem;
 	font-family: unset;
 	font-weight: 600;
 	color: #444;
 	line-height: 1.3;
-	padding: 0.6em;
+	padding: 0;
 	margin: 0;
 	border: 0 solid transparent;
 	box-shadow: none;
-	appearance: none;
 	border-radius: 0;
 	background: transparent;
 	word-spacing: normal;
+	flex: 1;
 
 	text-shadow: none;
 	cursor: text;
-	white-space: pre;
-	align-items: center;
-	text-align: start;
-	text-indent: 0;
-	letter-spacing: normal;
-	text-rendering: optimizeSpeed;
 
-	&:-webkit-autofill,
-	&:-webkit-autofill:hover,
-	&:-webkit-autofill:focus,
-	&:-webkit-autofill:active {
-		-webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
-		-webkit-transition-delay: 9999s;
+	> input {
+		display: block;
+		box-sizing: border-box;
+		outline: none !important;
+
+		font-size: 1rem;
+		font-family: unset;
+		font-weight: 600;
+		color: #444;
+		line-height: 1.3;
+		padding: 0.6em;
+		margin: 0;
+		border: 0 solid transparent;
+		box-shadow: none;
+		appearance: none;
+		border-radius: 0;
+		background: transparent;
+		word-spacing: normal;
+
+		text-shadow: none;
+		cursor: text;
+		white-space: pre;
+		align-items: center;
+		text-align: start;
+		text-indent: 0;
+		letter-spacing: normal;
+		text-rendering: optimizeSpeed;
+		width: ${({$cssWidth}) => (isNumberOrString($cssWidth) ? getPixelsOrString($cssWidth) : '100%')};
+
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus,
+		&:-webkit-autofill:active {
+			-webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+			-webkit-transition-delay: 9999s;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+		}
+
+		${({$inputCss}) => css($inputCss)}
+		${({$cssFlex}) => (isNumberOrString($cssFlex) ? `flex: ${$cssFlex};` : '')}
 	}
-
-	&:disabled {
-		cursor: not-allowed;
-	}
-
-	${({$inputCss}) => css($inputCss)}
-	${({$cssFlex}) => (isNumberOrString($cssFlex) ? `flex: ${$cssFlex};` : '')}
-	${({$cssWidth}) => (isNumberOrString($cssWidth) ? `width: ${getPixelsOrString($cssWidth)};` : '')}
 `;
 
 /**

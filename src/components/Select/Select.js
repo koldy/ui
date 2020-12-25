@@ -34,6 +34,7 @@ const Select = forwardRef(function (props, ref) {
 		height = null,
 		minWidth = null,
 		maxWidth = null,
+		verticalAlign = null,
 		disabled = false,
 		multiple = false,
 		visibleOptions,
@@ -252,7 +253,7 @@ const Select = forwardRef(function (props, ref) {
 	);
 
 	return (
-		<Container $containerCss={containerCss} style={containerStyle} ref={containerRef}>
+		<Container $containerCss={containerCss} style={containerStyle} ref={containerRef} $verticalAlign={verticalAlign}>
 			<InputFieldContext.Provider value={context}>
 				{childrenIsStandardHTMLDom ? <Input>{children}</Input> : children}
 			</InputFieldContext.Provider>
@@ -271,6 +272,7 @@ Select.propTypes = {
 	height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	verticalAlign: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onChange: PropTypes.func,
 	onClick: PropTypes.func,
 	onDoubleClick: PropTypes.func,
@@ -292,6 +294,7 @@ Select.propTypes = {
 
 const Container = styled.span`
 	display: inline-flex;
+	vertical-align: ${({$verticalAlign}) => (isNumberOrString($verticalAlign) ? $verticalAlign : 'middle')};
 	flex-wrap: nowrap;
 	align-items: center;
 	border: 2px solid #cfcfcf;

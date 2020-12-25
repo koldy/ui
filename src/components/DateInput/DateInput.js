@@ -70,6 +70,7 @@ const DateInput = forwardRef(function (props, ref) {
 		width = null,
 		minWidth = null,
 		maxWidth = null,
+		verticalAlign = null,
 		onChange = null,
 		onInput = null,
 		inputDelay = null,
@@ -440,7 +441,7 @@ const DateInput = forwardRef(function (props, ref) {
 
 	return (
 		<>
-			<Container $containerCss={containerCss} style={containerStyle} ref={containerRef} onClick={showPopper}>
+			<Container $containerCss={containerCss} style={containerStyle} ref={containerRef} onClick={showPopper} $verticalAlign={verticalAlign}>
 				{name && <input type="hidden" name={name} value={isValidDate(internalValue) ? valueFormat({value: internalValue}) : ''} />}
 				<InputFieldContext.Provider value={context}>{children || <Input />}</InputFieldContext.Provider>
 			</Container>
@@ -464,6 +465,7 @@ DateInput.propTypes = {
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	minWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+	verticalAlign: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	onChange: PropTypes.func,
 	onInput: PropTypes.func,
 	inputDelay: PropTypes.number,
@@ -495,6 +497,7 @@ const Container = styled.span`
 	display: inline-flex;
 	flex-wrap: nowrap;
 	align-items: center;
+	vertical-align: ${({$verticalAlign}) => (isNumberOrString($verticalAlign) ? $verticalAlign : 'middle')};
 	border: 2px solid #cfcfcf;
 	height: auto;
 	padding: 0 !important;
@@ -599,24 +602,23 @@ const Input = function (props) {
 	}
 
 	return (
-		<Field
-			ref={innerRef}
-			type="text"
-			value={givenValue}
-			defaultValue={givenDefaultValue}
-			placeholder={placeholder}
-			disabled={disabled}
-			readOnly={readOnly || controlledComponent}
-			onClick={handleClick}
-			onDoubleClick={handleDoubleClick}
-			onFocus={handleFocus}
-			onBlur={handleBlur}
-			onChange={handleChange}
-			inputCss={inputCss}
-			cssFlex={flex}
-			cssWidth={width}
-			{...otherProps}
-		/>
+		<InputWrapper $inputCss={inputCss} $cssFlex={flex} $cssWidth={width}>
+			<input
+				ref={innerRef}
+				type="text"
+				value={givenValue}
+				defaultValue={givenDefaultValue}
+				placeholder={placeholder}
+				disabled={disabled}
+				readOnly={readOnly || controlledComponent}
+				onClick={handleClick}
+				onDoubleClick={handleDoubleClick}
+				onFocus={handleFocus}
+				onBlur={handleBlur}
+				onChange={handleChange}
+				{...otherProps}
+			/>
+		</InputWrapper>
 	);
 };
 
@@ -624,6 +626,72 @@ Input.propTypes = {
 	flex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
+
+const InputWrapper = styled.span`
+	display: block;
+	box-sizing: border-box;
+	font-size: 1rem;
+	font-family: unset;
+	font-weight: 600;
+	color: #444;
+	line-height: 1.3;
+	padding: 0;
+	margin: 0;
+	border: 0 solid transparent;
+	box-shadow: none;
+	border-radius: 0;
+	background: transparent;
+	word-spacing: normal;
+	flex: 1;
+
+	text-shadow: none;
+	cursor: text;
+
+	> input {
+		display: block;
+		box-sizing: border-box;
+		outline: none !important;
+
+		font-size: 1rem;
+		font-family: unset;
+		font-weight: 600;
+		color: #444;
+		line-height: 1.3;
+		padding: 0.6em;
+		margin: 0;
+		border: 0 solid transparent;
+		box-shadow: none;
+		appearance: none;
+		border-radius: 0;
+		background: transparent;
+		word-spacing: normal;
+
+		text-shadow: none;
+		cursor: text;
+		white-space: pre;
+		align-items: center;
+		text-align: start;
+		text-indent: 0;
+		letter-spacing: normal;
+		text-rendering: optimizeSpeed;
+		width: ${({$cssWidth}) => (isNumberOrString($cssWidth) ? getPixelsOrString($cssWidth) : '100%')};
+
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus,
+		&:-webkit-autofill:active {
+			-webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
+			-webkit-transition-delay: 9999s;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+		}
+
+		${({$inputCss}) => css($inputCss)}
+		${({$cssFlex}) => (isNumberOrString($cssFlex) ? `flex: ${$cssFlex};` : '')}
+	}
+`;
 
 const Field = styled.input`
 	display: inline-block;
@@ -672,10 +740,10 @@ const Field = styled.input`
 
 const PopperWrapper = styled.div`
 	background: ${({$containerCss}) => $containerCss.background || '#fff'};
-	padding: 0.3rem;
+	padding: 0;
 	box-sizing: border-box;
 	border: 2px solid ${({$containerCss}) => $containerCss.borderColor || 'transparent'};
-	width: fit-content;
+	width: auto;
 	z-index: ${({$baseZIndex}) => $baseZIndex + 1};
 	box-shadow: 0 0 0 1px rgba(16, 22, 26, 0.1), 0 2px 4px rgba(16, 22, 26, 0.2), 0 8px 24px rgba(16, 22, 26, 0.2);
 	user-select: none;

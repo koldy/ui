@@ -14,6 +14,7 @@ import H2 from '../../../docs/components/H2';
 import Paragraph from '../../../docs/components/Paragraph';
 import List from '../../../docs/components/List';
 import TextDocs from '../InputField/Text.docs';
+import Button from '../Button/Button';
 
 export const title = 'DateInput';
 export const route = '/date-input';
@@ -288,6 +289,10 @@ const [val, setVal] = useState(new Date(Date.parse('2020-06-08')));
 					If set, it'll be added at the bottom of CSS definition so if you have any previous definition of <code>max-width</code> (for
 					example, in theme's variant definition), it'll be overridden with this value.
 				</Props.Prop>
+				<Props.Prop name="verticalAlign" type={['string', 'number']} defaultValue="middle">
+					Standard CSS value for vertical-align. It will be applied to the input's container. By default, it's <code>middle</code>
+					so you can place multiple input components inline.
+				</Props.Prop>
 				<Props.Prop name="onChange" type="function">
 					<Paragraph>Called when value has changed. This is required prop when DateInput is used as controlled component.</Paragraph>
 					<Paragraph>Called function will get the object as first parameter that has the following keys:</Paragraph>
@@ -561,6 +566,12 @@ const [val, setVal] = useState(new Date(Date.parse('2020-06-08')));
 			  </DateInput.Box>
 			  <DateInput.Input />
 			</DateInput>
+			<DateInput ml="1rem">
+			  <DateInput.Input />
+			  <DateInput.Box>
+			    <Button>Do something</Button>
+			  </DateInput.Box>
+			</DateInput>
 								`}
 				label="Example for DateInput.Box:"
 			>
@@ -578,6 +589,12 @@ const [val, setVal] = useState(new Date(Date.parse('2020-06-08')));
 						</div>
 					</DateInput.Box>
 					<DateInput.Input />
+				</DateInput>
+				<DateInput ml="1rem">
+					<DateInput.Input />
+					<DateInput.Box>
+						<Button>Do something</Button>
+					</DateInput.Box>
 				</DateInput>
 			</Code>
 			<H2 hash="size">Size</H2>
