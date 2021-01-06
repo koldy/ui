@@ -1,6 +1,6 @@
 import React, {useContext, useCallback, useMemo} from 'react';
 import PropTypes from 'prop-types';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 import {getPixelsOrString, getStyleForPaddings, isFunction, isNumberOrString} from '../../util/helpers';
 import InputFieldContext from './InputFieldContext';
@@ -48,23 +48,19 @@ const Text = function (props) {
 
 	const style = useMemo(() => {
 		let paddingDefinitions = {};
-		if (inputCss.padding) {
+
+		const hasPadding = isNumberOrString(p) || isNumberOrString(pt) || isNumberOrString(pr) || isNumberOrString(pb) || isNumberOrString(pl);
+
+		if (hasPadding) {
+			paddingDefinitions = getStyleForPaddings({p, pt, pr, pb, pl});
+		} else if (inputCss.padding) {
 			paddingDefinitions = {
 				padding: inputCss.padding
 			};
 		} else {
-			const hasPadding =
-				isNumberOrString(p) || isNumberOrString(pt) || isNumberOrString(pr) || isNumberOrString(pb) || isNumberOrString(pl);
-
-			if (hasPadding) {
-				paddingDefinitions = {
-					...getStyleForPaddings({p, pt, pr, pb, pl})
-				};
-			} else {
-				paddingDefinitions = {
-					padding: '0.3em'
-				};
-			}
+			paddingDefinitions = {
+				padding: '0.3em'
+			};
 		}
 
 		return {
