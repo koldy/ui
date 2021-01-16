@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ThemeError from '../theme/ThemeError';
 
-export const getInputProps = function(theme, defaults, userSize, userColor, variant, component) {
+export const getInputProps = function (theme, defaults, userSize, userColor, variant, component) {
 	const sizes = theme.json('checkboxAndRadio.size');
 	const colors = theme.json('checkboxAndRadio.color');
 
@@ -163,11 +163,13 @@ const Switch = styled.label`
 		&:checked ~ span {
 			background-color: ${({activeContainerBackground}) => activeContainerBackground};
 
-			&:hover {
-				background-color: ${({activeContainerHoverBackground}) => activeContainerHoverBackground};
+			@media (hover: hover) and (pointer: fine) {
+				&:hover {
+					background-color: ${({activeContainerHoverBackground}) => activeContainerHoverBackground};
 
-				&:before {
-					background-color: ${({activeMarkerHoverColor}) => activeMarkerHoverColor};
+					&:before {
+						background-color: ${({activeMarkerHoverColor}) => activeMarkerHoverColor};
+					}
 				}
 			}
 
@@ -187,9 +189,11 @@ const Switch = styled.label`
 	}
 
 	/* On mouse-over, add a grey background color */
-	&:hover {
-		> input ~ span {
-			background-color: ${({inactiveContainerHoverBackground}) => inactiveContainerHoverBackground};
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			> input ~ span {
+				background-color: ${({inactiveContainerHoverBackground}) => inactiveContainerHoverBackground};
+			}
 		}
 	}
 `;

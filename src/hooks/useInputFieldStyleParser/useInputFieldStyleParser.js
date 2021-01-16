@@ -187,16 +187,18 @@ export default ({
 				transform,
 				transformOrigin,
 				transformStyle,
-				'&:hover': {
-					backgroundColor: theme.processColor(hoverBackground),
-					borderColor: theme.processColor(hoverBorderColor),
-					borderTopColor: theme.processColor(hoverBorderTopColor),
-					borderRightColor: theme.processColor(hoverBorderRightColor),
-					borderBottomColor: theme.processColor(hoverBorderBottomColor),
-					borderLeftColor: theme.processColor(hoverBorderLeftColor),
-					boxShadow: theme.processColor(hoverBoxShadow),
-					outline: hoverOutline,
-					outlineOffset: hoverOutlineOffset
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: theme.processColor(hoverBackground),
+						borderColor: theme.processColor(hoverBorderColor),
+						borderTopColor: theme.processColor(hoverBorderTopColor),
+						borderRightColor: theme.processColor(hoverBorderRightColor),
+						borderBottomColor: theme.processColor(hoverBorderBottomColor),
+						borderLeftColor: theme.processColor(hoverBorderLeftColor),
+						boxShadow: theme.processColor(hoverBoxShadow),
+						outline: hoverOutline,
+						outlineOffset: hoverOutlineOffset
+					}
 				},
 				'&:focus-within': {
 					backgroundColor: theme.processColor(focusBackground),
@@ -219,8 +221,10 @@ export default ({
 				letterSpacing,
 				textAlign,
 				color: theme.processColor(fontColor),
-				'&:hover': {
-					color: theme.processColor(hoverFontColor)
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						color: theme.processColor(hoverFontColor)
+					}
 				},
 				'&:focus': {
 					color: theme.processColor(focusFontColor)

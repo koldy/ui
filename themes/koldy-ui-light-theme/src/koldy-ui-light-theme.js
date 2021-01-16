@@ -202,10 +202,12 @@ module.exports = {
 				color: 'textColorInverse|1',
 				backgroundColor: 'primary',
 				borderColor: 'primary|1',
-				'&:hover': {
-					backgroundColor: 'primary|1',
-					borderColor: 'primary|2',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'primary|1',
+						borderColor: 'primary|2',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					backgroundColor: 'primary|-4',
@@ -223,10 +225,12 @@ module.exports = {
 				color: 'textColorInverse',
 				backgroundColor: 'info',
 				borderColor: 'info|1',
-				'&:hover': {
-					backgroundColor: 'info|1',
-					borderColor: 'info|2',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'info|1',
+						borderColor: 'info|2',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					backgroundColor: 'info|-4',
@@ -244,10 +248,12 @@ module.exports = {
 				color: 'textColorInverse',
 				backgroundColor: 'success',
 				borderColor: 'success|1',
-				'&:hover': {
-					backgroundColor: 'success|1',
-					borderColor: 'success|2',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'success|1',
+						borderColor: 'success|2',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					backgroundColor: 'success|-4',
@@ -265,10 +271,12 @@ module.exports = {
 				color: 'textColorInverse',
 				backgroundColor: 'danger',
 				borderColor: 'danger|1',
-				'&:hover': {
-					backgroundColor: 'danger|1',
-					borderColor: 'danger|2',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'danger|1',
+						borderColor: 'danger|2',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					backgroundColor: 'danger|-4',
@@ -286,10 +294,12 @@ module.exports = {
 				color: 'textColorInverse',
 				backgroundColor: 'warning',
 				borderColor: 'warning|1',
-				'&:hover': {
-					backgroundColor: 'warning|1',
-					borderColor: 'warning|2',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'warning|1',
+						borderColor: 'warning|2',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					backgroundColor: 'warning|-4',
@@ -307,10 +317,12 @@ module.exports = {
 				color: 'textColor',
 				backgroundColor: 'gray|-5',
 				borderColor: 'gray',
-				'&:hover': {
-					backgroundColor: 'gray|-3',
-					borderColor: 'gray|1',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'gray|-3',
+						borderColor: 'gray|1',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					backgroundColor: 'gray|-5',
@@ -329,10 +341,12 @@ module.exports = {
 				color: 'textColor',
 				backgroundColor: 'transparent',
 				borderColor: 'gray|-5',
-				'&:hover': {
-					backgroundColor: 'transparent',
-					borderColor: 'gray|-3',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'transparent',
+						borderColor: 'gray|-3',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					color: 'textColor',
@@ -352,10 +366,12 @@ module.exports = {
 				backgroundColor: 'transparent',
 				borderColor: 'none',
 				textDecoration: 'underline',
-				'&:hover': {
-					backgroundColor: 'transparent',
-					borderColor: 'none',
-					boxShadow: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						backgroundColor: 'transparent',
+						borderColor: 'none',
+						boxShadow: 'none'
+					}
 				},
 				'&:disabled': {
 					color: 'textColor',
@@ -408,10 +424,12 @@ module.exports = {
 				borderBottom: '1px dashed #666666',
 				textDecoration: 'none',
 				cursor: 'pointer',
-				'&:hover': {
-					borderBottomColor: '#111111',
-					borderBottomStyle: 'solid',
-					textDecoration: 'none'
+				'@media(hover: hover) and (pointer: fine)': {
+					'&:hover': {
+						borderBottomColor: '#111',
+						borderBottomStyle: 'solid',
+						textDecoration: 'none'
+					}
 				}
 			}
 		}
@@ -799,6 +817,55 @@ module.exports = {
 						color: '#ababab'
 					}
 				}
+			},
+			info: {
+				normal: {
+					// these are the only CSS values we're going to apply
+					background: '#ffffff',
+					backgroundSize: undefined,
+					color: 'black',
+					borderColor: 'info',
+					outline: undefined,
+					outlineOffset: undefined,
+					hover: {
+						backgroundSize: undefined,
+						borderColor: 'info|3'
+					},
+					focus: {
+						boxShadow: '0 0 1px 2px info|-2',
+						outline: 'none',
+						borderColor: 'info|-2'
+					},
+					placeholder: {
+						color: '#ababab'
+					}
+				},
+				disabled: {
+					background: '#efefef',
+					color: 'textColor|-4',
+					borderColor: 'info|-2',
+					hover: {
+						background: undefined
+					},
+					placeholder: {
+						color: '#ababab'
+					}
+				},
+				readOnly: {
+					background: '#ffffff',
+					backgroundSize: undefined,
+					color: 'info',
+					borderColor: 'info|-2',
+					hover: {
+						background: '#ffffff',
+						backgroundSize: undefined,
+						color: 'info|2',
+						borderColor: 'info|2'
+					},
+					placeholder: {
+						color: '#ababab'
+					}
+				}
 			}
 		}
 	},
@@ -954,10 +1021,12 @@ module.exports = {
 					background: 'transparent',
 					border: '1px solid transparent',
 					outline: 'none',
-					'&:hover': {
-						borderColor: '#cfcfcf',
-						backgroundColor: '#efefef'
-					},
+          '@media(hover: hover) and (pointer: fine)': {
+            '&:hover': {
+              borderColor: '#cfcfcf',
+              backgroundColor: '#efefef'
+            }
+          },
 					color: '#222222',
 					'&.selected': {
 						background: '#dfdfdf'
@@ -1096,15 +1165,19 @@ module.exports = {
 					border: 'none',
 					outline: 'none',
 					color: '#ffffff',
-					'&:hover': {
-						background: 'primary|1'
-					},
+          '@media(hover: hover) and (pointer: fine)': {
+            '&:hover': {
+              background: 'primary|1'
+            }
+          },
 					'&.selected': {
 						background: 'primary|3',
 						color: '#ffffff',
-						':hover': {
-							background: 'primary|4'
-						}
+            '@media(hover: hover) and (pointer: fine)': {
+              '&:hover': {
+                background: 'primary|4'
+              }
+            }
 					},
 					'&.disabled': {
 						cursor: 'not-allowed',
@@ -1125,16 +1198,20 @@ module.exports = {
 					border: 'none',
 					outline: 'none',
 					color: '#efefef',
-					'&:hover': {
-						background: 'primary|-2',
-						color: '#ffffff'
-					},
-					'&.selected': {
+          '@media(hover: hover) and (pointer: fine)': {
+            '&:hover': {
+              background: 'primary|-2',
+              color: '#fff'
+            }
+          },
+          '&.selected': {
 						background: '#ffffff',
 						color: 'primary|-1',
-						':hover': {
-							background: undefined
-						}
+            '@media(hover: hover) and (pointer: fine)': {
+              '&:hover': {
+                background: undefined
+              }
+            }
 					},
 					'&.disabled': {
 						cursor: 'not-allowed'
@@ -1154,14 +1231,18 @@ module.exports = {
 					border: 'none',
 					outline: 'none',
 					color: 'black',
-					'&:hover': {
-						background: '#efefef'
-					},
+          '@media(hover: hover) and (pointer: fine)': {
+            '&:hover': {
+              background: '#efefef'
+            }
+          },
 					'&.selected': {
 						background: '#f6f6f6',
-						':hover': {
-							background: '#f6f6f6'
-						}
+            '@media(hover: hover) and (pointer: fine)': {
+              '&:hover': {
+                background: '#f6f6f6'
+              }
+            }
 					},
 					'&.disabled': {
 						cursor: 'not-allowed',
