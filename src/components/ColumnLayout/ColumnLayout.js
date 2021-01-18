@@ -78,6 +78,7 @@ const StyledColumnLayout = styled.div`
 	> div {
 		display: block;
 		margin: ${({space, hasColumns}) => (hasColumns ? 0 : `${getPixelsOrString(space)} 0`)};
+		min-width: ${({hasColumns}) => (hasColumns ? 0 : 'unset')};
 	}
 
 	align-items: ${({align}) => align};
