@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
 import Box from './Box';
 import TestApp from '../../../test/TestApp';
@@ -7,7 +7,7 @@ import {testClick, testDoubleClick, testMargins, testPaddings} from '../../../te
 
 describe('Box standard usage', () => {
 	it('Renders without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Box>Click me</Box>
 			</TestApp>
@@ -15,7 +15,7 @@ describe('Box standard usage', () => {
 	});
 
 	it('Renders with a lot of props', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Box mt={0} mr={0} mb={1} ml={-1} p={2} background="gray" width={800} height={400}>
 					Some content
@@ -25,7 +25,7 @@ describe('Box standard usage', () => {
 	});
 
 	it('Renders with all size props', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Box width={100} height={100} minWidth={50} maxWidth={200} minHeight={50} maxHeight={200}>
 					Some content
@@ -35,7 +35,7 @@ describe('Box standard usage', () => {
 	});
 
 	it('Renders with all position props', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Box width={100} height={100} minWidth={50} maxWidth={200} minHeight={50} maxHeight={200}>
 					Some content

@@ -1,12 +1,12 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
 import Overlay from './Overlay';
 import TestApp from '../../../test/TestApp';
 
 describe('Overlay standard usage', () => {
 	it('Renders without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Overlay onClose={() => {}}>{() => <div>some content</div>}</Overlay>
 			</TestApp>

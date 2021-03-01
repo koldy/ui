@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
 import Text from './Text';
 import TestApp from '../../../test/TestApp';
@@ -7,7 +7,7 @@ import {testClick, testDoubleClick, testMargins, testPaddings} from '../../../te
 
 describe('Menu standard usage', () => {
 	it('Renders without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Text>some content</Text>
 			</TestApp>
@@ -15,7 +15,7 @@ describe('Menu standard usage', () => {
 	});
 
 	it('Renders with font props', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Text fontFamily="Roboto, sans-serif" fontWeight={600} fontSize="2rem" lineHeight={1.5}>
 					some content

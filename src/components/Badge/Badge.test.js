@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 
 import Badge from './Badge';
 import TestApp from '../../../test/TestApp';
@@ -7,7 +7,7 @@ import {testClick, testDoubleClick, testMargins} from '../../../test/test-helper
 
 describe('Testing Badge', () => {
 	it('Renders number', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Badge>1</Badge>
 			</TestApp>
@@ -15,7 +15,7 @@ describe('Testing Badge', () => {
 	});
 
 	it('Renders string', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Badge>Hey, I'm badge</Badge>
 			</TestApp>
@@ -23,7 +23,7 @@ describe('Testing Badge', () => {
 	});
 
 	it('Renders html', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Badge>
 					Hey,

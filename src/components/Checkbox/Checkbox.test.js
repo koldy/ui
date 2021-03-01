@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
 import Checkbox from './Checkbox';
 import TestApp from '../../../test/TestApp';
@@ -7,16 +7,16 @@ import {testMargins} from '../../../test/test-helpers';
 
 describe('Checkbox standard usage', () => {
 	it('Renders without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Checkbox />
 			</TestApp>
 		);
 	});
 
-	['sm', 'md', 'lg', 'xlg'].forEach((val) =>
+	['sm', 'md', 'lg'].forEach((val) =>
 		it(`Renders with size=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<Checkbox size={val} />
 				</TestApp>
@@ -26,7 +26,7 @@ describe('Checkbox standard usage', () => {
 
 	['checkmark-square', 'checkmark-round', 'switch-square', 'switch-round'].forEach((val) =>
 		it(`Renders with variant=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<Checkbox variant={val} />
 				</TestApp>

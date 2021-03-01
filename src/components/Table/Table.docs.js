@@ -277,9 +277,7 @@ export default function TableDocs() {
 				</Table>
 			</Code>
 			<H2 hash="size">Size</H2>
-			<Paragraph>
-				<AvailableKeys data={sizes} name="theme.table.size" />
-			</Paragraph>
+			<AvailableKeys data={sizes} name="theme.table.size" />
 			{Object.keys(sizes).map((size) => (
 				<Code
 					language="js"
@@ -343,9 +341,7 @@ export default function TableDocs() {
 				</Code>
 			))}
 			<H2 hash="color">Color</H2>
-			<Paragraph>
-				<AvailableKeys data={colors} name="theme.table.color" />
-			</Paragraph>
+			<AvailableKeys data={colors} name="theme.table.color" />
 			{Object.keys(colors).map((color) => (
 				<Code
 					language="js"
@@ -540,7 +536,9 @@ export default function TableDocs() {
 					<Table.Head>
 						<Table.Tr>
 							<Table.Th>country</Table.Th>
-							<Table.Th width={180} textAlign="right">action</Table.Th>
+							<Table.Th width={180} textAlign="right">
+								action
+							</Table.Th>
 						</Table.Tr>
 					</Table.Head>
 					<Table.Body>
@@ -548,7 +546,9 @@ export default function TableDocs() {
 							<Table.Td>Australia</Table.Td>
 							<Table.Td textAlign="right">
 								<Table.OnRowHover>
-									<Button color="danger" size="sm">Delete</Button>
+									<Button color="danger" size="sm">
+										Delete
+									</Button>
 								</Table.OnRowHover>
 							</Table.Td>
 						</Table.Tr>
@@ -556,7 +556,9 @@ export default function TableDocs() {
 							<Table.Td>Croatia</Table.Td>
 							<Table.Td textAlign="right">
 								<Table.OnRowHover>
-									<Button color="danger" size="sm">Delete</Button>
+									<Button color="danger" size="sm">
+										Delete
+									</Button>
 								</Table.OnRowHover>
 							</Table.Td>
 						</Table.Tr>
@@ -564,7 +566,9 @@ export default function TableDocs() {
 							<Table.Td>Germany</Table.Td>
 							<Table.Td textAlign="right">
 								<Table.OnRowHover>
-									<Button color="danger" size="sm">Delete</Button>
+									<Button color="danger" size="sm">
+										Delete
+									</Button>
 								</Table.OnRowHover>
 							</Table.Td>
 						</Table.Tr>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
 import Flexbox from './Flexbox';
 import TestApp from '../../../test/TestApp';
@@ -7,7 +7,7 @@ import {testMargins} from '../../../test/test-helpers';
 
 describe('Flexbox standard usage', () => {
 	it('Renders without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Flexbox>
 					<Flexbox.Item>Some content 1</Flexbox.Item>

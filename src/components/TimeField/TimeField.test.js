@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 
 import lightTheme from '../../../themes/koldy-ui-light-theme/src/koldy-ui-light-theme';
 
@@ -9,7 +9,7 @@ import {testMargins} from '../../../test/test-helpers';
 
 describe('TimeField standard usage', () => {
 	it('Renders empty without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<TimeField />
 			</TestApp>
@@ -17,7 +17,7 @@ describe('TimeField standard usage', () => {
 	});
 
 	it('Renders with name without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<TimeField name="timeField-test" />
 			</TestApp>
@@ -26,7 +26,7 @@ describe('TimeField standard usage', () => {
 
 	Object.keys(lightTheme.inputField.size).forEach((val) =>
 		it(`Renders with size=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<TimeField size={val} />
 				</TestApp>
@@ -36,7 +36,7 @@ describe('TimeField standard usage', () => {
 
 	Object.keys(lightTheme.inputField.variant).forEach((val) =>
 		it(`Renders with variant=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<TimeField variant={val} />
 				</TestApp>
@@ -46,7 +46,7 @@ describe('TimeField standard usage', () => {
 
 	Object.keys(lightTheme.inputField.width).forEach((val) =>
 		it(`Renders with width=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<TimeField width={val} />
 				</TestApp>
@@ -55,7 +55,7 @@ describe('TimeField standard usage', () => {
 	);
 
 	it(`Renders with minWidth and maxWidth`, () => {
-		shallow(
+    mount(
 			<TestApp>
 				<TimeField minWidth={100} maxWidth={200} />
 			</TestApp>

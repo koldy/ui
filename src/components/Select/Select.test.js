@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 
 import lightTheme from '../../../themes/koldy-ui-light-theme/src/koldy-ui-light-theme';
 
@@ -9,7 +9,7 @@ import {testMargins} from '../../../test/test-helpers';
 
 describe('Select standard usage', () => {
 	it('Renders empty without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Select />
 			</TestApp>
@@ -17,7 +17,7 @@ describe('Select standard usage', () => {
 	});
 
 	it('Renders with simple option(s) without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Select>
 					<option>one</option>
@@ -29,7 +29,7 @@ describe('Select standard usage', () => {
 	});
 
 	it('Renders with simple option(s) and complex without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Select>
 					<Select.Text>Go</Select.Text>
@@ -44,7 +44,7 @@ describe('Select standard usage', () => {
 	});
 
 	it('Renders with name without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Select name="select-test" />
 			</TestApp>
@@ -52,7 +52,7 @@ describe('Select standard usage', () => {
 	});
 
 	it('Renders with optgroup option(s) without crashing', () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Select>
 					<optgroup label="First">
@@ -71,7 +71,7 @@ describe('Select standard usage', () => {
 
 	Object.keys(lightTheme.inputField.size).forEach((val) =>
 		it(`Renders with size=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<Select size={val} />
 				</TestApp>
@@ -81,7 +81,7 @@ describe('Select standard usage', () => {
 
 	Object.keys(lightTheme.inputField.variant).forEach((val) =>
 		it(`Renders with variant=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<Select variant={val} />
 				</TestApp>
@@ -91,7 +91,7 @@ describe('Select standard usage', () => {
 
 	Object.keys(lightTheme.inputField.width).forEach((val) =>
 		it(`Renders with width=${val}`, () => {
-			shallow(
+      mount(
 				<TestApp>
 					<Select width={val} />
 				</TestApp>
@@ -100,7 +100,7 @@ describe('Select standard usage', () => {
 	);
 
 	it(`Renders with minWidth and maxWidth`, () => {
-		shallow(
+    mount(
 			<TestApp>
 				<Select minWidth={100} maxWidth={200} />
 			</TestApp>

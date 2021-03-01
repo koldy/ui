@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
 import Button from './Button';
 import TestApp from '../../../test/TestApp';
@@ -8,7 +8,7 @@ import {testClick, testDoubleClick, testMargins} from '../../../test/test-helper
 
 describe('Button standard usage', () => {
 	it('Renders without crashing', () => {
-		shallow(
+		mount(
 			<TestApp>
 				<Button>Click me</Button>
 			</TestApp>
@@ -16,9 +16,9 @@ describe('Button standard usage', () => {
 	});
 
 	it('Renders with a lot of props', () => {
-		shallow(
+    mount(
 			<TestApp>
-				<Button type="reset" name="btn" disabled color="secondary" width="lg">
+				<Button type="reset" name="btn" disabled color="primary" width="lg">
 					Click me
 				</Button>
 			</TestApp>
