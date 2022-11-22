@@ -17,4 +17,4 @@ npm install --save koldy-ui
 yarn add koldy-ui
 ```
 
-For more info, visit [koldy.io](https://koldy.io)
+For more info, visit [ui.koldy.net](https://ui.koldy.net)
