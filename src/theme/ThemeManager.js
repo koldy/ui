@@ -19,7 +19,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	 ***************************************/
 
 	this.error = function(...args) {
-		if (this.inDebug() && window && window.console && window.console.error) {
+		if (/*this.inDebug() &&*/ window && window.console && window.console.error) {
 			// error is always visible, even in production
 			window.console.error(...args);
 		}
@@ -35,7 +35,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	};
 
 	this.info = function(...args) {
-		if (this.inDebug() && window && window.console && window.console.info) {
+		if (/*this.inDebug() &&*/ window && window.console && window.console.info) {
 			window.console.info(...args);
 		}
 
@@ -46,7 +46,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	};
 
 	this.warning = function(...args) {
-		if (this.inDebug() && window && window.console && window.console.warn) {
+		if (/*this.inDebug() &&*/ window && window.console && window.console.warn) {
 			window.console.warn(...args);
 		}
 
@@ -61,7 +61,7 @@ const ThemeManager = function({json, mode, onDebug, onInfo, onWarning, onError})
 	};
 
 	this.debug = function(...args) {
-		if (this.inDebug() && window && window.console && window.console.debug) {
+		if (/*this.inDebug() &&*/ window && window.console && window.console.debug) {
 			window.console.debug(...args);
 		}
 
